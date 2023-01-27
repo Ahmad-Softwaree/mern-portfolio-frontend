@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "home": "Home",
+    "blogs": "Blogs",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "home": {
+    "welcome": "WELCOME TO MY WORLD",
+    "who": "I'm",
+    "name": " Ahmad Software",
+    "job": "Full Stack developer"
+  },
+  "blog": {
+    "read": "Read blog",
+    "seeMore": "See more"
+  },
+  "skills": {
+    "languages": "Languages",
+    "webDev": "Web Development",
+    "front": "Front-end",
+    "back": "Back-end",
+    "gameDev": "Game Development",
+    "twoDGame": "2d game"
+  }
+}

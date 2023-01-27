@@ -1,0 +1,118 @@
+@use "../../util/colors.scss" as colors;
+@use "../../breakpoints.scss" as res;
+@use "../../animations/animation.scss" as animation;
+@use "../../util/hover.scss" as hover;
+
+.blogsPage {
+  min-height: 100vh;
+  padding: 35px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  padding-inline: 20px;
+  background-color: colors.$black;
+  color: colors.$white;
+
+  h1 {
+    font-size: 36px;
+    font-weight: 600;
+  }
+
+  .searchInputDiv {
+    background-color: #222222;
+    border: 1px solid #4a4a4a;
+    border-radius: 10px;
+    padding: 6px;
+    width: 328px;
+    height: 51px;
+
+    .x {
+      padding-right: 5px;
+      color: colors.$white;
+      @include hover.hover-effect(
+        200ms,
+        (
+          color: tomato,
+        )
+      );
+    }
+    img {
+      padding-top: 6px;
+    }
+    input {
+      width: 90%;
+      background-color: #222222;
+      color: colors.$white;
+      padding: 4px;
+      font-size: 16px;
+      font-weight: 509;
+    }
+  }
+  .allBlogs {
+    padding-top: 40px;
+    .blogCard {
+      width: 328px;
+      background-color: colors.$lightBlack;
+      border-radius: 24px;
+      padding: 10px;
+      text-align: left;
+      img {
+        width: 100%;
+        object-fit: cover;
+        cursor: pointer;
+      }
+      p {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 139.9%;
+      }
+      .readBlog {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        width: 304px;
+        height: 39px;
+        background: #707aff;
+        border-radius: 9px;
+        border: none;
+        color: colors.$white;
+        cursor: pointer;
+        @include hover.hover-effect(
+          200ms,
+          (
+            background-color: colors.$black,
+            color: colors.$purple,
+          )
+        );
+      }
+    }
+  }
+}
+
+@include res.responsive(computer) {
+  .blogsPage {
+    padding-inline: 100px !important;
+  }
+}
+
+@include res.responsive(mobile) {
+  .blogsPage {
+    h1 {
+      font-size: 24px !important;
+    }
+
+    .searchInputDiv {
+      width: 200px !important;
+    }
+    .allBlogs {
+      .blogCard {
+        width: 90% !important;
+        max-width: 400px !important;
+        min-width: 300px !important;
+        .readBlog {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+}

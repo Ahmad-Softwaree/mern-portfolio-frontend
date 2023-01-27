@@ -1,0 +1,42 @@
+@use "../../util/colors.scss" as colors;
+@use "../../breakpoints.scss" as res;
+@use "../../animations/animation.scss" as animation;
+@use "../../util/hover.scss" as hover;
+
+.login {
+  min-height: 100vh;
+  background-color: colors.$lightBlack;
+  direction: ltr;
+  .loginBox {
+    background-color: colors.$white;
+    padding: 10px;
+    border-radius: 7px;
+    min-width: 300px;
+    height: fit-content;
+    border: 2px colors.$purple solid;
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 5px;
+      border: 2px colors.$black solid;
+      border-radius: 3px;
+    }
+
+    button {
+      width: 80px;
+      height: 35px;
+      background-color: colors.$black;
+      color: colors.$white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  }
+  .error {
+    color: tomato;
+    font-size: 12px;
+  }
+}

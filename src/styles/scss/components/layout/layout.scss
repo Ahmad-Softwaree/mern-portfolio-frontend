@@ -1,0 +1,240 @@
+@use "../../util/colors.scss" as colors;
+@use "../../util/hover.scss" as hover;
+@use "../../animations/animation.scss" as animation;
+@use "../../breakpoints.scss" as res;
+.layout {
+  .header {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    background-color: colors.$black;
+    color: colors.$white;
+    min-height: 80px;
+    nav {
+      min-height: 80px;
+      ul {
+        padding-right: 50px;
+
+        li {
+          font-size: 28px;
+          font-weight: bold;
+          list-style-type: none;
+          @include hover.hover-effect(
+            200ms,
+            (
+              color: colors.$purple,
+            )
+          );
+          cursor: pointer;
+        }
+      }
+    }
+
+    .activeNav {
+      position: relative;
+      color: colors.$purple;
+      transition: all 200ms ease;
+    }
+    .activeNav::after {
+      bottom: 0;
+      content: "";
+      position: absolute;
+      width: 10px;
+      border-radius: 50%;
+      background-color: colors.$purple;
+      height: 10px;
+      bottom: -10px;
+      transform-origin: bottom center;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .languageDiv,
+    .blogLanguageDiv {
+      right: 30px;
+      top: 0;
+      bottom: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      color: colors.$purple;
+      width: 68px;
+      height: 30px;
+      border: 1.5px solid #707aff;
+      border-radius: 10px;
+      gap: 10px;
+      cursor: pointer;
+      @include hover.hover-effect(
+        200ms,
+        (
+          color: colors.$white,
+          background-color: colors.$purple,
+        )
+      );
+
+      .languagesList {
+        background-color: colors.$lightBlack;
+        border-radius: 8px;
+        width: 100%;
+        padding: 5px;
+        span {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+
+    .mobileNav {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      z-index: 999;
+      display: none !important;
+      position: absolute;
+      top: 5rem;
+      right: 0;
+      left: 0;
+      background-color: colors.$black;
+
+      ul {
+        padding-right: 0 !important;
+        padding: 20px 0;
+        li {
+          text-align: center;
+          width: 100%;
+          span {
+            font-size: 16px !important;
+          }
+        }
+      }
+    }
+
+    .mobNavAnim {
+      @include animation.nav-animation(nav, 250ms);
+    }
+    .xMobNav {
+      position: absolute;
+      left: 2rem;
+      font-size: 1.5rem;
+      color: tomato;
+      cursor: pointer;
+      height: fit-content;
+      top: 1rem;
+    }
+    .humb {
+      display: none;
+      cursor: pointer;
+    }
+  }
+
+  .footer {
+    background-color: colors.$lightBlack;
+    color: colors.$white;
+    min-height: 70px;
+    padding: 20px 10px;
+    text-align: center;
+    .socials {
+      span {
+        font-size: 26px;
+        cursor: pointer;
+      }
+      .fa-facebook {
+        @include hover.hover-effect(
+          200ms,
+          (
+            color: #0c87ef,
+          )
+        );
+      }
+
+      .fa-youtube {
+        @include hover.hover-effect(
+          200ms,
+          (
+            color: #ff0000,
+          )
+        );
+      }
+
+      .fa-github {
+        @include hover.hover-effect(
+          200ms,
+          (
+            color: #babfc6,
+          )
+        );
+      }
+
+      .fa-linkedin {
+        @include hover.hover-effect(
+          200ms,
+          (
+            color: #0a66c2,
+          )
+        );
+      }
+
+      .fa-b {
+        @include hover.hover-effect(
+          200ms,
+          (
+            color: #0a66c2,
+          )
+        );
+      }
+    }
+  }
+}
+
+@include res.responsive(computer) {
+  .header {
+    nav {
+      display: flex !important;
+    }
+  }
+}
+
+@include res.responsive(tablet) {
+  .header {
+    nav {
+      ul {
+        li {
+          font-size: 20px !important;
+        }
+      }
+    }
+    .languageDiv {
+      width: 55px !important;
+      height: 25px !important;
+      font-size: 13px !important;
+    }
+    .activeNav::after {
+      width: 8px !important;
+      height: 8px !important;
+    }
+  }
+}
+
+@include res.responsive(mobile) {
+  .layout {
+    .header {
+      gap: 0 !important;
+      flex-flow: column wrap;
+      .navigation {
+        display: none !important;
+      }
+      .mobileNav,
+      .humb {
+        display: flex !important;
+      }
+
+      .activeNav::after {
+        width: 8px !important;
+        height: 8px !important;
+      }
+    }
+  }
+}

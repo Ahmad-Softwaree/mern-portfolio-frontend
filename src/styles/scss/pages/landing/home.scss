@@ -1,0 +1,156 @@
+@use "../../util/colors.scss" as colors;
+@use "../../breakpoints.scss" as res;
+@use "../../animations/animation.scss" as animation;
+
+.home {
+  padding-inline: 20px;
+  padding-top: 150px;
+  min-height: 60vh;
+  .leftHome,
+  .rightHome {
+    width: 50%;
+  }
+
+  .rightHome {
+    img {
+      width: 100%;
+      z-index: 600;
+      object-fit: cover;
+    }
+  }
+
+  .leftHome {
+    z-index: 1;
+    p,
+    h1 {
+      cursor: pointer;
+      width: 100%;
+    }
+    p {
+      font-weight: 400;
+      font-size: 20px;
+      color: colors.$white;
+      margin: 0;
+      opacity: 0.6;
+    }
+    h1 {
+      margin: 0;
+      font-weight: 500;
+      font-size: 32px;
+      color: colors.$white;
+    }
+
+    .ahmadSoftware {
+      position: relative;
+      z-index: 1;
+      img {
+        width: 100%;
+        left: 0;
+        top: -10px;
+        z-index: -1;
+      }
+    }
+  }
+
+  .blurs {
+    width: fit-content;
+
+    .blur {
+      width: 227.11px;
+      height: 222.5px;
+      filter: blur(115px);
+    }
+    .greenBlur {
+      background-color: colors.$green;
+    }
+
+    .purpleBlur {
+      background-color: colors.$purple;
+      transform: rotate(165deg);
+    }
+  }
+}
+
+@include res.responsive(computer) {
+  .home {
+    padding-inline: 6% !important;
+  }
+}
+
+@include res.responsive(tablet) {
+  .home {
+    padding-inline: 40px !important;
+    .leftHome,
+    .rightHome {
+      width: 40% !important;
+    }
+
+    .leftHome {
+      h1 {
+        font-size: 26px !important;
+      }
+      p {
+        font-size: 18px !important;
+      }
+    }
+
+    .blur {
+      width: 177.11px !important;
+      height: 172.5px !important;
+      filter: blur(115px) !important;
+    }
+  }
+}
+
+@include res.responsive(mobile) {
+  .home {
+    flex-flow: column wrap !important;
+    padding-inline: 20px !important;
+    align-items: center;
+    padding-top: 180px !important;
+    gap: 5rem;
+    justify-content: left;
+    .leftHome,
+    .rightHome {
+      width: 100% !important;
+      text-align: center;
+    }
+
+    .rightHome {
+      max-width: 400px !important;
+    }
+
+    .leftHome {
+      h1,
+      p {
+        width: 100% !important;
+      }
+      h1 {
+        font-size: 22px !important;
+      }
+      p {
+        font-size: 16px !important;
+      }
+    }
+
+    .blur {
+      width: 137.11px !important;
+      height: 162.5px !important;
+      filter: blur(115px) !important;
+    }
+  }
+}
+
+@include res.responsive(small) {
+  .home {
+    .leftHome {
+    }
+    .blurs {
+      width: 80% !important;
+    }
+    .blur {
+      width: 100% !important;
+      height: 140px !important;
+    }
+  }
+}

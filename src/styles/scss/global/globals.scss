@@ -1,0 +1,126 @@
+@use "../util/typography.scss" as font;
+@use "../util/colors.scss" as colors;
+@use "../animations/animation.scss" as animation;
+@use "../breakpoints.scss" as res;
+
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Karla:wght@200;300;400;500;600;700;800&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@800;900&family=Roboto:wght@400;500;700;900&family=Varela&family=Varela+Round&display=swap");
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem !important;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: font.$karla, sans-serif;
+
+  position: relative;
+}
+
+textarea::placeholder,
+input::placeholder {
+  font-family: font.$karla, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+textarea,
+input {
+  font-family: font.$karla, sans-serif;
+}
+textarea {
+  resize: none;
+  border: 0;
+}
+
+input {
+  border: 0;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+a,
+Link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+*:disabled {
+  color: colors.$white !important;
+  cursor: progress !important;
+}
+
+button:focus {
+  outline: none;
+  border: none;
+}
+
+.loader {
+  text-align: center;
+  animation-name: loader;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  transition: all 100ms line;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+img {
+  object-fit: cover;
+}

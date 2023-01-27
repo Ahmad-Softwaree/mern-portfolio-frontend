@@ -1,0 +1,76 @@
+@use "../../util/colors.scss" as colors;
+@use "../../breakpoints.scss" as res;
+@use "../../animations/animation.scss" as animation;
+@use "../../util/hover.scss" as hover;
+
+.projects {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  h1 {
+    font-size: 36px;
+    color: colors.$white;
+    font-weight: 700;
+  }
+
+  .projectCards::-webkit-scrollbar {
+    display: none !important;
+  }
+  .projectCards {
+    padding-inline: 30px;
+    padding-left: 80px;
+    width: 100%;
+    height: fit-content;
+    max-height: 569px;
+    overflow-x: scroll;
+    .projectCard {
+      height: fit-content;
+      p {
+        margin: 0;
+      }
+      img {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        object-fit: cover;
+        max-height: 400px;
+        width: 100%;
+      }
+      .projectCardFooter {
+        width: 100%;
+        padding: 20px 0;
+        background-color: colors.$purple;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+    }
+  }
+}
+
+@include res.responsive(tablet) {
+  .projectCards {
+    padding-left: 50px !important;
+    .projectCard {
+      width: 600px !important;
+    }
+  }
+}
+
+@include res.responsive(mobile) {
+  .projectCards {
+    padding-left: 20px !important;
+    max-height: 350px !important;
+
+    .projectCard {
+      width: 400px !important;
+    }
+  }
+}
+
+@include res.responsive(small) {
+  .projectCards {
+    padding-left: 20px !important;
+    .projectCard {
+      width: 90% !important;
+      min-width: 300px;
+    }
+  }
+}

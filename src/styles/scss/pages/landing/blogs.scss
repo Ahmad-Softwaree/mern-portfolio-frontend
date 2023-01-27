@@ -1,0 +1,82 @@
+@use "../../util/colors.scss" as colors;
+@use "../../breakpoints.scss" as res;
+@use "../../animations/animation.scss" as animation;
+@use "../../util/hover.scss" as hover;
+
+.blogCards::-webkit-scrollbar {
+  display: none !important;
+}
+
+.blogs {
+  padding-top: 100px;
+  min-height: 60vh;
+  color: colors.$white;
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .blogCards {
+    width: fit-content;
+    padding-inline: 20px;
+    max-height: 550px;
+    overflow-x: scroll;
+    width: 100%;
+    flex-flow: column wrap !important;
+    justify-content: left;
+    align-items: center;
+    .blogCard {
+      width: 328px;
+      background-color: colors.$lightBlack;
+      border-radius: 24px;
+      padding: 10px;
+      text-align: left;
+      img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        height: 184px;
+        cursor: pointer;
+      }
+      p {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 139.9%;
+      }
+      .readBlog {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        width: 304px;
+        height: 39px;
+        background: #707aff;
+        border-radius: 9px;
+        border: none;
+        color: colors.$white;
+        cursor: pointer;
+        @include hover.hover-effect(
+          200ms,
+          (
+            background-color: colors.$black,
+            color: colors.$purple,
+          )
+        );
+      }
+    }
+  }
+  .seeMore {
+    width: 200px;
+  }
+  text-align: center;
+}
+
+@include res.responsive(computer) {
+  .blogs {
+    .blogCards {
+      flex-flow: row nowrap !important;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
