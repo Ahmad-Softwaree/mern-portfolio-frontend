@@ -14,7 +14,7 @@ const Header = ({ isHome }) => {
 
   //detecting active page part useEffect
 
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("home");
 
   const handleSetActiveSection = (sectionId) => {
     //put the active section depend on the top and bottom of each of them
@@ -30,13 +30,16 @@ const Header = ({ isHome }) => {
         const blog = document.getElementById("blogs").getBoundingClientRect();
         const whyUs = document.getElementById("skills").getBoundingClientRect();
         const services = document.getElementById("projects").getBoundingClientRect();
+        const works = document.getElementById("works").getBoundingClientRect();
+
         const contact = document.getElementById("contact").getBoundingClientRect();
 
-        const pageArray = [home, blog, whyUs, services, contact];
-        const pageString = ["home", "blogs", "skills", "projects", "contact"];
+        const pageArray = [home, blog, whyUs, services, works, contact];
+        const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
 
         // loop thorugh all of them and check for the top and the bottom
         pageArray.forEach((page, index) => {
+          if (!page) return;
           if (page.top <= 150 && page.bottom > 150) {
             handleSetActiveSection(`${pageString[index]}`);
             return;
@@ -167,6 +170,17 @@ const Header = ({ isHome }) => {
               <li className="navItem">
                 <span
                   onClick={() => {
+                    goNav("works");
+                  }}
+                  className={`${activeSection === "works" && "activeNav"}`}
+                >
+                  {t("nav.works")}
+                </span>
+              </li>
+
+              <li className="navItem">
+                <span
+                  onClick={() => {
                     goNav("contact");
                   }}
                   className={`${activeSection === "contact" && "activeNav"}`}
@@ -180,21 +194,20 @@ const Header = ({ isHome }) => {
             onClick={() => setLanguages((prev) => !prev)}
             className="languageDiv position-absolute flex flex-row justify-center align-center"
           >
-            <span>
-              <i className="fa-solid fa-globe"></i>
-            </span>
-            <span>{i18n.language === "en" ? "EN" : i18n.language === "kr" ? "KR" : "AR"}</span>
+            <div className="languageDivBox flex  flex-row justify-center align-center">
+              {" "}
+              <span>{i18n.language === "en" ? "EN" : i18n.language === "kr" ? "KR" : "AR"}</span>
+              <span>
+                <i className="fa-solid fa-globe"></i>
+              </span>
+            </div>
 
             {languages && (
-              <div
-                style={{
-                  top: "2rem",
-                }}
-                className="position-absolute languagesList flex flex-column justify-center align-center gap-1"
-              >
+              <div className="position-absolute languagesList flex flex-column justify-center align-center gap-1">
                 <span
                   onClick={() => {
                     i18n.changeLanguage("en");
+                    localStorage.setItem("lang", "en");
                     setLanguages(true);
                   }}
                 >
@@ -203,6 +216,8 @@ const Header = ({ isHome }) => {
                 <span
                   onClick={() => {
                     setLanguages(true);
+                    localStorage.setItem("lang", "kr");
+
                     i18n.changeLanguage("kr");
                   }}
                 >
@@ -211,6 +226,8 @@ const Header = ({ isHome }) => {
                 <span
                   onClick={() => {
                     i18n.changeLanguage("ar");
+                    localStorage.setItem("lang", "ar");
+
                     setLanguages(true);
                   }}
                 >

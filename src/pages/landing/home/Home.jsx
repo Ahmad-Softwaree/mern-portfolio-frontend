@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Element } from "react-scroll";
 
 const Home = ({ BACKEND_HOST, t, i18n }) => {
@@ -7,14 +7,17 @@ const Home = ({ BACKEND_HOST, t, i18n }) => {
       <section id="home" className="home flex flex-row justify-between align-center w-100 position-relative">
         <div className="leftHome flex flex-column justify-left align-start gap-2 position-relative">
           <p>{t("home.welcome")}</p>
-          <h1>
+          <h1 className="heading">
             {t("home.who")}
             <span className="ahmadSoftware position-relative">
               {t("home.name")}
               <img src="/images/rect.svg" alt="" className="position-absolute" />
             </span>
           </h1>
-          <h1>{t("home.job")}</h1>
+          <h1 className="heading">{t("home.job")}</h1>
+          <a href="/pdf/Resume.pdf" download className="showCV">
+            {t("home.cv")}
+          </a>
         </div>
 
         <div className="rightHome position-relative">

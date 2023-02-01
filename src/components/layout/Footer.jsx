@@ -20,11 +20,7 @@ const Footer = () => {
             <i className="fa-brands fa-github"></i>
           </a>
         </span>
-        <span>
-          <a target="_blank" href="https://bester.com">
-            <i className="fa-solid fa-b"></i>
-          </a>
-        </span>
+
         <span>
           <a target="_blank" href="https://www.linkedin.com/in/ahmad-sattar-50519022a/">
             <i className="fa-brands fa-linkedin"></i>

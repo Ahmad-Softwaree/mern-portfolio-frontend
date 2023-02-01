@@ -8,7 +8,6 @@
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  scroll-padding-top: 2rem !important;
 }
 
 *,
@@ -21,8 +20,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: font.$karla, sans-serif;
-
   position: relative;
+}
+:root {
+  --chakra-fonts-body: "";
 }
 
 textarea::placeholder,
@@ -123,4 +124,51 @@ button:focus {
 
 img {
   object-fit: cover;
+}
+
+.heading {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+//global style for all sections
+
+section {
+  padding-inline: 60px;
+  padding-top: 80px;
+}
+.projectCards,
+.workCards,
+.blogs .blogCards {
+  padding-inline: 60px;
+}
+
+@include res.responsive(tablet) {
+  section {
+    padding-inline: 40px !important;
+  }
+  .heading {
+    font-size: 26px !important;
+  }
+  .projectCards,
+  .workCards,
+  .blogs .blogCards {
+    padding-inline: 40px !important;
+  }
+}
+
+@include res.responsive(mobile) {
+  section {
+    padding-inline: 20px !important;
+  }
+  .heading {
+    font-size: 22px !important;
+  }
+
+  .projectCards,
+  .workCards,
+  .blogs .blogCards {
+    padding-inline: 20px !important;
+  }
 }

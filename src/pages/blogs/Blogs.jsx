@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
 import BlogPageCard from "../../components/blogs/BlogPageCard";
-
 import LoadingBlogSkeleton from "../../components/loading/LoadingBlogSkeleton";
 
 const Blogs = ({ BACKEND_HOST }) => {
@@ -20,53 +18,29 @@ const Blogs = ({ BACKEND_HOST }) => {
 
     let input = e.target.value;
     if (input === "") {
+      //we have saved the blogs in another state so whenever you done search it will come back again.
       setBlogs(savedBlogs);
       setX(false);
     } else {
       setX(true);
     }
-    if (i18n.language === "en") {
-      for (let i = 0; i < savedBlogs.length; i++) {
-        for (let j = 0; j < input.length; j++) {
-          if (savedBlogs[i].enBody.toLowerCase().charAt(j) === input.toLowerCase().charAt(j)) {
-            if (j === input.length - 1) {
-              setBlogs((prev) => [...prev, savedBlogs[i]]);
-            }
-          } else {
-            break;
+    //this will make search depend on language
+    searchInput(i18n.language.toString() + "Body", input);
+  };
+
+  const searchInput = (lang, input) => {
+    for (let i = 0; i < savedBlogs.length; i++) {
+      for (let j = 0; j < input.length; j++) {
+        if (savedBlogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j)) {
+          if (j === input.length - 1) {
+            setBlogs((prev) => [...prev, savedBlogs[i]]);
           }
-        }
-      }
-    } else if (i18n.language === "ar") {
-      for (let i = 0; i < savedBlogs.length; i++) {
-        for (let j = 0; j < input.length; j++) {
-          if (savedBlogs[i].arBody.toLowerCase().charAt(j) === input.toLowerCase().charAt(j)) {
-            if (j === input.length - 1) {
-              setBlogs((prev) => [...prev, savedBlogs[i]]);
-            }
-          } else {
-            break;
-          }
-        }
-      }
-    } else {
-      for (let i = 0; i < savedBlogs.length; i++) {
-        for (let j = 0; j < input.length; j++) {
-          if (savedBlogs[i].krBody.toLowerCase().charAt(j) === input.toLowerCase().charAt(j)) {
-            if (j === input.length - 1) {
-              setBlogs((prev) => [...prev, savedBlogs[i]]);
-            }
-          } else {
-            break;
-          }
+        } else {
+          break;
         }
       }
     }
   };
-
-  useEffect(() => {
-    console.log(blogs);
-  }, [blogs]);
 
   //fetch blogs
 
@@ -74,7 +48,7 @@ const Blogs = ({ BACKEND_HOST }) => {
     const getBlogs = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`/api/blog/`);
+        const res = await axios.get(`${BACKEND_HOST}/api/blog/`);
         const data = res.data;
         setLoading(false);
         setBlogs(data);
@@ -90,7 +64,7 @@ const Blogs = ({ BACKEND_HOST }) => {
   return (
     <section className="blogsPage flex flex-column justify-left align-center w-100 gap-2">
       <div className="flex flex-row justify-between align-center w-100">
-        <h1>{t("nav.blogs")}</h1>
+        <h1 className="heading">{t("nav.blogs")}</h1>
         <div className="searchInputDiv flex flex-row justify-between align-center">
           <input value={input} onChange={handleSearch} className="searchInput" type="text" name="searchBar" id="searchBar" />
           {!x ? (

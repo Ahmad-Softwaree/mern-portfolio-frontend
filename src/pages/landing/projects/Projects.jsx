@@ -4,7 +4,7 @@ import ProjectCard from "../../../components/projects/ProjectCard";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
 import { useEffect } from "react";
 import axios from "axios";
-const Projects = ({ BACKEND_HOST, t, i18n }) => {
+const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
@@ -35,8 +35,9 @@ const Projects = ({ BACKEND_HOST, t, i18n }) => {
     const getProjects = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`/api/project/`);
+        const res = await axios.get(`${BACKEND_HOST}/api/project/`);
         const data = res.data;
+        if (data.length === 0) setCanSeeProjects(false);
         setProjects(data);
         setLoading(false);
       } catch (error) {
@@ -49,7 +50,7 @@ const Projects = ({ BACKEND_HOST, t, i18n }) => {
   return (
     <Element className="w-100" name="projects">
       <section id="projects" className="projects flex flex-column justify-center align-center w-100 gap-2">
-        <h1>{t("nav.projects")}</h1>
+        <h1 className="heading">{t("nav.projects")}</h1>
         <div
           ref={containerRef}
           onMouseDown={handleMouseDown}
@@ -68,9 +69,12 @@ const Projects = ({ BACKEND_HOST, t, i18n }) => {
                     BACKEND_HOST={BACKEND_HOST}
                     key={index}
                     img={project.image}
-                    title={project.title}
+                    enTitle={project.enTitle}
+                    arTitle={project.arTitle}
+                    krTitle={project.krTitle}
                     id={project._id}
                     url={project.url}
+                    i18n={i18n}
                   />
                 );
               })}

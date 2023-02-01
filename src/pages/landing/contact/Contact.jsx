@@ -5,7 +5,7 @@ const Contact = ({ BACKEND_HOST, t, i18n }) => {
   return (
     <Element className="w-100" name="contact">
       <section id="contact" className="contact flex flex-column justify-left align-start w-100 gap-2">
-        <h1>{t("nav.contact")}</h1>
+        <h1 className="heading">{t("nav.contact")}</h1>
         <div className="contactType flex flex-row justify-left align-center gap-2">
           <span>
             <i className="fa-solid fa-phone"></i>

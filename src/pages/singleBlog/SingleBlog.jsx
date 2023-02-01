@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import LoadingBlogSkeleton from "../../components/loading/LoadingBlogSkeleton";
+import LoadingSingleBlogSkeleton from "../../components/loading/LoadingSingleBlogSkeleton";
 import SingleBlogError from "../../error/SingleBlogError";
 
 const SingleBlog = ({ BACKEND_HOST }) => {
@@ -17,7 +18,7 @@ const SingleBlog = ({ BACKEND_HOST }) => {
     const getBlog = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`/api/blog/${id}`);
+        const res = await axios.get(`${BACKEND_HOST}/api/blog/${id}`);
         const data = res.data;
         setBlog(data);
         setLoading(false);
@@ -34,7 +35,7 @@ const SingleBlog = ({ BACKEND_HOST }) => {
       {!error ? (
         <>
           {loading ? (
-            <LoadingBlogSkeleton />
+            <LoadingSingleBlogSkeleton />
           ) : (
             <>
               <h1 className="blogHeader">{i18n.language === "en" ? blog.enTitle : i18n.language === "ar" ? blog.arTitle : blog.krTitle}</h1>

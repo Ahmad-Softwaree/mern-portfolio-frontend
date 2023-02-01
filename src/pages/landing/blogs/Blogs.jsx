@@ -5,7 +5,7 @@ import { Element } from "react-scroll";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
 import axios from "axios";
 
-const Blogs = ({ BACKEND_HOST, t, i18n }) => {
+const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
@@ -21,7 +21,6 @@ const Blogs = ({ BACKEND_HOST, t, i18n }) => {
     if (!isDragging) return;
     event.preventDefault();
     const x = event.clientX - startX;
-    setScrollLeft(x);
     containerRef.current.scrollLeft = x;
   };
 
@@ -37,8 +36,9 @@ const Blogs = ({ BACKEND_HOST, t, i18n }) => {
     const getBlogs = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`/api/blog/`);
+        const res = await axios.get(`${BACKEND_HOST}/api/blog/`);
         const data = res.data;
+        if (data.length === 0) setCanSeeBlogs(false);
         setBlogs(data);
         setLoading(false);
       } catch (error) {
@@ -52,7 +52,7 @@ const Blogs = ({ BACKEND_HOST, t, i18n }) => {
   return (
     <Element className="w-100" name="blogs">
       <section id="blogs" className="blogs flex flex-column justify-left align-center w-100 gap-3">
-        <h1>{t("nav.blogs")}</h1>
+        <h1 className="heading">{t("nav.blogs")}</h1>
         <div
           ref={containerRef}
           onMouseDown={handleMouseDown}

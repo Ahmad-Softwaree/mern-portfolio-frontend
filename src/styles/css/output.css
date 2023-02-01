@@ -14,7 +14,7 @@
   padding-right: 50px;
 }
 .layout .header nav ul li {
-  font-size: 28px;
+  font-size: 21px;
   font-weight: bold;
   list-style-type: none;
   transition: all 200ms;
@@ -54,20 +54,29 @@
   width: 68px;
   height: 30px;
   border: 1.5px solid #707aff;
-  border-radius: 10px;
   gap: 10px;
+  border-radius: 10px;
   cursor: pointer;
+}
+.layout .header .languageDiv .languageDivBox,
+.layout .header .blogLanguageDiv .languageDivBox {
+  border-radius: 10px;
+  gap: 5px;
+  width: 100%;
+  height: 100%;
   transition: all 200ms;
 }
-.layout .header .languageDiv:hover,
-.layout .header .blogLanguageDiv:hover {
+.layout .header .languageDiv .languageDivBox:hover,
+.layout .header .blogLanguageDiv .languageDivBox:hover {
   color: #fff;
   background-color: #707aff;
 }
 .layout .header .languageDiv .languagesList,
 .layout .header .blogLanguageDiv .languagesList {
-  background-color: #262626;
-  border-radius: 8px;
+  top: 110%;
+  background-color: #181818;
+  color: #fff;
+  border-radius: 10px;
   width: 100%;
   padding: 5px;
 }
@@ -75,6 +84,13 @@
 .layout .header .blogLanguageDiv .languagesList span {
   width: 100%;
   text-align: center;
+  background-color: #262626;
+  border-radius: 6px;
+  transition: all 200ms;
+}
+.layout .header .languageDiv .languagesList span:hover,
+.layout .header .blogLanguageDiv .languagesList span:hover {
+  background-color: #707aff;
 }
 .layout .header .mobileNav {
   display: flex;
@@ -188,7 +204,7 @@
 }
 @media (min-width: 767px) and (max-width: 1023px) {
   .header nav ul li {
-    font-size: 20px !important;
+    font-size: 18px !important;
   }
   .header .languageDiv {
     width: 55px !important;
@@ -217,10 +233,31 @@
     height: 8px !important;
   }
 }
+/* Create my own font rabar-39 */
+@font-face {
+  font-family: rabar-39;
+  src: url(/fonts/Rabar_039.ttf);
+}
+.sectionHeader {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+@media (min-width: 767px) and (max-width: 1023px) {
+  .sectionHeader {
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
+@media (max-width: 767px) {
+  .sectionHeader {
+    font-size: 26px;
+    font-weight: 500;
+  }
+}
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  scroll-padding-top: 2rem !important;
 }
 
 *,
@@ -234,6 +271,10 @@ body {
   padding: 0;
   font-family: Karla, sans-serif;
   position: relative;
+}
+
+:root {
+  --chakra-fonts-body: "";
 }
 
 textarea::placeholder,
@@ -340,6 +381,49 @@ img {
   object-fit: cover;
 }
 
+.heading {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+section {
+  padding-inline: 60px;
+  padding-top: 80px;
+}
+
+.projectCards,
+.workCards,
+.blogs .blogCards {
+  padding-inline: 60px;
+}
+
+@media (min-width: 767px) and (max-width: 1023px) {
+  section {
+    padding-inline: 40px !important;
+  }
+  .heading {
+    font-size: 26px !important;
+  }
+  .projectCards,
+  .workCards,
+  .blogs .blogCards {
+    padding-inline: 40px !important;
+  }
+}
+@media (max-width: 767px) {
+  section {
+    padding-inline: 20px !important;
+  }
+  .heading {
+    font-size: 22px !important;
+  }
+  .projectCards,
+  .workCards,
+  .blogs .blogCards {
+    padding-inline: 20px !important;
+  }
+}
 .flex {
   display: flex;
 }
@@ -1468,18 +1552,13 @@ img {
 }
 
 .blogs {
-  padding-top: 100px;
-  min-height: 60vh;
+  padding-inline: 0 !important;
   color: #fff;
   text-align: center;
 }
-.blogs h1 {
-  font-size: 36px;
-  font-weight: 700;
-}
 .blogs .blogCards {
-  width: fit-content;
-  padding-inline: 20px;
+  width: 100%;
+  height: fit-content;
   max-height: 550px;
   overflow-x: scroll;
   width: 100%;
@@ -1492,7 +1571,7 @@ img {
   background-color: #262626;
   border-radius: 24px;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 .blogs .blogCards .blogCard img {
   width: 100%;
@@ -1503,7 +1582,7 @@ img {
 }
 .blogs .blogCards .blogCard p {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 139.9%;
 }
 .blogs .blogCards .blogCard .readBlog {
@@ -1526,6 +1605,19 @@ img {
 }
 .blogs .seeMore {
   width: 200px;
+  background-color: #262626;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px #181818 solid;
+  transition: all 200ms;
+}
+.blogs .seeMore:hover {
+  background-color: #181818;
+  border-color: #fff;
 }
 
 @media (min-width: 1024px) {
@@ -1535,21 +1627,21 @@ img {
     align-items: center;
   }
 }
-.projects {
-  padding-top: 50px;
-  padding-bottom: 50px;
+@media (max-width: 767px) {
+  .blogs .blogCard {
+    width: 250px !important;
+  }
+  .blogs .blogCard .readBlog {
+    width: 100% !important;
+  }
 }
-.projects h1 {
-  font-size: 36px;
-  color: #fff;
-  font-weight: 700;
+.projects {
+  padding-inline: 0 !important;
 }
 .projects .projectCards::-webkit-scrollbar {
   display: none !important;
 }
 .projects .projectCards {
-  padding-inline: 30px;
-  padding-left: 80px;
   width: 100%;
   height: fit-content;
   max-height: 569px;
@@ -1577,42 +1669,26 @@ img {
 }
 
 @media (min-width: 767px) and (max-width: 1023px) {
-  .projectCards {
-    padding-left: 50px !important;
-  }
   .projectCards .projectCard {
     width: 600px !important;
   }
 }
 @media (max-width: 767px) {
   .projectCards {
-    padding-left: 20px !important;
     max-height: 350px !important;
   }
   .projectCards .projectCard {
-    width: 400px !important;
+    width: 300px !important;
   }
 }
 @media (max-width: 450px) {
-  .projectCards {
-    padding-left: 20px !important;
-  }
   .projectCards .projectCard {
     width: 90% !important;
-    min-width: 300px;
+    min-width: 250px;
   }
 }
-.skills {
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-.skills .heading {
-  margin-bottom: 20px;
-}
 .skills h1 {
-  color: #fff;
-  font-size: 36px !important;
-  font-weight: 700;
+  margin-bottom: 40px;
 }
 .skills .skillsBox {
   width: 80%;
@@ -1625,6 +1701,7 @@ img {
 .skills .skillsBox h1 {
   font-size: 30px;
   padding: 0 20px;
+  margin: 0;
 }
 .skills .skillsBox .skillGroup {
   padding: 20px 25px;
@@ -1648,10 +1725,14 @@ img {
 
 @media (max-width: 767px) {
   .skills {
-    padding: 0 !important;
+    padding-inline: 0 !important;
   }
   .skills .skillsBox {
+    width: 90% !important;
     border-width: 20px !important;
+  }
+  .skills .skillsBox .littleBreak {
+    height: 20px !important;
   }
   .skills .skillsBox h1 {
     font-size: 22px !important;
@@ -1668,9 +1749,7 @@ img {
   }
 }
 .home {
-  padding-inline: 20px;
-  padding-top: 150px;
-  min-height: 60vh;
+  min-height: 100vh;
 }
 .home .leftHome,
 .home .rightHome {
@@ -1702,6 +1781,23 @@ img {
   font-size: 32px;
   color: #fff;
 }
+.home .leftHome .showCV {
+  width: 150px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.home .leftHome .showCV:hover {
+  background-color: #707aff;
+  border: none;
+}
 .home .leftHome .ahmadSoftware {
   position: relative;
   z-index: 1;
@@ -1728,15 +1824,7 @@ img {
   transform: rotate(165deg);
 }
 
-@media (min-width: 1024px) {
-  .home {
-    padding-inline: 6% !important;
-  }
-}
 @media (min-width: 767px) and (max-width: 1023px) {
-  .home {
-    padding-inline: 40px !important;
-  }
   .home .leftHome,
   .home .rightHome {
     width: 40% !important;
@@ -1756,9 +1844,8 @@ img {
 @media (max-width: 767px) {
   .home {
     flex-flow: column wrap !important;
-    padding-inline: 20px !important;
     align-items: center;
-    padding-top: 180px !important;
+    padding-top: 140px !important;
     gap: 5rem;
     justify-content: left;
   }
@@ -1770,6 +1857,10 @@ img {
   .home .rightHome {
     max-width: 400px !important;
   }
+  .home .leftHome {
+    justify-content: center;
+    align-items: center;
+  }
   .home .leftHome h1,
   .home .leftHome p {
     width: 100% !important;
@@ -1779,6 +1870,11 @@ img {
   }
   .home .leftHome p {
     font-size: 16px !important;
+  }
+  .home .leftHome .showCV {
+    font-size: 12px;
+    width: 150px;
+    height: 35px;
   }
   .home .blur {
     width: 137.11px !important;
@@ -1796,14 +1892,7 @@ img {
   }
 }
 .contact {
-  padding: 35px;
-  padding-top: 30px;
-  padding-bottom: 50px;
   min-height: 70vh;
-}
-.contact h1 {
-  font-size: 36px;
-  font-weight: 700;
 }
 .contact .contactType span,
 .contact .contactType a {
@@ -1812,12 +1901,6 @@ img {
 }
 
 @media (max-width: 767px) {
-  .contact {
-    padding-left: 20px !important;
-  }
-  .contact h1 {
-    font-size: 24px !important;
-  }
   .contact .contactType {
     gap: 1rem !important;
   }
@@ -1834,10 +1917,6 @@ img {
   padding-inline: 20px;
   background-color: #181818;
   color: #fff;
-}
-.blogsPage h1 {
-  font-size: 36px;
-  font-weight: 600;
 }
 .blogsPage .searchInputDiv {
   background-color: #222222;
@@ -1874,16 +1953,17 @@ img {
   background-color: #262626;
   border-radius: 24px;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 .blogsPage .allBlogs .blogCard img {
   width: 100%;
   object-fit: cover;
+  border-radius: 12px;
   cursor: pointer;
 }
 .blogsPage .allBlogs .blogCard p {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 139.9%;
 }
 .blogsPage .allBlogs .blogCard .readBlog {
@@ -1905,15 +1985,7 @@ img {
   color: #707aff;
 }
 
-@media (min-width: 1024px) {
-  .blogsPage {
-    padding-inline: 100px !important;
-  }
-}
 @media (max-width: 767px) {
-  .blogsPage h1 {
-    font-size: 24px !important;
-  }
   .blogsPage .searchInputDiv {
     width: 200px !important;
   }
@@ -2001,6 +2073,101 @@ img {
   font-size: 12px;
 }
 
+.works {
+  padding-inline: 0 !important;
+}
+.works h1 {
+  width: 100%;
+  text-align: center;
+}
+.works .workCards::-webkit-scrollbar {
+  display: none !important;
+}
+.works h2 {
+  text-align: center;
+  width: 100%;
+}
+.works button {
+  width: 147px;
+  height: 54px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.workCards {
+  flex-flow: row nowrap;
+  height: fit-content;
+  max-height: 540px;
+  width: 100%;
+  overflow-x: scroll;
+}
+.workCards .workCard {
+  cursor: pointer;
+  background: #262626;
+  border: 1px solid #707aff;
+  border-radius: 20px;
+  min-width: 278px;
+  height: 315px;
+}
+.workCards .workCard .workCardBack {
+  border-radius: 20px;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  top: 0;
+  height: 40%;
+  width: 100%;
+  right: 0;
+  left: 0;
+  background: linear-gradient(114.78deg, #707aff 0%, #4a52b9 79.88%);
+}
+.workCards .workCard .workCardImageDiv {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: auto;
+  margin-left: auto;
+  background: #181818;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 35px;
+  width: 126px;
+  height: 126px;
+}
+.workCards .workCard .workCardImageDiv img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+}
+.workCards .workCard .workCardText {
+  text-align: center;
+}
+.workCards .workCard h2,
+.workCards .workCard p {
+  color: #fff;
+}
+.workCards .workCard h2 {
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0;
+}
+.workCards .workCard .workType {
+  font-weight: 400;
+  font-size: 18px;
+  opacity: 0.6;
+  color: #fff;
+}
+
+@media (min-width: 767px) and (max-width: 1023px) {
+  .workCards {
+    flex-flow: column wrap !important;
+    justify-content: left !important;
+  }
+}
 .skeleton {
   background-color: rgb(199, 199, 199);
   margin: 0.75 0;
@@ -2169,6 +2336,50 @@ img {
     width: 120px !important;
     height: 30px !important;
     font-size: 12px !important;
+  }
+}
+@media (pointer: coarse) {
+  .home .leftHome .showCV {
+    background-color: #707aff;
+    border: none;
+  }
+  .home .leftHome .showCV:hover {
+    background-color: #707aff;
+    border: none;
+  }
+  .blogsPage .searchInputDiv .x {
+    color: tomato;
+  }
+  .blogsPage .searchInputDiv:hover .x {
+    color: tomato;
+  }
+  .blogsPage .allBlogs .blogCard .readBlog:hover {
+    background-color: #707aff;
+    color: #fff;
+  }
+  .blogs .blogCards .blogCard .readBlog:hover {
+    background-color: #707aff;
+    color: #fff;
+  }
+  .blogs .seeMore:hover {
+    background-color: #262626;
+    border-color: #181818;
+  }
+  .layout .header nav ul li:hover {
+    color: #fff;
+  }
+  .layout .header .blogLanguageDiv .languageDivBox:hover {
+    color: #707aff;
+    background-color: #181818;
+  }
+  .layout .header .blogLanguageDiv .languageList span:hover {
+    background-color: #181818;
+  }
+  .layout .footer .socials .fa-facebook:hover,
+  .layout .footer .socials .fa-youtube:hover,
+  .layout .footer .socials .fa-github:hover,
+  .layout .footer .socials .fa-linkedin:hover {
+    color: #fff;
   }
 }
 

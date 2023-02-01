@@ -4,20 +4,14 @@
 @use "../../util/hover.scss" as hover;
 
 .skills {
-  padding-top: 50px;
-  padding-bottom: 50px;
-  .heading {
-    margin-bottom: 20px;
-  }
   h1 {
-    color: colors.$white;
-    font-size: 36px !important;
-    font-weight: 700;
+    margin-bottom: 40px;
   }
   .skillsBox {
     h1 {
       font-size: 30px;
       padding: 0 20px;
+      margin: 0;
     }
     width: 80%;
     color: colors.$white;
@@ -53,8 +47,12 @@
 
 @include res.responsive(mobile) {
   .skills {
-    padding: 0 !important;
+    padding-inline: 0 !important;
     .skillsBox {
+      width: 90% !important;
+      .littleBreak {
+        height: 20px !important;
+      }
       border-width: 20px !important;
       h1 {
         font-size: 22px !important;

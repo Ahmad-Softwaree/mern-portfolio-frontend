@@ -5,7 +5,6 @@ import Layout from "./components/layout/Layout";
 import Blogs from "./pages/blogs/Blogs";
 import Landing from "./pages/landing/Landing";
 import SingleBlog from "./pages/singleBlog/SingleBlog";
-import getBackendHost from "../src/data/getBackendHost.js";
 import ErrorPage from "./error/ErrorPage";
 import Error from "./error/Error";
 import "./language/i18react.js";
@@ -13,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import Logout from "./pages/logout/Logout";
 import Login from "./pages/login/Login";
 
-const BACKEND_HOST = getBackendHost();
+const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST;
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -42,11 +41,16 @@ const routes = createBrowserRouter(
 
 function App() {
   const { t, i18n } = useTranslation();
-  if (i18n.language === "kr" || i18n.language === "ar") {
-    document.body.style.direction = "rtl";
-  } else {
-    document.body.style.direction = "ltr";
-  }
+  useEffect(() => {
+    if (i18n.language === "kr" || i18n.language === "ar") {
+      document.body.style.direction = "rtl";
+      document.body.style.fontFamily = "rabar-39";
+    } else {
+      document.body.style.direction = "ltr";
+      document.body.style.fontFamily = "Karla";
+    }
+  }, [i18n.language]);
+
   return (
     <div className="App">
       <RouterProvider router={routes} />

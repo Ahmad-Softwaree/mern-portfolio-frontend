@@ -2,23 +2,19 @@
 @use "../../breakpoints.scss" as res;
 @use "../../animations/animation.scss" as animation;
 @use "../../util/hover.scss" as hover;
+@use "../../util/typography.scss" as type;
 
 .blogCards::-webkit-scrollbar {
   display: none !important;
 }
 
 .blogs {
-  padding-top: 100px;
-  min-height: 60vh;
+  padding-inline: 0 !important;
   color: colors.$white;
-  h1 {
-    font-size: 36px;
-    font-weight: 700;
-  }
 
   .blogCards {
-    width: fit-content;
-    padding-inline: 20px;
+    width: 100%;
+    height: fit-content;
     max-height: 550px;
     overflow-x: scroll;
     width: 100%;
@@ -30,7 +26,7 @@
       background-color: colors.$lightBlack;
       border-radius: 24px;
       padding: 10px;
-      text-align: left;
+      text-align: center;
       img {
         width: 100%;
         object-fit: cover;
@@ -40,7 +36,7 @@
       }
       p {
         font-weight: 500;
-        font-size: 20px;
+        font-size: 16px;
         line-height: 139.9%;
       }
       .readBlog {
@@ -67,6 +63,21 @@
   }
   .seeMore {
     width: 200px;
+    background-color: colors.$lightBlack;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    border: 1px colors.$black solid;
+    @include hover.hover-effect(
+      200ms,
+      (
+        background-color: colors.$black,
+        border-color: colors.$white,
+      )
+    );
   }
   text-align: center;
 }
@@ -77,6 +88,17 @@
       flex-flow: row nowrap !important;
       justify-content: center;
       align-items: center;
+    }
+  }
+}
+
+@include res.responsive(mobile) {
+  .blogs {
+    .blogCard {
+      width: 250px !important;
+      .readBlog {
+        width: 100% !important;
+      }
     }
   }
 }

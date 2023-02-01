@@ -4,20 +4,12 @@
 @use "../../util/hover.scss" as hover;
 
 .projects {
-  padding-top: 50px;
-  padding-bottom: 50px;
-  h1 {
-    font-size: 36px;
-    color: colors.$white;
-    font-weight: 700;
-  }
+  padding-inline: 0 !important;
 
   .projectCards::-webkit-scrollbar {
     display: none !important;
   }
   .projectCards {
-    padding-inline: 30px;
-    padding-left: 80px;
     width: 100%;
     height: fit-content;
     max-height: 569px;
@@ -47,7 +39,6 @@
 
 @include res.responsive(tablet) {
   .projectCards {
-    padding-left: 50px !important;
     .projectCard {
       width: 600px !important;
     }
@@ -56,21 +47,19 @@
 
 @include res.responsive(mobile) {
   .projectCards {
-    padding-left: 20px !important;
     max-height: 350px !important;
 
     .projectCard {
-      width: 400px !important;
+      width: 300px !important;
     }
   }
 }
 
 @include res.responsive(small) {
   .projectCards {
-    padding-left: 20px !important;
     .projectCard {
       width: 90% !important;
-      min-width: 300px;
+      min-width: 250px;
     }
   }
 }

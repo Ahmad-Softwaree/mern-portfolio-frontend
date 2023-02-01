@@ -4,15 +4,7 @@
 @use "../../util/hover.scss" as hover;
 
 .contact {
-  padding: 35px;
-  padding-top: 30px;
-  padding-bottom: 50px;
   min-height: 70vh;
-  h1 {
-    font-size: 36px;
-    font-weight: 700;
-  }
-
   .contactType {
     span,
     a {
@@ -24,11 +16,6 @@
 
 @include res.responsive(mobile) {
   .contact {
-    padding-left: 20px !important;
-    h1 {
-      font-size: 24px !important;
-    }
-
     .contactType {
       gap: 1rem !important;
       span,

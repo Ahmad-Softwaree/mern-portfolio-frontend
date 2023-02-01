@@ -4,17 +4,22 @@
     "blogs": "Blogs",
     "skills": "Skills",
     "projects": "Projects",
+    "works": "Works",
     "contact": "Contact"
   },
   "home": {
     "welcome": "WELCOME TO MY WORLD",
     "who": "I'm",
     "name": " Ahmad Software",
-    "job": "Full Stack developer"
+    "job": "Full Stack developer",
+    "cv": "Show CV"
   },
   "blog": {
     "read": "Read blog",
     "seeMore": "See more"
+  },
+  "work": {
+    "title": "works for clients"
   },
   "skills": {
     "languages": "Languages",

@@ -1,11 +1,9 @@
 @use "../../util/colors.scss" as colors;
 @use "../../breakpoints.scss" as res;
 @use "../../animations/animation.scss" as animation;
-
+@use "../../util/hover.scss" as hover;
 .home {
-  padding-inline: 20px;
-  padding-top: 150px;
-  min-height: 60vh;
+  min-height: 100vh;
   .leftHome,
   .rightHome {
     width: 50%;
@@ -40,6 +38,26 @@
       color: colors.$white;
     }
 
+    .showCV {
+      width: 150px;
+      height: 40px;
+      background-color: transparent;
+      border: 1px solid #ffffff;
+      border-radius: 5px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      @include hover.hover-effect(
+        200ms,
+        (
+          background-color: colors.$purple,
+          border: none,
+        )
+      );
+    }
+
     .ahmadSoftware {
       position: relative;
       z-index: 1;
@@ -71,15 +89,8 @@
   }
 }
 
-@include res.responsive(computer) {
-  .home {
-    padding-inline: 6% !important;
-  }
-}
-
 @include res.responsive(tablet) {
   .home {
-    padding-inline: 40px !important;
     .leftHome,
     .rightHome {
       width: 40% !important;
@@ -105,9 +116,8 @@
 @include res.responsive(mobile) {
   .home {
     flex-flow: column wrap !important;
-    padding-inline: 20px !important;
     align-items: center;
-    padding-top: 180px !important;
+    padding-top: 140px !important;
     gap: 5rem;
     justify-content: left;
     .leftHome,
@@ -130,6 +140,13 @@
       }
       p {
         font-size: 16px !important;
+      }
+      justify-content: center;
+      align-items: center;
+      .showCV {
+        font-size: 12px;
+        width: 150px;
+        height: 35px;
       }
     }
 

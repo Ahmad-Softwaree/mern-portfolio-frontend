@@ -51,6 +51,17 @@ const MobileNav = ({ isHome, activeSection, goNav, setMobNav, mobNav, t, i18n })
         <li className="navItem">
           <span
             onClick={() => {
+              goNav("works");
+            }}
+            className={`${activeSection === "works" && "activeNav"}`}
+          >
+            {t("nav.works")}
+          </span>
+        </li>
+
+        <li className="navItem">
+          <span
+            onClick={() => {
               goNav("contact");
             }}
             className={`${activeSection === "contact" && "activeNav"}`}

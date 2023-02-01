@@ -1,0 +1,84 @@
+//those things not when touch
+@use "./util/colors.scss" as colors;
+@media (pointer: coarse) {
+  .home {
+    .leftHome {
+      .showCV {
+        background-color: colors.$purple;
+        border: none;
+      }
+      .showCV:hover {
+        background-color: colors.$purple;
+        border: none;
+      }
+    }
+  }
+  .blogsPage {
+    .searchInputDiv {
+      .x {
+        color: tomato;
+      }
+    }
+    .searchInputDiv:hover {
+      .x {
+        color: tomato;
+      }
+    }
+
+    .allBlogs {
+      .blogCard {
+        .readBlog:hover {
+          background-color: colors.$purple;
+          color: colors.$white;
+        }
+      }
+    }
+  }
+  .blogs {
+    .blogCards {
+      .blogCard {
+        .readBlog:hover {
+          background-color: colors.$purple;
+          color: colors.$white;
+        }
+      }
+    }
+    .seeMore:hover {
+      background-color: colors.$lightBlack;
+      border-color: colors.$black;
+    }
+  }
+
+  .layout {
+    .header {
+      nav {
+        ul {
+          li:hover {
+            color: colors.$white;
+          }
+        }
+      }
+      .blogLanguageDiv {
+        .languageDivBox:hover {
+          color: colors.$purple;
+          background-color: colors.$black;
+        }
+        .languageList {
+          span:hover {
+            background-color: colors.$black;
+          }
+        }
+      }
+    }
+    .footer {
+      .socials {
+        .fa-facebook:hover,
+        .fa-youtube:hover,
+        .fa-github:hover,
+        .fa-linkedin:hover {
+          color: colors.$white;
+        }
+      }
+    }
+  }
+}
