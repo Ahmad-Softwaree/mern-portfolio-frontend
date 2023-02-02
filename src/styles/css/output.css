@@ -1634,7 +1634,7 @@ section {
 @media (max-width: 767px) {
   .blogs .blogCard {
     width: 250px !important;
-    height: 400px !important;
+    height: 430px !important;
   }
   .blogs .blogCard .readBlog {
     width: 100% !important;
