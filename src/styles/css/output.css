@@ -1571,6 +1571,7 @@ section {
   border-radius: 24px;
   padding: 10px;
   text-align: center;
+  min-height: 410px;
 }
 .blogs .blogCards .blogCard img {
   width: 100%;
@@ -1972,6 +1973,7 @@ section {
   border-radius: 24px;
   padding: 10px;
   text-align: center;
+  min-height: 410px;
 }
 .blogsPage .allBlogs .blogCard img {
   width: 100%;
