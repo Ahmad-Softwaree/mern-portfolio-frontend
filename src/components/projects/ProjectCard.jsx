@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Link } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 const ProjectCard = ({ BACKEND_HOST, img, enTitle, arTitle, krTitle, id, url, i18n, urlName }) => {
   return (
     <div className="projectCard flex flex-column justify-center align-center">
@@ -14,9 +15,10 @@ const ProjectCard = ({ BACKEND_HOST, img, enTitle, arTitle, krTitle, id, url, i1
         )}
 
         {url && (
-          <a target="_blank" href={`${url}`} className="projectLink">
+          <Link isExternal href={`${url}`} className="projectLink">
             {urlName}
-          </a>
+            <ExternalLinkIcon mx="2px" />
+          </Link>
         )}
       </div>
     </div>
