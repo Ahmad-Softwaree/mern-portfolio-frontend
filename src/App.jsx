@@ -39,6 +39,26 @@ const routes = createBrowserRouter(
   )
 );
 
+//Error whole app
+
+const ErrorBoundaryDetect = ({ children }) => {
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (hasError) {
+        logErrorToMyService();
+      }
+    };
+  }, [hasError]);
+
+  if (hasError) {
+    return <ErrorBoundary />;
+  }
+
+  return children;
+};
+
 function App() {
   const { t, i18n } = useTranslation();
   useEffect(() => {
@@ -51,10 +71,20 @@ function App() {
     }
   }, [i18n.language]);
 
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShow(true);
+    }, [6000]);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <RouterProvider router={routes} />
-    </div>
+    <ErrorBoundaryDetect>
+      <div className="App">{!show ? <Fallback /> : <RouterProvider router={routes} />}</div>
+    </ErrorBoundaryDetect>
   );
 }
 
