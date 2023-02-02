@@ -15,9 +15,16 @@ const ProjectCard = ({ BACKEND_HOST, img, enTitle, arTitle, krTitle, id, url, i1
         )}
 
         {url && (
-          <Link isExternal href={`${url}`} className="projectLink">
-            {urlName}
+          <Link
+            style={{
+              gap: "8px",
+            }}
+            isExternal
+            href={`${url}`}
+            className="projectLink flex flex-row justify-center align-center"
+          >
             <ExternalLinkIcon mx="2px" />
+            {urlName}
           </Link>
         )}
       </div>
