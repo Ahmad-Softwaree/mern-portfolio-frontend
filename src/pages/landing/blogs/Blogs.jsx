@@ -81,6 +81,7 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
                     enBody={blog.enBody}
                     arBody={blog.arBody}
                     krBody={blog.krBody}
+                    time={blog.createdAt}
                   />
                 );
               })}

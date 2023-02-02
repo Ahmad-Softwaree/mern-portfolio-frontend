@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { scroller } from "react-scroll";
 import MobileNav from "./MobileNav";
 import { useTranslation } from "react-i18next";
-
-const Header = ({ isHome }) => {
+import axios from "axios";
+const Header = ({ isHome, BACKEND_HOST }) => {
   //languages
 
   const [languages, setLanguages] = useState(false);
@@ -26,13 +26,13 @@ const Header = ({ isHome }) => {
       //this if so we don't have error in other pages says that those element are not defined
       const handleScroll = () => {
         //we have all the domes every time
-        const home = document.getElementById("home").getBoundingClientRect();
-        const blog = document.getElementById("blogs").getBoundingClientRect();
-        const whyUs = document.getElementById("skills").getBoundingClientRect();
-        const services = document.getElementById("projects").getBoundingClientRect();
-        const works = document.getElementById("works").getBoundingClientRect();
+        const home = document.getElementById("home")?.getBoundingClientRect();
+        const blog = document.getElementById("blogs")?.getBoundingClientRect();
+        const whyUs = document.getElementById("skills")?.getBoundingClientRect();
+        const services = document.getElementById("projects")?.getBoundingClientRect();
+        const works = document.getElementById("works")?.getBoundingClientRect();
 
-        const contact = document.getElementById("contact").getBoundingClientRect();
+        const contact = document.getElementById("contact")?.getBoundingClientRect();
 
         const pageArray = [home, blog, whyUs, services, works, contact];
         const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
@@ -53,6 +53,63 @@ const Header = ({ isHome }) => {
       };
     }
   }, [activeSection, isHome]);
+
+  //to show blogs or not
+
+  const [canSeeBlog, setCanSeeBlog] = useState(true);
+  const [canSeeProjects, setCanSeeProjects] = useState(true);
+  const [canSeeWorks, setCanSeeWorks] = useState(true);
+
+  useEffect(() => {
+    const getBlogs = async () => {
+      try {
+        const res = await axios.get(`${BACKEND_HOST}/api/blog/`);
+        const data = res.data;
+        if (data.length === 0) setCanSeeBlog(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getBlogs();
+
+    return () => {
+      //
+    };
+  }, []);
+
+  useEffect(() => {
+    const getProjects = async () => {
+      try {
+        const res = await axios.get(`${BACKEND_HOST}/api/project/`);
+        const data = res.data;
+        if (data.length === 0) setCanSeeProjects(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProjects();
+
+    return () => {
+      //
+    };
+  }, []);
+
+  useEffect(() => {
+    const getWorks = async () => {
+      try {
+        const res = await axios.get(`${BACKEND_HOST}/api/work/`);
+        const data = res.data;
+        if (data.length === 0) setCanSeeWorks(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getWorks();
+
+    return () => {
+      //
+    };
+  }, []);
 
   const goNav = (name) => {
     setMobNav(false);
@@ -134,16 +191,18 @@ const Header = ({ isHome }) => {
                 </span>
               </li>
 
-              <li className="navItem">
-                <span
-                  onClick={() => {
-                    goNav("blogs");
-                  }}
-                  className={`${activeSection === "blogs" && "activeNav"}`}
-                >
-                  {t("nav.blogs")}
-                </span>
-              </li>
+              {canSeeBlog && (
+                <li className="navItem">
+                  <span
+                    onClick={() => {
+                      goNav("blogs");
+                    }}
+                    className={`${activeSection === "blogs" && "activeNav"}`}
+                  >
+                    {t("nav.blogs")}
+                  </span>
+                </li>
+              )}
 
               <li className="navItem">
                 <span
@@ -156,27 +215,31 @@ const Header = ({ isHome }) => {
                 </span>
               </li>
 
-              <li className="navItem">
-                <span
-                  onClick={() => {
-                    goNav("projects");
-                  }}
-                  className={`${activeSection === "projects" && "activeNav"}`}
-                >
-                  {t("nav.projects")}
-                </span>
-              </li>
+              {canSeeProjects && (
+                <li className="navItem">
+                  <span
+                    onClick={() => {
+                      goNav("projects");
+                    }}
+                    className={`${activeSection === "projects" && "activeNav"}`}
+                  >
+                    {t("nav.projects")}
+                  </span>
+                </li>
+              )}
 
-              <li className="navItem">
-                <span
-                  onClick={() => {
-                    goNav("works");
-                  }}
-                  className={`${activeSection === "works" && "activeNav"}`}
-                >
-                  {t("nav.works")}
-                </span>
-              </li>
+              {canSeeWorks && (
+                <li className="navItem">
+                  <span
+                    onClick={() => {
+                      goNav("works");
+                    }}
+                    className={`${activeSection === "works" && "activeNav"}`}
+                  >
+                    {t("nav.works")}
+                  </span>
+                </li>
+              )}
 
               <li className="navItem">
                 <span

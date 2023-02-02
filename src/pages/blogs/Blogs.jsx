@@ -105,6 +105,7 @@ const Blogs = ({ BACKEND_HOST }) => {
                   arBody={blog.arBody}
                   krBody={blog.krBody}
                   BACKEND_HOST={BACKEND_HOST}
+                  time={blog.createdAt}
                 />
               );
             })}

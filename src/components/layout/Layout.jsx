@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 
-const Layout = ({ isHome }) => {
+const Layout = ({ isHome, BACKEND_HOST }) => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
@@ -14,7 +14,7 @@ const Layout = ({ isHome }) => {
   }, [location]);
   return (
     <div className="layout w-100">
-      <Header isHome={isHome} />
+      <Header isHome={isHome} BACKEND_HOST={BACKEND_HOST} />
       <Outlet />
       <Footer />
     </div>

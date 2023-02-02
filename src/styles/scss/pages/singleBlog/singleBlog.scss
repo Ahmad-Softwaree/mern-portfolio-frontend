@@ -11,7 +11,10 @@
   padding-inline: 20px;
   background-color: colors.$black;
   color: colors.$white;
-
+  .blogTime {
+    font-size: 12px;
+    font-weight: 400;
+  }
   h1 {
     font-size: 36px;
     margin: 0;

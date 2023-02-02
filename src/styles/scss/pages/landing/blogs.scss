@@ -4,13 +4,12 @@
 @use "../../util/hover.scss" as hover;
 @use "../../util/typography.scss" as type;
 
-.blogCards::-webkit-scrollbar {
-  display: none !important;
-}
-
 .blogs {
   padding-inline: 0 !important;
   color: colors.$white;
+  .blogCards::-webkit-scrollbar {
+    display: none !important;
+  }
 
   .blogCards {
     width: 100%;
@@ -59,6 +58,10 @@
           )
         );
       }
+      .blogTime {
+        font-size: 12px;
+        font-weight: 400;
+      }
     }
   }
   .seeMore {
@@ -96,6 +99,7 @@
   .blogs {
     .blogCard {
       width: 250px !important;
+      height: 400px !important;
       .readBlog {
         width: 100% !important;
       }

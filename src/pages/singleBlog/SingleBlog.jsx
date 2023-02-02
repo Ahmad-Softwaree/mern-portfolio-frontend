@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import LoadingBlogSkeleton from "../../components/loading/LoadingBlogSkeleton";
 import LoadingSingleBlogSkeleton from "../../components/loading/LoadingSingleBlogSkeleton";
 import SingleBlogError from "../../error/SingleBlogError";
+import DOMPurify from "dompurify";
+import moment from "moment";
 
 const SingleBlog = ({ BACKEND_HOST }) => {
   const { id } = useParams();
@@ -39,7 +41,7 @@ const SingleBlog = ({ BACKEND_HOST }) => {
           ) : (
             <>
               <h1 className="blogHeader">{i18n.language === "en" ? blog.enTitle : i18n.language === "ar" ? blog.arTitle : blog.krTitle}</h1>
-              <img src={`${BACKEND_HOST}/public/images/blogs/${blog.image}`} alt="" className="blogImage" />
+              <img src={`${blog.image}`} alt="" className="blogImage" />
               {i18n.language === "en" ? (
                 <p dangerouslySetInnerHTML={{ __html: blog.enBody }}></p>
               ) : i18n.language === "ar" ? (
@@ -47,8 +49,11 @@ const SingleBlog = ({ BACKEND_HOST }) => {
               ) : (
                 <p dangerouslySetInnerHTML={{ __html: blog.krBody }}></p>
               )}
+              <span className="blogTime">
+                {moment(blog.createdAt).format("MMMM Do YYYY")} {moment(blog.createdAt).format("dddd")}
+              </span>
             </>
-          )}{" "}
+          )}
         </>
       ) : (
         <SingleBlogError />

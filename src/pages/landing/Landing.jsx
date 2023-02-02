@@ -19,7 +19,7 @@ const Landing = ({ BACKEND_HOST }) => {
 
   useEffect(() => {
     const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
-
+    console.log(canSeeBlogs);
     if (!canSeeBlogs) {
       const index = pageString.indexOf("blogs");
       if (index > -1) pageString.splice(index, 1);
@@ -43,7 +43,7 @@ const Landing = ({ BACKEND_HOST }) => {
         opacity: 1,
       });
     });
-  }, []);
+  }, [canSeeBlogs, canSeeProjects, canSeeWorks]);
 
   return (
     <div className="landing w-100 p-0 m-0 flex flex-column justify-center align-center gap-2">

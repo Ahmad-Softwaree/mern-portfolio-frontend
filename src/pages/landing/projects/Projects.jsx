@@ -49,7 +49,7 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
   }, []);
   return (
     <Element className="w-100" name="projects">
-      <section id="projects" className="projects flex flex-column justify-center align-center w-100 gap-2">
+      <section id="projects" className="projects flex flex-column justify-left align-center w-100 gap-2">
         <h1 className="heading">{t("nav.projects")}</h1>
         <div
           ref={containerRef}
@@ -57,7 +57,7 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className="projectCards flex flex-column justify-center align-center flex-wrap w-100  gap-4"
+          className="projectCards flex flex-column justify-left align-center flex-wrap w-100  gap-4"
         >
           {loading ? (
             <LoadingBlogSkeleton />
@@ -75,6 +75,7 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
                     id={project._id}
                     url={project.url}
                     i18n={i18n}
+                    urlName={project.urlName}
                   />
                 );
               })}
