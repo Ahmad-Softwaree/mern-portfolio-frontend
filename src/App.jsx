@@ -11,6 +11,8 @@ import "./language/i18react.js";
 import { useTranslation } from "react-i18next";
 import Logout from "./pages/logout/Logout";
 import Login from "./pages/login/Login";
+import Fallback from "./pages/Fallback";
+import ErrorBoundary from "./pages/ErrorBoundary";
 
 const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST;
 

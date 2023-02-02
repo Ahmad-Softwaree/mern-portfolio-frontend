@@ -5,6 +5,8 @@ const Fallback = () => {
     <section
       style={{
         minHeight: "100vh",
+        backgroundColor: "#262626",
+        color: "#fff",
       }}
       className="w-100 flex flex-column justify-center align-center"
     >
