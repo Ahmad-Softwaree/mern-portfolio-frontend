@@ -1656,7 +1656,7 @@ section {
   align-items: center;
 }
 .projects .projectCards .projectCard {
-  height: fit-content;
+  height: 400px;
 }
 .projects .projectCards .projectCard p {
   margin: 0;
@@ -1667,10 +1667,10 @@ section {
   object-fit: cover;
   max-height: 400px;
   width: 100%;
-  height: 70%;
+  height: 75%;
 }
 .projects .projectCards .projectCard .projectCardFooter {
-  height: 30%;
+  height: 25%;
   width: 100%;
   padding: 20px 0;
   background-color: #707aff;
@@ -1730,11 +1730,103 @@ section {
   margin: 0;
   font-weight: 500;
 }
-.skills .skillsBox .skillGroup .skillIcons img {
+.skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv {
   cursor: pointer;
   max-width: 100px;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.skills .skillsBox .skillGroup .skillIcons img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  max-height: 100px;
+}
+.skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv::after {
+  content: "Java";
+  position: absolute;
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  width: 100%;
+  bottom: 0;
+  height: 0;
+  overflow: hidden;
+  transform-origin: bottom center;
+  z-index: 999;
+  background-color: #181818;
+  color: #fff;
+  opacity: 0.9;
+  transition: all 200ms ease;
+}
+.skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv:hover::after {
+  height: 50px;
+}
+.skills .skillsBox .skillGroup .skillIcons .java::after {
+  content: "java";
+}
+.skills .skillsBox .skillGroup .skillIcons .python::after {
+  content: "python";
+}
+.skills .skillsBox .skillGroup .skillIcons .c::after {
+  content: "c-sharp";
+}
+.skills .skillsBox .skillGroup .skillIcons .html::after {
+  content: "html";
+}
+.skills .skillsBox .skillGroup .skillIcons .css::after {
+  content: "css";
+}
+.skills .skillsBox .skillGroup .skillIcons .sass::after {
+  content: "sass";
+}
+.skills .skillsBox .skillGroup .skillIcons .bootstrap::after {
+  content: "bootstrap";
+}
+.skills .skillsBox .skillGroup .skillIcons .tailwind::after {
+  content: "tailwind";
+}
+.skills .skillsBox .skillGroup .skillIcons .javascript::after {
+  content: "javascript";
+}
+.skills .skillsBox .skillGroup .skillIcons .typescript::after {
+  content: "typescript";
+}
+.skills .skillsBox .skillGroup .skillIcons .react::after {
+  content: "react.js";
+}
+.skills .skillsBox .skillGroup .skillIcons .next::after {
+  content: "next.js";
+}
+.skills .skillsBox .skillGroup .skillIcons .node::after {
+  content: "node.js";
+}
+.skills .skillsBox .skillGroup .skillIcons .express::after {
+  content: "express.js";
+}
+.skills .skillsBox .skillGroup .skillIcons .npm::after {
+  content: "npm";
+}
+.skills .skillsBox .skillGroup .skillIcons .mysql::after {
+  content: "mysql";
+}
+.skills .skillsBox .skillGroup .skillIcons .mongodb::after {
+  content: "mongodb";
+}
+.skills .skillsBox .skillGroup .skillIcons .firebase::after {
+  content: "firebase";
+}
+.skills .skillsBox .skillGroup .skillIcons .postman::after {
+  content: "postman";
+}
+.skills .skillsBox .skillGroup .skillIcons .unity::after {
+  content: "unity";
 }
 .skills .littleBreak {
   width: 100%;
@@ -1762,9 +1854,15 @@ section {
   .skills .skillsBox .skillGroup .skillIcons {
     gap: 2rem !important;
   }
-  .skills .skillsBox .skillGroup .skillIcons img {
+  .skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv {
     width: 50px !important;
     height: 50px !important;
+  }
+  .skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv::after {
+    font-size: 10px;
+  }
+  .skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv:hover::after {
+    height: 25px !important;
   }
 }
 .home {
@@ -2417,6 +2515,9 @@ section {
   .layout .footer .socials .fa-github:hover,
   .layout .footer .socials .fa-linkedin:hover {
     color: #fff;
+  }
+  .skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv:hover::after {
+    height: 0;
   }
 }
 

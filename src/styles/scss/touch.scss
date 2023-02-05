@@ -81,4 +81,16 @@
       }
     }
   }
+
+  .skills {
+    .skillsBox {
+      .skillGroup {
+        .skillIcons {
+          .showSkillNameDiv:hover::after {
+            height: 0;
+          }
+        }
+      }
+    }
+  }
 }

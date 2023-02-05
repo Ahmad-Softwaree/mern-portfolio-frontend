@@ -19,7 +19,6 @@ const Landing = ({ BACKEND_HOST }) => {
 
   useEffect(() => {
     const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
-    console.log(canSeeBlogs);
     if (!canSeeBlogs) {
       const index = pageString.indexOf("blogs");
       if (index > -1) pageString.splice(index, 1);

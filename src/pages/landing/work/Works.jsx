@@ -19,7 +19,6 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
   };
 
   const handleMouseMove = (event) => {
-    console.log("event");
     if (!isDragging) return;
     event.preventDefault();
     const x = event.clientX - startX;
