@@ -5,7 +5,7 @@ const WorkCard = ({ id, image, companyName, BACKEND_HOST, enTitle, arTitle, krTi
     <div className="workCard position-relative flex flex-column justify-center align-center">
       <div className="workCardBack position-absolute"></div>
       <div className="workCardImageDiv flex flex-row justify-center align-center">
-        <img src={`${image}`} alt="workCardImage" className="workCardImage" />
+        <img src={`${decodeURIComponent(image)}`} alt="workCardImage" className="workCardImage" />
       </div>
 
       <div className="workCardText position-absolute bottom-4 w-100">

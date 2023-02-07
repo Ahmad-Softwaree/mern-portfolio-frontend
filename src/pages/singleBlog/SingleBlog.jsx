@@ -41,7 +41,7 @@ const SingleBlog = ({ BACKEND_HOST }) => {
           ) : (
             <>
               <h1 className="blogHeader">{i18n.language === "en" ? blog.enTitle : i18n.language === "ar" ? blog.arTitle : blog.krTitle}</h1>
-              <img src={`${blog.image}`} alt="" className="blogImage" />
+              <img src={`${decodeURIComponent(blog.image)}`} alt="" className="blogImage" />
               {i18n.language === "en" ? (
                 <p dangerouslySetInnerHTML={{ __html: blog.enBody }}></p>
               ) : i18n.language === "ar" ? (
