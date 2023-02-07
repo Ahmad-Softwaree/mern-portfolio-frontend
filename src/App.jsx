@@ -74,26 +74,14 @@ function App() {
   }, [i18n.language]);
 
   const [show, setShow] = useState(false);
-  //this will make the website not load until all the images loaded
-  const images = document.querySelectorAll("img");
-
-  let imagesLoaded = 0;
   useEffect(() => {
-    images.forEach((img) => {
-      if (img.complete) {
-        imagesLoaded++;
-      } else {
-        img.addEventListener("load", () => {
-          imagesLoaded++;
-          if (imagesLoaded + 1 === images.length) {
-            loadData().then(() => {
-              setShow(true);
-            });
-          }
-        });
-      }
-    });
-  }, [images]);
+    const interval = setInterval(() => {
+      setShow(true);
+    }, [6000]);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <ErrorBoundaryDetect>
