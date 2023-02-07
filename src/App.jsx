@@ -78,20 +78,22 @@ function App() {
   const images = document.querySelectorAll("img");
 
   let imagesLoaded = 0;
-  images.forEach((img) => {
-    if (img.complete) {
-      imagesLoaded++;
-    } else {
-      img.addEventListener("load", () => {
+  useEffect(() => {
+    images.forEach((img) => {
+      if (img.complete) {
         imagesLoaded++;
-        if (imagesLoaded + 1 === images.length) {
-          loadData().then(() => {
-            setShow(true);
-          });
-        }
-      });
-    }
-  });
+      } else {
+        img.addEventListener("load", () => {
+          imagesLoaded++;
+          if (imagesLoaded + 1 === images.length) {
+            loadData().then(() => {
+              setShow(true);
+            });
+          }
+        });
+      }
+    });
+  }, [images]);
 
   return (
     <ErrorBoundaryDetect>
