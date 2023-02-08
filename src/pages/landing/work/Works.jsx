@@ -66,7 +66,11 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
           className="workCards flex flex-column justify-left align-center gap-2 flex-wrap w-100"
         >
           {works.length === 0 && loading ? (
-            <LoadingBlogSkeleton />
+            <>
+              <LoadingBlogSkeleton />
+              <LoadingBlogSkeleton />
+              <LoadingBlogSkeleton />
+            </>
           ) : works.length > 0 && !loading ? (
             <>
               {works.map((work, index) => {

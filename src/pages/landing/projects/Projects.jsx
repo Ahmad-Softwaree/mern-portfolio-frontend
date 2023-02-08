@@ -60,7 +60,11 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
           className="projectCards flex flex-column justify-left align-center flex-wrap w-100  gap-2"
         >
           {loading ? (
-            <LoadingBlogSkeleton />
+            <>
+              <LoadingBlogSkeleton />
+              <LoadingBlogSkeleton />
+              <LoadingBlogSkeleton />
+            </>
           ) : (
             <>
               {projects.map((project, index) => {
