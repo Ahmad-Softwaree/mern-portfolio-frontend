@@ -10,16 +10,15 @@
     display: none !important;
   }
   .projectCards {
-    width: 100%;
-    height: fit-content;
-    max-height: 569px;
-    overflow-x: scroll;
-    flex-flow: column wrap !important;
-    justify-content: left;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
     align-items: center;
     .projectCard {
       width: 350px;
       height: 400px;
+      flex: 0 0 auto;
+
       border: 1px colors.$white solid;
       border-radius: 21px;
       p {
@@ -45,16 +44,6 @@
   }
 }
 
-@include res.responsive(computer) {
-  .projects {
-    .projectCards {
-      flex-flow: column wrap !important;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-}
-
 @include res.responsive(tablet) {
   .projectCards {
     .projectCard {
@@ -66,8 +55,6 @@
 
 @include res.responsive(mobile) {
   .projectCards {
-    max-height: 350px !important;
-
     .projectCard {
       height: 300px !important;
       width: 300px !important;

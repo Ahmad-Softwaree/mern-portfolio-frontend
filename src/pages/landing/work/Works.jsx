@@ -3,13 +3,35 @@ import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton
 import axios from "axios";
 import WorkCard from "./WorkCard";
 import { Element } from "react-scroll";
-
+import useSize from "../../../hooks/useSize";
 const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  //to make the x scroll not center when width smaller thann 1024px
+
+  useEffect(() => {
+    const center = () => {
+      if (useSize() !== "xl") {
+        document.querySelector(".workCards").style.justifyContent = "unset";
+        document.querySelector(".workCards").style.alignItems = "unset";
+      } else {
+        document.querySelector(".workCards").style.justifyContent = "center";
+        document.querySelector(".workCards").style.alignItems = "center";
+      }
+    };
+    center();
+    window.addEventListener("resize", center);
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        //
+      });
+    };
+  }, [window.innerWidth]);
 
   //mouse dragging event
 
@@ -63,7 +85,7 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className="workCards flex flex-column justify-left align-center gap-2 flex-wrap w-100"
+          className="workCards flex flex-roww gap-2 flex-nowrap w-100"
         >
           {works.length === 0 && loading ? (
             <>
@@ -92,6 +114,13 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
               })}
             </>
           ) : null}
+        </div>
+
+        <div className="seeMoreAdvice flex flex-row justify-center align-center w-100  gap-1">
+          <span>
+            <i className="fa-solid fa-arrow-pointer"></i>
+          </span>
+          <small>{t("drag")}</small>
         </div>
       </section>
     </Element>

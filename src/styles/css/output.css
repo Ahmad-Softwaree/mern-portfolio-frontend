@@ -1556,22 +1556,22 @@ section {
   display: none !important;
 }
 .blogs .blogCards {
+  overflow-x: auto;
   width: 100%;
-  height: fit-content;
-  max-height: 550px;
-  overflow-x: scroll;
-  width: 100%;
-  flex-flow: column wrap !important;
-  justify-content: left;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 .blogs .blogCards .blogCard {
   width: 328px;
+  flex: 0 0 auto;
   background-color: #262626;
   border-radius: 24px;
   padding: 10px;
   text-align: center;
-  min-height: 410px;
+  height: 410px;
 }
 .blogs .blogCards .blogCard img {
   width: 100%;
@@ -1624,22 +1624,6 @@ section {
   border-color: #fff;
 }
 
-@media (min-width: 1024px) {
-  .blogs .blogCards {
-    flex-flow: column wrap !important;
-    justify-content: center;
-    align-items: center;
-  }
-}
-@media (max-width: 767px) {
-  .blogs .blogCard {
-    width: 250px !important;
-    height: 430px !important;
-  }
-  .blogs .blogCard .readBlog {
-    width: 100% !important;
-  }
-}
 .projects {
   padding-inline: 0 !important;
 }
@@ -1647,17 +1631,15 @@ section {
   display: none !important;
 }
 .projects .projectCards {
-  width: 100%;
-  height: fit-content;
-  max-height: 569px;
-  overflow-x: scroll;
-  flex-flow: column wrap !important;
-  justify-content: left;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 .projects .projectCards .projectCard {
   width: 350px;
   height: 400px;
+  flex: 0 0 auto;
   border: 1px #fff solid;
   border-radius: 21px;
 }
@@ -1681,13 +1663,6 @@ section {
   border-bottom-right-radius: 20px;
 }
 
-@media (min-width: 1024px) {
-  .projects .projectCards {
-    flex-flow: column wrap !important;
-    justify-content: center;
-    align-items: center;
-  }
-}
 @media (min-width: 767px) and (max-width: 1023px) {
   .projectCards .projectCard {
     width: 350px !important;
@@ -1695,9 +1670,6 @@ section {
   }
 }
 @media (max-width: 767px) {
-  .projectCards {
-    max-height: 350px !important;
-  }
   .projectCards .projectCard {
     height: 300px !important;
     width: 300px !important;
@@ -2223,25 +2195,22 @@ section {
   border-radius: 5px;
   font-weight: 600;
 }
-
-.workCards {
-  flex-flow: column wrap !important;
-  justify-content: left;
+.works .workCards {
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  height: fit-content;
-  max-height: 540px;
-  width: 100%;
-  overflow-x: scroll;
 }
-.workCards .workCard {
+.works .workCards .workCard {
   cursor: pointer;
+  flex: 0 0 auto;
   background: #262626;
   border: 1px solid #707aff;
   border-radius: 20px;
   min-width: 278px;
   height: 315px;
 }
-.workCards .workCard .workCardBack {
+.works .workCards .workCard .workCardBack {
   border-radius: 20px;
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
@@ -2252,7 +2221,7 @@ section {
   left: 0;
   background: linear-gradient(114.78deg, #707aff 0%, #4a52b9 79.88%);
 }
-.workCards .workCard .workCardImageDiv {
+.works .workCards .workCard .workCardImageDiv {
   position: absolute;
   top: 0;
   right: 0;
@@ -2268,44 +2237,31 @@ section {
   width: 126px;
   height: 126px;
 }
-.workCards .workCard .workCardImageDiv img {
+.works .workCards .workCard .workCardImageDiv img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 7px;
 }
-.workCards .workCard .workCardText {
+.works .workCards .workCard .workCardText {
   text-align: center;
 }
-.workCards .workCard h2,
-.workCards .workCard p {
+.works .workCards .workCard h2,
+.works .workCards .workCard p {
   color: #fff;
 }
-.workCards .workCard h2 {
+.works .workCards .workCard h2 {
   font-weight: 500;
   font-size: 24px;
   margin: 0;
 }
-.workCards .workCard .workType {
+.works .workCards .workCard .workType {
   font-weight: 400;
   font-size: 18px;
   opacity: 0.6;
   color: #fff;
 }
 
-@media (min-width: 1024px) {
-  .works .workCards {
-    flex-flow: column wrap !important;
-    justify-content: center;
-    align-items: center;
-  }
-}
-@media (min-width: 767px) and (max-width: 1023px) {
-  .workCards {
-    flex-flow: column wrap !important;
-    justify-content: left !important;
-  }
-}
 .skeleton {
   background-color: rgb(199, 199, 199);
   margin: 0.75 0;

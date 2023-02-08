@@ -4,11 +4,34 @@ import { Link } from "react-router-dom";
 import { Element } from "react-scroll";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
 import axios from "axios";
+import useSize from "../../../hooks/useSize";
 
 const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
+
+  //to make the x scroll not center when width smaller thann 1024px
+
+  useEffect(() => {
+    const center = () => {
+      if (useSize() !== "xl") {
+        document.querySelector(".blogCards").style.justifyContent = "unset";
+        document.querySelector(".blogCards").style.alignItems = "unset";
+      } else {
+        document.querySelector(".blogCards").style.justifyContent = "center";
+        document.querySelector(".blogCards").style.alignItems = "center";
+      }
+    };
+    center();
+    window.addEventListener("resize", center);
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        //
+      });
+    };
+  }, [window.innerWidth]);
 
   //mouse dragging event
 
@@ -59,7 +82,7 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className="blogCards flex flex-column justify-left align-center  flex-wrap gap-2"
+          className="blogCards flex flex-row  flex-nowrap gap-2"
         >
           {loading ? (
             <>
@@ -87,6 +110,12 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
               })}
             </>
           )}
+        </div>
+        <div className="seeMoreAdvice flex flex-row justify-center align-center w-100  gap-1">
+          <span>
+            <i className="fa-solid fa-arrow-pointer"></i>
+          </span>
+          <small>{t("drag")}</small>
         </div>
 
         <Link className="seeMore" to={`/blogs`}>

@@ -12,21 +12,21 @@
   }
 
   .blogCards {
+    overflow-x: auto;
     width: 100%;
-    height: fit-content;
-    max-height: 550px;
-    overflow-x: scroll;
-    width: 100%;
-    flex-flow: column wrap !important;
-    justify-content: left;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     .blogCard {
       width: 328px;
+      flex: 0 0 auto;
       background-color: colors.$lightBlack;
       border-radius: 24px;
       padding: 10px;
       text-align: center;
-      min-height: 410px;
+      height: 410px;
 
       img {
         width: 100%;
@@ -85,26 +85,4 @@
     );
   }
   text-align: center;
-}
-
-@include res.responsive(computer) {
-  .blogs {
-    .blogCards {
-      flex-flow: column wrap !important;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-}
-
-@include res.responsive(mobile) {
-  .blogs {
-    .blogCard {
-      width: 250px !important;
-      height: 430px !important;
-      .readBlog {
-        width: 100% !important;
-      }
-    }
-  }
 }

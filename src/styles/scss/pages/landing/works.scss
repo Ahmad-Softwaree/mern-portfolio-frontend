@@ -23,94 +23,76 @@
     border-radius: 5px;
     font-weight: 600;
   }
-}
-.workCards {
-  flex-flow: column wrap !important;
-  justify-content: left;
-  align-items: center;
-  height: fit-content;
-  max-height: 540px;
-  width: 100%;
-  overflow-x: scroll;
-  .workCard {
-    cursor: pointer;
-    background: colors.$lightBlack;
-    border: 1px solid colors.$purple;
-    border-radius: 20px;
-
-    min-width: 278px;
-    height: 315px;
-
-    .workCardBack {
-      border-radius: 20px;
-      border-bottom-right-radius: 0 !important;
-      border-bottom-left-radius: 0 !important;
-      top: 0;
-      height: 40%;
-      width: 100%;
-      right: 0;
-      left: 0;
-      background: linear-gradient(114.78deg, #707aff 0%, #4a52b9 79.88%);
-    }
-    .workCardImageDiv {
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 7px;
-      }
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 100px;
-      margin-top: auto;
-      margin-bottom: auto;
-      margin-right: auto;
-      margin-left: auto;
-      background: colors.$black;
-      box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
-      border-radius: 35px;
-      width: 126px;
-      height: 126px;
-    }
-
-    .workCardText {
-      text-align: center;
-    }
-
-    h2,
-    p {
-      color: colors.$white;
-    }
-
-    h2 {
-      font-weight: 500;
-      font-size: 24px;
-      margin: 0;
-    }
-    .workType {
-      font-weight: 400;
-      font-size: 18px;
-      opacity: 0.6;
-      color: colors.$white;
-    }
-  }
-}
-
-@include res.responsive(computer) {
-  .works {
-    .workCards {
-      flex-flow: column wrap !important;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-}
-
-@include res.responsive(tablet) {
   .workCards {
-    flex-flow: column wrap !important;
-    justify-content: left !important;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .workCard {
+      cursor: pointer;
+      flex: 0 0 auto;
+
+      background: colors.$lightBlack;
+      border: 1px solid colors.$purple;
+      border-radius: 20px;
+
+      min-width: 278px;
+      height: 315px;
+
+      .workCardBack {
+        border-radius: 20px;
+        border-bottom-right-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        top: 0;
+        height: 40%;
+        width: 100%;
+        right: 0;
+        left: 0;
+        background: linear-gradient(114.78deg, #707aff 0%, #4a52b9 79.88%);
+      }
+      .workCardImageDiv {
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 7px;
+        }
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 100px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: auto;
+        margin-left: auto;
+        background: colors.$black;
+        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
+        border-radius: 35px;
+        width: 126px;
+        height: 126px;
+      }
+
+      .workCardText {
+        text-align: center;
+      }
+
+      h2,
+      p {
+        color: colors.$white;
+      }
+
+      h2 {
+        font-weight: 500;
+        font-size: 24px;
+        margin: 0;
+      }
+      .workType {
+        font-weight: 400;
+        font-size: 18px;
+        opacity: 0.6;
+        color: colors.$white;
+      }
+    }
   }
 }
