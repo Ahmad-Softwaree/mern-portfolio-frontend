@@ -1656,7 +1656,7 @@ section {
   align-items: center;
 }
 .projects .projectCards .projectCard {
-  width: 400px;
+  width: 350px;
   height: 400px;
   border: 1px #fff solid;
   border-radius: 21px;
@@ -1690,7 +1690,7 @@ section {
 }
 @media (min-width: 767px) and (max-width: 1023px) {
   .projectCards .projectCard {
-    width: 400px !important;
+    width: 350px !important;
     height: 400px !important;
   }
 }
