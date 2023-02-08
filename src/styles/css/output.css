@@ -1657,6 +1657,8 @@ section {
 }
 .projects .projectCards .projectCard {
   height: 400px;
+  border: 1px #fff solid;
+  border-radius: 21px;
 }
 .projects .projectCards .projectCard p {
   margin: 0;

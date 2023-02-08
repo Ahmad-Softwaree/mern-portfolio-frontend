@@ -19,6 +19,8 @@
     align-items: center;
     .projectCard {
       height: 400px;
+      border: 1px colors.$white solid;
+      border-radius: 21px;
       p {
         margin: 0;
       }
