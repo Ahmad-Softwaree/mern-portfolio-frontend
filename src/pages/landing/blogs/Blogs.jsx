@@ -59,7 +59,7 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className="blogCards flex flex-column justify-left align-center  flex-wrap gap-3"
+          className="blogCards flex flex-column justify-left align-center  flex-wrap gap-2"
         >
           {loading ? (
             <>

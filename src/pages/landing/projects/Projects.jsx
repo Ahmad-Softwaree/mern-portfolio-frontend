@@ -57,7 +57,7 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className="projectCards flex flex-column justify-left align-center flex-wrap w-100  gap-4"
+          className="projectCards flex flex-column justify-left align-center flex-wrap w-100  gap-2"
         >
           {loading ? (
             <LoadingBlogSkeleton />
