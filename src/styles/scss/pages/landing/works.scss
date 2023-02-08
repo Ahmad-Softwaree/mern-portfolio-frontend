@@ -101,7 +101,7 @@
 @include res.responsive(computer) {
   .works {
     .workCards {
-      flex-flow: row nowrap !important;
+      flex-flow: column wrap !important;
       justify-content: center;
       align-items: center;
     }

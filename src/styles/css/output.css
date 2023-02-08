@@ -1626,7 +1626,7 @@ section {
 
 @media (min-width: 1024px) {
   .blogs .blogCards {
-    flex-flow: row nowrap !important;
+    flex-flow: column wrap !important;
     justify-content: center;
     align-items: center;
   }
@@ -1656,6 +1656,7 @@ section {
   align-items: center;
 }
 .projects .projectCards .projectCard {
+  width: 400px;
   height: 400px;
   border: 1px #fff solid;
   border-radius: 21px;
@@ -1682,7 +1683,7 @@ section {
 
 @media (min-width: 1024px) {
   .projects .projectCards {
-    flex-flow: row nowrap !important;
+    flex-flow: column wrap !important;
     justify-content: center;
     align-items: center;
   }
@@ -2294,7 +2295,7 @@ section {
 
 @media (min-width: 1024px) {
   .works .workCards {
-    flex-flow: row nowrap !important;
+    flex-flow: column wrap !important;
     justify-content: center;
     align-items: center;
   }

@@ -90,7 +90,7 @@
 @include res.responsive(computer) {
   .blogs {
     .blogCards {
-      flex-flow: row nowrap !important;
+      flex-flow: column wrap !important;
       justify-content: center;
       align-items: center;
     }
