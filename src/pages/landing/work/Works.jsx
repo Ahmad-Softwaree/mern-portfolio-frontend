@@ -3,35 +3,12 @@ import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton
 import axios from "axios";
 import WorkCard from "./WorkCard";
 import { Element } from "react-scroll";
-import useSize from "../../../hooks/useSize";
 const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  //to make the x scroll not center when width smaller thann 1024px
-
-  useEffect(() => {
-    const center = () => {
-      if (useSize() !== "xl") {
-        document.querySelector(".workCards").style.justifyContent = "unset";
-        document.querySelector(".workCards").style.alignItems = "unset";
-      } else {
-        document.querySelector(".workCards").style.justifyContent = "center";
-        document.querySelector(".workCards").style.alignItems = "center";
-      }
-    };
-    center();
-    window.addEventListener("resize", center);
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        //
-      });
-    };
-  }, [window.innerWidth]);
 
   //mouse dragging event
 
@@ -86,9 +63,9 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
           className={
-            i18n.language === "en"
-              ? "workCards flex flex-row justify-left align-center  flex-nowrap w-100  gap-2"
-              : "workCards flex flex-row justify-right align-center flex-nowrap w-100  gap-2"
+            works.length === 1
+              ? "workCards flex flex-row justify-center align-center  flex-nowrap w-100  gap-2"
+              : "workCards flex flex-row  align-center flex-nowrap w-100  gap-2"
           }
         >
           {works.length === 0 && loading ? (

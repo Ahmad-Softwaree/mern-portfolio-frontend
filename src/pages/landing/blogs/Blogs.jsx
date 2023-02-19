@@ -61,9 +61,9 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
           className={
-            i18n.language === "en"
-              ? "blogCards flex flex-row justify-left align-center  flex-nowrap w-100  gap-2"
-              : "blogCards flex flex-row justify-right align-center flex-nowrap w-100  gap-2"
+            blogs.length === 1
+              ? "blogCards flex flex-row justify-center align-center  flex-nowrap w-100  gap-2"
+              : "blogCards flex flex-row  align-center flex-nowrap w-100  gap-2"
           }
         >
           {loading ? (
