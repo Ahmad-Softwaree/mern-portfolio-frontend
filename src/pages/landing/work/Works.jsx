@@ -85,7 +85,11 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className="workCards flex flex-roww gap-2 flex-nowrap w-100"
+          className={
+            i18n.language === "en"
+              ? "workCards flex flex-row justify-left align-center  flex-nowrap w-100  gap-2"
+              : "workCards flex flex-row justify-right align-center flex-nowrap w-100  gap-2"
+          }
         >
           {works.length === 0 && loading ? (
             <>

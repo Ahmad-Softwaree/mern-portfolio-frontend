@@ -1803,6 +1803,12 @@ section {
 .skills .skillsBox .skillGroup .skillIcons .unity::after {
   content: "unity";
 }
+.skills .skillsBox .skillGroup .skillIcons .redux::after {
+  content: "redux";
+}
+.skills .skillsBox .skillGroup .skillIcons .socket::after {
+  content: "socket";
+}
 .skills .littleBreak {
   width: 100%;
   height: 40px;

@@ -11,28 +11,6 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
 
-  //to make the x scroll not center when width smaller thann 1024px
-
-  useEffect(() => {
-    const center = () => {
-      if (useSize() !== "xl") {
-        document.querySelector(".blogCards").style.justifyContent = "unset";
-        document.querySelector(".blogCards").style.alignItems = "unset";
-      } else {
-        document.querySelector(".blogCards").style.justifyContent = "center";
-        document.querySelector(".blogCards").style.alignItems = "center";
-      }
-    };
-    center();
-    window.addEventListener("resize", center);
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        //
-      });
-    };
-  }, [window.innerWidth]);
-
   //mouse dragging event
 
   const handleMouseDown = (event) => {
@@ -82,7 +60,11 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className="blogCards flex flex-row  flex-nowrap gap-2"
+          className={
+            i18n.language === "en"
+              ? "blogCards flex flex-row justify-left align-center  flex-nowrap w-100  gap-2"
+              : "blogCards flex flex-row justify-right align-center flex-nowrap w-100  gap-2"
+          }
         >
           {loading ? (
             <>

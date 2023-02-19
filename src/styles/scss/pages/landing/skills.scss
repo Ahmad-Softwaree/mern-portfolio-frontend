@@ -127,6 +127,12 @@
         .unity::after {
           content: "unity";
         }
+        .redux::after {
+          content: "redux";
+        }
+        .socket::after {
+          content: "socket";
+        }
       }
     }
   }

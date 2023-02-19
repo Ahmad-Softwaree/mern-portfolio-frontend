@@ -2,35 +2,13 @@ import React, { useRef, useState } from "react";
 import { Element } from "react-scroll";
 import ProjectCard from "../../../components/projects/ProjectCard";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
-import useSize from "../../../hooks/useSize";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
-
-  //to make the x scroll not center when width smaller thann 1024px
-
-  useEffect(() => {
-    const center = () => {
-      if (useSize() !== "xl") {
-        document.querySelector(".projectCards").style.justifyContent = "unset";
-        document.querySelector(".projectCards").style.alignItems = "unset";
-      } else {
-        document.querySelector(".projectCards").style.justifyContent = "center";
-        document.querySelector(".projectCards").style.alignItems = "center";
-      }
-    };
-    center();
-    window.addEventListener("resize", center);
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        //
-      });
-    };
-  }, [window.innerWidth]);
 
   //mouse dragging event
 
@@ -80,7 +58,11 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className="projectCards flex flex-row  flex-nowrap w-100  gap-2"
+          className={
+            i18n.language === "en"
+              ? "projectCards flex flex-row justify-left align-center  flex-nowrap w-100  gap-2"
+              : "projectCards flex flex-row justify-right align-center flex-nowrap w-100  gap-2"
+          }
         >
           {loading ? (
             <>

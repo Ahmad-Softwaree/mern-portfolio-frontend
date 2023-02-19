@@ -54,6 +54,10 @@ const Skills = ({ BACKEND_HOST, t, i18n }) => {
               <div className="showSkillNameDiv react">
                 <img src="/images/icons/react.svg" alt="" />
               </div>
+
+              <div className="showSkillNameDiv redux">
+                <img src="/images/icons/redux.svg" alt="" />
+              </div>
               <div className="showSkillNameDiv next">
                 <img src="/images/icons/next-js.png" alt="" />
               </div>
@@ -86,6 +90,9 @@ const Skills = ({ BACKEND_HOST, t, i18n }) => {
               </div>
               <div className="showSkillNameDiv firebase">
                 <img src="/images/icons/firebase.svg" alt="" />
+              </div>
+              <div className="showSkillNameDiv socket">
+                <img src="/images/icons/socketio.svg" alt="" />
               </div>
               <div className="showSkillNameDiv postman">
                 <img src="/images/icons/postman.svg" alt="" />
