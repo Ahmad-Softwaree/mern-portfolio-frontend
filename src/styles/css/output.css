@@ -1559,8 +1559,6 @@ section {
   overflow-x: auto;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: nowrap;
   overflow-x: auto;
 }
@@ -1633,8 +1631,6 @@ section {
 .projects .projectCards {
   overflow-x: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .projects .projectCards .projectCard {
   width: 350px;
@@ -2204,8 +2200,6 @@ section {
 .works .workCards {
   overflow-x: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .works .workCards .workCard {
   cursor: pointer;
