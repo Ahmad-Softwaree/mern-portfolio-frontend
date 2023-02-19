@@ -60,8 +60,8 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
           onMouseLeave={handleMouseUp}
           className={
             projects.length === 1
-              ? "projectsCards flex flex-row justify-center align-center  flex-nowrap w-100  gap-2"
-              : "projectsCards flex flex-row  align-center flex-nowrap w-100  gap-2"
+              ? "projectCards flex flex-row justify-center align-center  flex-nowrap w-100  gap-2"
+              : "projectCards flex flex-row  align-center flex-nowrap w-100  gap-2"
           }
         >
           {loading ? (
