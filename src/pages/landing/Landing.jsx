@@ -20,6 +20,11 @@ const Landing = ({ BACKEND_HOST, works, blogs, projects }) => {
   //scroll nice animation
 
   useEffect(() => {
+    setShow({
+      blog: true,
+      project: true,
+      work: true,
+    });
     const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
     if (blogs.length === 0) {
       setShow((prev) => ({ ...prev, blog: false }));

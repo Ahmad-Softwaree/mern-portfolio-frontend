@@ -73,6 +73,11 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
   }, []);
 
   useEffect(() => {
+    setShow({
+      blog: true,
+      project: true,
+      work: true,
+    });
     if (blog.blogs.length === 0) setShow((prev) => ({ ...prev, blog: false }));
     if (project.projects.length === 0) setShow((prev) => ({ ...prev, project: false }));
     if (work.works.length === 0) setShow((prev) => ({ ...prev, work: false }));
