@@ -13,7 +13,6 @@ const initialState = {
   singleBlog: null,
   loading: false,
   error: null,
-  done: false,
 };
 
 export default function blog(state = initialState, action) {
@@ -25,7 +24,6 @@ export default function blog(state = initialState, action) {
         ...state,
         loading: true,
         error: null,
-        done: false,
       };
     case FETCH_BLOGS_FAIL:
     case FETCH_SINGLE_BLOG_FAIL:
@@ -40,7 +38,6 @@ export default function blog(state = initialState, action) {
         loading: false,
         error: null,
         blogs: payload,
-        done: true,
       };
     case FETCH_SINGLE_BLOG_SUCCESS:
       return {

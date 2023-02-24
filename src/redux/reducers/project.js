@@ -3,7 +3,6 @@ import { FETCH_PROJECTS_FAIL, FETCH_PROJECTS_START, FETCH_PROJECTS_SUCCESS, REMO
 const initialState = {
   projects: [],
   loading: false,
-  done: false,
   error: null,
 };
 
@@ -14,7 +13,6 @@ export default function project(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        done: false,
         error: null,
       };
     case FETCH_PROJECTS_FAIL:
@@ -28,7 +26,6 @@ export default function project(state = initialState, action) {
         ...state,
         loading: false,
         error: null,
-        done: true,
         projects: payload,
       };
 

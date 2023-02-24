@@ -7,12 +7,10 @@ import ErrorPage from "./error/ErrorPage";
 import Error from "./error/Error";
 import "./language/i18react.js";
 import { useTranslation } from "react-i18next";
-import { getBlogs } from "./actions/blog";
-import { getProjects } from "./actions/project";
-import { getWorks } from "./actions/work";
+
 import Fallback from "./pages/Fallback";
+import ErrorBoundary from "./pages/ErrorBoundary";
 import SingleBlogPage from "./pages/singleBlog/SingleBlogPage";
-import { connect } from "react-redux";
 
 const BACKEND_HOST = import.meta.env.VITE_BACKEND_LOCAL_HOST;
 
@@ -37,7 +35,7 @@ const routes = createBrowserRouter(
   )
 );
 
-function App({ blogDone, projectDone, workDone, getBlogs, getWorks, getProjects }) {
+function App() {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (i18n.language === "kr" || i18n.language === "ar") {
@@ -49,23 +47,17 @@ function App({ blogDone, projectDone, workDone, getBlogs, getWorks, getProjects 
     }
   }, [i18n.language]);
 
+  const [show, setShow] = useState(false);
   useEffect(() => {
-    getBlogs();
-    getWorks();
-    getProjects();
+    const interval = setInterval(() => {
+      setShow(true);
+    }, [3000]);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
-  return <div className="App">{!blogDone || !projectDone || !workDone ? <Fallback /> : <RouterProvider router={routes} />}</div>;
+  return <div className="App">{!show ? <Fallback /> : <RouterProvider router={routes} />}</div>;
 }
 
-const mapStateToProps = (state) => ({
-  blogDone: state.blog.done,
-  projectDone: state.project.done,
-  workDone: state.work.done,
-});
-
-export default connect(mapStateToProps, {
-  getBlogs,
-  getWorks,
-  getProjects,
-})(App);
+export default App;
