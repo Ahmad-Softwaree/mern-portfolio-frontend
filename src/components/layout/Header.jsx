@@ -8,12 +8,6 @@ import { getWorks } from "../../actions/work";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjects, getWorks }) => {
-  const [show, setShow] = useState({
-    blog: true,
-    project: true,
-    work: true,
-  });
-
   //languages
 
   const [languages, setLanguages] = useState(false);
@@ -72,17 +66,6 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
     getProjects();
   }, []);
 
-  useEffect(() => {
-    setShow({
-      blog: true,
-      project: true,
-      work: true,
-    });
-    if (blog.blogs.length === 0) setShow((prev) => ({ ...prev, blog: false }));
-    if (project.projects.length === 0) setShow((prev) => ({ ...prev, project: false }));
-    if (work.works.length === 0) setShow((prev) => ({ ...prev, work: false }));
-  }, [work, blog, project]);
-
   const goNav = (name) => {
     setMobNav(false);
     scroller.scrollTo(name, {
@@ -98,18 +81,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
     <>
       {isHome && (
         <header className="header w-100 position-relative">
-          {mobNav && (
-            <MobileNav
-              show={show}
-              t={t}
-              i18n={i18n}
-              isHome={isHome}
-              goNav={goNav}
-              activeSection={activeSection}
-              mobNav={mobNav}
-              setMobNav={setMobNav}
-            />
-          )}
+          {mobNav && <MobileNav t={t} i18n={i18n} goNav={goNav} activeSection={activeSection} mobNav={mobNav} setMobNav={setMobNav} />}
 
           {mobNav ? (
             <span
@@ -164,7 +136,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
                 </span>
               </li>
 
-              {show.blog && (
+              {blog.blogs.length !== 0 && (
                 <li className="navItem">
                   <span
                     onClick={() => {
@@ -188,7 +160,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
                 </span>
               </li>
 
-              {show.project && (
+              {project.projects.length !== 0 && (
                 <li className="navItem">
                   <span
                     onClick={() => {
@@ -201,7 +173,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
                 </li>
               )}
 
-              {show.work && (
+              {work.works.length !== 0 && (
                 <li className="navItem">
                   <span
                     onClick={() => {

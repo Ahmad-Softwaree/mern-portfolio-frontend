@@ -1,6 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 
-const MobileNav = ({ show, activeSection, goNav, mobNav, t }) => {
+const MobileNav = ({ activeSection, goNav, mobNav, t, blogs, works, projects }) => {
   return (
     <nav className={`${mobNav ? "mobileNav mobNavAnim" : "mobileNav"}`}>
       <ul className="flex flex-column justify-center align-center gap-2 w-100">
@@ -14,7 +15,7 @@ const MobileNav = ({ show, activeSection, goNav, mobNav, t }) => {
             {t("nav.home")}
           </span>
         </li>
-        {show.blog && (
+        {blogs.length !== 0 && (
           <li className="navItem">
             <span
               onClick={() => {
@@ -37,7 +38,7 @@ const MobileNav = ({ show, activeSection, goNav, mobNav, t }) => {
             {t("nav.skills")}
           </span>
         </li>
-        {show.project && (
+        {projects.length !== 0 && (
           <li className="navItem">
             <span
               onClick={() => {
@@ -50,7 +51,7 @@ const MobileNav = ({ show, activeSection, goNav, mobNav, t }) => {
           </li>
         )}
 
-        {show.work && (
+        {works.length !== 0 && (
           <li className="navItem">
             <span
               onClick={() => {
@@ -78,4 +79,10 @@ const MobileNav = ({ show, activeSection, goNav, mobNav, t }) => {
   );
 };
 
-export default MobileNav;
+const mapStateToProps = (state) => ({
+  blogs: state.blog.blogs,
+  projects: state.project.projects,
+  works: state.work.works,
+});
+
+export default connect(mapStateToProps, {})(MobileNav);
