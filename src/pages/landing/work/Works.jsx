@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
-import axios from "axios";
 import WorkCard from "./WorkCard";
 import { Element } from "react-scroll";
-const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
+import { connect } from "react-redux";
+const Works = ({ BACKEND_HOST, t, i18n, work }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
-  const [works, setWorks] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   //mouse dragging event
 
@@ -28,30 +26,6 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
     setIsDragging(false);
   };
 
-  //fetch all works useEffect
-
-  useEffect(() => {
-    setWorks([]);
-    try {
-      setLoading(true);
-      const getWorks = async () => {
-        const res = await axios.get(`${BACKEND_HOST}/api/work/`);
-        const data = res.data;
-        if (data.length === 0) setCanSeeWorks(false);
-        setWorks(data);
-        setLoading(false);
-      };
-      getWorks();
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
-    }
-
-    return () => {
-      //
-    };
-  }, []);
-
   return (
     <Element name="works" className="w-100">
       <section id="works" className="works flex flex-column justify-left align-center w-100 gap-2">
@@ -63,20 +37,20 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
           className={
-            works.length === 1
+            work.works.length === 1
               ? "workCards flex flex-row justify-center align-center  flex-nowrap w-100  gap-2"
               : "workCards flex flex-row  align-center flex-nowrap w-100  gap-2"
           }
         >
-          {works.length === 0 && loading ? (
+          {work.works.length === 0 && work.loading ? (
             <>
               <LoadingBlogSkeleton />
               <LoadingBlogSkeleton />
               <LoadingBlogSkeleton />
             </>
-          ) : works.length > 0 && !loading ? (
+          ) : work.works.length > 0 && !work.loading ? (
             <>
-              {works.map((work, index) => {
+              {work.works.map((work, index) => {
                 return (
                   <WorkCard
                     id={work._id}
@@ -108,4 +82,8 @@ const Works = ({ canSeeWorks, setCanSeeWorks, BACKEND_HOST, t, i18n }) => {
   );
 };
 
-export default Works;
+const mapStateToProps = (state) => ({
+  work: state.work,
+});
+
+export default connect(mapStateToProps, {})(Works);

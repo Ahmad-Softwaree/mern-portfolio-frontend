@@ -2,10 +2,8 @@ import React, { useRef, useState } from "react";
 import { Element } from "react-scroll";
 import ProjectCard from "../../../components/projects/ProjectCard";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import axios from "axios";
-const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) => {
+import { connect } from "react-redux";
+const Projects = ({ BACKEND_HOST, t, i18n, project }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
@@ -28,26 +26,6 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
     setIsDragging(false);
   };
 
-  //fetch projects data
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getProjects = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(`${BACKEND_HOST}/api/project/`);
-        const data = res.data;
-        if (data.length === 0) setCanSeeProjects(false);
-        setProjects(data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
-      }
-    };
-    getProjects();
-  }, []);
   return (
     <Element className="w-100" name="projects">
       <section id="projects" className="projects flex flex-column justify-left align-center w-100 gap-2">
@@ -59,12 +37,12 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
           className={
-            projects.length === 1
+            project.projects.length === 1
               ? "projectCards flex flex-row justify-center align-center  flex-nowrap w-100  gap-2"
               : "projectCards flex flex-row  align-center flex-nowrap w-100  gap-2"
           }
         >
-          {loading ? (
+          {project.loading ? (
             <>
               <LoadingBlogSkeleton />
               <LoadingBlogSkeleton />
@@ -72,7 +50,7 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
             </>
           ) : (
             <>
-              {projects.map((project, index) => {
+              {project.projects.map((project, index) => {
                 return (
                   <ProjectCard
                     BACKEND_HOST={BACKEND_HOST}
@@ -102,4 +80,8 @@ const Projects = ({ canSeeProjects, setCanSeeProjects, BACKEND_HOST, t, i18n }) 
   );
 };
 
-export default Projects;
+const mapStateToProps = (state) => ({
+  project: state.project,
+});
+
+export default connect(mapStateToProps, {})(Projects);

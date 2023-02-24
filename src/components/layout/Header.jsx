@@ -2,8 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import { scroller } from "react-scroll";
 import MobileNav from "./MobileNav";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
-const Header = ({ isHome, BACKEND_HOST }) => {
+import { getBlogs } from "../../actions/blog";
+import { getProjects } from "../../actions/project";
+import { getWorks } from "../../actions/work";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjects, getWorks }) => {
   //languages
 
   const [languages, setLanguages] = useState(false);
@@ -56,59 +60,10 @@ const Header = ({ isHome, BACKEND_HOST }) => {
 
   //to show blogs or not
 
-  const [canSeeBlog, setCanSeeBlog] = useState(true);
-  const [canSeeProjects, setCanSeeProjects] = useState(true);
-  const [canSeeWorks, setCanSeeWorks] = useState(true);
-
   useEffect(() => {
-    const getBlogs = async () => {
-      try {
-        const res = await axios.get(`${BACKEND_HOST}/api/blog/`);
-        const data = res.data;
-        if (data.length === 0) setCanSeeBlog(false);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     getBlogs();
-
-    return () => {
-      //
-    };
-  }, []);
-
-  useEffect(() => {
-    const getProjects = async () => {
-      try {
-        const res = await axios.get(`${BACKEND_HOST}/api/project/`);
-        const data = res.data;
-        if (data.length === 0) setCanSeeProjects(false);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getProjects();
-
-    return () => {
-      //
-    };
-  }, []);
-
-  useEffect(() => {
-    const getWorks = async () => {
-      try {
-        const res = await axios.get(`${BACKEND_HOST}/api/work/`);
-        const data = res.data;
-        if (data.length === 0) setCanSeeWorks(false);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     getWorks();
-
-    return () => {
-      //
-    };
+    getProjects();
   }, []);
 
   const goNav = (name) => {
@@ -191,7 +146,7 @@ const Header = ({ isHome, BACKEND_HOST }) => {
                 </span>
               </li>
 
-              {canSeeBlog && (
+              {blog.blogs.length !== 0 && (
                 <li className="navItem">
                   <span
                     onClick={() => {
@@ -215,7 +170,7 @@ const Header = ({ isHome, BACKEND_HOST }) => {
                 </span>
               </li>
 
-              {canSeeProjects && (
+              {project.projects.length !== 0 && (
                 <li className="navItem">
                   <span
                     onClick={() => {
@@ -228,7 +183,7 @@ const Header = ({ isHome, BACKEND_HOST }) => {
                 </li>
               )}
 
-              {canSeeWorks && (
+              {work.works.length !== 0 && (
                 <li className="navItem">
                   <span
                     onClick={() => {
@@ -305,4 +260,23 @@ const Header = ({ isHome, BACKEND_HOST }) => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  getBlogs: PropTypes.func.isRequired,
+  getWorks: PropTypes.func.isRequired,
+  getProjects: PropTypes.func.isRequired,
+  blog: PropTypes.object.isRequired,
+  work: PropTypes.object.isRequired,
+  project: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  blog: state.blog,
+  work: state.work,
+  project: state.project,
+});
+
+export default connect(mapStateToProps, {
+  getBlogs,
+  getProjects,
+  getWorks,
+})(Header);

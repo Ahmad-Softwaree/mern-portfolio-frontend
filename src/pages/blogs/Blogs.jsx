@@ -1,25 +1,23 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
 import BlogPageCard from "../../components/blogs/BlogPageCard";
 import LoadingBlogSkeleton from "../../components/loading/LoadingBlogSkeleton";
-
-const Blogs = ({ BACKEND_HOST }) => {
+import { getBlogs } from "../../actions/blog";
+import PropTypes from "prop-types";
+const Blogs = ({ BACKEND_HOST, getBlogs, blog }) => {
   const { t, i18n } = useTranslation();
   const [input, setInput] = useState("");
   const [x, setX] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [savedBlogs, setSavedBlogs] = useState([]);
 
   const handleSearch = (e) => {
     setInput(e.target.value);
     setBlogs([]);
-
     let input = e.target.value;
     if (input === "") {
       //we have saved the blogs in another state so whenever you done search it will come back again.
-      setBlogs(savedBlogs);
+      setBlogs(blog.blogs);
       setX(false);
     } else {
       setX(true);
@@ -29,11 +27,11 @@ const Blogs = ({ BACKEND_HOST }) => {
   };
 
   const searchInput = (lang, input) => {
-    for (let i = 0; i < savedBlogs.length; i++) {
+    for (let i = 0; i < blog.blogs.length; i++) {
       for (let j = 0; j < input.length; j++) {
-        if (savedBlogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j)) {
+        if (blog.blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j)) {
           if (j === input.length - 1) {
-            setBlogs((prev) => [...prev, savedBlogs[i]]);
+            setBlogs((prev) => [...prev, blog.blogs[i]]);
           }
         } else {
           break;
@@ -45,21 +43,8 @@ const Blogs = ({ BACKEND_HOST }) => {
   //fetch blogs
 
   useEffect(() => {
-    const getBlogs = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(`${BACKEND_HOST}/api/blog/`);
-        const data = res.data;
-        setLoading(false);
-        setBlogs(data);
-        setSavedBlogs(data);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-    getBlogs();
-  }, []);
+    setBlogs(blog.blogs);
+  }, [blog]);
 
   return (
     <section className="blogsPage flex flex-column justify-left align-center w-100 gap-2">
@@ -73,7 +58,7 @@ const Blogs = ({ BACKEND_HOST }) => {
             <span
               onClick={() => {
                 setInput("");
-                setBlogs(savedBlogs);
+                setBlogs(blog.blogs);
                 setX(false);
               }}
               className="x"
@@ -85,7 +70,7 @@ const Blogs = ({ BACKEND_HOST }) => {
       </div>
 
       <div className="allBlogs flex flex-row justify-center align-center gap-3 w-100 flex-wrap">
-        {loading ? (
+        {blog.loading ? (
           <>
             <LoadingBlogSkeleton />
             <LoadingBlogSkeleton />
@@ -93,7 +78,7 @@ const Blogs = ({ BACKEND_HOST }) => {
           </>
         ) : (
           <>
-            {blogs.map((blog, index) => {
+            {blogs?.map((blog, index) => {
               return (
                 <BlogPageCard
                   t={t}
@@ -116,4 +101,15 @@ const Blogs = ({ BACKEND_HOST }) => {
   );
 };
 
-export default Blogs;
+Blogs.propTypes = {
+  blog: PropTypes.object.isRequired,
+  getBlogs: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  blog: state.blog,
+});
+
+export default connect(mapStateToProps, {
+  getBlogs,
+})(Blogs);

@@ -22,4 +22,3 @@ const SingleBlogError = () => {
 };
 
 export default SingleBlogError;
-<h1>Error</h1>;

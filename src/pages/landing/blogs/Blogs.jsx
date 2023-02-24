@@ -3,10 +3,10 @@ import BlogCard from "../../../components/blogs/BlogCard";
 import { Link } from "react-router-dom";
 import { Element } from "react-scroll";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
-import axios from "axios";
-import useSize from "../../../hooks/useSize";
-
-const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
+import { getBlogs } from "../../../actions/blog";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+const Blogs = ({ BACKEND_HOST, t, i18n, getBlogs, blog }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
@@ -29,27 +29,6 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
     setIsDragging(false);
   };
 
-  //fetch blog data
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getBlogs = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(`${BACKEND_HOST}/api/blog/`);
-        const data = res.data;
-        if (data.length === 0) setCanSeeBlogs(false);
-        setBlogs(data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.log(error);
-      }
-    };
-    getBlogs();
-  }, []);
-
   return (
     <Element className="w-100" name="blogs">
       <section id="blogs" className="blogs flex flex-column justify-left align-center w-100 gap-3">
@@ -61,12 +40,12 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
           className={
-            blogs.length === 1
+            blog.blogs.length === 1
               ? "blogCards flex flex-row justify-center align-center  flex-nowrap w-100  gap-2"
               : "blogCards flex flex-row  align-center flex-nowrap w-100  gap-2"
           }
         >
-          {loading ? (
+          {blog.loading ? (
             <>
               <LoadingBlogSkeleton />
               <LoadingBlogSkeleton />
@@ -74,7 +53,7 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
             </>
           ) : (
             <>
-              {blogs.map((blog, index) => {
+              {blog.blogs.map((blog, index) => {
                 return (
                   <BlogCard
                     t={t}
@@ -108,4 +87,15 @@ const Blogs = ({ setCanSeeBlogs, canSeeBlogs, BACKEND_HOST, t, i18n }) => {
   );
 };
 
-export default Blogs;
+Blogs.propTypes = {
+  blog: PropTypes.object.isRequired,
+  getBlogs: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  blog: state.blog,
+});
+
+export default connect(mapStateToProps, {
+  getBlogs,
+})(Blogs);

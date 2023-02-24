@@ -116,6 +116,10 @@
 }
 .layout .header .mobileNav ul li span {
   font-size: 16px !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .layout .header .mobNavAnim {
   animation: nav 250ms ease;

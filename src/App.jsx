@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
 import Layout from "./components/layout/Layout";
 import Blogs from "./pages/blogs/Blogs";
 import Landing from "./pages/landing/Landing";
-import SingleBlog from "./pages/singleBlog/SingleBlog";
 import ErrorPage from "./error/ErrorPage";
 import Error from "./error/Error";
 import "./language/i18react.js";
 import { useTranslation } from "react-i18next";
-import Logout from "./pages/logout/Logout";
-import Login from "./pages/login/Login";
+
 import Fallback from "./pages/Fallback";
 import ErrorBoundary from "./pages/ErrorBoundary";
+import SingleBlogPage from "./pages/singleBlog/SingleBlogPage";
 
-const BACKEND_HOST = import.meta.env.VITE_BACKEND_HOST;
+const BACKEND_HOST = import.meta.env.VITE_BACKEND_LOCAL_HOST;
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -24,15 +22,11 @@ const routes = createBrowserRouter(
         <Route index element={<Landing BACKEND_HOST={BACKEND_HOST} />} errorElement={<Error />} />
       </Route>
 
-      {/* login and logout */}
-      <Route path="/logout" element={<Logout />} />
-      <Route path="/login" element={<Login />} />
-
       {/* blogs routes */}
       <Route path="/blogs" element={<Layout BACKEND_HOST={BACKEND_HOST} isHome={false} />} errorElement={<Error />}>
         {/* single blog  route */}
         <Route index element={<Blogs BACKEND_HOST={BACKEND_HOST} />} errorElement={<Error />} />
-        <Route path=":id" element={<SingleBlog BACKEND_HOST={BACKEND_HOST} errorElement={<Error />} />} />
+        <Route path=":id" element={<SingleBlogPage BACKEND_HOST={BACKEND_HOST} errorElement={<Error />} />} />
       </Route>
 
       {/* page 404 route */}
@@ -40,26 +34,6 @@ const routes = createBrowserRouter(
     </>
   )
 );
-
-//Error whole app
-
-const ErrorBoundaryDetect = ({ children }) => {
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    return () => {
-      if (hasError) {
-        logErrorToMyService();
-      }
-    };
-  }, [hasError]);
-
-  if (hasError) {
-    return <ErrorBoundary />;
-  }
-
-  return children;
-};
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -77,17 +51,13 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setShow(true);
-    }, [6000]);
+    }, [1000]);
     return () => {
       clearInterval(interval);
     };
   }, []);
 
-  return (
-    <ErrorBoundaryDetect>
-      <div className="App">{!show ? <Fallback /> : <RouterProvider router={routes} />}</div>
-    </ErrorBoundaryDetect>
-  );
+  return <div className="App">{!show ? <Fallback /> : <RouterProvider router={routes} />}</div>;
 }
 
 export default App;
