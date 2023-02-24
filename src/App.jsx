@@ -37,7 +37,7 @@ const routes = createBrowserRouter(
   )
 );
 
-function App({ blogDone, projectDone, workDone }) {
+function App({ blogDone, projectDone, workDone, getBlogs, getWorks, getProjects }) {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     if (i18n.language === "kr" || i18n.language === "ar") {
