@@ -8,6 +8,12 @@ import { getWorks } from "../../actions/work";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjects, getWorks }) => {
+  const [show, setShow] = useState({
+    blog: true,
+    project: true,
+    work: true,
+  });
+
   //languages
 
   const [languages, setLanguages] = useState(false);
@@ -66,6 +72,12 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
     getProjects();
   }, []);
 
+  useEffect(() => {
+    if (blog.blogs.length === 0) setShow((prev) => ({ ...prev, blog: false }));
+    if (project.projects.length === 0) setShow((prev) => ({ ...prev, project: false }));
+    if (work.works.length === 0) setShow((prev) => ({ ...prev, work: false }));
+  }, [work, blog, project]);
+
   const goNav = (name) => {
     setMobNav(false);
     scroller.scrollTo(name, {
@@ -83,6 +95,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
         <header className="header w-100 position-relative">
           {mobNav && (
             <MobileNav
+              show={show}
               t={t}
               i18n={i18n}
               isHome={isHome}
@@ -146,7 +159,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
                 </span>
               </li>
 
-              {blog.blogs.length !== 0 && (
+              {show.blog && (
                 <li className="navItem">
                   <span
                     onClick={() => {
@@ -170,7 +183,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
                 </span>
               </li>
 
-              {project.projects.length !== 0 && (
+              {show.project && (
                 <li className="navItem">
                   <span
                     onClick={() => {
@@ -183,7 +196,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
                 </li>
               )}
 
-              {work.works.length !== 0 && (
+              {show.work && (
                 <li className="navItem">
                   <span
                     onClick={() => {

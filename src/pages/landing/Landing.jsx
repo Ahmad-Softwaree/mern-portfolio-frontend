@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Blogs from "./blogs/Blogs";
 import Contact from "./contact/Contact";
 import Home from "./home/Home";
@@ -11,22 +11,30 @@ import { connect } from "react-redux";
 
 const Landing = ({ BACKEND_HOST, works, blogs, projects }) => {
   const { t, i18n } = useTranslation();
+  const [show, setShow] = useState({
+    blog: true,
+    project: true,
+    work: true,
+  });
 
   //scroll nice animation
 
   useEffect(() => {
     const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
     if (blogs.length === 0) {
+      setShow((prev) => ({ ...prev, blog: false }));
       const index = pageString.indexOf("blogs");
       if (index > -1) pageString.splice(index, 1);
     }
 
     if (projects.length === 0) {
+      setShow((prev) => ({ ...prev, project: false }));
       const index = pageString.indexOf("projects");
       if (index > -1) pageString.splice(index, 1);
     }
 
     if (works.length === 0) {
+      setShow((prev) => ({ ...prev, work: false }));
       const index = pageString.indexOf("works");
       if (index > -1) pageString.splice(index, 1);
     }
@@ -44,10 +52,10 @@ const Landing = ({ BACKEND_HOST, works, blogs, projects }) => {
   return (
     <div className="landing w-100 p-0 m-0 flex flex-column justify-center align-center gap-2">
       <Home t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />
-      {blogs.length !== 0 && <Blogs t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />}
+      {show.blog && <Blogs t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />}
       <Skills t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />
-      {projects.length !== 0 && <Projects t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />}
-      {works.length !== 0 && <Works t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />}
+      {show.project && <Projects t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />}
+      {show.work && <Works t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />}
       <Contact t={t} i18n={i18n} BACKEND_HOST={BACKEND_HOST} />
     </div>
   );
