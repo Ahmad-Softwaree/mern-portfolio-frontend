@@ -19,6 +19,7 @@ export default function work(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        works: [],
         error: payload,
       };
     case FETCH_WORKS_SUCCESS:

@@ -29,6 +29,8 @@ export default function blog(state = initialState, action) {
     case FETCH_SINGLE_BLOG_FAIL:
       return {
         ...state,
+        blogs: [],
+        singleBlog: null,
         loading: false,
         error: payload,
       };

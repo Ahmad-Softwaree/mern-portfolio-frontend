@@ -43,6 +43,10 @@ const Blogs = ({ BACKEND_HOST, getBlogs, blog }) => {
   //fetch blogs
 
   useEffect(() => {
+    getBlogs();
+  }, []);
+
+  useEffect(() => {
     setBlogs(blog.blogs);
   }, [blog]);
 

@@ -18,6 +18,7 @@ export default function project(state = initialState, action) {
     case FETCH_PROJECTS_FAIL:
       return {
         ...state,
+        projects: [],
         loading: false,
         error: payload,
       };
