@@ -3,6 +3,7 @@ import { FETCH_WORKS_FAIL, FETCH_WORKS_START, FETCH_WORKS_SUCCESS, REMOVE_WORKS_
 const initialState = {
   works: [],
   loading: false,
+  done: false,
   error: null,
 };
 
@@ -12,6 +13,7 @@ export default function work(state = initialState, action) {
     case FETCH_WORKS_START:
       return {
         ...state,
+        done: false,
         loading: true,
         error: null,
       };
@@ -26,6 +28,7 @@ export default function work(state = initialState, action) {
         ...state,
         loading: false,
         error: null,
+        done: true,
         works: payload,
       };
 

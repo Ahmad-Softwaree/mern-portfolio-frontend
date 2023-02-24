@@ -2,12 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { scroller } from "react-scroll";
 import MobileNav from "./MobileNav";
 import { useTranslation } from "react-i18next";
-import { getBlogs } from "../../actions/blog";
-import { getProjects } from "../../actions/project";
-import { getWorks } from "../../actions/work";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjects, getWorks }) => {
+const Header = ({ isHome, BACKEND_HOST, blog, project, work }) => {
   //languages
 
   const [languages, setLanguages] = useState(false);
@@ -59,12 +56,6 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
   }, [activeSection, isHome]);
 
   //to show blogs or not
-
-  useEffect(() => {
-    getBlogs();
-    getWorks();
-    getProjects();
-  }, []);
 
   const goNav = (name) => {
     setMobNav(false);
@@ -251,9 +242,6 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work, getBlogs, getProjec
 };
 
 Header.propTypes = {
-  getBlogs: PropTypes.func.isRequired,
-  getWorks: PropTypes.func.isRequired,
-  getProjects: PropTypes.func.isRequired,
   blog: PropTypes.object.isRequired,
   work: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
@@ -265,8 +253,4 @@ const mapStateToProps = (state) => ({
   project: state.project,
 });
 
-export default connect(mapStateToProps, {
-  getBlogs,
-  getProjects,
-  getWorks,
-})(Header);
+export default connect(mapStateToProps, {})(Header);
