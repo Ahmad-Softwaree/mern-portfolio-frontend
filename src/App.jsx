@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setShow(true);
-    }, [1000]);
+    }, [4000]);
     return () => {
       clearInterval(interval);
     };
