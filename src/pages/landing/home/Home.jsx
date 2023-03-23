@@ -21,7 +21,7 @@ const Home = ({ BACKEND_HOST, t, i18n }) => {
         </div>
 
         <div className="rightHome position-relative">
-          <img src="/images/ahmad.jpg" alt="" className="myImage position-relative" />
+          <img src="/images/ahmad.svg" alt="" className="myImage position-relative" />
         </div>
         <div className="blurs position-absolute flex flex-row justify-center align-center">
           <div className="greenBlur blur"></div>
