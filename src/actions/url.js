@@ -1,4 +1,4 @@
-const BACKEND_HOST = "http://localhost:3001";
+const BACKEND_HOST = "https://portfolio-api-4n84.onrender.com";
 //blog
 export const GET_HOME_BLOG_URL = `${BACKEND_HOST}/api/blogs/home`;
 export const GET_ALL_BLOG_URL = `${BACKEND_HOST}/api/blogs/all`;
