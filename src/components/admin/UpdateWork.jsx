@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateWork } from "../../actions/work";
 import { Spinner } from "@chakra-ui/react";
-import { BLOG_UPDATE_IMAGE, WORK_UPDATE_IMAGE } from "../../actions/types";
-import { UPLOAD_BLOG_IMAGE } from "../../actions/url";
+import { WORK_UPDATE_IMAGE } from "../../actions/types";
 const UpdateWork = ({
   enTitle,
   arTitle,
@@ -40,7 +39,7 @@ const UpdateWork = ({
         company: inputs.company,
         from: inputs.from,
         to: inputs.to,
-        image: image.updateBlog,
+        image: image.updateWork,
         workId: id,
         setUpdate,
         oldImage,
@@ -60,7 +59,7 @@ const UpdateWork = ({
           company: inputs.company,
           from: inputs.from,
           to: inputs.to,
-          image: image.updateBlog,
+          image: image.updateWork,
           workId: id,
           setUpdate,
           oldImage,
