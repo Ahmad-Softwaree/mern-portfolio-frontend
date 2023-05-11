@@ -4,8 +4,7 @@ import BlogPageCard from "../../components/blogs/BlogPageCard";
 import LoadingBlogSkeleton from "../../components/loading/LoadingBlogSkeleton";
 import { getAllBlogs } from "../../actions/blog";
 import PropTypes from "prop-types";
-import { AdminBlogs } from "../../components/admin/AdminBlogs";
-const Blogs = ({ getAllBlogs, blog: { blogs, blogLoading }, language: { file, language } }) => {
+const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
   const [input, setInput] = useState("");
   const [x, setX] = useState(false);
   const [blogs, setBlogs] = useState([]);
@@ -24,10 +23,10 @@ const Blogs = ({ getAllBlogs, blog: { blogs, blogLoading }, language: { file, la
   }, []);
 
   const searchInput = useCallback((lang, input) => {
-    for (let i = 0; i < blogs.length; i++) {
+    for (let i = 0; i < blog.blogs.length; i++) {
       for (let j = 0; j < input.length; j++) {
-        if (blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j))
-          if (j === input.length - 1) setBlogs((prev) => [...prev, blogs[i]]);
+        if (blog.blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j))
+          if (j === input.length - 1) setBlogs((prev) => [...prev, blog.blogs[i]]);
           else break;
       }
     }
@@ -40,8 +39,8 @@ const Blogs = ({ getAllBlogs, blog: { blogs, blogLoading }, language: { file, la
   }, []);
 
   useEffect(() => {
-    setBlogs(blogs);
-  }, [blogs]);
+    setBlogs(blog.blogs);
+  }, [blog]);
 
   return (
     <section className="blogsPage flex flex-column justify-left align-center w-100 gap-2">
@@ -55,7 +54,7 @@ const Blogs = ({ getAllBlogs, blog: { blogs, blogLoading }, language: { file, la
             <span
               onClick={() => {
                 setInput("");
-                setBlogs(blogs);
+                setBlogs(blog.blogs);
                 setX(false);
               }}
               className="x"
@@ -67,7 +66,7 @@ const Blogs = ({ getAllBlogs, blog: { blogs, blogLoading }, language: { file, la
       </div>
 
       <div className="allBlogs flex flex-row justify-center align-center gap-3 w-100 flex-wrap">
-        {blogLoading ? (
+        {blog.blogLoading ? (
           <>
             <LoadingBlogSkeleton />
             <LoadingBlogSkeleton />
@@ -75,7 +74,7 @@ const Blogs = ({ getAllBlogs, blog: { blogs, blogLoading }, language: { file, la
           </>
         ) : (
           <>
-            {blogs?.map((blog, index) => {
+            {blog.blogs?.map((blog, index) => {
               return (
                 <BlogPageCard
                   file={file}
