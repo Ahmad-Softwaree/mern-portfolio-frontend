@@ -1,48 +1,31 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, memo } from "react";
 import { scroller } from "react-scroll";
 import MobileNav from "./MobileNav";
-import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-const Header = ({ isHome, BACKEND_HOST, blog, project, work }) => {
-  //languages
-
+import { ARABIC, ENGLISH, KURDISH } from "../../actions/types";
+const Header = memo(({ isHome, blog, project, work, language: { language, file } }) => {
   const [languages, setLanguages] = useState(false);
-
-  //mobile navigation
-
   const [mobNav, setMobNav] = useState(false);
-
-  //detecting active page part useEffect
-
   const [activeSection, setActiveSection] = useState("home");
-
-  const handleSetActiveSection = (sectionId) => {
-    //put the active section depend on the top and bottom of each of them
-    setActiveSection(sectionId);
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isHome) {
-      //this if so we don't have error in other pages says that those element are not defined
       const handleScroll = () => {
-        //we have all the domes every time
         const home = document.getElementById("home")?.getBoundingClientRect();
         const blog = document.getElementById("blogs")?.getBoundingClientRect();
         const whyUs = document.getElementById("skills")?.getBoundingClientRect();
         const services = document.getElementById("projects")?.getBoundingClientRect();
         const works = document.getElementById("works")?.getBoundingClientRect();
-
         const contact = document.getElementById("contact")?.getBoundingClientRect();
 
         const pageArray = [home, blog, whyUs, services, works, contact];
         const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
-
-        // loop thorugh all of them and check for the top and the bottom
         pageArray.forEach((page, index) => {
           if (!page) return;
           if (page.top <= 150 && page.bottom > 150) {
-            handleSetActiveSection(`${pageString[index]}`);
+            setActiveSection(`${pageString[index]}`);
             return;
           }
         });
@@ -65,51 +48,18 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work }) => {
       smooth: "linear",
     });
   };
-
-  const { t, i18n } = useTranslation();
-
   return (
     <>
       {isHome && (
         <header className="header w-100 position-relative">
-          {mobNav && <MobileNav t={t} i18n={i18n} goNav={goNav} activeSection={activeSection} mobNav={mobNav} setMobNav={setMobNav} />}
+          {mobNav && <MobileNav goNav={goNav} activeSection={activeSection} mobNav={mobNav} setMobNav={setMobNav} />}
 
           {mobNav ? (
-            <span
-              onClick={() => {
-                setMobNav(false);
-              }}
-              style={{
-                position: "absolute",
-                left: "30px",
-                top: "0",
-                bottom: "0",
-                marginTop: "auto",
-                marginBottom: "auto",
-                fontSize: "1.5rem",
-                height: "fit-content",
-              }}
-              className="xMobNav"
-            >
+            <span onClick={() => setMobNav(false)} className="xMobNav">
               <i className="fa-solid fa-xmark"></i>
             </span>
           ) : (
-            <span
-              onClick={() => {
-                setMobNav(true);
-              }}
-              className="humb"
-              style={{
-                position: "absolute",
-                left: "30px",
-                top: "0",
-                bottom: "0",
-                marginTop: "auto",
-                marginBottom: "auto",
-                fontSize: "1.5rem",
-                height: "fit-content",
-              }}
-            >
+            <span onClick={() => setMobNav(true)} className="humb">
               <i className="fa-solid fa-bars"></i>
             </span>
           )}
@@ -117,74 +67,44 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work }) => {
           <nav className="navigation flex flex-row justify-center align-center  w-100">
             <ul className="flex flex-row justify-center align-center gap-2 w-100">
               <li className="navItem">
-                <span
-                  onClick={() => {
-                    goNav("home");
-                  }}
-                  className={`${activeSection === "home" && "activeNav"}`}
-                >
-                  {t("nav.home")}
+                <span onClick={() => goNav("home")} className={`${activeSection === "home" && "activeNav"}`}>
+                  {file.nav.home}
                 </span>
               </li>
 
               {blog.blogs.length !== 0 && (
                 <li className="navItem">
-                  <span
-                    onClick={() => {
-                      goNav("blogs");
-                    }}
-                    className={`${activeSection === "blogs" && "activeNav"}`}
-                  >
-                    {t("nav.blogs")}
+                  <span onClick={() => goNav("blogs")} className={`${activeSection === "blogs" && "activeNav"}`}>
+                    {file.nav.blogs}
                   </span>
                 </li>
               )}
 
               <li className="navItem">
-                <span
-                  onClick={() => {
-                    goNav("skills");
-                  }}
-                  className={`${activeSection === "skills" && "activeNav"}`}
-                >
-                  {t("nav.skills")}
+                <span onClick={() => goNav("skills")} className={`${activeSection === "skills" && "activeNav"}`}>
+                  {file.nav.skills}
                 </span>
               </li>
 
               {project.projects.length !== 0 && (
                 <li className="navItem">
-                  <span
-                    onClick={() => {
-                      goNav("projects");
-                    }}
-                    className={`${activeSection === "projects" && "activeNav"}`}
-                  >
-                    {t("nav.projects")}
+                  <span onClick={() => goNav("projects")} className={`${activeSection === "projects" && "activeNav"}`}>
+                    {file.nav.projects}
                   </span>
                 </li>
               )}
 
               {work.works.length !== 0 && (
                 <li className="navItem">
-                  <span
-                    onClick={() => {
-                      goNav("works");
-                    }}
-                    className={`${activeSection === "works" && "activeNav"}`}
-                  >
-                    {t("nav.works")}
+                  <span onClick={() => goNav("works")} className={`${activeSection === "works" && "activeNav"}`}>
+                    {file.nav.works}
                   </span>
                 </li>
               )}
 
               <li className="navItem">
-                <span
-                  onClick={() => {
-                    goNav("contact");
-                  }}
-                  className={`${activeSection === "contact" && "activeNav"}`}
-                >
-                  {t("nav.contact")}
+                <span onClick={() => goNav("contact")} className={`${activeSection === "contact" && "activeNav"}`}>
+                  {file.nav.contact}
                 </span>
               </li>
             </ul>
@@ -195,7 +115,7 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work }) => {
           >
             <div className="languageDivBox flex  flex-row justify-center align-center">
               {" "}
-              <span>{i18n.language === "en" ? "EN" : i18n.language === "kr" ? "KR" : "AR"}</span>
+              <span>{language === "en" ? "EN" : language === "kr" ? "KR" : "AR"}</span>
               <span>
                 <i className="fa-solid fa-globe"></i>
               </span>
@@ -205,8 +125,9 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work }) => {
               <div className="position-absolute languagesList flex flex-column justify-center align-center gap-1">
                 <span
                   onClick={() => {
-                    i18n.changeLanguage("en");
-                    localStorage.setItem("lang", "en");
+                    dispatch({
+                      type: ENGLISH,
+                    });
                     setLanguages(true);
                   }}
                 >
@@ -214,19 +135,18 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work }) => {
                 </span>
                 <span
                   onClick={() => {
-                    setLanguages(true);
-                    localStorage.setItem("lang", "kr");
-
-                    i18n.changeLanguage("kr");
+                    dispatch({
+                      type: KURDISH,
+                    });
                   }}
                 >
                   KR
                 </span>
                 <span
                   onClick={() => {
-                    i18n.changeLanguage("ar");
-                    localStorage.setItem("lang", "ar");
-
+                    dispatch({
+                      type: ARABIC,
+                    });
                     setLanguages(true);
                   }}
                 >
@@ -239,18 +159,20 @@ const Header = ({ isHome, BACKEND_HOST, blog, project, work }) => {
       )}
     </>
   );
-};
+});
 
 Header.propTypes = {
   blog: PropTypes.object.isRequired,
   work: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
+  language: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   blog: state.blog,
   work: state.work,
   project: state.project,
+  language: state.language,
 });
 
-export default connect(mapStateToProps, {})(Header);
+export default connect(mapStateToProps, {})(memo(Header));

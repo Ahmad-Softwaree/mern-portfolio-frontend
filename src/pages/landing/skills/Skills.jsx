@@ -1,14 +1,14 @@
 import React from "react";
 import { Element } from "react-scroll";
 
-const Skills = ({ BACKEND_HOST, t, i18n }) => {
+const Skills = ({ file, language }) => {
   return (
     <Element className="w-100" name="skills">
       <section id="skills" className="skills flex flex-column justify-center align-center w-100">
-        <h1 className="heading">{t("nav.skills")}</h1>
+        <h1 className="heading">{file.nav.skills}</h1>
         <div className="skillsBox flex flex-column justify-left align-start gap-2">
           <div className="skillGroup flex flex-column justify-left align-center w-100 gap-3">
-            <h2>{t("skills.languages")}</h2>
+            <h2>{file.skills.languages}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv java">
                 <img src="/images/icons/java.svg" alt="" />
@@ -24,9 +24,9 @@ const Skills = ({ BACKEND_HOST, t, i18n }) => {
           <div className="littleBreak"></div>
 
           {/* web dev */}
-          <h1>{t("skills.webDev")}</h1>
+          <h1>{file.skills.webDev}</h1>
           <div className="skillGroup flex flex-column justify-left align-center w-100 gap-2">
-            <h2>{t("skills.front")}</h2>
+            <h2>{file.skills.front}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv html">
                 <img src="/images/icons/html.svg" alt="" />
@@ -69,7 +69,7 @@ const Skills = ({ BACKEND_HOST, t, i18n }) => {
           {/* backend */}
 
           <div className="skillGroup flex flex-column justify-left align-center w-100 gap-2">
-            <h2>{t("skills.back")}</h2>
+            <h2>{file.skills.back}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv node">
                 <img src="/images/icons/nodejs.svg" alt="" />
@@ -104,12 +104,12 @@ const Skills = ({ BACKEND_HOST, t, i18n }) => {
 
           {/* languages */}
 
-          <h1>{t("skills.gameDev")}</h1>
+          <h1>{file.skills.gameDev}</h1>
 
           {/* game dev */}
 
           <div className="skillGroup flex flex-column justify-left align-center w-100 gap-2">
-            <h2>{t("skills.twoDGame")}</h2>
+            <h2>{file.skills.twoDGame}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv unity">
                 <img src="/images/icons/unity.svg" alt="" />

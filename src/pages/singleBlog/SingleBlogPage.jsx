@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import LoadingSingleBlogSkeleton from "../../components/loading/LoadingSingleBlogSkeleton";
 import SingleBlogError from "../../error/SingleBlogError";
@@ -7,31 +6,28 @@ import moment from "moment";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getOneBlog } from "../../actions/blog";
-const SingleBlogPage = ({ blog, getOneBlog }) => {
+const SingleBlogPage = ({ blog: { blog }, getOneBlog, language: { file, language } }) => {
   const { id } = useParams();
-  const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    getOneBlog(id);
+    getOneBlog({ blogId: id });
   }, [id]);
 
   return (
     <section className="singleBlog flex flex-column justify-left align-start gap-2 w-100">
-      {blog.singleBlog !== null && !blog.loading ? (
+      {Object.keys(blog)?.length !== 0 && !blog.loading ? (
         <>
-          <h1 className="blogHeader">
-            {i18n.language === "en" ? blog.singleBlog.enTitle : i18n.language === "ar" ? blog.singleBlog.arTitle : blog.singleBlog.krTitle}
-          </h1>
-          <img src={`${blog.singleBlog.image}`} alt="" className="blogImage" />
-          {i18n.language === "en" ? (
-            <p dangerouslySetInnerHTML={{ __html: blog.singleBlog.enBody }}></p>
-          ) : i18n.language === "ar" ? (
-            <p dangerouslySetInnerHTML={{ __html: blog.singleBlog.arBody }}></p>
+          <h1 className="blogHeader">{language === "en" ? blog.enTitle : language === "ar" ? blog.arTitle : blog.krTitle}</h1>
+          <img src={`${blog.image}`} alt="" className="blogImage" />
+          {language === "en" ? (
+            <p dangerouslySetInnerHTML={{ __html: blog.enBody }}></p>
+          ) : language === "ar" ? (
+            <p dangerouslySetInnerHTML={{ __html: blog.arBody }}></p>
           ) : (
-            <p dangerouslySetInnerHTML={{ __html: blog.singleBlog.krBody }}></p>
+            <p dangerouslySetInnerHTML={{ __html: blog.krBody }}></p>
           )}
           <span className="blogTime">
-            {moment(blog.singleBlog.createdAt).format("MMMM Do YYYY")} {moment(blog.singleBlog.createdAt).format("dddd")}
+            {moment(blog.createdAt).format("MMMM Do YYYY")} {moment(blog.createdAt).format("dddd")}
           </span>
         </>
       ) : blog.loading ? (
@@ -46,10 +42,12 @@ const SingleBlogPage = ({ blog, getOneBlog }) => {
 SingleBlogPage.propTypes = {
   blog: PropTypes.object.isRequired,
   getOneBlog: PropTypes.func.isRequired,
+  language: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   blog: state.blog,
+  language: state.language,
 });
 
 export default connect(mapStateToProps, {

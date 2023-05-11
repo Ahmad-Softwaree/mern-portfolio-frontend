@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Element } from "react-scroll";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-const Home = ({ BACKEND_HOST, t, i18n }) => {
+const Home = ({ language, file }) => {
   return (
     <Element className="w-100" name="home">
       <section id="home" className="home flex flex-row justify-between align-center w-100 position-relative">
         <div className="leftHome flex flex-column justify-left align-start gap-2 position-relative">
-          <p>{t("home.welcome")}</p>
+          <p>{file.home.welcome}</p>
           <h1 className="heading">
-            {t("home.who")}
+            {file.home.who}
             <span className="ahmadSoftware position-relative">
-              {t("home.name")}
+              {file.home.name}
               <img src="/images/rect.svg" alt="" className="position-absolute" />
             </span>
           </h1>
-          <h1 className="heading">{t("home.job")}</h1>
+          <h1 className="heading">{file.home.job}</h1>
           <a href="/pdf/Resume.pdf" download className="showCV">
-            {t("home.cv")}
+            {file.home.cv}
           </a>
         </div>
 
@@ -32,4 +34,10 @@ const Home = ({ BACKEND_HOST, t, i18n }) => {
   );
 };
 
-export default Home;
+Home.propTypes = {};
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

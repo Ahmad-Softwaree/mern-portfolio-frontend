@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import DOMPurify from "dompurify";
 
-const BlogPageCard = ({ time, img, enBody, arBody, krBody, id, BACKEND_HOST, t, i18n }) => {
+const BlogPageCard = ({ time, img, enBody, arBody, krBody, id, language, file }) => {
   return (
     <div className="blogCard flex flex-column justify-between align-center  gap-1">
       <div className="flex flex-column justify-center align-center gap-1 w-100">
         <img src={`${img}`} alt="blogImage" />
-        {i18n.language === "en" ? (
+        {language === "en" ? (
           <p>{DOMPurify.sanitize(enBody.replace(/<br\s*[\/]?>/gi, ""), { ADD_TAGS: ["br"] }).substring(0, 120) + "..."}</p>
-        ) : i18n.language === "ar" ? (
+        ) : language === "ar" ? (
           <p>{DOMPurify.sanitize(arBody.replace(/<br\s*[\/]?>/gi, ""), { ADD_TAGS: ["br"] }).substring(0, 120) + "..."}</p>
         ) : (
           <p>{DOMPurify.sanitize(krBody.replace(/<br\s*[\/]?>/gi, ""), { ADD_TAGS: ["br"] }).substring(0, 120) + "..."}</p>
@@ -22,7 +22,7 @@ const BlogPageCard = ({ time, img, enBody, arBody, krBody, id, BACKEND_HOST, t, 
         </span>
 
         <Link to={`/blogs/${id}`} className="readBlog">
-          {t("blog.read")}
+          {file.blog.read}
         </Link>
       </div>
     </div>

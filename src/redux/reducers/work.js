@@ -1,39 +1,93 @@
-import { FETCH_WORKS_FAIL, FETCH_WORKS_START, FETCH_WORKS_SUCCESS, REMOVE_WORKS_ERRORS } from "../../actions/types";
+import {
+  GET_ALL_WORK_FAIL,
+  GET_ALL_WORK_START,
+  GET_ALL_WORK_SUCCESS,
+  UPDATE_WORK_FAIL,
+  UPDATE_WORK_START,
+  UPDATE_WORK_SUCCESS,
+  CREATE_WORK_FAIL,
+  CREATE_WORK_START,
+  CREATE_WORK_SUCCESS,
+  DELETE_WORK_FAIL,
+  DELETE_WORK_START,
+  DELETE_WORK_SUCCESS,
+} from "../../actions/types";
 
 const initialState = {
   works: [],
-  loading: false,
-  error: null,
+  workLoading: false,
+  createWorkLoading: false,
+  deleteWorkLoading: false,
+  updateWorkLoading: false,
 };
 
-export default function work(state = initialState, action) {
+export default function WORK(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case FETCH_WORKS_START:
+    case GET_ALL_WORK_START:
       return {
         ...state,
-        loading: true,
-        error: null,
-      };
-    case FETCH_WORKS_FAIL:
-      return {
-        ...state,
-        loading: false,
         works: [],
-        error: payload,
+        workLoading: true,
       };
-    case FETCH_WORKS_SUCCESS:
+    case GET_ALL_WORK_FAIL:
       return {
         ...state,
-        loading: false,
-        error: null,
+        workLoading: false,
+      };
+    case GET_ALL_WORK_SUCCESS:
+      return {
+        ...state,
+        workLoading: false,
         works: payload,
       };
-
-    case REMOVE_WORKS_ERRORS:
+    case CREATE_WORK_START:
       return {
         ...state,
-        error: null,
+        createWorkLoading: true,
+      };
+    case CREATE_WORK_FAIL:
+      return {
+        ...state,
+        createWorkLoading: false,
+      };
+    case CREATE_WORK_SUCCESS:
+      return {
+        ...state,
+        createWorkLoading: false,
+        works: [...state.works, payload],
+      };
+    case DELETE_WORK_START:
+      return {
+        ...state,
+        deleteWorkLoading: true,
+      };
+    case DELETE_WORK_FAIL:
+      return {
+        ...state,
+        deleteworkLoading: false,
+      };
+    case DELETE_WORK_SUCCESS:
+      return {
+        ...state,
+        deleteWorkLoading: false,
+        works: state.works.filter((WORK) => WORK._id !== payload),
+      };
+    case UPDATE_WORK_START:
+      return {
+        ...state,
+        updateWorkLoading: true,
+      };
+    case UPDATE_WORK_FAIL:
+      return {
+        ...state,
+        updateWorkLoading: false,
+      };
+    case UPDATE_WORK_SUCCESS:
+      return {
+        ...state,
+        updateWorkLoading: false,
+        works: [...state.works.filter((WORK) => WORK._id !== payload._id), payload],
       };
     default:
       return state;

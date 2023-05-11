@@ -1,6 +1,6 @@
 import React from "react";
 
-const WorkCard = ({ id, image, companyName, BACKEND_HOST, enTitle, arTitle, krTitle, from, to, i18n }) => {
+const WorkCard = ({ id, image, companyName, file, language, enTitle, arTitle, krTitle, from, to }) => {
   return (
     <div className="workCard position-relative flex flex-column justify-center align-center">
       <div className="workCardBack position-absolute"></div>
@@ -10,9 +10,9 @@ const WorkCard = ({ id, image, companyName, BACKEND_HOST, enTitle, arTitle, krTi
 
       <div className="workCardText position-absolute bottom-4 w-100">
         <h2>{companyName}</h2>
-        {i18n.language === "en" ? (
+        {language === "en" ? (
           <span className="workType">{enTitle}</span>
-        ) : i18n.language === "ar" ? (
+        ) : language === "ar" ? (
           <span className="workType">{arTitle}</span>
         ) : (
           <span className="workType">{krTitle}</span>

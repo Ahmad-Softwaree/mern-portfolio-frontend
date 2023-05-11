@@ -1,0 +1,1043 @@
+@use "../util/colors.scss" as colors;
+@use "../util/hover.scss" as hover;
+@use "../breakpoints.scss" as res;
+
+.panelLoading {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel_header {
+  background-color: colors.$lightBlack;
+  color: colors.$white;
+  min-height: 150px;
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  .admin_logout,
+  .admin_getOut,
+  .admin_add,
+  .admins {
+    padding: 10px;
+    position: absolute;
+    width: fit-content;
+    font-size: 12px;
+    color: colors.$white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 200ms linear;
+  }
+  .admin_logout {
+    left: 2rem;
+    top: 2rem;
+    background-color: colors.$red;
+  }
+  .admin_getOut {
+    left: 5rem;
+    top: 2rem;
+    background-color: colors.$purple;
+  }
+  .admin_add {
+    left: 2rem;
+    top: 5rem;
+    background-color: colors.$green;
+  }
+  .admins {
+    left: 5rem;
+    top: 5rem;
+    background-color: colors.$yellow;
+  }
+  .admin_logout:hover,
+  .admin_getOut:hover,
+  .admin_add:hover,
+  .admins:hover {
+    opacity: 1;
+  }
+  .admin_profile {
+    right: 2rem;
+    top: 2rem;
+    padding: 8px;
+    background-color: colors.$purple;
+    color: colors.$white;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: all 200ms linear;
+    img {
+      width: 2rem;
+      height: 2rem;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    span {
+      font-size: 14px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+.panel {
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+  }
+  position: relative;
+  min-height: 100vh;
+  padding: 10px 20px 100px 10px;
+  background-color: colors.$lightBlack;
+  color: colors.$white !important;
+  .admin_blogs {
+    width: 100%;
+    text-align: center;
+
+    button {
+      padding: 10px 20px;
+      min-width: 100px;
+      font-size: 20px;
+      background-color: colors.$purple;
+      color: colors.$white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 200ms linear;
+    }
+    button:hover {
+      opacity: 1;
+    }
+    .blogs {
+      padding: 30px 0;
+      border: 1px solid colors.$purple;
+
+      .theBlogs {
+        padding: 20px 0;
+        max-height: 500px;
+        overflow-y: scroll;
+      }
+      .blogTable {
+        font-weight: 600;
+      }
+      .blogCard {
+        border: 1px solid colors.$purple;
+        padding: 0 10px;
+        border-right: 0;
+        border-left: 0;
+        .tableIndex {
+          min-width: 60px;
+          width: 30%;
+        }
+        .tableOperation {
+          min-width: 60px;
+          width: 30%;
+          font-weight: 600;
+          .fa-pen-to-square {
+            color: colors.$blue;
+            cursor: pointer;
+          }
+          .fa-trash {
+            color: colors.$red;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .no_blog {
+      padding: 60px 0;
+      font-weight: 600;
+      font-size: 22px;
+    }
+    .createBlog {
+      * {
+        width: 100%;
+      }
+      inset: 0;
+      max-height: 600px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      border-radius: 10px;
+      background-color: colors.$lightBlack;
+      max-width: 600px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: left;
+      align-items: center;
+      z-index: 1000;
+      margin: auto;
+      padding: 40px;
+      .inner {
+        width: 100%;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: left;
+        align-items: center;
+        gap: 2rem;
+      }
+      .blogImage {
+        display: none;
+      }
+
+      .error {
+        color: colors.$purple;
+        font-size: 12px;
+      }
+
+      input,
+      textarea {
+        padding: 10px;
+        border-bottom: 2px solid colors.$black;
+        opacity: 0.7;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+      }
+      input::placeholder {
+        font-weight: 600;
+        font-size: 26px;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+      }
+
+      input {
+        font-weight: 600;
+        font-size: 26px;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+
+        height: fit-content;
+      }
+
+      textarea::placeholder {
+        font-weight: 500;
+        font-size: 16px;
+      }
+      textarea {
+        font-weight: 500;
+        font-size: 16px;
+        resize: none;
+        height: 500px !important;
+        min-height: 50px;
+        border: 2px solid colors.$purple;
+        border-radius: 5px;
+        color: colors.$white !important;
+      }
+
+      .activeInputBorder {
+        border-color: colors.$purple;
+      }
+
+      .fileInputDiv {
+        width: 100%;
+        height: 481px;
+        background: colors.$lightBlack;
+        border: 1px dashed colors.$purple;
+        border-radius: 10px;
+        .imageUploadCloud {
+          max-width: 100px;
+          object-fit: cover;
+          max-height: 100px;
+          cursor: pointer;
+        }
+
+        p {
+          text-align: center;
+          font-size: 12px;
+          opacity: 0.6;
+        }
+
+        .URLImage {
+          width: 100%;
+          height: 100%;
+          max-height: 600px;
+          border: 1px dashed colors.$purple;
+          border-radius: 10px;
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+          .x {
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            width: fit-content;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            width: 2rem;
+            height: 2rem;
+            background-color: colors.$purple;
+            color: colors.$white;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+        }
+        .imageUploadButton {
+          padding: 10px 20px;
+
+          width: 230px;
+          text-align: center;
+          height: 44px;
+          font-size: 14px;
+
+          background-color: colors.$purple;
+          color: colors.$white;
+          border-radius: 3px;
+          border: 2px solid colors.$purple;
+          cursor: pointer;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$lightBlack,
+              color: colors.$purple,
+              border-color: colors.$purple,
+            )
+          );
+        }
+      }
+
+      .publishAndCancel {
+        button,
+        .cancelLink {
+          width: 102px;
+          height: 42px;
+          font-weight: 400;
+          font-size: 14px;
+          cursor: pointer;
+          border: none;
+        }
+        .cancelLink {
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          flex-flow: row nowrap;
+          border: 1px solid colors.$purple;
+          border-radius: 4px;
+          color: colors.$white;
+          background-color: colors.$lightBlack;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$purple,
+              color: colors.$white,
+            )
+          );
+        }
+
+        .publish {
+          background: #888888;
+          border-radius: 4px;
+          color: colors.$white;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$black,
+              color: colors.$white,
+            )
+          );
+        }
+
+        .activePublish {
+          background: colors.$purple;
+          border-radius: 4px;
+          color: colors.$white;
+          border: 1px solid colors.$purple;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$lightBlack,
+              color: colors.$white,
+            )
+          );
+        }
+      }
+    }
+
+    .update {
+      .fileInputDiv {
+        position: relative;
+        .blogImageUploaderLabel {
+          position: absolute;
+          bottom: 1rem;
+          left: 1rem;
+          width: fit-content;
+          .editButton {
+            background-color: colors.$purple;
+            color: colors.$white;
+            min-width: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 200ms linear;
+            &:hover {
+              opacity: 1;
+            }
+            img {
+              width: 18px;
+              height: 18px;
+            }
+            padding: 5px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .wantToDelete {
+      background-color: colors.$lightBlack;
+      z-index: 1200;
+      padding: 20px;
+      border-radius: 6px;
+      margin: auto;
+      inset: 0;
+      width: fit-content;
+      height: fit-content;
+      button {
+        font-size: 14px;
+      }
+      .no {
+        background-color: colors.$blue;
+      }
+      .yes {
+        background-color: colors.$red;
+      }
+    }
+  }
+
+  .admin_projects {
+    width: 100%;
+    text-align: center;
+    button {
+      padding: 10px 20px;
+      min-width: 100px;
+      font-size: 20px;
+      background-color: colors.$purple;
+      color: colors.$white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 200ms linear;
+    }
+    button:hover {
+      opacity: 1;
+    }
+    .projects {
+      padding: 30px 0;
+      border: 1px solid colors.$purple;
+      .theProjects {
+        padding: 20px 0;
+        max-height: 500px;
+        overflow-y: scroll;
+      }
+      .projectTable {
+        font-weight: 600;
+      }
+
+      .projectCard {
+        border: 1px solid colors.$purple;
+        padding: 0 10px;
+        border-right: 0;
+        border-left: 0;
+        .tableIndex {
+          min-width: 60px;
+          width: 30%;
+        }
+        .tableOperation {
+          min-width: 60px;
+          width: 30%;
+          font-weight: 600;
+          .fa-pen-to-square {
+            color: colors.$blue;
+            cursor: pointer;
+          }
+          .fa-trash {
+            color: colors.$red;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .no_project {
+      padding: 60px 0;
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .createProject {
+      * {
+        width: 100%;
+      }
+      inset: 0;
+      max-height: 600px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      border-radius: 10px;
+      background-color: colors.$lightBlack;
+      max-width: 400px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: left;
+      align-items: center;
+      z-index: 1000;
+      margin: auto;
+      padding: 40px;
+      .inner {
+        width: 100%;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: left;
+        align-items: center;
+        gap: 2rem;
+      }
+      .projectImage {
+        display: none;
+      }
+      .error {
+        color: colors.$purple;
+        font-size: 12px;
+      }
+
+      input {
+        padding: 10px;
+        border-bottom: 2px solid colors.$black;
+        opacity: 0.7;
+        width: 100% !important;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+      }
+      input::placeholder {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      input {
+        font-weight: 600;
+        font-size: 14px;
+        height: fit-content;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+
+        width: 200px;
+      }
+
+      .activeInputBorder {
+        border-color: colors.$purple;
+      }
+
+      .fileInputDiv {
+        width: 100%;
+        height: 200px;
+        max-width: 200px;
+
+        background: colors.$lightBlack;
+        border: 1px dashed colors.$purple;
+        border-radius: 10px;
+        .imageUploadCloud {
+          max-width: 50px;
+          object-fit: cover;
+          max-height: 100px;
+          cursor: pointer;
+        }
+
+        p {
+          text-align: center;
+          font-size: 12px;
+          opacity: 0.6;
+        }
+
+        .URLImage {
+          width: 100%;
+          height: 100%;
+          max-height: 600px;
+          border: 1px dashed colors.$purple;
+          border-radius: 10px;
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+          .x {
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            width: fit-content;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            width: 2rem;
+            height: 2rem;
+            background-color: colors.$purple;
+            color: colors.$white;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+        }
+        .imageUploadButton {
+          padding: 10px 20px;
+          max-width: 130px;
+          text-align: center;
+          font-size: 10px;
+          background-color: colors.$purple;
+          color: colors.$white;
+          border-radius: 3px;
+          border: 2px solid colors.$purple;
+          cursor: pointer;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$lightBlack,
+              color: colors.$purple,
+              border-color: colors.$purple,
+            )
+          );
+        }
+      }
+
+      .publishAndCancel {
+        button,
+        .cancelLink {
+          width: 102px;
+          height: 42px;
+          font-weight: 400;
+          font-size: 14px;
+          cursor: pointer;
+          border: none;
+        }
+        .cancelLink {
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          flex-flow: row nowrap;
+          border: 1px solid colors.$purple;
+          border-radius: 4px;
+          color: colors.$white;
+          background-color: colors.$lightBlack;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$purple,
+              color: colors.$white,
+            )
+          );
+        }
+
+        .publish {
+          background: #888888;
+          border-radius: 4px;
+          color: colors.$white;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$black,
+              color: colors.$white,
+            )
+          );
+        }
+
+        .activePublish {
+          background: colors.$purple;
+          border-radius: 4px;
+          border: 1px solid colors.$purple;
+          color: colors.$white;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$lightBlack,
+              color: colors.$white,
+            )
+          );
+        }
+      }
+    }
+
+    .update {
+      .fileInputDiv {
+        position: relative;
+        .blogImageUploaderLabel {
+          position: absolute;
+          bottom: 1rem;
+          left: 1rem;
+          width: fit-content;
+          .editButton {
+            background-color: colors.$purple;
+            color: colors.$white;
+            min-width: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 200ms linear;
+            &:hover {
+              opacity: 1;
+            }
+            img {
+              width: 18px;
+              height: 18px;
+            }
+            padding: 5px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .wantToDelete {
+      background-color: colors.$lightBlack;
+      z-index: 1200;
+      padding: 20px;
+      border-radius: 6px;
+      margin: auto;
+      inset: 0;
+      width: fit-content;
+      height: fit-content;
+      button {
+        font-size: 14px;
+      }
+      .no {
+        background-color: colors.$blue;
+      }
+      .yes {
+        background-color: colors.$red;
+      }
+    }
+  }
+
+  .admin_works {
+    width: 100%;
+    text-align: center;
+    button {
+      padding: 10px 20px;
+      min-width: 100px;
+      font-size: 20px;
+      background-color: colors.$purple;
+      color: colors.$white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 200ms linear;
+    }
+    button:hover {
+      opacity: 1;
+    }
+    .works {
+      padding: 30px 0;
+      border: 1px solid colors.$purple;
+      .theWorks {
+        padding: 20px 0;
+        max-height: 500px;
+        overflow-y: scroll;
+      }
+      .workTable {
+        font-weight: 600;
+      }
+
+      .workCard {
+        border: 1px solid colors.$purple;
+        padding: 0 10px;
+        border-right: 0;
+        border-left: 0;
+        .tableIndex {
+          min-width: 60px;
+          width: 30%;
+        }
+        .tableOperation {
+          min-width: 60px;
+          width: 30%;
+          font-weight: 600;
+          .fa-pen-to-square {
+            color: colors.$blue;
+            cursor: pointer;
+          }
+          .fa-trash {
+            color: colors.$red;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .no_project {
+      padding: 60px 0;
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .createWork {
+      * {
+        width: 100%;
+      }
+      inset: 0;
+      max-height: 600px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      border-radius: 10px;
+      background-color: colors.$lightBlack;
+      max-width: 400px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: left;
+      align-items: center;
+      z-index: 1000;
+      margin: auto;
+      padding: 40px;
+      .inner {
+        width: 100%;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: left;
+        align-items: center;
+        gap: 2rem;
+      }
+      .workImage {
+        display: none;
+      }
+      .error {
+        color: colors.$purple;
+        font-size: 12px;
+      }
+
+      input {
+        padding: 10px;
+        border-bottom: 2px solid colors.$black;
+        opacity: 0.7;
+        width: 100% !important;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+      }
+      input::placeholder {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      input {
+        font-weight: 600;
+        font-size: 14px;
+        height: fit-content;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+
+        width: 200px;
+      }
+
+      .activeInputBorder {
+        border-color: colors.$purple;
+      }
+
+      .fileInputDiv {
+        width: 100%;
+        height: 200px;
+        max-width: 200px;
+
+        background: colors.$lightBlack;
+        border: 1px dashed colors.$purple;
+        border-radius: 10px;
+        .imageUploadCloud {
+          max-width: 50px;
+          object-fit: cover;
+          max-height: 100px;
+          cursor: pointer;
+        }
+
+        p {
+          text-align: center;
+          font-size: 12px;
+          opacity: 0.6;
+        }
+
+        .URLImage {
+          width: 100%;
+          height: 100%;
+          max-height: 600px;
+          border: 1px dashed colors.$purple;
+          border-radius: 10px;
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+          .x {
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            width: fit-content;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            width: 2rem;
+            height: 2rem;
+            background-color: colors.$purple;
+            color: colors.$white;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+        }
+        .imageUploadButton {
+          padding: 10px 20px;
+          max-width: 130px;
+          text-align: center;
+          font-size: 10px;
+          background-color: colors.$purple;
+          color: colors.$white;
+          border-radius: 3px;
+          border: 2px solid colors.$purple;
+          cursor: pointer;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$lightBlack,
+              color: colors.$purple,
+              border-color: colors.$purple,
+            )
+          );
+        }
+      }
+
+      .publishAndCancel {
+        button,
+        .cancelLink {
+          width: 102px;
+          height: 42px;
+          font-weight: 400;
+          font-size: 14px;
+          cursor: pointer;
+          border: none;
+        }
+        .cancelLink {
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          flex-flow: row nowrap;
+          border: 1px solid colors.$purple;
+          border-radius: 4px;
+          color: colors.$white;
+          background-color: colors.$lightBlack;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$purple,
+              color: colors.$white,
+            )
+          );
+        }
+
+        .publish {
+          background: #888888;
+          border-radius: 4px;
+          color: colors.$white;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$black,
+              color: colors.$white,
+            )
+          );
+        }
+
+        .activePublish {
+          background: colors.$purple;
+          border-radius: 4px;
+          border: 1px solid colors.$purple;
+          color: colors.$white;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$lightBlack,
+              color: colors.$white,
+            )
+          );
+        }
+      }
+    }
+
+    .update {
+      .fileInputDiv {
+        position: relative;
+        .blogImageUploaderLabel {
+          position: absolute;
+          bottom: 1rem;
+          left: 1rem;
+          width: fit-content;
+          .editButton {
+            background-color: colors.$purple;
+            color: colors.$white;
+            min-width: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 200ms linear;
+            &:hover {
+              opacity: 1;
+            }
+            img {
+              width: 18px;
+              height: 18px;
+            }
+            padding: 5px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .wantToDelete {
+      background-color: colors.$lightBlack;
+      z-index: 1200;
+      padding: 20px;
+      border-radius: 6px;
+      margin: auto;
+      inset: 0;
+      width: fit-content;
+      height: fit-content;
+      button {
+        font-size: 14px;
+      }
+      .no {
+        background-color: colors.$blue;
+      }
+      .yes {
+        background-color: colors.$red;
+      }
+    }
+  }
+}
+@include res.responsive(computer) {
+  .createBlog,
+  .createProject,
+  .createWork {
+    padding: 80px;
+  }
+}
+
+@include res.responsive(mobile) {
+  .panel_header {
+    padding-top: 120px !important;
+  }
+  .panel {
+    .blogs,
+    .projects,
+    .works {
+      padding: 60px 0;
+      .blogCard,
+      .projectCard,
+      .workCard {
+        .tableIndex {
+          font-size: 12px;
+        }
+        .tableOperation {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

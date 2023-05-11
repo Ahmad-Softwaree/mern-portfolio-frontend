@@ -3,8 +3,8 @@
   position: fixed;
   z-index: 999;
   top: 0;
-  background-color: #181818;
-  color: #fff;
+  background-color: #121212;
+  color: #ffffff;
   min-height: 80px;
 }
 .layout .header nav {
@@ -68,14 +68,14 @@
 }
 .layout .header .languageDiv .languageDivBox:hover,
 .layout .header .blogLanguageDiv .languageDivBox:hover {
-  color: #fff;
+  color: #ffffff;
   background-color: #707aff;
 }
 .layout .header .languageDiv .languagesList,
 .layout .header .blogLanguageDiv .languagesList {
   top: 110%;
-  background-color: #181818;
-  color: #fff;
+  background-color: #121212;
+  color: #ffffff;
   border-radius: 10px;
   width: 100%;
   padding: 5px;
@@ -104,7 +104,7 @@
   top: 5rem;
   right: 0;
   left: 0;
-  background-color: #181818;
+  background-color: #121212;
 }
 .layout .header .mobileNav ul {
   padding-right: 0 !important;
@@ -154,14 +154,30 @@
   cursor: pointer;
   height: fit-content;
   top: 1rem;
+  position: "absolute";
+  left: "30px";
+  top: "0";
+  bottom: "0";
+  margin-top: "auto";
+  margin-bottom: "auto";
+  font-size: "1.5rem";
+  height: "fit-content";
 }
 .layout .header .humb {
   display: none;
   cursor: pointer;
+  position: "absolute";
+  left: "30px";
+  top: "0";
+  bottom: "0";
+  margin-top: "auto";
+  margin-bottom: "auto";
+  font-size: "1.5rem";
+  height: "fit-content";
 }
 .layout .footer {
   background-color: #262626;
-  color: #fff;
+  color: #ffffff;
   min-height: 70px;
   padding: 20px 10px;
   text-align: center;
@@ -273,8 +289,15 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: Karla, sans-serif;
   position: relative;
+}
+
+.kurdish_font {
+  font-family: rabar-39, sans-serif !important;
+}
+
+.english_font {
+  font-family: Karla, sans-serif !important;
 }
 
 :root {
@@ -283,14 +306,18 @@ body {
 
 textarea::placeholder,
 input::placeholder {
-  font-family: Karla, sans-serif;
   font-weight: 500;
   font-size: 14px;
 }
 
-textarea,
-input {
-  font-family: Karla, sans-serif;
+.opaBackground {
+  background: #ffffff;
+  opacity: 0.25;
+  position: fixed;
+  z-index: 600;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 textarea {
@@ -315,8 +342,29 @@ Link {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Change this to your desired track color */
+  border-radius: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Change this to your desired thumb color */
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1; /* Change this to your desired corner color */
 }
 
 input[type=color] {
@@ -354,7 +402,7 @@ input[type=color]::-webkit-color-swatch {
 }
 
 *:disabled {
-  color: #fff !important;
+  color: #ffffff !important;
   cursor: progress !important;
 }
 
@@ -1547,13 +1595,13 @@ section {
 }
 
 .landing {
-  background-color: #181818;
-  color: #fff;
+  background-color: #121212;
+  color: #ffffff;
 }
 
 .blogs {
   padding-inline: 0 !important;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
 }
 .blogs .blogCards::-webkit-scrollbar {
@@ -1597,12 +1645,12 @@ section {
   background: #707aff;
   border-radius: 9px;
   border: none;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   transition: all 200ms;
 }
 .blogs .blogCards .blogCard .readBlog:hover {
-  background-color: #181818;
+  background-color: #121212;
   color: #707aff;
 }
 .blogs .blogCards .blogCard .blogTime {
@@ -1618,12 +1666,12 @@ section {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  border: 1px #181818 solid;
+  border: 1px #121212 solid;
   transition: all 200ms;
 }
 .blogs .seeMore:hover {
-  background-color: #181818;
-  border-color: #fff;
+  background-color: #121212;
+  border-color: #ffffff;
 }
 
 .projects {
@@ -1640,7 +1688,7 @@ section {
   width: 350px;
   height: 400px;
   flex: 0 0 auto;
-  border: 1px #fff solid;
+  border: 1px #ffffff solid;
   border-radius: 21px;
 }
 .projects .projectCards .projectCard p {
@@ -1686,8 +1734,8 @@ section {
 }
 .skills .skillsBox {
   width: 80%;
-  color: #fff;
-  background-color: #181818;
+  color: #ffffff;
+  background-color: #121212;
   box-shadow: 0px 15px 43px rgba(112, 122, 255, 0.14);
   border-radius: 11px;
   border: 50px #262626 solid;
@@ -1735,8 +1783,8 @@ section {
   overflow: hidden;
   transform-origin: bottom center;
   z-index: 999;
-  background-color: #181818;
-  color: #fff;
+  background-color: #121212;
+  color: #ffffff;
   opacity: 0.9;
   transition: all 200ms ease;
 }
@@ -1869,7 +1917,7 @@ section {
 .home .leftHome p {
   font-weight: 400;
   font-size: 20px;
-  color: #fff;
+  color: #ffffff;
   margin: 0;
   opacity: 0.6;
 }
@@ -1877,7 +1925,7 @@ section {
   margin: 0;
   font-weight: 500;
   font-size: 32px;
-  color: #fff;
+  color: #ffffff;
 }
 .home .leftHome .showCV {
   width: 150px;
@@ -2013,8 +2061,8 @@ section {
   padding-top: 20px;
   padding-bottom: 50px;
   padding-inline: 20px;
-  background-color: #181818;
-  color: #fff;
+  background-color: #121212;
+  color: #ffffff;
 }
 .blogsPage .searchInputDiv {
   background-color: #222222;
@@ -2026,7 +2074,7 @@ section {
 }
 .blogsPage .searchInputDiv .x {
   padding-right: 5px;
-  color: #fff;
+  color: #ffffff;
   transition: all 200ms;
 }
 .blogsPage .searchInputDiv .x:hover {
@@ -2038,7 +2086,7 @@ section {
 .blogsPage .searchInputDiv input {
   width: 90%;
   background-color: #222222;
-  color: #fff;
+  color: #ffffff;
   padding: 4px;
   font-size: 16px;
   font-weight: 509;
@@ -2075,12 +2123,12 @@ section {
   background: #707aff;
   border-radius: 9px;
   border: none;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
   transition: all 200ms;
 }
 .blogsPage .allBlogs .blogCard .readBlog:hover {
-  background-color: #181818;
+  background-color: #121212;
   color: #707aff;
 }
 .blogsPage .allBlogs .blogCard .blogTime {
@@ -2107,8 +2155,8 @@ section {
   padding-top: 50px;
   padding-bottom: 50px;
   padding-inline: 20px;
-  background-color: #181818;
-  color: #fff;
+  background-color: #121212;
+  color: #ffffff;
 }
 .singleBlog .blogTime {
   font-size: 12px;
@@ -2150,7 +2198,7 @@ section {
   direction: ltr;
 }
 .login .loginBox {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 7px;
   min-width: 300px;
@@ -2164,14 +2212,14 @@ section {
 .login .loginBox input {
   width: 100%;
   padding: 5px;
-  border: 2px #181818 solid;
+  border: 2px #121212 solid;
   border-radius: 3px;
 }
 .login .loginBox button {
   width: 80px;
   height: 35px;
-  background-color: #181818;
-  color: #fff;
+  background-color: #121212;
+  color: #ffffff;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -2193,13 +2241,6 @@ section {
 .works h2 {
   text-align: center;
   width: 100%;
-}
-.works button {
-  width: 147px;
-  height: 54px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-weight: 600;
 }
 .works .workCards {
   overflow-x: auto;
@@ -2235,7 +2276,7 @@ section {
   margin-bottom: auto;
   margin-right: auto;
   margin-left: auto;
-  background: #181818;
+  background: #121212;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
   border-radius: 35px;
   width: 126px;
@@ -2252,7 +2293,7 @@ section {
 }
 .works .workCards .workCard h2,
 .works .workCards .workCard p {
-  color: #fff;
+  color: #ffffff;
 }
 .works .workCards .workCard h2 {
   font-weight: 500;
@@ -2263,7 +2304,1333 @@ section {
   font-weight: 400;
   font-size: 18px;
   opacity: 0.6;
-  color: #fff;
+  color: #ffffff;
+}
+
+.loginPage {
+  background-color: #262626;
+  color: #ffffff;
+  padding: 20px;
+  min-height: 100vh;
+}
+.loginPage .loginBox {
+  padding: 20px;
+  background-color: #707aff;
+  border: 2px #707aff solid;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+}
+.loginPage .backToHome {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  font-size: 40px;
+}
+.loginPage h1 {
+  font-size: 26px;
+  font-weight: 600;
+}
+.loginPage h1,
+.loginPage p {
+  margin: 0;
+  text-align: center;
+}
+.loginPage .emailInput {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 2px solid #707aff;
+  max-width: 350px;
+  border-radius: 6px;
+  color: #262626;
+}
+.loginPage .passwordInput {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 2px solid #707aff;
+  background-color: #ffffff;
+  max-width: 350px;
+  border-radius: 6px;
+  color: #262626;
+}
+.loginPage .fa-solid {
+  cursor: pointer;
+}
+.loginPage input::placeholder {
+  color: #262626;
+}
+.loginPage button {
+  padding: 8px 20px;
+  border: 2px solid #262626;
+  background-color: #262626;
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.loginPage button:hover {
+  border-color: #ffffff;
+}
+
+.panelLoading {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel_header {
+  background-color: #262626;
+  color: #ffffff;
+  min-height: 150px;
+}
+.panel_header h1 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+}
+.panel_header .admin_logout,
+.panel_header .admin_getOut,
+.panel_header .admin_add,
+.panel_header .admins {
+  padding: 10px;
+  position: absolute;
+  width: fit-content;
+  font-size: 12px;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 200ms linear;
+}
+.panel_header .admin_logout {
+  left: 2rem;
+  top: 2rem;
+  background-color: #ff0000;
+}
+.panel_header .admin_getOut {
+  left: 5rem;
+  top: 2rem;
+  background-color: #707aff;
+}
+.panel_header .admin_add {
+  left: 2rem;
+  top: 5rem;
+  background-color: #29ffe5;
+}
+.panel_header .admins {
+  left: 5rem;
+  top: 5rem;
+  background-color: #ffc700;
+}
+.panel_header .admin_logout:hover,
+.panel_header .admin_getOut:hover,
+.panel_header .admin_add:hover,
+.panel_header .admins:hover {
+  opacity: 1;
+}
+.panel_header .admin_profile {
+  right: 2rem;
+  top: 2rem;
+  padding: 8px;
+  background-color: #707aff;
+  color: #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: all 200ms linear;
+}
+.panel_header .admin_profile img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.panel_header .admin_profile span {
+  font-size: 14px;
+}
+.panel_header .admin_profile:hover {
+  opacity: 1;
+}
+
+.panel {
+  position: relative;
+  min-height: 100vh;
+  padding: 10px 20px 100px 10px;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.panel h1 {
+  font-size: 26px;
+  font-weight: 600;
+}
+.panel .admin_blogs {
+  width: 100%;
+  text-align: center;
+}
+.panel .admin_blogs button {
+  padding: 10px 20px;
+  min-width: 100px;
+  font-size: 20px;
+  background-color: #707aff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_blogs button:hover {
+  opacity: 1;
+}
+.panel .admin_blogs .blogs {
+  padding: 30px 0;
+  border: 1px solid #707aff;
+}
+.panel .admin_blogs .blogs .theBlogs {
+  padding: 20px 0;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.panel .admin_blogs .blogs .blogTable {
+  font-weight: 600;
+}
+.panel .admin_blogs .blogs .blogCard {
+  border: 1px solid #707aff;
+  padding: 0 10px;
+  border-right: 0;
+  border-left: 0;
+}
+.panel .admin_blogs .blogs .blogCard .tableIndex {
+  min-width: 60px;
+  width: 30%;
+}
+.panel .admin_blogs .blogs .blogCard .tableOperation {
+  min-width: 60px;
+  width: 30%;
+  font-weight: 600;
+}
+.panel .admin_blogs .blogs .blogCard .tableOperation .fa-pen-to-square {
+  color: #00eded;
+  cursor: pointer;
+}
+.panel .admin_blogs .blogs .blogCard .tableOperation .fa-trash {
+  color: #ff0000;
+  cursor: pointer;
+}
+.panel .admin_blogs .no_blog {
+  padding: 60px 0;
+  font-weight: 600;
+  font-size: 22px;
+}
+.panel .admin_blogs .createBlog {
+  inset: 0;
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+  background-color: #262626;
+  max-width: 600px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
+  align-items: center;
+  z-index: 1000;
+  margin: auto;
+  padding: 40px;
+}
+.panel .admin_blogs .createBlog * {
+  width: 100%;
+}
+.panel .admin_blogs .createBlog .inner {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+.panel .admin_blogs .createBlog .blogImage {
+  display: none;
+}
+.panel .admin_blogs .createBlog .error {
+  color: #707aff;
+  font-size: 12px;
+}
+.panel .admin_blogs .createBlog input,
+.panel .admin_blogs .createBlog textarea {
+  padding: 10px;
+  border-bottom: 2px solid #121212;
+  opacity: 0.7;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.panel .admin_blogs .createBlog input::placeholder {
+  font-weight: 600;
+  font-size: 26px;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.panel .admin_blogs .createBlog input {
+  font-weight: 600;
+  font-size: 26px;
+  background-color: #262626;
+  color: #ffffff !important;
+  height: fit-content;
+}
+.panel .admin_blogs .createBlog textarea::placeholder {
+  font-weight: 500;
+  font-size: 16px;
+}
+.panel .admin_blogs .createBlog textarea {
+  font-weight: 500;
+  font-size: 16px;
+  resize: none;
+  height: 500px !important;
+  min-height: 50px;
+  border: 2px solid #707aff;
+  border-radius: 5px;
+  color: #ffffff !important;
+}
+.panel .admin_blogs .createBlog .activeInputBorder {
+  border-color: #707aff;
+}
+.panel .admin_blogs .createBlog .fileInputDiv {
+  width: 100%;
+  height: 481px;
+  background: #262626;
+  border: 1px dashed #707aff;
+  border-radius: 10px;
+}
+.panel .admin_blogs .createBlog .fileInputDiv .imageUploadCloud {
+  max-width: 100px;
+  object-fit: cover;
+  max-height: 100px;
+  cursor: pointer;
+}
+.panel .admin_blogs .createBlog .fileInputDiv p {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.6;
+}
+.panel .admin_blogs .createBlog .fileInputDiv .URLImage {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  border: 1px dashed #707aff;
+  border-radius: 10px;
+}
+.panel .admin_blogs .createBlog .fileInputDiv .URLImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.panel .admin_blogs .createBlog .fileInputDiv .URLImage .x {
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  width: fit-content;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: #707aff;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.panel .admin_blogs .createBlog .fileInputDiv .imageUploadButton {
+  padding: 10px 20px;
+  width: 230px;
+  text-align: center;
+  height: 44px;
+  font-size: 14px;
+  background-color: #707aff;
+  color: #ffffff;
+  border-radius: 3px;
+  border: 2px solid #707aff;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.panel .admin_blogs .createBlog .fileInputDiv .imageUploadButton:hover {
+  background-color: #262626;
+  color: #707aff;
+  border-color: #707aff;
+}
+.panel .admin_blogs .createBlog .publishAndCancel button,
+.panel .admin_blogs .createBlog .publishAndCancel .cancelLink {
+  width: 102px;
+  height: 42px;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+.panel .admin_blogs .createBlog .publishAndCancel .cancelLink {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid #707aff;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #262626;
+  transition: all 200ms;
+}
+.panel .admin_blogs .createBlog .publishAndCancel .cancelLink:hover {
+  background-color: #707aff;
+  color: #ffffff;
+}
+.panel .admin_blogs .createBlog .publishAndCancel .publish {
+  background: #888888;
+  border-radius: 4px;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_blogs .createBlog .publishAndCancel .publish:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.panel .admin_blogs .createBlog .publishAndCancel .activePublish {
+  background: #707aff;
+  border-radius: 4px;
+  color: #ffffff;
+  border: 1px solid #707aff;
+  transition: all 200ms;
+}
+.panel .admin_blogs .createBlog .publishAndCancel .activePublish:hover {
+  background-color: #262626;
+  color: #ffffff;
+}
+.panel .admin_blogs .update .fileInputDiv {
+  position: relative;
+}
+.panel .admin_blogs .update .fileInputDiv .blogImageUploaderLabel {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  width: fit-content;
+}
+.panel .admin_blogs .update .fileInputDiv .blogImageUploaderLabel .editButton {
+  background-color: #707aff;
+  color: #ffffff;
+  min-width: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+  padding: 5px;
+  font-size: 14px;
+}
+.panel .admin_blogs .update .fileInputDiv .blogImageUploaderLabel .editButton:hover {
+  opacity: 1;
+}
+.panel .admin_blogs .update .fileInputDiv .blogImageUploaderLabel .editButton img {
+  width: 18px;
+  height: 18px;
+}
+.panel .admin_blogs .wantToDelete {
+  background-color: #262626;
+  z-index: 1200;
+  padding: 20px;
+  border-radius: 6px;
+  margin: auto;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+}
+.panel .admin_blogs .wantToDelete button {
+  font-size: 14px;
+}
+.panel .admin_blogs .wantToDelete .no {
+  background-color: #00eded;
+}
+.panel .admin_blogs .wantToDelete .yes {
+  background-color: #ff0000;
+}
+.panel .admin_projects {
+  width: 100%;
+  text-align: center;
+}
+.panel .admin_projects button {
+  padding: 10px 20px;
+  min-width: 100px;
+  font-size: 20px;
+  background-color: #707aff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_projects button:hover {
+  opacity: 1;
+}
+.panel .admin_projects .projects {
+  padding: 30px 0;
+  border: 1px solid #707aff;
+}
+.panel .admin_projects .projects .theProjects {
+  padding: 20px 0;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.panel .admin_projects .projects .projectTable {
+  font-weight: 600;
+}
+.panel .admin_projects .projects .projectCard {
+  border: 1px solid #707aff;
+  padding: 0 10px;
+  border-right: 0;
+  border-left: 0;
+}
+.panel .admin_projects .projects .projectCard .tableIndex {
+  min-width: 60px;
+  width: 30%;
+}
+.panel .admin_projects .projects .projectCard .tableOperation {
+  min-width: 60px;
+  width: 30%;
+  font-weight: 600;
+}
+.panel .admin_projects .projects .projectCard .tableOperation .fa-pen-to-square {
+  color: #00eded;
+  cursor: pointer;
+}
+.panel .admin_projects .projects .projectCard .tableOperation .fa-trash {
+  color: #ff0000;
+  cursor: pointer;
+}
+.panel .admin_projects .no_project {
+  padding: 60px 0;
+  font-weight: 600;
+  font-size: 22px;
+}
+.panel .admin_projects .createProject {
+  inset: 0;
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+  background-color: #262626;
+  max-width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
+  align-items: center;
+  z-index: 1000;
+  margin: auto;
+  padding: 40px;
+}
+.panel .admin_projects .createProject * {
+  width: 100%;
+}
+.panel .admin_projects .createProject .inner {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+.panel .admin_projects .createProject .projectImage {
+  display: none;
+}
+.panel .admin_projects .createProject .error {
+  color: #707aff;
+  font-size: 12px;
+}
+.panel .admin_projects .createProject input {
+  padding: 10px;
+  border-bottom: 2px solid #121212;
+  opacity: 0.7;
+  width: 100% !important;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.panel .admin_projects .createProject input::placeholder {
+  font-weight: 600;
+  font-size: 14px;
+}
+.panel .admin_projects .createProject input {
+  font-weight: 600;
+  font-size: 14px;
+  height: fit-content;
+  background-color: #262626;
+  color: #ffffff !important;
+  width: 200px;
+}
+.panel .admin_projects .createProject .activeInputBorder {
+  border-color: #707aff;
+}
+.panel .admin_projects .createProject .fileInputDiv {
+  width: 100%;
+  height: 200px;
+  max-width: 200px;
+  background: #262626;
+  border: 1px dashed #707aff;
+  border-radius: 10px;
+}
+.panel .admin_projects .createProject .fileInputDiv .imageUploadCloud {
+  max-width: 50px;
+  object-fit: cover;
+  max-height: 100px;
+  cursor: pointer;
+}
+.panel .admin_projects .createProject .fileInputDiv p {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.6;
+}
+.panel .admin_projects .createProject .fileInputDiv .URLImage {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  border: 1px dashed #707aff;
+  border-radius: 10px;
+}
+.panel .admin_projects .createProject .fileInputDiv .URLImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.panel .admin_projects .createProject .fileInputDiv .URLImage .x {
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  width: fit-content;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: #707aff;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.panel .admin_projects .createProject .fileInputDiv .imageUploadButton {
+  padding: 10px 20px;
+  max-width: 130px;
+  text-align: center;
+  font-size: 10px;
+  background-color: #707aff;
+  color: #ffffff;
+  border-radius: 3px;
+  border: 2px solid #707aff;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.panel .admin_projects .createProject .fileInputDiv .imageUploadButton:hover {
+  background-color: #262626;
+  color: #707aff;
+  border-color: #707aff;
+}
+.panel .admin_projects .createProject .publishAndCancel button,
+.panel .admin_projects .createProject .publishAndCancel .cancelLink {
+  width: 102px;
+  height: 42px;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+.panel .admin_projects .createProject .publishAndCancel .cancelLink {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid #707aff;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #262626;
+  transition: all 200ms;
+}
+.panel .admin_projects .createProject .publishAndCancel .cancelLink:hover {
+  background-color: #707aff;
+  color: #ffffff;
+}
+.panel .admin_projects .createProject .publishAndCancel .publish {
+  background: #888888;
+  border-radius: 4px;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_projects .createProject .publishAndCancel .publish:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.panel .admin_projects .createProject .publishAndCancel .activePublish {
+  background: #707aff;
+  border-radius: 4px;
+  border: 1px solid #707aff;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_projects .createProject .publishAndCancel .activePublish:hover {
+  background-color: #262626;
+  color: #ffffff;
+}
+.panel .admin_projects .update .fileInputDiv {
+  position: relative;
+}
+.panel .admin_projects .update .fileInputDiv .blogImageUploaderLabel {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  width: fit-content;
+}
+.panel .admin_projects .update .fileInputDiv .blogImageUploaderLabel .editButton {
+  background-color: #707aff;
+  color: #ffffff;
+  min-width: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+  padding: 5px;
+  font-size: 14px;
+}
+.panel .admin_projects .update .fileInputDiv .blogImageUploaderLabel .editButton:hover {
+  opacity: 1;
+}
+.panel .admin_projects .update .fileInputDiv .blogImageUploaderLabel .editButton img {
+  width: 18px;
+  height: 18px;
+}
+.panel .admin_projects .wantToDelete {
+  background-color: #262626;
+  z-index: 1200;
+  padding: 20px;
+  border-radius: 6px;
+  margin: auto;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+}
+.panel .admin_projects .wantToDelete button {
+  font-size: 14px;
+}
+.panel .admin_projects .wantToDelete .no {
+  background-color: #00eded;
+}
+.panel .admin_projects .wantToDelete .yes {
+  background-color: #ff0000;
+}
+.panel .admin_works {
+  width: 100%;
+  text-align: center;
+}
+.panel .admin_works button {
+  padding: 10px 20px;
+  min-width: 100px;
+  font-size: 20px;
+  background-color: #707aff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_works button:hover {
+  opacity: 1;
+}
+.panel .admin_works .works {
+  padding: 30px 0;
+  border: 1px solid #707aff;
+}
+.panel .admin_works .works .theWorks {
+  padding: 20px 0;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.panel .admin_works .works .workTable {
+  font-weight: 600;
+}
+.panel .admin_works .works .workCard {
+  border: 1px solid #707aff;
+  padding: 0 10px;
+  border-right: 0;
+  border-left: 0;
+}
+.panel .admin_works .works .workCard .tableIndex {
+  min-width: 60px;
+  width: 30%;
+}
+.panel .admin_works .works .workCard .tableOperation {
+  min-width: 60px;
+  width: 30%;
+  font-weight: 600;
+}
+.panel .admin_works .works .workCard .tableOperation .fa-pen-to-square {
+  color: #00eded;
+  cursor: pointer;
+}
+.panel .admin_works .works .workCard .tableOperation .fa-trash {
+  color: #ff0000;
+  cursor: pointer;
+}
+.panel .admin_works .no_project {
+  padding: 60px 0;
+  font-weight: 600;
+  font-size: 22px;
+}
+.panel .admin_works .createWork {
+  inset: 0;
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+  background-color: #262626;
+  max-width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
+  align-items: center;
+  z-index: 1000;
+  margin: auto;
+  padding: 40px;
+}
+.panel .admin_works .createWork * {
+  width: 100%;
+}
+.panel .admin_works .createWork .inner {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+.panel .admin_works .createWork .workImage {
+  display: none;
+}
+.panel .admin_works .createWork .error {
+  color: #707aff;
+  font-size: 12px;
+}
+.panel .admin_works .createWork input {
+  padding: 10px;
+  border-bottom: 2px solid #121212;
+  opacity: 0.7;
+  width: 100% !important;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.panel .admin_works .createWork input::placeholder {
+  font-weight: 600;
+  font-size: 14px;
+}
+.panel .admin_works .createWork input {
+  font-weight: 600;
+  font-size: 14px;
+  height: fit-content;
+  background-color: #262626;
+  color: #ffffff !important;
+  width: 200px;
+}
+.panel .admin_works .createWork .activeInputBorder {
+  border-color: #707aff;
+}
+.panel .admin_works .createWork .fileInputDiv {
+  width: 100%;
+  height: 200px;
+  max-width: 200px;
+  background: #262626;
+  border: 1px dashed #707aff;
+  border-radius: 10px;
+}
+.panel .admin_works .createWork .fileInputDiv .imageUploadCloud {
+  max-width: 50px;
+  object-fit: cover;
+  max-height: 100px;
+  cursor: pointer;
+}
+.panel .admin_works .createWork .fileInputDiv p {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.6;
+}
+.panel .admin_works .createWork .fileInputDiv .URLImage {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  border: 1px dashed #707aff;
+  border-radius: 10px;
+}
+.panel .admin_works .createWork .fileInputDiv .URLImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.panel .admin_works .createWork .fileInputDiv .URLImage .x {
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  width: fit-content;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: #707aff;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.panel .admin_works .createWork .fileInputDiv .imageUploadButton {
+  padding: 10px 20px;
+  max-width: 130px;
+  text-align: center;
+  font-size: 10px;
+  background-color: #707aff;
+  color: #ffffff;
+  border-radius: 3px;
+  border: 2px solid #707aff;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.panel .admin_works .createWork .fileInputDiv .imageUploadButton:hover {
+  background-color: #262626;
+  color: #707aff;
+  border-color: #707aff;
+}
+.panel .admin_works .createWork .publishAndCancel button,
+.panel .admin_works .createWork .publishAndCancel .cancelLink {
+  width: 102px;
+  height: 42px;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+.panel .admin_works .createWork .publishAndCancel .cancelLink {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid #707aff;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #262626;
+  transition: all 200ms;
+}
+.panel .admin_works .createWork .publishAndCancel .cancelLink:hover {
+  background-color: #707aff;
+  color: #ffffff;
+}
+.panel .admin_works .createWork .publishAndCancel .publish {
+  background: #888888;
+  border-radius: 4px;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_works .createWork .publishAndCancel .publish:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.panel .admin_works .createWork .publishAndCancel .activePublish {
+  background: #707aff;
+  border-radius: 4px;
+  border: 1px solid #707aff;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_works .createWork .publishAndCancel .activePublish:hover {
+  background-color: #262626;
+  color: #ffffff;
+}
+.panel .admin_works .update .fileInputDiv {
+  position: relative;
+}
+.panel .admin_works .update .fileInputDiv .blogImageUploaderLabel {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  width: fit-content;
+}
+.panel .admin_works .update .fileInputDiv .blogImageUploaderLabel .editButton {
+  background-color: #707aff;
+  color: #ffffff;
+  min-width: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+  padding: 5px;
+  font-size: 14px;
+}
+.panel .admin_works .update .fileInputDiv .blogImageUploaderLabel .editButton:hover {
+  opacity: 1;
+}
+.panel .admin_works .update .fileInputDiv .blogImageUploaderLabel .editButton img {
+  width: 18px;
+  height: 18px;
+}
+.panel .admin_works .wantToDelete {
+  background-color: #262626;
+  z-index: 1200;
+  padding: 20px;
+  border-radius: 6px;
+  margin: auto;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+}
+.panel .admin_works .wantToDelete button {
+  font-size: 14px;
+}
+.panel .admin_works .wantToDelete .no {
+  background-color: #00eded;
+}
+.panel .admin_works .wantToDelete .yes {
+  background-color: #ff0000;
+}
+
+@media (min-width: 1024px) {
+  .createBlog,
+  .createProject,
+  .createWork {
+    padding: 80px;
+  }
+}
+@media (max-width: 767px) {
+  .panel_header {
+    padding-top: 120px !important;
+  }
+  .panel .blogs,
+  .panel .projects,
+  .panel .works {
+    padding: 60px 0;
+  }
+  .panel .blogs .blogCard .tableIndex,
+  .panel .blogs .projectCard .tableIndex,
+  .panel .blogs .workCard .tableIndex,
+  .panel .projects .blogCard .tableIndex,
+  .panel .projects .projectCard .tableIndex,
+  .panel .projects .workCard .tableIndex,
+  .panel .works .blogCard .tableIndex,
+  .panel .works .projectCard .tableIndex,
+  .panel .works .workCard .tableIndex {
+    font-size: 12px;
+  }
+  .panel .blogs .blogCard .tableOperation,
+  .panel .blogs .projectCard .tableOperation,
+  .panel .blogs .workCard .tableOperation,
+  .panel .projects .blogCard .tableOperation,
+  .panel .projects .projectCard .tableOperation,
+  .panel .projects .workCard .tableOperation,
+  .panel .works .blogCard .tableOperation,
+  .panel .works .projectCard .tableOperation,
+  .panel .works .workCard .tableOperation {
+    font-size: 12px;
+  }
+}
+.admins_page {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: left;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  gap: 1rem;
+  background-color: #262626;
+  color: #ffffff;
+}
+.admins_page h1 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+}
+.admins_page .createAdmin {
+  inset: 0;
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+  background-color: #262626;
+  max-width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
+  align-items: center;
+  z-index: 1000;
+  margin: auto;
+  padding: 40px;
+}
+.admins_page .createAdmin *:not(.fa-solid) {
+  width: 100%;
+}
+.admins_page .createAdmin h1 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+}
+.admins_page .createAdmin .inner {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+.admins_page .createAdmin .adminImage {
+  display: none;
+}
+.admins_page .createAdmin .error {
+  color: #ff0000;
+  font-size: 12px;
+}
+.admins_page .createAdmin input {
+  padding: 10px;
+  border-bottom: 2px solid #121212;
+  opacity: 0.7;
+  width: 100% !important;
+  background-color: #262626;
+  color: #ffffff;
+}
+.admins_page .createAdmin input::placeholder {
+  font-weight: 600;
+  font-size: 14px;
+  color: #ffffff;
+}
+.admins_page .createAdmin input {
+  font-weight: 600;
+  font-size: 14px;
+  height: fit-content;
+  width: 200px;
+}
+.admins_page .createAdmin .fa-eye,
+.admins_page .createAdmin .fa-eye-slash {
+  width: fit-content;
+  cursor: pointer;
+}
+.admins_page .createAdmin .activeInputBorder {
+  border-color: #707aff;
+}
+.admins_page .createAdmin .fileInputDiv {
+  width: 100%;
+  height: 200px;
+  background-color: #262626;
+  border: 1px dashed #707aff;
+  border-radius: 10px;
+}
+.admins_page .createAdmin .fileInputDiv .imageUploadCloud {
+  max-width: 50px;
+  object-fit: cover;
+  max-height: 100px;
+  cursor: pointer;
+}
+.admins_page .createAdmin .fileInputDiv p {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.6;
+}
+.admins_page .createAdmin .fileInputDiv .URLImage {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  border: 1px dashed #707aff;
+  border-radius: 10px;
+}
+.admins_page .createAdmin .fileInputDiv .URLImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.admins_page .createAdmin .fileInputDiv .URLImage .x {
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  width: fit-content;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 2rem !important;
+  height: 2rem;
+  background-color: #ff0000;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.admins_page .createAdmin .fileInputDiv .imageUploadButton {
+  padding: 10px 20px;
+  max-width: 130px;
+  text-align: center;
+  font-size: 10px;
+  background-color: #707aff;
+  color: #ffffff;
+  border-radius: 3px;
+  border: 2px solid #707aff;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.admins_page .createAdmin .fileInputDiv .imageUploadButton:hover {
+  background-color: #ffffff;
+  color: #707aff;
+  border-color: #707aff;
+}
+.admins_page .createAdmin .publishAndCancel button,
+.admins_page .createAdmin .publishAndCancel .cancelLink {
+  width: 102px;
+  height: 42px;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+.admins_page .createAdmin .publishAndCancel .cancelLink {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid #707aff;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #262626;
+  transition: all 200ms;
+}
+.admins_page .createAdmin .publishAndCancel .cancelLink:hover {
+  background-color: #707aff;
+  color: #ffffff;
+}
+.admins_page .createAdmin .publishAndCancel .publish {
+  background: #888888;
+  border-radius: 4px;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.admins_page .createAdmin .publishAndCancel .publish:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.admins_page .createAdmin .publishAndCancel .activePublish {
+  background: #707aff;
+  border-radius: 4px;
+  border: 1px solid #707aff;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.admins_page .createAdmin .publishAndCancel .activePublish:hover {
+  background-color: #262626;
+  color: #ffffff;
+}
+.admins_page .update .fileInputDiv {
+  position: relative;
+}
+.admins_page .update .fileInputDiv .blogImageUploaderLabel {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  width: fit-content;
+}
+.admins_page .update .fileInputDiv .blogImageUploaderLabel .editButton {
+  background-color: #707aff;
+  color: #ffffff;
+  min-width: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+  padding: 5px;
+  font-size: 14px;
+}
+.admins_page .update .fileInputDiv .blogImageUploaderLabel .editButton:hover {
+  opacity: 1;
+}
+.admins_page .update .fileInputDiv .blogImageUploaderLabel .editButton img {
+  width: 18px;
+  height: 18px;
+}
+.admins_page button {
+  padding: 10px 20px;
+  min-width: 100px;
+  font-size: 20px;
+  background-color: #707aff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.admins_page button:hover {
+  opacity: 1;
+}
+.admins_page .wantToDelete {
+  background-color: #ffffff;
+  z-index: 1200;
+  padding: 20px;
+  border-radius: 6px;
+  margin: auto;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+}
+.admins_page .wantToDelete button {
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.admins_page .wantToDelete button:hover {
+  opacity: 1;
+}
+.admins_page .wantToDelete .no {
+  background-color: #00eded;
+  color: #ffffff;
+}
+.admins_page .wantToDelete .yes {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+.admins_page .admin_card {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #707aff;
+  color: #ffffff;
+  opacity: 0.9;
+  width: 100%;
+  max-width: 400px;
+  transition: all 200ms linear;
+  cursor: pointer;
+}
+.admins_page .admin_card:hover {
+  opacity: 1;
+}
+.admins_page .admin_card .fa-solid {
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.admins_page .admin_card .fa-trash {
+  background-color: #ff0000;
+}
+.admins_page .admin_card .fa-pen-to-square {
+  background-color: #00eded;
+}
+.admins_page .admin_card img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .skeleton {
@@ -2276,14 +3643,14 @@ section {
   margin-bottom: 1rem;
   border: 1px #707aff solid;
   border-radius: 9px;
-  box-shadow: 1px 1px 5px 1px #fff;
+  box-shadow: 1px 1px 5px 1px #ffffff;
 }
 .skeleton .text {
   height: 1.5rem;
   margin-bottom: 1rem;
   border: 1px #707aff solid;
   border-radius: 9px;
-  box-shadow: 1px 1px 5px 1px #fff;
+  box-shadow: 1px 1px 5px 1px #ffffff;
 }
 .skeleton .w-100 {
   width: 100%;
@@ -2297,7 +3664,7 @@ section {
   margin-bottom: 1rem;
   border: 1px #707aff solid;
   border-radius: 9px;
-  box-shadow: 1px 1px 5px 1px #fff;
+  box-shadow: 1px 1px 5px 1px #ffffff;
 }
 
 @keyframes pulse {
@@ -2312,7 +3679,7 @@ section {
 .error404Page {
   min-height: 100vh;
   background-color: #262626;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
 }
 .error404Page h1 {
@@ -2334,7 +3701,7 @@ section {
   cursor: pointer;
 }
 .error404Page button {
-  color: #fff;
+  color: #ffffff;
   background-color: #707aff;
 }
 .error404Page .toHome {
@@ -2342,8 +3709,8 @@ section {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  color: #181818;
-  background-color: #fff;
+  color: #121212;
+  background-color: #ffffff;
 }
 .error404Page .toHome:hover {
   text-decoration: none;
@@ -2352,7 +3719,7 @@ section {
 .errorPage {
   min-height: 100vh;
   background-color: #262626;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
 }
 .errorPage h1 {
@@ -2366,7 +3733,7 @@ section {
   cursor: pointer;
 }
 .errorPage button {
-  color: #fff;
+  color: #ffffff;
   background-color: #707aff;
 }
 .errorPage .toHome {
@@ -2374,8 +3741,8 @@ section {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  color: #181818;
-  background-color: #fff;
+  color: #121212;
+  background-color: #ffffff;
 }
 .errorPage .toHome:hover {
   text-decoration: none;
@@ -2395,7 +3762,7 @@ section {
   cursor: pointer;
 }
 .singleBlogErrorPage button {
-  color: #fff;
+  color: #ffffff;
   background-color: #707aff;
 }
 .singleBlogErrorPage .toHome {
@@ -2403,8 +3770,8 @@ section {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  color: #181818;
-  background-color: #fff;
+  color: #121212;
+  background-color: #ffffff;
 }
 .singleBlogErrorPage .toHome:hover {
   text-decoration: none;
@@ -2453,35 +3820,143 @@ section {
   }
   .blogsPage .allBlogs .blogCard .readBlog:hover {
     background-color: #707aff;
-    color: #fff;
+    color: #ffffff;
   }
   .blogs .blogCards .blogCard .readBlog:hover {
     background-color: #707aff;
-    color: #fff;
+    color: #ffffff;
   }
   .blogs .seeMore:hover {
     background-color: #262626;
-    border-color: #181818;
+    border-color: #121212;
   }
   .layout .header nav ul li:hover {
-    color: #fff;
+    color: #ffffff;
   }
   .layout .header .blogLanguageDiv .languageDivBox:hover {
     color: #707aff;
-    background-color: #181818;
+    background-color: #121212;
   }
   .layout .header .blogLanguageDiv .languageList span:hover {
-    background-color: #181818;
+    background-color: #121212;
   }
   .layout .footer .socials .fa-facebook:hover,
   .layout .footer .socials .fa-youtube:hover,
   .layout .footer .socials .fa-github:hover,
   .layout .footer .socials .fa-linkedin:hover {
-    color: #fff;
+    color: #ffffff;
   }
   .skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv:hover::after {
     height: 0;
   }
+}
+.popup {
+  max-width: 300px;
+  width: 100%;
+}
+.popup .back {
+  height: 100%;
+  max-width: 300px;
+  width: 100%;
+  background: #121212;
+  position: fixed;
+  z-index: 1200;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: all 200ms linear;
+  opacity: 0;
+}
+.popup .appear {
+  width: 300px;
+  opacity: 0.6;
+}
+.popup .not_appear {
+  width: 0;
+  overflow: hidden;
+  scale: 0;
+}
+.popup .cards {
+  position: fixed;
+  right: 0;
+  max-width: 300px;
+  z-index: 1200;
+  width: 100%;
+  color: #121212;
+  display: flex;
+  flex-flow: column wrap;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  top: 0;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 20px 10px 20px 10px;
+  overflow-x: hidden;
+  transition: all 200ms linear;
+}
+.popup .remove {
+  display: flex;
+  padding: 0.5rem;
+  background-color: #707aff;
+  transition-property: all;
+  transition-duration: 150ms;
+  color: #ffffff;
+  text-align: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.popup .remove :hover {
+  background-color: #dc2626;
+}
+.popup .card {
+  display: flex;
+  padding: 0.5rem;
+  z-index: 1000;
+  background-color: #ffffff;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: fit-content;
+  border-radius: 0.5rem;
+  gap: 1rem;
+}
+.popup .card .text {
+  overflow-wrap: break-word;
+  width: 100%;
+}
+.popup .card .progress {
+  background-color: #29ffe5;
+  width: 100%;
+  border-radius: 0.5rem;
+  opacity: 0.7;
+  height: 20px;
+}
+.popup .card .ok {
+  display: flex;
+  background-color: #707aff;
+  color: #ffffff;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  height: 30px;
+  color: 12px;
+}
+.popup .error {
+  color: #707aff;
+}
+.popup .success {
+  color: #29ffe5;
 }
 
 /*# sourceMappingURL=output.css.map */
