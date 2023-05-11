@@ -73,6 +73,7 @@ export const createProject =
         enType: "",
         arType: "",
         krType: "",
+        url: "",
       });
       dispatch({
         type: PROJECT_IMAGE,

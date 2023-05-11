@@ -4,7 +4,8 @@ import BlogPageCard from "../../components/blogs/BlogPageCard";
 import LoadingBlogSkeleton from "../../components/loading/LoadingBlogSkeleton";
 import { getAllBlogs } from "../../actions/blog";
 import PropTypes from "prop-types";
-const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
+import { AdminBlogs } from "../../components/admin/AdminBlogs";
+const Blogs = ({ getAllBlogs, blog: { blogs, blogLoading }, language: { file, language } }) => {
   const [input, setInput] = useState("");
   const [x, setX] = useState(false);
   const [blogs, setBlogs] = useState([]);
@@ -23,10 +24,10 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
   }, []);
 
   const searchInput = useCallback((lang, input) => {
-    for (let i = 0; i < blog.blogs.length; i++) {
+    for (let i = 0; i < blogs.length; i++) {
       for (let j = 0; j < input.length; j++) {
-        if (blog.blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j))
-          if (j === input.length - 1) setBlogs((prev) => [...prev, blog.blogs[i]]);
+        if (blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j))
+          if (j === input.length - 1) setBlogs((prev) => [...prev, blogs[i]]);
           else break;
       }
     }
@@ -39,8 +40,8 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
   }, []);
 
   useEffect(() => {
-    setBlogs(blog.blogs);
-  }, [blog]);
+    setBlogs(blogs);
+  }, [blogs]);
 
   return (
     <section className="blogsPage flex flex-column justify-left align-center w-100 gap-2">
@@ -54,7 +55,7 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
             <span
               onClick={() => {
                 setInput("");
-                setBlogs(blog.blogs);
+                setBlogs(blogs);
                 setX(false);
               }}
               className="x"
@@ -66,7 +67,7 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
       </div>
 
       <div className="allBlogs flex flex-row justify-center align-center gap-3 w-100 flex-wrap">
-        {blog.loading ? (
+        {blogLoading ? (
           <>
             <LoadingBlogSkeleton />
             <LoadingBlogSkeleton />
