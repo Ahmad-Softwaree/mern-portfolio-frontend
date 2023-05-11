@@ -22,6 +22,13 @@ export const UPDATE_WORK_URL = `${BACKEND_HOST}/api/works`;
 export const DELETE_WORK_URL = `${BACKEND_HOST}/api/works`;
 export const UPLOAD_WORK_IMAGE = `${BACKEND_HOST}/api/upload/work`;
 
+//work
+export const GET_ALL_SKILL_URL = `${BACKEND_HOST}/api/skills`;
+export const CREATE_SKILL_URL = `${BACKEND_HOST}/api/skills`;
+export const UPDATE_SKILL_URL = `${BACKEND_HOST}/api/skills`;
+export const DELETE_SKILL_URL = `${BACKEND_HOST}/api/skills`;
+export const UPLOAD_SKILL_IMAGE = `${BACKEND_HOST}/api/upload/skill`;
+
 //auth
 export const GET_AUTH_TOKEN = `${BACKEND_HOST}/api/auth/jwt_token`;
 export const LOGIN_URL = `${BACKEND_HOST}/api/auth/login`;

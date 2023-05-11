@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Box, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 import { getAllAdmins } from "../../actions/admin";
-import AdminCard from "../../components/Admin/AdminCard";
+import AdminCard from "../../components/admin/AdminCard";
 import Opacity from "../../components/Opacity";
-import CreateAdmin from "../../components/Admin/CreateAdmin";
+import CreateAdmin from "../../components/admin/CreateAdmin";
 export const Admins = ({ admin: { users, usersLoading }, getAllAdmins }) => {
   const [add, setAdd] = useState(false);
   useEffect(() => {
