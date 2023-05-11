@@ -6,7 +6,7 @@ import moment from "moment";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getOneBlog } from "../../actions/blog";
-const SingleBlogPage = ({ blog: { blog }, getOneBlog, language: { file, language } }) => {
+const SingleBlogPage = ({ blog: { blog, blogLoading }, getOneBlog, language: { file, language } }) => {
   const { id } = useParams();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const SingleBlogPage = ({ blog: { blog }, getOneBlog, language: { file, language
 
   return (
     <section className="singleBlog flex flex-column justify-left align-start gap-2 w-100">
-      {Object.keys(blog)?.length !== 0 && !blog.loading ? (
+      {Object.keys(blog)?.length !== 0 && !blogLoading ? (
         <>
           <h1 className="blogHeader">{language === "en" ? blog.enTitle : language === "ar" ? blog.arTitle : blog.krTitle}</h1>
           <img src={`${blog.image}`} alt="" className="blogImage" />
@@ -30,7 +30,7 @@ const SingleBlogPage = ({ blog: { blog }, getOneBlog, language: { file, language
             {moment(blog.createdAt).format("MMMM Do YYYY")} {moment(blog.createdAt).format("dddd")}
           </span>
         </>
-      ) : blog.loading ? (
+      ) : blogLoading ? (
         <LoadingSingleBlogSkeleton />
       ) : (
         <SingleBlogError />
