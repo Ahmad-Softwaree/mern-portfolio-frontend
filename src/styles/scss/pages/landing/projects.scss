@@ -16,6 +16,7 @@
     .projectCard {
       width: 350px;
       height: 400px;
+
       flex: 0 0 auto;
 
       border: 1px colors.$white solid;
@@ -35,9 +36,22 @@
         height: 25%;
         width: 100%;
         padding: 20px 0;
+        gap: 6px;
         background-color: colors.$purple;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
+        .projectLink {
+          background-color: colors.$lightBlack;
+          padding: 3px 15px;
+          border-radius: 5px;
+          cursor: pointer;
+          opacity: 0.8;
+          transition: opacity 200ms linear;
+          &:hover {
+            opacity: 1;
+            text-decoration: none;
+          }
+        }
       }
     }
   }
@@ -47,7 +61,7 @@
   .projectCards {
     .projectCard {
       width: 350px !important;
-      height: 400px !important;
+      height: 430px !important;
     }
   }
 }
@@ -55,8 +69,14 @@
 @include res.responsive(mobile) {
   .projectCards {
     .projectCard {
-      height: 300px !important;
+      height: 350px !important;
       width: 300px !important;
+      .projectCardFooter {
+        height: 35% !important;
+      }
+      img {
+        height: 65% !important;
+      }
     }
   }
 }

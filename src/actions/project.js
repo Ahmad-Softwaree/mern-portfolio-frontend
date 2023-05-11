@@ -89,13 +89,13 @@ export const createProject =
   };
 
 export const updateProject =
-  ({ enTitle, arTitle, krTitle, enType, arType, krType, url, image, projectId, oldImage, setInputs, setUpdate, imageChange }) =>
+  ({ enTitle, arTitle, krTitle, enType, arType, krType, url, image, projectId, oldImage, setInputs, setUpdate, imageChanged }) =>
   async (dispatch) => {
     dispatch({
       type: UPDATE_PROJECT_START,
     });
     try {
-      if (oldImage && imageChange) {
+      if (oldImage && imageChanged) {
         //delete any old images if there exist
         const imageRef = ref(firebaseStorage, oldImage);
         deleteObject(imageRef)
@@ -115,7 +115,7 @@ export const updateProject =
         const file = new FormData();
         const filename = Date.now() + image.name;
         file.append("name", filename);
-        file.append("blog", image);
+        file.append("project", image);
         const imageURL = await saveProjectImage({ file });
         data.image = imageURL;
       } else data.image = oldImage;

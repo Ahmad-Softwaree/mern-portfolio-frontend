@@ -88,18 +88,18 @@ export const createWork =
   };
 
 export const updateWork =
-  ({ enTitle, arTitle, krTitle, company, from, to, image, workId, oldImage, setInputs, setUpdate, imageChange }) =>
+  ({ enTitle, arTitle, krTitle, company, from, to, image, workId, oldImage, setInputs, setUpdate, imageChanged }) =>
   async (dispatch) => {
     dispatch({
       type: UPDATE_WORK_START,
     });
     try {
-      if (oldImage && imageChange) {
+      if (oldImage && imageChanged) {
         //delete any old images if there exist
         const imageRef = ref(firebaseStorage, oldImage);
         deleteObject(imageRef)
           .then(() => {
-            globalSuccess({ dispatch, text: "project old image deleted in storage" });
+            globalSuccess({ dispatch, text: "work old image deleted in storage" });
           })
           .catch((err) => {
             globalError({

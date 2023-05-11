@@ -67,9 +67,11 @@ const Projects = ({ file, language, project, getAllProjects }) => {
                         enTitle={project.enTitle}
                         arTitle={project.arTitle}
                         krTitle={project.krTitle}
+                        enType={project.enType}
+                        arType={project.arType}
+                        krType={project.krType}
                         id={project._id}
                         url={project.url}
-                        urlName={project.urlName}
                       />
                     );
                   })}

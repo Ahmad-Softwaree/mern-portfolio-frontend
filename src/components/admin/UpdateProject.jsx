@@ -215,7 +215,7 @@ const UpdateProject = ({
               <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
             </div>
           ) : (
-            "Publish"
+            "Update"
           )}
         </button>
       </div>

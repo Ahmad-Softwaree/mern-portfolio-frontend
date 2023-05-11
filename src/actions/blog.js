@@ -138,13 +138,13 @@ export const createBlog =
   };
 
 export const updateBlog =
-  ({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image, blogId, oldImage, setInputs, setUpdate, imageChange }) =>
+  ({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image, blogId, oldImage, setInputs, setUpdate, imageChanged }) =>
   async (dispatch) => {
     dispatch({
       type: UPDATE_BLOG_START,
     });
     try {
-      if (oldImage && imageChange) {
+      if (oldImage && imageChanged) {
         //delete any old images if there exist
         const imageRef = ref(firebaseStorage, oldImage);
         deleteObject(imageRef)

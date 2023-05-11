@@ -41,7 +41,7 @@ const MobileNav = ({ activeSection, goNav, mobNav, blogs, works, projects, langu
 
         <li className="navItem">
           <span onClick={() => goNav("contact")} className={`${activeSection === "contact" && "activeNav"}`}>
-            {t("nav.contact")}
+            {file.nav.contact}
           </span>
         </li>
       </ul>

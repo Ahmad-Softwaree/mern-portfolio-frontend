@@ -154,26 +154,26 @@
   cursor: pointer;
   height: fit-content;
   top: 1rem;
-  position: "absolute";
-  left: "30px";
-  top: "0";
-  bottom: "0";
-  margin-top: "auto";
-  margin-bottom: "auto";
-  font-size: "1.5rem";
-  height: "fit-content";
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 1.5rem;
+  height: fit-content;
 }
 .layout .header .humb {
   display: none;
   cursor: pointer;
-  position: "absolute";
-  left: "30px";
-  top: "0";
-  bottom: "0";
-  margin-top: "auto";
-  margin-bottom: "auto";
-  font-size: "1.5rem";
-  height: "fit-content";
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 1.5rem;
+  height: fit-content;
 }
 .layout .footer {
   background-color: #262626;
@@ -1706,21 +1706,40 @@ section {
   height: 25%;
   width: 100%;
   padding: 20px 0;
+  gap: 6px;
   background-color: #707aff;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+.projects .projectCards .projectCard .projectCardFooter .projectLink {
+  background-color: #262626;
+  padding: 3px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 200ms linear;
+}
+.projects .projectCards .projectCard .projectCardFooter .projectLink:hover {
+  opacity: 1;
+  text-decoration: none;
 }
 
 @media (min-width: 767px) and (max-width: 1023px) {
   .projectCards .projectCard {
     width: 350px !important;
-    height: 400px !important;
+    height: 430px !important;
   }
 }
 @media (max-width: 767px) {
   .projectCards .projectCard {
-    height: 300px !important;
+    height: 350px !important;
     width: 300px !important;
+  }
+  .projectCards .projectCard .projectCardFooter {
+    height: 35% !important;
+  }
+  .projectCards .projectCard img {
+    height: 65% !important;
   }
 }
 @media (max-width: 450px) {
@@ -2628,8 +2647,8 @@ section {
   object-fit: cover;
 }
 .panel .admin_blogs .createBlog .fileInputDiv .URLImage .x {
-  top: 2rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 1000;
   width: fit-content;
   display: flex;
@@ -2638,7 +2657,7 @@ section {
   align-items: center;
   width: 2rem;
   height: 2rem;
-  background-color: #707aff;
+  background-color: #ff0000;
   color: #ffffff;
   border-radius: 5px;
   cursor: pointer;
@@ -2901,8 +2920,8 @@ section {
   object-fit: cover;
 }
 .panel .admin_projects .createProject .fileInputDiv .URLImage .x {
-  top: 2rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 1000;
   width: fit-content;
   display: flex;
@@ -2911,7 +2930,7 @@ section {
   align-items: center;
   width: 2rem;
   height: 2rem;
-  background-color: #707aff;
+  background-color: #ff0000;
   color: #ffffff;
   border-radius: 5px;
   cursor: pointer;
@@ -3173,8 +3192,8 @@ section {
   object-fit: cover;
 }
 .panel .admin_works .createWork .fileInputDiv .URLImage .x {
-  top: 2rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 1000;
   width: fit-content;
   display: flex;
@@ -3183,7 +3202,7 @@ section {
   align-items: center;
   width: 2rem;
   height: 2rem;
-  background-color: #707aff;
+  background-color: #ff0000;
   color: #ffffff;
   border-radius: 5px;
   cursor: pointer;
@@ -3450,15 +3469,15 @@ section {
   object-fit: cover;
 }
 .admins_page .createAdmin .fileInputDiv .URLImage .x {
-  top: 2rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 1000;
   width: fit-content;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  width: 2rem !important;
+  width: 2rem;
   height: 2rem;
   background-color: #ff0000;
   color: #ffffff;

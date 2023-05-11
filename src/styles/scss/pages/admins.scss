@@ -117,15 +117,15 @@
           object-fit: cover;
         }
         .x {
-          top: 2rem;
-          right: 2rem;
+          top: 1rem;
+          right: 1rem;
           z-index: 1000;
           width: fit-content;
           display: flex;
           flex-flow: row wrap;
           justify-content: center;
           align-items: center;
-          width: 2rem !important;
+          width: 2rem;
           height: 2rem;
           background-color: colors.$red;
           color: colors.$white;
