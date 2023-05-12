@@ -158,7 +158,7 @@ const CreateProject = ({ image: { project }, createProject, project: { projects,
             }
           >
             {createProjectLoading ? (
-              <div className="w-100">
+              <div className="w-100 loadingSpinner">
                 <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
               </div>
             ) : (

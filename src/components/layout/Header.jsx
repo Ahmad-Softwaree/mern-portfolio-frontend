@@ -1,36 +1,39 @@
-import React, { useEffect, useState, useRef, memo } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { scroller } from "react-scroll";
 import MobileNav from "./MobileNav";
 import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { ARABIC, ENGLISH, KURDISH } from "../../actions/types";
-const Header = memo(({ isHome, blog, project, work, language: { language, file } }) => {
+const Header = React.memo(({ isHome, blog, project, work, language: { language, file } }) => {
   const [languages, setLanguages] = useState(false);
   const [mobNav, setMobNav] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const dispatch = useDispatch();
 
+  const handleScroll = useCallback(() => {
+    console.log("hi");
+    const home = document.getElementById("home")?.getBoundingClientRect();
+    const blog = document.getElementById("blogs")?.getBoundingClientRect();
+    const whyUs = document.getElementById("skills")?.getBoundingClientRect();
+    const services = document.getElementById("projects")?.getBoundingClientRect();
+    const works = document.getElementById("works")?.getBoundingClientRect();
+    const contact = document.getElementById("contact")?.getBoundingClientRect();
+
+    const pageArray = [home, blog, whyUs, services, works, contact];
+    const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
+    pageArray.forEach((page, index) => {
+      if (!page) return;
+      if (page.top <= 150 && page.bottom > 150) {
+        setActiveSection(`${pageString[index]}`);
+        return;
+      }
+    });
+    //...and so on for all sections
+  }, []);
+
   useEffect(() => {
     if (isHome) {
-      const handleScroll = () => {
-        const home = document.getElementById("home")?.getBoundingClientRect();
-        const blog = document.getElementById("blogs")?.getBoundingClientRect();
-        const whyUs = document.getElementById("skills")?.getBoundingClientRect();
-        const services = document.getElementById("projects")?.getBoundingClientRect();
-        const works = document.getElementById("works")?.getBoundingClientRect();
-        const contact = document.getElementById("contact")?.getBoundingClientRect();
-
-        const pageArray = [home, blog, whyUs, services, works, contact];
-        const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
-        pageArray.forEach((page, index) => {
-          if (!page) return;
-          if (page.top <= 150 && page.bottom > 150) {
-            setActiveSection(`${pageString[index]}`);
-            return;
-          }
-        });
-        //...and so on for all sections
-      };
+      handleScroll();
       window.addEventListener("scroll", handleScroll);
       return () => {
         window.removeEventListener("scroll", handleScroll);
@@ -40,14 +43,14 @@ const Header = memo(({ isHome, blog, project, work, language: { language, file }
 
   //to show blogs or not
 
-  const goNav = (name) => {
+  const goNav = useCallback((name) => {
     setMobNav(false);
     scroller.scrollTo(name, {
       duration: 50,
       delay: 0,
       smooth: "linear",
     });
-  };
+  }, []);
   return (
     <>
       {isHome && (
@@ -175,4 +178,4 @@ const mapStateToProps = (state) => ({
   language: state.language,
 });
 
-export default connect(mapStateToProps, {})(memo(Header));
+export default connect(mapStateToProps, {})(Header);

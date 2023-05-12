@@ -19,7 +19,7 @@ import { GET_ALL_WORK_URL, CREATE_WORK_URL, DELETE_WORK_URL, UPLOAD_WORK_IMAGE, 
 import { getCookie } from "../data/cookie";
 import { config, authConfig, fileAuthConfig } from "../data/config.js";
 import globalSuccess from "./success";
-import firebaseStorage from "../firebase";
+import firebaseStorage from "../firebase_storage";
 import globalError from "./error";
 import { ref, deleteObject } from "firebase/storage";
 export const getAllWorks =

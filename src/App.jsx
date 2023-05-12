@@ -25,9 +25,9 @@ const routes = createBrowserRouter(
         <Route path=":id" element={<SingleBlogPage B errorElement={<Error />} />} />
       </Route>
       <Route path="/login" element={<Login />} errorElement={<Error />} />
-      <Route path="/panel" element={<AdminRoutes />} errorElement={<Error />}>
-        <Route index element={<Panel />} errorElement={<Error />} />
-        <Route path="admins" element={<Admins />} errorElement={<Error />} />
+      <Route element={<AdminRoutes />} errorElement={<Error />}>
+        <Route path="/panel" element={<Panel />} errorElement={<Error />} />
+        <Route path="/admins" element={<Admins />} errorElement={<Error />} />
       </Route>
       {/* page 404 route */}
       <Route path="*" element={<ErrorPage />} />

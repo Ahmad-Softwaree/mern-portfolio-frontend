@@ -14,23 +14,26 @@ export const AdminWorks = ({ work: { works, workLoading }, getAllWorks }) => {
   }, []);
   return (
     <div className="admin_works  flex flex-column justify-center align-center gap-1">
-      <h1>Works</h1>
+      <div className="flex flex-row justify-center align-center gap-1 w-100">
+        <h1>Works</h1>
+        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
+          <i className="fa-solid fa-upload"></i>
+          <span>Upload</span>
+        </button>
+      </div>
+
       {add && (
         <>
           <Opacity />
           <CreateWork setAdd={setAdd} />
         </>
       )}
-      <button onClick={() => setAdd(true)}>
-        <i className="fa-solid fa-square-plus"></i>
-      </button>
 
       {workLoading && <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} />}
       {!workLoading && works.length > 0 && (
         <div className="works w-100 flex flex-column justify-left align-center gap-2">
           <div className="workCard workTable flex flex-row justify-between align-center w-100">
             <span className="tableIndex">Id</span>
-            <span className="tableIndex">Title</span>
             <span className="tableIndex">Company</span>
 
             <div className="flex flex-row justify-center align-center gap-2">

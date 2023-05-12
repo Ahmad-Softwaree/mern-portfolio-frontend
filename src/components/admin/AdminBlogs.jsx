@@ -13,20 +13,23 @@ export const AdminBlogs = ({ blog: { blogs, blogLoading }, getAllBlogsForPanel }
   }, []);
   return (
     <div className="admin_blogs  flex flex-column justify-center align-center gap-1">
-      <h1>Blogs</h1>
+      <div className="flex flex-row justify-center align-center gap-1 w-100">
+        <h1>Blogs</h1>
+        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
+          <i className="fa-solid fa-upload"></i>
+          <span>Upload</span>
+        </button>
+      </div>
       {add && (
         <>
           <Opacity />
           <CreateBlog setAdd={setAdd} />
         </>
       )}
-      <button onClick={() => setAdd(true)}>
-        <i className="fa-solid fa-square-plus"></i>
-      </button>
 
       {blogLoading && <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} />}
       {!blogLoading && blogs.length > 0 && (
-        <div className="blogs w-100 flex flex-column justify-left align-center gap-2">
+        <div className="blogs w-100 flex flex-column justify-left align-center gap-1">
           <div className="blogCard blogTable flex flex-row justify-between align-center w-100">
             <span className="tableIndex">Id</span>
             <span className="tableIndex">Title</span>

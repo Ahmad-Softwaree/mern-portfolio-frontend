@@ -14,24 +14,27 @@ export const AdminProjects = ({ project: { projects, projectLoading }, getAllPro
   }, []);
   return (
     <div className="admin_projects  flex flex-column justify-center align-center gap-1">
-      <h1>Projects</h1>
+      <div className="flex flex-row justify-center align-center gap-1 w-100">
+        <h1>Projects</h1>
+        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
+          <i className="fa-solid fa-upload"></i>
+          <span>Upload</span>
+        </button>
+      </div>
+
       {add && (
         <>
           <Opacity />
           <CreateProject setAdd={setAdd} />
         </>
       )}
-      <button onClick={() => setAdd(true)}>
-        <i className="fa-solid fa-square-plus"></i>
-      </button>
 
       {projectLoading && <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} />}
       {!projectLoading && projects.length > 0 && (
-        <div className="projects w-100 flex flex-column justify-left align-center gap-2">
+        <div className="projects w-100 flex flex-column justify-left align-center gap-1">
           <div className="projectCard blogTable flex flex-row justify-between align-center w-100">
             <span className="tableIndex">Id</span>
             <span className="tableIndex">Title</span>
-            <span className="tableIndex">Type</span>
 
             <div className="flex flex-row justify-center align-center gap-2">
               <span className="tableOperation">Update</span>

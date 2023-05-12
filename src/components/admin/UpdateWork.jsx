@@ -198,7 +198,7 @@ const UpdateWork = ({
             }
           >
             {updateWorkLoading ? (
-              <div className="w-100">
+              <div className="w-100 loadingSpinner">
                 <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
               </div>
             ) : (

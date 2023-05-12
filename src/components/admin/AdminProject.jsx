@@ -36,7 +36,6 @@ export const AdminProject = ({ index, id, enTitle, arTitle, krTitle, enType, krT
       <div className="projectCard flex flex-row justify-between align-center w-100">
         <span className="tableIndex">{index}</span>
         <span className="tableIndex">{enTitle}</span>
-        <span className="tableIndex">{enType}</span>
 
         <div className="flex flex-row justify-center align-center gap-2">
           <span onClick={() => setUpdate(true)} className="tableOperation">

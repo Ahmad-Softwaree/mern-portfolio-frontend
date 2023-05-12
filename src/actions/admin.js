@@ -16,6 +16,9 @@ import {
   GET_ALL_BLOG_FAIL,
   GET_ALL_BLOG_START,
   GET_ALL_BLOG_SUCCESS,
+  GET_STORAGE_SIZE_FAIL,
+  GET_STORAGE_SIZE_START,
+  GET_STORAGE_SIZE_SUCCESS,
   LOAD_USER,
   LOGIN_FAIL,
   LOGIN_START,
@@ -38,8 +41,40 @@ import {
 import axios from "axios";
 import { authConfig, config, fileAuthConfig } from "../data/config";
 import globalSuccess from "./success";
-import firebaseStorage from "../firebase";
-import { ref, deleteObject } from "firebase/storage";
+import firebaseStorage from "../firebase_storage";
+import { ref, deleteObject, getMetadata, listAll } from "firebase/storage";
+
+export const getStorageUsage = () => async (dispatch) => {
+  dispatch({
+    type: GET_STORAGE_SIZE_START,
+  });
+  const listRef = ref(firebaseStorage, import.meta.env.VITE_FIREBASE_FIREBASE_STORAGE_PATH);
+  let size = 0;
+
+  const getAllFiles = async (listResult) => {
+    for (const item of listResult.items) {
+      const metadata = await getMetadata(item);
+      const fileSize = metadata.size;
+      size += fileSize / (1024 * 1024);
+    }
+    for (const prefix of listResult.prefixes) {
+      const folderResult = await listAll(prefix);
+      await getAllFiles(folderResult);
+    }
+  };
+
+  try {
+    const listResult = await listAll(listRef);
+    await getAllFiles(listResult);
+    dispatch({
+      type: GET_STORAGE_SIZE_SUCCESS,
+      payload: size,
+    });
+  } catch (error) {
+    globalError({ dispatch, text: error?.response?.data?.error ? error.response.data.error : error?.message, FAIL: GET_STORAGE_SIZE_FAIL });
+  }
+};
+
 export const loadUser = () => async (dispatch) => {
   if (!getCookie("admin")) return;
   setAuthToken(getCookie("admin"));

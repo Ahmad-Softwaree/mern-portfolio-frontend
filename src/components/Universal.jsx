@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Popup from "./Popup";
 
 export const Universal = ({ language: { file, language } }) => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (language === "en") {
       document.body.style.direction = "ltr";
       document.body.classList.remove("kurdish_font");

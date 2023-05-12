@@ -16,7 +16,9 @@ export const Panel = ({}) => {
 
 Panel.propTypes = {};
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  admin: state.admin,
+});
 
 const mapDispatchToProps = {};
 

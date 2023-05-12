@@ -19,7 +19,7 @@ import { GET_ALL_PROJECT_URL, CREATE_PROJECT_URL, DELETE_PROJECT_URL, UPLOAD_PRO
 import { getCookie } from "../data/cookie";
 import { config, authConfig, fileAuthConfig } from "../data/config.js";
 import globalSuccess from "./success";
-import firebaseStorage from "../firebase";
+import firebaseStorage from "../firebase_storage";
 import globalError from "./error";
 import { ref, deleteObject } from "firebase/storage";
 export const getAllProjects =

@@ -117,7 +117,7 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
             className={name !== "" && email !== "" && password !== "" ? "activePublish" : "publish"}
           >
             {createLoading ? (
-              <div className="w-100">
+              <div className="w-100 loadingSpinner">
                 <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
               </div>
             ) : (

@@ -1,6 +1,7 @@
 @use "../util/colors.scss" as colors;
 @use "../util/hover.scss" as hover;
 @use "../breakpoints.scss" as res;
+@use "../util/typography.scss" as font;
 
 .panelLoading {
   min-height: 100vh;
@@ -8,103 +9,163 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  background-color: colors.$lightBlack;
+  color: colors.$white;
 }
 
 .panel_header {
-  background-color: colors.$lightBlack;
+  position: fixed;
+  top: 0;
+  .active {
+    background-color: #474553;
+    border-right: 3px solid colors.$white !important;
+  }
+
+  background-color: colors.$black;
   color: colors.$white;
-  min-height: 150px;
+  height: fit-content;
+  z-index: 100;
+  padding: 10px;
+  padding-left: 220px !important;
   h1 {
     text-align: center;
-    font-size: 26px;
-    font-weight: 600;
+    font-size: 36px;
+    font-weight: 700;
   }
   .admin_logout,
   .admin_getOut,
   .admin_add,
   .admins {
     padding: 10px;
-    position: absolute;
     width: fit-content;
     font-size: 12px;
     color: colors.$white;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
-    opacity: 0.6;
+    opacity: 1;
     transition: all 200ms linear;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: left;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+  }
+  .admin_logout,
+  .admin_getOut {
+    width: fit-content !important;
+    border-radius: 6px;
   }
   .admin_logout {
-    left: 2rem;
-    top: 2rem;
-    background-color: colors.$red;
+    border: 1px solid colors.$red;
+    &:hover {
+      background-color: colors.$red;
+    }
   }
   .admin_getOut {
-    left: 5rem;
-    top: 2rem;
-    background-color: colors.$purple;
+    border: 1px solid colors.$blue;
+    &:hover {
+      background-color: colors.$blue;
+    }
   }
-  .admin_add {
-    left: 2rem;
-    top: 5rem;
-    background-color: colors.$green;
-  }
+  .admin_add,
   .admins {
-    left: 5rem;
-    top: 5rem;
-    background-color: colors.$yellow;
+    border-radius: 0;
+    height: 60px;
+    font-size: 16px;
+    gap: 1rem;
+    transition: all 200ms linear;
+    &:hover {
+      background-color: #474553;
+    }
   }
-  .admin_logout:hover,
-  .admin_getOut:hover,
-  .admin_add:hover,
-  .admins:hover {
-    opacity: 1;
+  .storage {
+    border-radius: 0;
+    padding: 6px;
+    transition: all 200ms linear;
+    cursor: pointer;
   }
+
   .admin_profile {
-    right: 2rem;
-    top: 2rem;
-    padding: 8px;
+    padding: 2px;
     background-color: colors.$purple;
     color: colors.$white;
-    border-radius: 10px;
     cursor: pointer;
     opacity: 0.9;
     transition: all 200ms linear;
-    img {
-      width: 2rem;
-      height: 2rem;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    span {
-      font-size: 14px;
-    }
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
+    border-radius: 50%;
     &:hover {
       opacity: 1;
     }
   }
+  .admin_left_panel {
+    width: 200px;
+    top: 0;
+    left: 0;
+    background-color: colors.$black;
+    height: 100%;
+  }
+  .storage {
+    width: 100%;
+    right: 30px;
+    .fa-fire {
+      color: colors.$yellow;
+    }
+    span {
+      font-size: 10px;
+    }
+    .storageOuter {
+      border-radius: 10px;
+      width: 140px;
+      height: 10px;
+      border: 1px solid colors.$yellow;
+      .storageInner {
+        background-color: colors.$yellow;
+        height: 100%;
+      }
+    }
+  }
 }
+
 .panel {
+  padding-bottom: 100px;
   h1 {
     font-size: 26px;
     font-weight: 600;
   }
+  padding-top: 100px;
+  padding-left: 220px !important;
+  padding-right: 20px;
   position: relative;
   min-height: 100vh;
-  padding: 10px 20px 100px 10px;
   background-color: colors.$lightBlack;
   color: colors.$white !important;
   .admin_blogs {
     width: 100%;
     text-align: center;
 
-    button {
-      padding: 10px 20px;
-      min-width: 100px;
-      font-size: 20px;
-      background-color: colors.$purple;
-      color: colors.$white;
+    .uploadButton {
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: colors.$blue;
+      color: colors.$black;
       border: none;
+      gap: 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 200ms linear;
+    }
+    .yes,
+    .no {
+      padding: 5px 10px;
+      width: 100px;
+      font-size: 14px;
+      border: none;
+      gap: 6px;
       border-radius: 6px;
       cursor: pointer;
       opacity: 0.8;
@@ -115,21 +176,21 @@
     }
     .blogs {
       padding: 30px 0;
-      border: 1px solid colors.$purple;
 
       .theBlogs {
-        padding: 20px 0;
         max-height: 500px;
         overflow-y: scroll;
       }
+      .theBlogs::-webkit-scrollbar {
+        display: none;
+      }
+
       .blogTable {
         font-weight: 600;
       }
       .blogCard {
-        border: 1px solid colors.$purple;
+        border-bottom: 2px solid colors.$black;
         padding: 0 10px;
-        border-right: 0;
-        border-left: 0;
         .tableIndex {
           min-width: 60px;
           width: 30%;
@@ -414,13 +475,25 @@
   .admin_projects {
     width: 100%;
     text-align: center;
-    button {
-      padding: 10px 20px;
-      min-width: 100px;
-      font-size: 20px;
-      background-color: colors.$purple;
-      color: colors.$white;
+    .uploadButton {
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: colors.$blue;
+      color: colors.$black;
       border: none;
+      gap: 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 200ms linear;
+    }
+    .yes,
+    .no {
+      padding: 5px 10px;
+      width: 100px;
+      font-size: 14px;
+      border: none;
+      gap: 6px;
       border-radius: 6px;
       cursor: pointer;
       opacity: 0.8;
@@ -431,9 +504,7 @@
     }
     .projects {
       padding: 30px 0;
-      border: 1px solid colors.$purple;
       .theProjects {
-        padding: 20px 0;
         max-height: 500px;
         overflow-y: scroll;
       }
@@ -442,7 +513,7 @@
       }
 
       .projectCard {
-        border: 1px solid colors.$purple;
+        border-bottom: 2px solid colors.$black;
         padding: 0 10px;
         border-right: 0;
         border-left: 0;
@@ -714,13 +785,25 @@
   .admin_works {
     width: 100%;
     text-align: center;
-    button {
-      padding: 10px 20px;
-      min-width: 100px;
-      font-size: 20px;
-      background-color: colors.$purple;
-      color: colors.$white;
+    .uploadButton {
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: colors.$blue;
+      color: colors.$black;
       border: none;
+      gap: 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 200ms linear;
+    }
+    .yes,
+    .no {
+      padding: 5px 10px;
+      width: 100px;
+      font-size: 14px;
+      border: none;
+      gap: 6px;
       border-radius: 6px;
       cursor: pointer;
       opacity: 0.8;
@@ -731,7 +814,6 @@
     }
     .works {
       padding: 30px 0;
-      border: 1px solid colors.$purple;
       .theWorks {
         padding: 20px 0;
         max-height: 500px;
@@ -742,7 +824,7 @@
       }
 
       .workCard {
-        border: 1px solid colors.$purple;
+        border-bottom: 2px solid colors.$black;
         padding: 0 10px;
         border-right: 0;
         border-left: 0;
@@ -1011,19 +1093,43 @@
     }
   }
 }
-@include res.responsive(computer) {
-  .createBlog,
-  .createProject,
-  .createWork {
-    padding: 80px;
-  }
-}
 
 @include res.responsive(mobile) {
   .panel_header {
-    padding-top: 120px !important;
+    padding-left: 80px !important;
+    .admin_left_panel {
+      .admin_left_panel_three {
+        flex-flow: column-reverse;
+      }
+      width: fit-content !important;
+
+      .admin_add,
+      .admins {
+        justify-content: center;
+        span {
+          display: none;
+        }
+      }
+    }
+    .storage {
+      width: fit-content !important;
+
+      .storageOuter,
+      span {
+        display: none;
+      }
+      .fa-fire {
+        font-size: 14px;
+        padding: 10px;
+        background-color: colors.$yellow;
+        border-radius: 10px;
+        color: colors.$white;
+      }
+    }
   }
   .panel {
+    padding-left: 80px !important;
+    padding-right: 10px !important;
     .blogs,
     .projects,
     .works {

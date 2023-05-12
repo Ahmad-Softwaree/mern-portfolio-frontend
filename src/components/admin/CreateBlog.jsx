@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
@@ -6,7 +6,7 @@ import { createBlog } from "../../actions/blog";
 import { BLOG_IMAGE } from "../../actions/types";
 import { Spinner } from "@chakra-ui/react";
 
-const CreateBlog = ({ image: { blog }, createBlog, blog: { blogs, createBlogLoading }, setAdd, admin: { user } }) => {
+const CreateBlog = React.memo(({ image: { blog }, createBlog, blog: { blogs, createBlogLoading }, setAdd, admin: { user } }) => {
   const [{ enTitle, arTitle, krTitle, enBody, arBody, krBody }, setInputs] = useState({
     enTitle: "",
     krTitle: "",
@@ -17,12 +17,15 @@ const CreateBlog = ({ image: { blog }, createBlog, blog: { blogs, createBlogLoad
   });
   const dispatch = useDispatch();
 
-  const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  const onKeyDown = (e) => {
-    if (e.key === "13" && !e.shiftKey) {
-      createBlog({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image: blog, userId: user._id, setInputs });
-    }
-  };
+  const onChange = useCallback((e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })), []);
+  const onKeyDown = useCallback(
+    (e) => {
+      if (e.key === "13" && !e.shiftKey) {
+        createBlog({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image: blog, userId: user._id, setInputs });
+      }
+    },
+    [enTitle, arTitle, krTitle, enBody, arBody, krBody, blog, user._id, createBlog]
+  );
 
   return (
     <form
@@ -145,7 +148,7 @@ const CreateBlog = ({ image: { blog }, createBlog, blog: { blogs, createBlogLoad
             }
           >
             {createBlogLoading ? (
-              <div className="w-100">
+              <div className="w-100 loadingSpinner">
                 <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
               </div>
             ) : (
@@ -156,7 +159,7 @@ const CreateBlog = ({ image: { blog }, createBlog, blog: { blogs, createBlogLoad
       </div>
     </form>
   );
-};
+});
 
 CreateBlog.propTypes = {
   createBlog: PropTypes.func.isRequired,

@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
 import { login } from "../actions/admin";
 import { Spinner } from "@chakra-ui/react";
 import { ENGLISH } from "../actions/types";
-const Login = ({ login, admin: { loginLoading } }) => {
+const Login = React.memo(({ login, admin: { loginLoading } }) => {
   const [{ email, password }, setInputs] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
-  const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const onChange = useCallback((e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })), []);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const onKeyDown = (e) => {
+  const onKeyDown = useCallback((e) => {
     if (e.key === "13" && !e.shiftKey) login({ email, password, navigate });
-  };
+  }, []);
 
   useEffect(() => {
     dispatch({
@@ -72,7 +72,7 @@ const Login = ({ login, admin: { loginLoading } }) => {
       </form>
     </div>
   );
-};
+});
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,

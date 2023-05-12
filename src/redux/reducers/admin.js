@@ -9,6 +9,9 @@ import {
   GET_ALL_ADMINS_FAIL,
   GET_ALL_ADMINS_START,
   GET_ALL_ADMINS_SUCCESS,
+  GET_STORAGE_SIZE_FAIL,
+  GET_STORAGE_SIZE_START,
+  GET_STORAGE_SIZE_SUCCESS,
   LOAD_USER,
   LOGIN_FAIL,
   LOGIN_START,
@@ -21,6 +24,8 @@ import {
 const initialState = {
   user: {},
   token: null,
+  storageSize: 0,
+  storageSizeLoading: false,
   loginLoading: false,
   users: [],
   usersLoading: false,
@@ -125,6 +130,22 @@ export default function admin(state = initialState, action) {
         updateLoading: false,
         users: [...state.users.filter((user) => user._id !== payload._id), payload],
         user: payload.isMe ? payload.user : state.user,
+      };
+    case GET_STORAGE_SIZE_START:
+      return {
+        ...state,
+        storageSizeLoading: true,
+      };
+    case GET_STORAGE_SIZE_FAIL:
+      return {
+        ...state,
+        storageSizeLoading: false,
+      };
+    case GET_STORAGE_SIZE_SUCCESS:
+      return {
+        ...state,
+        storageSizeLoading: false,
+        storageSize: payload,
       };
     default:
       return state;

@@ -26,7 +26,7 @@ import { CREATE_BLOG_URL, DELETE_BLOG_URL, GET_ALL_BLOG_URL, GET_HOME_BLOG_URL, 
 import { getCookie } from "../data/cookie";
 import { config, authConfig, fileAuthConfig } from "../data/config.js";
 import globalSuccess from "./success";
-import firebaseStorage from "../firebase";
+import firebaseStorage from "../firebase_storage";
 import { ref, deleteObject } from "firebase/storage";
 import { UPDATE_BLOG_URL } from "./url";
 export const getHomeBlogs =

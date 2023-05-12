@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Karla:wght@200;300;400;500;600;700;800&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@800;900&family=Roboto:wght@400;500;700;900&family=Varela&family=Varela+Round&display=swap");
+@import url("https://fonts.cdnfonts.com/css/cubano");
 .layout .header {
   position: fixed;
   z-index: 999;
@@ -308,6 +309,17 @@ textarea::placeholder,
 input::placeholder {
   font-weight: 500;
   font-size: 14px;
+}
+
+.loadingSpinner {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.loadingSpinner * {
+  width: 25px !important;
+  height: 25px !important;
 }
 
 .opaBackground {
@@ -2397,87 +2409,133 @@ section {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  background-color: #262626;
+  color: #ffffff;
 }
 
 .panel_header {
-  background-color: #262626;
+  position: fixed;
+  top: 0;
+  background-color: #121212;
   color: #ffffff;
-  min-height: 150px;
+  height: fit-content;
+  z-index: 100;
+  padding: 10px;
+  padding-left: 220px !important;
+}
+.panel_header .active {
+  background-color: #474553;
+  border-right: 3px solid #ffffff !important;
 }
 .panel_header h1 {
   text-align: center;
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 36px;
+  font-weight: 700;
 }
 .panel_header .admin_logout,
 .panel_header .admin_getOut,
 .panel_header .admin_add,
 .panel_header .admins {
   padding: 10px;
-  position: absolute;
   width: fit-content;
   font-size: 12px;
   color: #ffffff;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 1;
   transition: all 200ms linear;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+.panel_header .admin_logout,
+.panel_header .admin_getOut {
+  width: fit-content !important;
+  border-radius: 6px;
 }
 .panel_header .admin_logout {
-  left: 2rem;
-  top: 2rem;
+  border: 1px solid #ff0000;
+}
+.panel_header .admin_logout:hover {
   background-color: #ff0000;
 }
 .panel_header .admin_getOut {
-  left: 5rem;
-  top: 2rem;
-  background-color: #707aff;
+  border: 1px solid #00eded;
 }
-.panel_header .admin_add {
-  left: 2rem;
-  top: 5rem;
-  background-color: #29ffe5;
+.panel_header .admin_getOut:hover {
+  background-color: #00eded;
 }
+.panel_header .admin_add,
 .panel_header .admins {
-  left: 5rem;
-  top: 5rem;
-  background-color: #ffc700;
+  border-radius: 0;
+  height: 60px;
+  font-size: 16px;
+  gap: 1rem;
+  transition: all 200ms linear;
 }
-.panel_header .admin_logout:hover,
-.panel_header .admin_getOut:hover,
 .panel_header .admin_add:hover,
 .panel_header .admins:hover {
-  opacity: 1;
+  background-color: #474553;
+}
+.panel_header .storage {
+  border-radius: 0;
+  padding: 6px;
+  transition: all 200ms linear;
+  cursor: pointer;
 }
 .panel_header .admin_profile {
-  right: 2rem;
-  top: 2rem;
-  padding: 8px;
+  padding: 2px;
   background-color: #707aff;
   color: #ffffff;
-  border-radius: 10px;
   cursor: pointer;
   opacity: 0.9;
   transition: all 200ms linear;
-}
-.panel_header .admin_profile img {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   object-fit: cover;
   border-radius: 50%;
-}
-.panel_header .admin_profile span {
-  font-size: 14px;
 }
 .panel_header .admin_profile:hover {
   opacity: 1;
 }
+.panel_header .admin_left_panel {
+  width: 200px;
+  top: 0;
+  left: 0;
+  background-color: #121212;
+  height: 100%;
+}
+.panel_header .storage {
+  width: 100%;
+  right: 30px;
+}
+.panel_header .storage .fa-fire {
+  color: #ffc700;
+}
+.panel_header .storage span {
+  font-size: 10px;
+}
+.panel_header .storage .storageOuter {
+  border-radius: 10px;
+  width: 140px;
+  height: 10px;
+  border: 1px solid #ffc700;
+}
+.panel_header .storage .storageOuter .storageInner {
+  background-color: #ffc700;
+  height: 100%;
+}
 
 .panel {
+  padding-bottom: 100px;
+  padding-top: 100px;
+  padding-left: 220px !important;
+  padding-right: 20px;
   position: relative;
   min-height: 100vh;
-  padding: 10px 20px 100px 10px;
   background-color: #262626;
   color: #ffffff !important;
 }
@@ -2489,13 +2547,25 @@ section {
   width: 100%;
   text-align: center;
 }
-.panel .admin_blogs button {
-  padding: 10px 20px;
-  min-width: 100px;
-  font-size: 20px;
-  background-color: #707aff;
-  color: #ffffff;
+.panel .admin_blogs .uploadButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #00eded;
+  color: #121212;
   border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_blogs .yes,
+.panel .admin_blogs .no {
+  padding: 5px 10px;
+  width: 100px;
+  font-size: 14px;
+  border: none;
+  gap: 6px;
   border-radius: 6px;
   cursor: pointer;
   opacity: 0.8;
@@ -2506,21 +2576,20 @@ section {
 }
 .panel .admin_blogs .blogs {
   padding: 30px 0;
-  border: 1px solid #707aff;
 }
 .panel .admin_blogs .blogs .theBlogs {
-  padding: 20px 0;
   max-height: 500px;
   overflow-y: scroll;
+}
+.panel .admin_blogs .blogs .theBlogs::-webkit-scrollbar {
+  display: none;
 }
 .panel .admin_blogs .blogs .blogTable {
   font-weight: 600;
 }
 .panel .admin_blogs .blogs .blogCard {
-  border: 1px solid #707aff;
+  border-bottom: 2px solid #121212;
   padding: 0 10px;
-  border-right: 0;
-  border-left: 0;
 }
 .panel .admin_blogs .blogs .blogCard .tableIndex {
   min-width: 60px;
@@ -2776,13 +2845,25 @@ section {
   width: 100%;
   text-align: center;
 }
-.panel .admin_projects button {
-  padding: 10px 20px;
-  min-width: 100px;
-  font-size: 20px;
-  background-color: #707aff;
-  color: #ffffff;
+.panel .admin_projects .uploadButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #00eded;
+  color: #121212;
   border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_projects .yes,
+.panel .admin_projects .no {
+  padding: 5px 10px;
+  width: 100px;
+  font-size: 14px;
+  border: none;
+  gap: 6px;
   border-radius: 6px;
   cursor: pointer;
   opacity: 0.8;
@@ -2793,10 +2874,8 @@ section {
 }
 .panel .admin_projects .projects {
   padding: 30px 0;
-  border: 1px solid #707aff;
 }
 .panel .admin_projects .projects .theProjects {
-  padding: 20px 0;
   max-height: 500px;
   overflow-y: scroll;
 }
@@ -2804,7 +2883,7 @@ section {
   font-weight: 600;
 }
 .panel .admin_projects .projects .projectCard {
-  border: 1px solid #707aff;
+  border-bottom: 2px solid #121212;
   padding: 0 10px;
   border-right: 0;
   border-left: 0;
@@ -3048,13 +3127,25 @@ section {
   width: 100%;
   text-align: center;
 }
-.panel .admin_works button {
-  padding: 10px 20px;
-  min-width: 100px;
-  font-size: 20px;
-  background-color: #707aff;
-  color: #ffffff;
+.panel .admin_works .uploadButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #00eded;
+  color: #121212;
   border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_works .yes,
+.panel .admin_works .no {
+  padding: 5px 10px;
+  width: 100px;
+  font-size: 14px;
+  border: none;
+  gap: 6px;
   border-radius: 6px;
   cursor: pointer;
   opacity: 0.8;
@@ -3065,7 +3156,6 @@ section {
 }
 .panel .admin_works .works {
   padding: 30px 0;
-  border: 1px solid #707aff;
 }
 .panel .admin_works .works .theWorks {
   padding: 20px 0;
@@ -3076,7 +3166,7 @@ section {
   font-weight: 600;
 }
 .panel .admin_works .works .workCard {
-  border: 1px solid #707aff;
+  border-bottom: 2px solid #121212;
   padding: 0 10px;
   border-right: 0;
   border-left: 0;
@@ -3317,16 +3407,41 @@ section {
   background-color: #ff0000;
 }
 
-@media (min-width: 1024px) {
-  .createBlog,
-  .createProject,
-  .createWork {
-    padding: 80px;
-  }
-}
 @media (max-width: 767px) {
   .panel_header {
-    padding-top: 120px !important;
+    padding-left: 80px !important;
+  }
+  .panel_header .admin_left_panel {
+    width: fit-content !important;
+  }
+  .panel_header .admin_left_panel .admin_left_panel_three {
+    flex-flow: column-reverse;
+  }
+  .panel_header .admin_left_panel .admin_add,
+  .panel_header .admin_left_panel .admins {
+    justify-content: center;
+  }
+  .panel_header .admin_left_panel .admin_add span,
+  .panel_header .admin_left_panel .admins span {
+    display: none;
+  }
+  .panel_header .storage {
+    width: fit-content !important;
+  }
+  .panel_header .storage .storageOuter,
+  .panel_header .storage span {
+    display: none;
+  }
+  .panel_header .storage .fa-fire {
+    font-size: 14px;
+    padding: 10px;
+    background-color: #ffc700;
+    border-radius: 10px;
+    color: #ffffff;
+  }
+  .panel {
+    padding-left: 80px !important;
+    padding-right: 10px !important;
   }
   .panel .blogs,
   .panel .projects,
@@ -3869,33 +3984,20 @@ section {
     height: 0;
   }
 }
-.popup {
-  max-width: 300px;
-  width: 100%;
-}
-.popup .back {
-  height: 100%;
-  max-width: 300px;
-  width: 100%;
-  background: #121212;
-  position: fixed;
-  z-index: 1200;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  transition: all 200ms linear;
-  opacity: 0;
-}
-.popup .appear {
+.appear {
   width: 300px;
-  opacity: 0.6;
+  opacity: 1;
 }
-.popup .not_appear {
+
+.not_appear {
   width: 0;
   overflow: hidden;
   scale: 0;
 }
-.popup .cards {
+
+.popup_cards {
+  max-width: 300px;
+  width: 0;
   position: fixed;
   right: 0;
   max-width: 300px;
@@ -3903,78 +4005,59 @@ section {
   width: 100%;
   color: #121212;
   display: flex;
-  flex-flow: column wrap;
-  justify-items: center;
-  align-items: center;
+  flex-flow: column-reverse wrap;
+  justify-items: flex-end;
+  align-items: baseline;
   gap: 10px;
-  top: 0;
-  height: 100%;
+  bottom: 0;
+  height: fit-content;
   overflow-y: scroll;
   padding: 20px 10px 20px 10px;
   overflow-x: hidden;
   transition: all 200ms linear;
 }
-.popup .remove {
+.popup_cards .card {
   display: flex;
-  padding: 0.5rem;
-  background-color: #707aff;
-  transition-property: all;
-  transition-duration: 150ms;
-  color: #ffffff;
-  text-align: center;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-.popup .remove :hover {
-  background-color: #dc2626;
-}
-.popup .card {
-  display: flex;
-  padding: 0.5rem;
+  padding: 0.8rem;
   z-index: 1000;
-  background-color: #ffffff;
+  background-color: #262626;
   text-align: center;
-  flex-direction: column;
-  justify-content: center;
+  flex-flow: row wrap;
+  justify-content: left;
   align-items: center;
   width: 100%;
   min-height: fit-content;
   border-radius: 0.5rem;
   gap: 1rem;
-}
-.popup .card .text {
-  overflow-wrap: break-word;
-  width: 100%;
-}
-.popup .card .progress {
-  background-color: #29ffe5;
-  width: 100%;
-  border-radius: 0.5rem;
-  opacity: 0.7;
-  height: 20px;
-}
-.popup .card .ok {
-  display: flex;
-  background-color: #707aff;
-  color: #ffffff;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border-radius: 0.5rem;
   cursor: pointer;
-  height: 30px;
-  color: 12px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.popup .error {
-  color: #707aff;
+.popup_cards .card span .fa-bug {
+  color: #ff0000;
 }
-.popup .success {
+.popup_cards .card span .fa-square-check {
+  color: #29ffe5;
+}
+.popup_cards .card .text {
+  overflow-wrap: break-word;
+  width: fit-content;
+}
+.popup_cards .card .progress {
+  transition: width 200ms linear;
+  position: absolute;
+  top: 0;
+  background: rgb(38, 38, 38);
+  background: linear-gradient(90deg, rgb(38, 38, 38) 0%, rgb(112, 122, 255) 45%, rgb(255, 0, 0) 100%);
+  left: 0;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  opacity: 1;
+  height: 5px;
+}
+.popup_cards .error {
+  color: #ff0000;
+}
+.popup_cards .success {
   color: #29ffe5;
 }
 

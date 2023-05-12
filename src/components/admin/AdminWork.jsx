@@ -33,7 +33,6 @@ export const AdminWork = ({ index, id, enTitle, arTitle, krTitle, company, from,
       )}
       <div className="workCard flex flex-row justify-between align-center w-100">
         <span className="tableIndex">{index}</span>
-        <span className="tableIndex">{enTitle}</span>
         <span className="tableIndex">{company}</span>
 
         <div className="flex flex-row justify-center align-center gap-2">
