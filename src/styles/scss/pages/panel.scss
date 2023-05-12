@@ -508,6 +508,9 @@
         max-height: 500px;
         overflow-y: scroll;
       }
+      .theProjects::-webkit-scrollbar {
+        display: none;
+      }
       .projectTable {
         font-weight: 600;
       }
@@ -818,6 +821,9 @@
         padding: 20px 0;
         max-height: 500px;
         overflow-y: scroll;
+      }
+      .theWorks::-webkit-scrollbar {
+        display: none;
       }
       .workTable {
         font-weight: 600;

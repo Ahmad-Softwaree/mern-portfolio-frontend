@@ -2879,6 +2879,9 @@ section {
   max-height: 500px;
   overflow-y: scroll;
 }
+.panel .admin_projects .projects .theProjects::-webkit-scrollbar {
+  display: none;
+}
 .panel .admin_projects .projects .projectTable {
   font-weight: 600;
 }
@@ -3161,6 +3164,9 @@ section {
   padding: 20px 0;
   max-height: 500px;
   overflow-y: scroll;
+}
+.panel .admin_works .works .theWorks::-webkit-scrollbar {
+  display: none;
 }
 .panel .admin_works .works .workTable {
   font-weight: 600;
