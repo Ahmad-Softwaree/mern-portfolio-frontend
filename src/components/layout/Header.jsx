@@ -11,7 +11,6 @@ const Header = React.memo(({ isHome, blog, project, work, language: { language, 
   const dispatch = useDispatch();
 
   const handleScroll = useCallback(() => {
-    console.log("hi");
     const home = document.getElementById("home")?.getBoundingClientRect();
     const blog = document.getElementById("blogs")?.getBoundingClientRect();
     const whyUs = document.getElementById("skills")?.getBoundingClientRect();
