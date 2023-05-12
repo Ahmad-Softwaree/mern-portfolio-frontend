@@ -14,16 +14,21 @@ export const Admins = ({ admin: { users, usersLoading }, getAllAdmins }) => {
 
   return (
     <section className="admins_page">
-      <h1>Admins</h1>
+      <div className="flex flex-row justify-center align-center gap-1 w-100">
+        <h1>Admins</h1>
+        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
+          <i className="fa-solid fa-upload"></i>
+          <span>Create</span>
+        </button>
+      </div>
+
       {add && (
         <>
           <Opacity />
           <CreateAdmin setAdd={setAdd} />
         </>
       )}
-      <button onClick={() => setAdd(true)}>
-        <i className="fa-solid fa-square-plus"></i>
-      </button>
+
       {usersLoading && (
         <Box
           className="flex flex-row gap-1 justify-center align-center"

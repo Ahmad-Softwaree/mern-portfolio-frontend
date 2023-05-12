@@ -3481,11 +3481,42 @@ section {
   gap: 1rem;
   background-color: #262626;
   color: #ffffff;
+  padding-bottom: 100px;
+  padding-top: 100px;
+  padding-left: 220px !important;
+  padding-right: 20px;
 }
 .admins_page h1 {
   text-align: center;
   font-size: 26px;
   font-weight: 600;
+}
+.admins_page .uploadButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #00eded;
+  color: #121212;
+  border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.admins_page .yes,
+.admins_page .no {
+  padding: 5px 10px;
+  width: 100px;
+  font-size: 14px;
+  border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.admins_page button:hover {
+  opacity: 1;
 }
 .admins_page .createAdmin {
   inset: 0;
@@ -3767,6 +3798,12 @@ section {
   border-radius: 50%;
 }
 
+@media (max-width: 767px) {
+  .admins_page {
+    padding-left: 80px !important;
+    padding-right: 10px !important;
+  }
+}
 .skeleton {
   background-color: rgb(199, 199, 199);
   margin: 0.75 0;
