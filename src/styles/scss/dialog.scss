@@ -10,6 +10,9 @@
   overflow: hidden;
   scale: 0;
 }
+.popup_cards::-webkit-scrollbar {
+  display: none;
+}
 .popup_cards {
   max-width: 300px;
   width: 0;
@@ -20,6 +23,7 @@
   width: 100%;
   color: colors.$black;
   display: flex;
+
   flex-flow: column-reverse wrap;
   justify-items: flex-end;
   align-items: baseline;

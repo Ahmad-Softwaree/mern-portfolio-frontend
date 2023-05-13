@@ -4038,6 +4038,10 @@ section {
   scale: 0;
 }
 
+.popup_cards::-webkit-scrollbar {
+  display: none;
+}
+
 .popup_cards {
   max-width: 300px;
   width: 0;
