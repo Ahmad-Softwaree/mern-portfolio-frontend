@@ -9,28 +9,33 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
   const [x, setX] = useState(false);
   const [blogs, setBlogs] = useState([]);
 
-  const handleSearch = useCallback((e) => {
-    setInput(e.target.value);
-    setBlogs([]);
-    let input = e.target.value;
-    if (input === "") {
-      setBlogs(blog.blogs);
-      setX(false);
-    } else setX(true);
+  const handleSearch = useCallback(
+    (e) => {
+      setInput(e.target.value);
+      setBlogs([]);
+      let input = e.target.value;
+      if (input === "") {
+        setBlogs(blog.blogs);
+        setX(false);
+      } else setX(true);
+      //this will make search depend on language
+      searchInput(language + "Body", input);
+    },
+    [input]
+  );
 
-    //this will make search depend on language
-    searchInput(language.toString() + "Body", input);
-  }, []);
-
-  const searchInput = useCallback((lang, input) => {
-    for (let i = 0; i < blog.blogs.length; i++) {
-      for (let j = 0; j < input.length; j++) {
-        if (blog.blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j))
-          if (j === input.length - 1) setBlogs((prev) => [...prev, blog.blogs[i]]);
-          else break;
+  const searchInput = useCallback(
+    (lang, input) => {
+      for (let i = 0; i < blog.blogs.length; i++) {
+        for (let j = 0; j < input.length; j++) {
+          if (blog.blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j))
+            if (j === input.length - 1) setBlogs((prev) => [...prev, blog.blogs[i]]);
+            else break;
+        }
       }
-    }
-  }, []);
+    },
+    [input]
+  );
 
   //fetch blogs
 
@@ -74,7 +79,7 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
           </>
         ) : (
           <>
-            {blog.blogs?.map((blog, index) => {
+            {blogs?.map((blog, index) => {
               return (
                 <BlogPageCard
                   file={file}

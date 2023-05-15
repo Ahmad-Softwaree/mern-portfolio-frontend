@@ -7,7 +7,7 @@ const BlogPageCard = ({ time, img, enBody, arBody, krBody, id, language, file })
   return (
     <div className="blogCard flex flex-column justify-between align-center  gap-1">
       <div className="flex flex-column justify-center align-center gap-1 w-100">
-        <img src={`${img}`} alt="blogImage" />
+        <img src={`${img}`} />
         {language === "en" ? (
           <p>{DOMPurify.sanitize(enBody.replace(/<br\s*[\/]?>/gi, ""), { ADD_TAGS: ["br"] }).substring(0, 120) + "..."}</p>
         ) : language === "ar" ? (
