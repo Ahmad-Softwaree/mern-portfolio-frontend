@@ -8,44 +8,44 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
   const [input, setInput] = useState("");
   const [x, setX] = useState(false);
   const [blogs, setBlogs] = useState([]);
+  const handleSearch = (e) => {
+    setInput(e.target.value);
+    setBlogs([]);
+    let input = e.target.value;
+    if (input === "") {
+      //we have saved the blogs in another state so whenever you done search it will come back again.
+      setBlogs(blog.blogs);
+      setX(false);
+    } else {
+      setX(true);
+    }
+    //this will make search depend on language
+    searchInput(language + "Body", input);
+  };
 
-  const handleSearch = useCallback(
-    (e) => {
-      setInput(e.target.value);
-      setBlogs([]);
-      let input = e.target.value;
-      if (input === "") {
-        setBlogs(blog.blogs);
-        setX(false);
-      } else setX(true);
-      //this will make search depend on language
-      searchInput(language + "Body", input);
-    },
-    [input]
-  );
-
-  const searchInput = useCallback(
-    (lang, input) => {
-      for (let i = 0; i < blog.blogs.length; i++) {
-        for (let j = 0; j < input.length; j++) {
-          if (blog.blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j))
-            if (j === input.length - 1) setBlogs((prev) => [...prev, blog.blogs[i]]);
-            else break;
+  const searchInput = (lang, input) => {
+    for (let i = 0; i < blog.blogs.length; i++) {
+      for (let j = 0; j < input.length; j++) {
+        if (blog.blogs[i][lang].toLowerCase().charAt(j) === input.toLowerCase().charAt(j)) {
+          if (j === input.length - 1) {
+            setBlogs((prev) => [...prev, blog.blogs[i]]);
+          }
+        } else {
+          break;
         }
       }
-    },
-    [input]
-  );
+    }
+  };
 
   //fetch blogs
 
   useEffect(() => {
-    getAllBlogs();
-  }, []);
-
-  useEffect(() => {
     setBlogs(blog.blogs);
   }, [blog]);
+
+  useEffect(() => {
+    getAllBlogs();
+  }, []);
 
   return (
     <section className="blogsPage flex flex-column justify-left align-center w-100 gap-2">

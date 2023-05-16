@@ -50,27 +50,24 @@ export const getHomeBlogs =
     }
   };
 
-export const getAllBlogs =
-  ({ page, setTotal }) =>
-  async (dispatch) => {
+export const getAllBlogs = () => async (dispatch) => {
+  dispatch({
+    type: GET_ALL_BLOG_START,
+  });
+  try {
+    const res = await axios.get(`${GET_ALL_BLOG_URL}`, config());
     dispatch({
-      type: GET_ALL_BLOG_START,
+      type: GET_ALL_BLOG_SUCCESS,
+      payload: res.data,
     });
-    try {
-      const res = await axios.get(`${GET_ALL_BLOG_URL}?page=${page}`, config());
-      dispatch({
-        type: GET_ALL_BLOG_SUCCESS,
-        payload: res.data.blogs,
-      });
-      setTotal(res.data.total);
-    } catch (error) {
-      globalError({
-        dispatch,
-        text: error?.response?.data?.error ? error.response.data.error : error?.message,
-        FAIL: GET_ALL_BLOG_FAIL,
-      });
-    }
-  };
+  } catch (error) {
+    globalError({
+      dispatch,
+      text: error?.response?.data?.error ? error.response.data.error : error?.message,
+      FAIL: GET_ALL_BLOG_FAIL,
+    });
+  }
+};
 
 export const getOneBlog =
   ({ blogId }) =>
