@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { memo } from "react";
 import { Element } from "react-scroll";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-const Home = ({ language, file }) => {
+const Home = ({ file }) => {
   return (
     <Element className="w-100" name="home">
       <section id="home" className="home flex flex-row justify-between align-center w-100 position-relative">
@@ -13,7 +13,7 @@ const Home = ({ language, file }) => {
             {file.home.who}
             <span className="ahmadSoftware position-relative">
               {file.home.name}
-              <img src="/images/rect.svg" alt="" className="position-absolute" />
+              <img src="/images/rect.svg" className="position-absolute" />
             </span>
           </h1>
           <h1 className="heading">{file.home.job}</h1>

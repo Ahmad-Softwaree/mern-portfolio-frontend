@@ -24,6 +24,22 @@
 .layout .header nav ul li:hover {
   color: #707aff;
 }
+.layout .header nav ul .animatedNavItem {
+  animation: animatedNavItem 1s ease-out 0.5s infinite alternate both;
+  opacity: 1;
+  transition: all 200ms linear;
+}
+@keyframes animatedNavItem {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .layout .header .activeNav {
   position: relative;
   color: #707aff;
@@ -320,6 +336,10 @@ input::placeholder {
 .loadingSpinner * {
   width: 25px !important;
   height: 25px !important;
+}
+
+.fallback {
+  background-color: #262626;
 }
 
 .opaBackground {
@@ -1522,6 +1542,9 @@ section {
 .h-fit {
   width: fit-content;
 }
+.h-screen {
+  min-height: 100vh;
+}
 
 .object-cover {
   object-fit: cover;
@@ -2678,9 +2701,19 @@ section {
   resize: none;
   height: 500px !important;
   min-height: 50px;
-  border: 2px solid #707aff;
   border-radius: 5px;
   color: #ffffff !important;
+  padding-bottom: 100px !important;
+  border: 2px solid #707aff;
+}
+.panel .admin_blogs .createBlog .text_decoration {
+  border-bottom: 2px solid #707aff;
+  overflow-x: scroll;
+  padding: 10px;
+}
+.panel .admin_blogs .createBlog .text_decoration * {
+  cursor: pointer;
+  padding: 5px;
 }
 .panel .admin_blogs .createBlog .activeInputBorder {
   border-color: #707aff;

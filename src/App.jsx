@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import Blogs from "./pages/blogs/Blogs";
-import Landing from "./pages/landing/Landing";
-import ErrorPage from "./error/ErrorPage";
-import Error from "./error/Error";
-import SingleBlogPage from "./pages/singleBlog/SingleBlogPage";
-import Universal from "./components/Universal";
-import Panel from "./pages/panel/Panel";
-import Login from "./pages/Login";
-import AdminRoutes from "./routes/AdminRoutes";
-import Admins from "./pages/admin/Admins";
+import { lazy, Suspense } from "react";
+import Fallback from "./components/Fallback.jsx";
+const Landing = lazy(() => import("./pages/landing/Landing.jsx"));
+const Layout = lazy(() => import("./components/layout/Layout"));
+const Blogs = lazy(() => import("./pages/blogs/Blogs"));
+const ErrorPage = lazy(() => import("./error/ErrorPage"));
+const Error = lazy(() => import("./error/Error"));
+const SingleBlogPage = lazy(() => import("./pages/singleBlog/SingleBlogPage"));
+const Universal = lazy(() => import("./components/Universal"));
+const Panel = lazy(() => import("./pages/panel/Panel"));
+const Login = lazy(() => import("./pages/Login"));
+const AdminRoutes = lazy(() => import("./routes/AdminRoutes"));
+const Admins = lazy(() => import("./pages/admin/Admins"));
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Universal />}>
@@ -36,7 +37,11 @@ const routes = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={routes} />;
+  return (
+    <Suspense fallback={<Fallback />}>
+      <RouterProvider router={routes} />
+    </Suspense>
+  );
 }
 
 export default App;

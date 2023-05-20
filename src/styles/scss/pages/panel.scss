@@ -278,15 +278,26 @@
         font-weight: 500;
         font-size: 16px;
       }
+
       textarea {
         font-weight: 500;
         font-size: 16px;
         resize: none;
         height: 500px !important;
         min-height: 50px;
-        border: 2px solid colors.$purple;
         border-radius: 5px;
         color: colors.$white !important;
+        padding-bottom: 100px !important;
+        border: 2px solid colors.$purple;
+      }
+      .text_decoration {
+        border-bottom: 2px solid colors.$purple;
+        overflow-x: scroll;
+        padding: 10px;
+        * {
+          cursor: pointer;
+          padding: 5px;
+        }
       }
 
       .activeInputBorder {

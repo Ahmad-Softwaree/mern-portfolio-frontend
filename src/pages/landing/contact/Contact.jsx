@@ -1,7 +1,7 @@
 import React from "react";
 import { Element } from "react-scroll";
 
-const Contact = ({ file, language }) => {
+const Contact = ({ file }) => {
   return (
     <Element className="w-100" name="contact">
       <section id="contact" className="contact flex flex-column justify-left align-start w-100 gap-2">

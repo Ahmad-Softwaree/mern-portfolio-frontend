@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Blogs from "./blogs/Blogs";
 import Contact from "./contact/Contact";
@@ -27,12 +27,12 @@ const Landing = ({ language: { language, file } }) => {
 
   return (
     <div className="landing w-100 p-0 m-0 flex flex-column justify-center align-center gap-2">
-      <Home language={language} file={file} />
+      <Home file={file} />
       <Blogs language={language} file={file} />
       <Skills language={language} file={file} />
       <Projects language={language} file={file} />
       <Works language={language} file={file} />
-      <Contact language={language} file={file} />
+      <Contact file={file} />
     </div>
   );
 };

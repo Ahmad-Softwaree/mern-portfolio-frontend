@@ -33,7 +33,7 @@ const Projects = ({ file, language, project, getAllProjects }) => {
 
   return (
     <>
-      {project.projects.length > 0 && (
+      {project.projects.length > 0 && !project.projectLoading ? (
         <Element className="w-100" name="projects">
           <section id="projects" className="projects flex flex-column justify-left align-center w-100 gap-2">
             <h1 className="heading">{file.nav.projects}</h1>
@@ -49,34 +49,24 @@ const Projects = ({ file, language, project, getAllProjects }) => {
                   : "projectCards flex flex-row  align-center flex-nowrap w-100  gap-2"
               }
             >
-              {project.loading ? (
-                <>
-                  <LoadingBlogSkeleton />
-                  <LoadingBlogSkeleton />
-                  <LoadingBlogSkeleton />
-                </>
-              ) : (
-                <>
-                  {project.projects.map((project, index) => {
-                    return (
-                      <ProjectCard
-                        file={file}
-                        language={language}
-                        key={index}
-                        img={project.image}
-                        enTitle={project.enTitle}
-                        arTitle={project.arTitle}
-                        krTitle={project.krTitle}
-                        enType={project.enType}
-                        arType={project.arType}
-                        krType={project.krType}
-                        id={project._id}
-                        url={project.url}
-                      />
-                    );
-                  })}
-                </>
-              )}
+              {project.projects.map((project, index) => {
+                return (
+                  <ProjectCard
+                    file={file}
+                    language={language}
+                    key={index}
+                    img={project.image}
+                    enTitle={project.enTitle}
+                    arTitle={project.arTitle}
+                    krTitle={project.krTitle}
+                    enType={project.enType}
+                    arType={project.arType}
+                    krType={project.krType}
+                    id={project._id}
+                    url={project.url}
+                  />
+                );
+              })}
             </div>
             <div className="seeMoreAdvice flex flex-row justify-center align-center w-100  gap-1">
               <span>
@@ -86,7 +76,13 @@ const Projects = ({ file, language, project, getAllProjects }) => {
             </div>
           </section>
         </Element>
-      )}
+      ) : project.projects.length === 0 && project.projectLoading ? (
+        <div style={{ overflowX: "hidden" }} className="flex flex-row justify-center align-center w-100 gap-5">
+          <LoadingBlogSkeleton />
+          <LoadingBlogSkeleton />
+          <LoadingBlogSkeleton />
+        </div>
+      ) : null}
     </>
   );
 };

@@ -74,13 +74,15 @@ const Header = React.memo(({ isHome, blog, project, work, language: { language, 
                 </span>
               </li>
 
-              {blog.blogs.length !== 0 && (
+              {blog.blogs.length > 0 && !blog.blogLoading ? (
                 <li className="navItem">
                   <span onClick={() => goNav("blogs")} className={`${activeSection === "blogs" && "activeNav"}`}>
                     {file.nav.blogs}
                   </span>
                 </li>
-              )}
+              ) : blog.blogs.length === 0 && blog.blogLoading ? (
+                <li className="navItem animatedNavItem">{file.nav.blogs}</li>
+              ) : null}
 
               <li className="navItem">
                 <span onClick={() => goNav("skills")} className={`${activeSection === "skills" && "activeNav"}`}>
@@ -88,21 +90,25 @@ const Header = React.memo(({ isHome, blog, project, work, language: { language, 
                 </span>
               </li>
 
-              {project.projects.length !== 0 && (
+              {project.projects.length > 0 && !project.projectLoading ? (
                 <li className="navItem">
                   <span onClick={() => goNav("projects")} className={`${activeSection === "projects" && "activeNav"}`}>
                     {file.nav.projects}
                   </span>
                 </li>
-              )}
+              ) : project.projects.length === 0 && project.projectLoading ? (
+                <li className="navItem animatedNavItem">{file.nav.projects}</li>
+              ) : null}
 
-              {work.works.length !== 0 && (
+              {work.works.length > 0 && !work.worksLoading ? (
                 <li className="navItem">
                   <span onClick={() => goNav("works")} className={`${activeSection === "works" && "activeNav"}`}>
                     {file.nav.works}
                   </span>
                 </li>
-              )}
+              ) : work.works.length === 0 && work.workLoading ? (
+                <li className="navItem animatedNavItem">{file.nav.works}</li>
+              ) : null}
 
               <li className="navItem">
                 <span onClick={() => goNav("contact")} className={`${activeSection === "contact" && "activeNav"}`}>

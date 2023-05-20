@@ -14,6 +14,7 @@ const Blogs = ({ getHomeBlogs, blog, language, file }) => {
   //mouse dragging event
 
   const handleMouseDown = (event) => {
+    console.log(`render-handleMousedown ${render}`);
     setIsDragging(true);
     setStartX(event.clientX - containerRef.current.scrollLeft);
   };
@@ -35,7 +36,7 @@ const Blogs = ({ getHomeBlogs, blog, language, file }) => {
 
   return (
     <>
-      {blog.blogs.length > 0 && (
+      {blog.blogs.length > 0 && !blog.blogLoading ? (
         <Element className="w-100" name="blogs">
           <section id="blogs" className="blogs flex flex-column justify-left align-center w-100 gap-3">
             <h1 className="heading">{file.nav.blogs}</h1>
@@ -51,31 +52,21 @@ const Blogs = ({ getHomeBlogs, blog, language, file }) => {
                   : "blogCards flex flex-row  align-center flex-nowrap w-100  gap-2"
               }
             >
-              {blog.loading ? (
-                <>
-                  <LoadingBlogSkeleton />
-                  <LoadingBlogSkeleton />
-                  <LoadingBlogSkeleton />
-                </>
-              ) : (
-                <>
-                  {blog.blogs.map((blog, index) => {
-                    return (
-                      <BlogCard
-                        file={file}
-                        language={language}
-                        key={index}
-                        img={blog.image}
-                        id={blog._id}
-                        enBody={blog.enBody}
-                        arBody={blog.arBody}
-                        krBody={blog.krBody}
-                        time={blog.createdAt}
-                      />
-                    );
-                  })}
-                </>
-              )}
+              {blog.blogs.map((blog, index) => {
+                return (
+                  <BlogCard
+                    file={file}
+                    language={language}
+                    key={index}
+                    img={blog.image}
+                    id={blog._id}
+                    enBody={blog.enBody}
+                    arBody={blog.arBody}
+                    krBody={blog.krBody}
+                    time={blog.createdAt}
+                  />
+                );
+              })}
             </div>
             <div className="seeMoreAdvice flex flex-row justify-center align-center w-100  gap-1">
               <span>
@@ -89,7 +80,13 @@ const Blogs = ({ getHomeBlogs, blog, language, file }) => {
             </Link>
           </section>
         </Element>
-      )}
+      ) : blog.blogLoading && blog.blogs.length === 0 ? (
+        <div style={{ overflowX: "hidden" }} className="flex flex-row justify-center align-center w-100 gap-5">
+          <LoadingBlogSkeleton />
+          <LoadingBlogSkeleton />
+          <LoadingBlogSkeleton />
+        </div>
+      ) : null}
     </>
   );
 };

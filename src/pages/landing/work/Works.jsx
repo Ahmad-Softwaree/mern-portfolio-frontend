@@ -34,7 +34,7 @@ const Works = ({ file, language, work, getAllWorks }) => {
   return (
     <>
       {" "}
-      {work.works.length > 0 && (
+      {work.works.length > 0 && !work.workLoading ? (
         <Element name="works" className="w-100">
           <section id="works" className="works flex flex-column justify-left align-center w-100 gap-2">
             <h1 className="heading">{file.work.title}</h1>
@@ -50,33 +50,23 @@ const Works = ({ file, language, work, getAllWorks }) => {
                   : "workCards flex flex-row  align-center flex-nowrap w-100  gap-2"
               }
             >
-              {work.works.length === 0 && work.loading ? (
-                <>
-                  <LoadingBlogSkeleton />
-                  <LoadingBlogSkeleton />
-                  <LoadingBlogSkeleton />
-                </>
-              ) : work.works.length > 0 && !work.loading ? (
-                <>
-                  {work.works.map((work, index) => {
-                    return (
-                      <WorkCard
-                        file={file}
-                        language={language}
-                        id={work._id}
-                        key={index}
-                        image={work.image}
-                        companyName={work.companyName}
-                        enTitle={work.enTitle}
-                        arTitle={work.arTitle}
-                        krTitle={work.krTitle}
-                        from={work.from}
-                        to={work.to}
-                      />
-                    );
-                  })}
-                </>
-              ) : null}
+              {work.works.map((work, index) => {
+                return (
+                  <WorkCard
+                    file={file}
+                    language={language}
+                    id={work._id}
+                    key={index}
+                    image={work.image}
+                    companyName={work.companyName}
+                    enTitle={work.enTitle}
+                    arTitle={work.arTitle}
+                    krTitle={work.krTitle}
+                    from={work.from}
+                    to={work.to}
+                  />
+                );
+              })}
             </div>
 
             <div className="seeMoreAdvice flex flex-row justify-center align-center w-100  gap-1">
@@ -87,7 +77,14 @@ const Works = ({ file, language, work, getAllWorks }) => {
             </div>
           </section>
         </Element>
-      )}{" "}
+      ) : work.works.length === 0 && work.workLoading ? (
+        <div style={{ overflowX: "hidden" }} className="flex flex-row justify-center align-center w-100 gap-5">
+          {" "}
+          <LoadingBlogSkeleton />
+          <LoadingBlogSkeleton />
+          <LoadingBlogSkeleton />
+        </div>
+      ) : null}
     </>
   );
 };

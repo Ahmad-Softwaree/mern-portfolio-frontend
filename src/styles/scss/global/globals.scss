@@ -48,6 +48,11 @@ input::placeholder {
     height: 25px !important;
   }
 }
+
+.fallback {
+  background-color: colors.$lightBlack;
+}
+
 .opaBackground {
   background: colors.$white;
   opacity: 0.25;

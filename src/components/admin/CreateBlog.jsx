@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
 import { createBlog } from "../../actions/blog";
@@ -99,6 +98,7 @@ const CreateBlog = React.memo(({ image: { blog }, createBlog, blog: { blogs, cre
             </div>
           )}
         </div>
+
         <textarea
           onChange={onChange}
           onKeyDown={onKeyDown}
@@ -108,6 +108,7 @@ const CreateBlog = React.memo(({ image: { blog }, createBlog, blog: { blogs, cre
           id="enBody"
           className={enBody !== "" ? "activeInputBorder" : null}
         />
+
         <textarea
           onChange={onChange}
           onKeyDown={onKeyDown}

@@ -32,6 +32,9 @@
   &-fit {
     width: fit-content;
   }
+  &-screen {
+    min-height: 100vh;
+  }
 }
 
 .object {
