@@ -1,7 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 
-const MobileNav = ({ activeSection, goNav, mobNav, blogs, works, projects, language: { file, language } }) => {
+const MobileNav = ({
+  activeSection,
+  goNav,
+  mobNav,
+  blog: { blogs, blogLoading },
+  work: { works, workLoading },
+  project: { projects, projectLoading },
+  language: { file, language },
+}) => {
   return (
     <nav className={`${mobNav ? "mobileNav mobNavAnim" : "mobileNav"}`}>
       <ul className="flex flex-column justify-center align-center gap-2 w-100">
@@ -10,34 +18,40 @@ const MobileNav = ({ activeSection, goNav, mobNav, blogs, works, projects, langu
             {file.nav.home}
           </span>
         </li>
-        {blogs.length !== 0 && (
+        {blogs.length > 0 && !blogLoading ? (
           <li className="navItem">
             <span onClick={() => goNav("blogs")} className={`${activeSection === "blogs" && "activeNav"}`}>
               {file.nav.blogs}
             </span>
           </li>
-        )}
+        ) : blogs.length === 0 && blogLoading ? (
+          <li className="navItem animatedNavItem">{file.nav.blogs}</li>
+        ) : null}
 
         <li className="navItem">
           <span onClick={() => goNav("skills")} className={`${activeSection === "skills" && "activeNav"}`}>
             {file.nav.skills}
           </span>
         </li>
-        {projects.length !== 0 && (
+        {projects.length > 0 && !projectLoading ? (
           <li className="navItem">
             <span onClick={() => goNav("projects")} className={`${activeSection === "projects" && "activeNav"}`}>
               {file.nav.projects}
             </span>
           </li>
-        )}
+        ) : projects.length === 0 && projectLoading ? (
+          <li className="navItem animatedNavItem">{file.nav.projects}</li>
+        ) : null}
 
-        {works.length !== 0 && (
+        {works.length > 0 && !workLoading ? (
           <li className="navItem">
             <span onClick={() => goNav("works")} className={`${activeSection === "works" && "activeNav"}`}>
               {file.nav.works}
             </span>
           </li>
-        )}
+        ) : works.length === 0 && workLoading ? (
+          <li className="navItem animatedNavItem">{file.nav.works}</li>
+        ) : null}
 
         <li className="navItem">
           <span onClick={() => goNav("contact")} className={`${activeSection === "contact" && "activeNav"}`}>
@@ -50,9 +64,9 @@ const MobileNav = ({ activeSection, goNav, mobNav, blogs, works, projects, langu
 };
 
 const mapStateToProps = (state) => ({
-  blogs: state.blog.blogs,
-  projects: state.project.projects,
-  works: state.work.works,
+  blogs: state.blog,
+  projects: state.project,
+  works: state.work,
   language: state.language,
 });
 
