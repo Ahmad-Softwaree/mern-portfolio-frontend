@@ -14,7 +14,6 @@ const Blogs = ({ getHomeBlogs, blog, language, file }) => {
   //mouse dragging event
 
   const handleMouseDown = (event) => {
-    console.log(`render-handleMousedown ${render}`);
     setIsDragging(true);
     setStartX(event.clientX - containerRef.current.scrollLeft);
   };
