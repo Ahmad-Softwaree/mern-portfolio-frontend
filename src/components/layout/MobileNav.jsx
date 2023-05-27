@@ -64,9 +64,9 @@ const MobileNav = ({
 };
 
 const mapStateToProps = (state) => ({
-  blogs: state.blog,
-  projects: state.project,
-  works: state.work,
+  blog: state.blog,
+  project: state.project,
+  work: state.work,
   language: state.language,
 });
 
