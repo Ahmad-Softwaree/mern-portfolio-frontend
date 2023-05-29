@@ -476,6 +476,8 @@ img {
   text-align: center;
   font-weight: 600;
   animation: 2s linear fallback infinite;
+  color: #ffffff;
+  opacity: 0.5;
 }
 
 @keyframes fallback {
