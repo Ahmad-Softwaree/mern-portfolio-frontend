@@ -7,18 +7,10 @@ import { Spinner } from "@chakra-ui/react";
 import { Navigate, Outlet } from "react-router-dom";
 import AdminLayout from "../components/layout/AdminLayout";
 import { ENGLISH } from "../actions/types";
-export const AdminRoutes = ({ loadUser, admin: { user } }) => {
+import Fallback from "../components/Fallback";
+export const AdminRoutes = ({ loadUser, admin: { user, loading } }) => {
   const location = useLocation();
-  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLoading(false);
-    }, [3000]);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   useEffect(() => {
     loadUser();
@@ -30,7 +22,7 @@ export const AdminRoutes = ({ loadUser, admin: { user } }) => {
   //there must be user and not verified yet
   return loading ? (
     <div className="panelLoading flex flex-row justify-center items-center">
-      <Spinner minWidth={`100px`} minHeight={`100px`} size={`xl`} />
+      <Fallback />
     </div>
   ) : Object.keys(user)?.length !== 0 && !loading ? (
     <>

@@ -23,6 +23,10 @@ const Login = React.memo(({ login, admin: { loginLoading } }) => {
       type: ENGLISH,
     });
   }, []);
+
+  const animate = (e) => {
+    e.target.nextElementSibling.classList.toggle("animateInputTextFocus");
+  };
   return (
     <div className="loginPage flex flex-row justify-center align-center w-100 position-relative">
       <Link className="backToHome" to={`/`}>
@@ -39,19 +43,27 @@ const Login = React.memo(({ login, admin: { loginLoading } }) => {
       >
         <div className="loginBox flex flex-column justify-center align-center gap-2">
           <h1>Admin Login</h1>
-          <input
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="enter your email"
-            className="emailInput"
-          />
-          <div className="w-100 flex flex-row justify-between align-center passwordInput">
+          <div className="flex flex-row justify-left align-center w-100 position-relative">
             <input
               onChange={onChange}
               onKeyDown={onKeyDown}
+              onBlur={animate}
+              onFocus={animate}
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              className="emailInput"
+            />
+            <span className="animateInputText position-absolute">Your Email:</span>
+          </div>
+
+          <div className="w-100 flex flex-row justify-between align-center passwordInput position-relative">
+            <input
+              onChange={onChange}
+              onKeyDown={onKeyDown}
+              onBlur={animate}
+              onFocus={animate}
               value={password}
               placeholder="Enter the password"
               type={show ? "text" : "password"}
@@ -59,6 +71,7 @@ const Login = React.memo(({ login, admin: { loginLoading } }) => {
               id="password"
               className="w-100"
             />
+            <span className="animateInputText position-absolute">Your Password:</span>
             {!show ? (
               <i onClick={() => setShow(true)} className="fa-solid fa-eye"></i>
             ) : (

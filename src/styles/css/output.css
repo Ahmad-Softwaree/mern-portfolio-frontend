@@ -471,6 +471,27 @@ img {
   font-weight: 600;
 }
 
+.fallbackText {
+  font-size: max(6vw, 2rem) !important;
+  text-align: center;
+  font-weight: 600;
+  animation: 2s linear fallback infinite;
+}
+
+@keyframes fallback {
+  0% {
+    opacity: 0.1;
+  }
+  30% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 section {
   padding-inline: 60px;
   padding-top: 80px;
@@ -2374,6 +2395,7 @@ section {
   border-radius: 5px;
   width: 100%;
   max-width: 400px;
+  z-index: 10;
 }
 .loginPage .backToHome {
   position: absolute;
@@ -2389,6 +2411,23 @@ section {
 .loginPage p {
   margin: 0;
   text-align: center;
+}
+.loginPage input {
+  overflow: auto;
+}
+.loginPage input {
+  position: relative;
+  transition: all 100ms linear;
+}
+.loginPage .animateInputText {
+  top: -1.6rem;
+  color: white;
+  left: 0;
+  opacity: 0;
+  transition: all 100ms linear;
+}
+.loginPage .animateInputTextFocus {
+  opacity: 100;
 }
 .loginPage .emailInput {
   width: 100%;

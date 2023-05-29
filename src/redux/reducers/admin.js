@@ -27,6 +27,7 @@ const initialState = {
   storageSize: 0,
   storageSizeLoading: false,
   loginLoading: false,
+  loading: true,
   users: [],
   usersLoading: false,
   deleteLoading: false,
@@ -42,6 +43,7 @@ export default function admin(state = initialState, action) {
         ...state,
         user: payload.user,
         token: payload.token,
+        loading: false,
       };
     case AUTH_ERROR:
       return {
@@ -53,11 +55,13 @@ export default function admin(state = initialState, action) {
       return {
         ...state,
         loginLoading: true,
+        loading: true,
       };
     case LOGIN_FAIL:
       return {
         ...state,
         loginLoading: false,
+        loading: false,
       };
     case LOGIN_SUCCESS:
       return {
@@ -65,6 +69,7 @@ export default function admin(state = initialState, action) {
         loginLoading: false,
         user: payload.user,
         token: payload.token,
+        loading: false,
       };
     case GET_ALL_ADMINS_START:
       return {

@@ -23,7 +23,7 @@ const routes = createBrowserRouter(
       <Route path="/blogs" element={<Layout isHome={false} />} errorElement={<Error />}>
         {/* single blog  route */}
         <Route index element={<Blogs />} errorElement={<Error />} />
-        <Route path=":id" element={<SingleBlogPage B errorElement={<Error />} />} />
+        <Route path=":id" element={<SingleBlogPage errorElement={<Error />} />} />
       </Route>
       <Route path="/login" element={<Login />} errorElement={<Error />} />
       <Route element={<AdminRoutes />} errorElement={<Error />}>

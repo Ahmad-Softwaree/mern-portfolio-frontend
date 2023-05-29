@@ -10,6 +10,7 @@
     border-radius: 5px;
     width: 100%;
     max-width: 400px;
+    z-index: 10;
   }
 
   .backToHome {
@@ -28,6 +29,25 @@
   p {
     margin: 0;
     text-align: center;
+  }
+  input {
+    overflow: auto;
+  }
+  input {
+    position: relative;
+    transition: all 100ms linear;
+  }
+
+  .animateInputText {
+    top: -1.6rem;
+    color: white;
+    left: 0;
+    opacity: 0;
+    transition: all 100ms linear;
+  }
+
+  .animateInputTextFocus {
+    opacity: 100;
   }
   .emailInput {
     width: 100%;

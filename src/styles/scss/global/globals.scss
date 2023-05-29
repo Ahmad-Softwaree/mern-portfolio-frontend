@@ -179,6 +179,27 @@ img {
   font-weight: 600;
 }
 
+.fallbackText {
+  font-size: max(6vw, 2rem) !important;
+  text-align: center;
+  font-weight: 600;
+  animation: 2s linear fallback infinite;
+}
+
+@keyframes fallback {
+  0% {
+    opacity: 0.1;
+  }
+  30% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 //global style for all sections
 
 section {
