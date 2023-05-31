@@ -13,6 +13,7 @@ const Projects = ({ file, language, project, getAllProjects }) => {
   const [touchEnd, setTouchEnd] = useState(0);
   const [dragStart, setDragStart] = useState(0);
   const [dragEnd, setDragEnd] = useState(0);
+  const [y, setY] = useState(0);
   useEffect(() => {
     getAllProjects({});
   }, []);
@@ -63,6 +64,8 @@ const Projects = ({ file, language, project, getAllProjects }) => {
   const onTouchEnd = (e) => {
     setTouchEnd(e.changedTouches[0].clientX);
     setCanMove(true);
+
+    setY(Math.abs(e.changedTouches[0].clientY - touchStart));
   };
   const onTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
@@ -70,25 +73,29 @@ const Projects = ({ file, language, project, getAllProjects }) => {
   };
 
   useEffect(() => {
-    if (touchStart - 60 > touchEnd) {
-      if (canMove) {
-        if (active === project?.projects.length - 1) {
-          setActive(0);
-        } else {
-          setActive((prev) => prev + 1);
+    const scroll = () => {
+      if (y > 10) return;
+      if (touchStart - 60 > touchEnd) {
+        if (canMove) {
+          if (active === project?.projects.length - 1) {
+            setActive(0);
+          } else {
+            setActive((prev) => prev + 1);
+          }
         }
-      }
-    } else if (touchEnd - 60 > touchStart) {
-      if (canMove) {
-        if (active === 0) {
-          setActive(project?.projects.length - 1);
-        } else {
-          setActive((prev) => prev - 1);
+      } else if (touchEnd - 60 > touchStart) {
+        if (canMove) {
+          if (active === 0) {
+            setActive(project?.projects.length - 1);
+          } else {
+            setActive((prev) => prev - 1);
+          }
         }
+        setCanMove(false);
       }
-      setCanMove(false);
-    }
-  }, [touchStart, touchEnd]);
+    };
+    scroll();
+  }, [touchStart, touchEnd, y]);
 
   return (
     <>
