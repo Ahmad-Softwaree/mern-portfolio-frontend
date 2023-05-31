@@ -1785,7 +1785,6 @@ section {
 
 .projects {
   user-select: none;
-  touch-action: none;
   padding-inline: 0 !important;
 }
 .projects .projectCards {
