@@ -23,11 +23,13 @@ const Projects = ({ file, language, project, getAllProjects }) => {
 
   useEffect(() => {
     let project = document.querySelectorAll(".projectCard")[0];
-    projectRef.current?.scrollTo((project?.offsetWidth + 36) * active, 0);
+    projectRef.current?.scrollTo({
+      left: (project?.offsetWidth + 36) * active,
+      behavior: "smooth",
+    });
   }, [active]);
 
   const onDragEnd = (e) => {
-    console.log(e.clientX);
     setDragStart(e.clientX);
     setCanMove(true);
   };
