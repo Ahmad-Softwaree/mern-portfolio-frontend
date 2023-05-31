@@ -12,7 +12,7 @@ export const AdminWork = ({ index, id, enTitle, arTitle, krTitle, company, from,
       {wantToDelete && (
         <>
           <Opacity />
-          <WantToDelete setWantToDelete={setWantToDelete} id={id} image={image} blog={false} work={true} />
+          <WantToDelete setWantToDelete={setWantToDelete} id={id} image={image} method={`work`} />
         </>
       )}
       {update && (

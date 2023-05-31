@@ -17,18 +17,24 @@ const SingleBlogPage = ({ blog: { blog, blogLoading }, getOneBlog, language: { f
     <section className="singleBlog flex flex-column justify-left align-start gap-2 w-100">
       {Object.keys(blog)?.length !== 0 && !blogLoading ? (
         <>
-          <h1 className="blogHeader">{language === "en" ? blog.enTitle : language === "ar" ? blog.arTitle : blog.krTitle}</h1>
           <img src={`${blog.image}`} alt="" className="blogImage" />
-          {language === "en" ? (
-            <p dangerouslySetInnerHTML={{ __html: blog.enBody }}></p>
-          ) : language === "ar" ? (
-            <p dangerouslySetInnerHTML={{ __html: blog.arBody }}></p>
-          ) : (
-            <p dangerouslySetInnerHTML={{ __html: blog.krBody }}></p>
-          )}
-          <span className="blogTime">
-            {moment(blog.createdAt).format("MMMM Do YYYY")} {moment(blog.createdAt).format("dddd")}
-          </span>
+          <div className="overImage"></div>
+          <div className="content flex w-100 flex-column justify-left align-center gap-2">
+            <div className="blogHeader flex flex-column w-100 justify-center align-center gap-2">
+              <h1>{language === "en" ? blog.enTitle : language === "ar" ? blog.arTitle : blog.krTitle}</h1>
+              <div className=" blogOwner flex flex-column justify-left align-center ">
+                <img src={`${blog.user.image}`} alt="" />
+                <span>{file.singleBlog.name}</span>
+                <p>{file.singleBlog.ceo}</p>
+              </div>
+            </div>
+
+            <p dangerouslySetInnerHTML={{ __html: language === "en" ? blog.enBody : language === "ar" ? blog.arBody : blog.krBody }}></p>
+            <span className={`blogTime flex flex-row justify-left align-center gap-1 ${language !== "en" && "justify-right"}`}>
+              <i className="fa-regular fa-clock"></i>
+              {moment(blog.createdAt).format("MMMM Do YYYY")} {moment(blog.createdAt).format("dddd")}
+            </span>
+          </div>
         </>
       ) : blogLoading ? (
         <LoadingSingleBlogSkeleton />

@@ -5,7 +5,7 @@ import Opacity from "../Opacity";
 import WantToDelete from "./WantToDelete";
 import UpdateProject from "./UpdateProject";
 
-export const AdminProject = ({ index, id, enTitle, arTitle, krTitle, enType, krType, arType, url, image }) => {
+export const AdminProject = ({ index, id, enTitle, arTitle, krTitle, enType, krType, arType, url, image, stacks }) => {
   const [wantToDelete, setWantToDelete] = useState(false);
   const [update, setUpdate] = useState(false);
   return (
@@ -13,7 +13,7 @@ export const AdminProject = ({ index, id, enTitle, arTitle, krTitle, enType, krT
       {wantToDelete && (
         <>
           <Opacity />
-          <WantToDelete setWantToDelete={setWantToDelete} id={id} image={image} blog={false} work={false} />
+          <WantToDelete setWantToDelete={setWantToDelete} id={id} image={image} method={`project`} />
         </>
       )}
       {update && (
@@ -28,6 +28,7 @@ export const AdminProject = ({ index, id, enTitle, arTitle, krTitle, enType, krT
             arType={arType}
             url={url}
             id={id}
+            oldStacks={stacks}
             oldImage={image}
             setUpdate={setUpdate}
           />

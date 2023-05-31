@@ -7,6 +7,8 @@ import admin from "./admin";
 import error from "./error";
 import success from "./success";
 import image from "./image";
+import category from "./category";
+import stack from "./stack";
 export default combineReducers({
   blog,
   project,
@@ -16,4 +18,6 @@ export default combineReducers({
   error,
   success,
   image,
+  category,
+  stack,
 });

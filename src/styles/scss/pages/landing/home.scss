@@ -4,9 +4,12 @@
 @use "../../util/hover.scss" as hover;
 .home {
   min-height: 100vh;
+  overflow: hidden;
+  padding-inline: 30px !important;
   .leftHome,
   .rightHome {
-    width: 50%;
+    width: 60%;
+    min-width: 200px;
   }
 
   .rightHome {
@@ -36,6 +39,30 @@
       font-weight: 500;
       font-size: 32px;
       color: colors.$white;
+    }
+
+    .jobs {
+      height: 60px;
+      overflow: hidden;
+      position: relative;
+      width: 600px;
+      .innerJobs {
+        transition: all 800ms ease-in-out;
+        position: absolute;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-content: baseline;
+        top: 0;
+        left: 0;
+        width: 100%;
+        span {
+          font-size: 34px;
+          font-weight: 600;
+          height: 60px;
+          color: colors.$purple;
+        }
+      }
     }
 
     .showCV {
@@ -72,7 +99,6 @@
 
   .blurs {
     width: fit-content;
-
     .blur {
       width: 227.11px;
       height: 222.5px;
@@ -102,6 +128,13 @@
       }
       p {
         font-size: 18px !important;
+      }
+      .jobs {
+        .innerJobs {
+          span {
+            font-size: 28px !important;
+          }
+        }
       }
     }
 
@@ -160,14 +193,21 @@
 
 @include res.responsive(small) {
   .home {
-    .leftHome {
-    }
     .blurs {
       width: 80% !important;
     }
     .blur {
       width: 100% !important;
       height: 140px !important;
+    }
+    .leftHome {
+      .jobs {
+        .innerJobs {
+          span {
+            font-size: 24px !important;
+          }
+        }
+      }
     }
   }
 }

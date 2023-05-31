@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
-import BlogPageCard from "../../components/blogs/BlogPageCard";
 import LoadingBlogSkeleton from "../../components/loading/LoadingBlogSkeleton";
 import { getAllBlogs } from "../../actions/blog";
+import BlogCard from "../../components/blogs/BlogCard";
 import PropTypes from "prop-types";
 const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
   const [input, setInput] = useState("");
@@ -52,7 +52,15 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
       <div className="flex flex-row justify-between align-center w-100">
         <h1 className="heading">{file.nav.blogs}</h1>
         <div className="searchInputDiv flex flex-row justify-between align-center">
-          <input value={input} onChange={handleSearch} className="searchInput" type="text" name="searchBar" id="searchBar" />
+          <input
+            placeholder="Search for blog..."
+            value={input}
+            onChange={handleSearch}
+            className="searchInput"
+            type="text"
+            name="searchBar"
+            id="searchBar"
+          />
           {!x ? (
             <img className="searchGlass" src="/images/Search.svg" alt="" />
           ) : (
@@ -81,16 +89,15 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
           <>
             {blogs?.map((blog, index) => {
               return (
-                <BlogPageCard
+                <BlogCard
                   file={file}
                   language={language}
                   key={index}
-                  id={blog._id}
                   img={blog.image}
-                  enBody={blog.enBody}
-                  arBody={blog.arBody}
-                  krBody={blog.krBody}
-                  time={blog.createdAt}
+                  id={blog._id}
+                  enTitle={blog.enTitle}
+                  arTitle={blog.arTitle}
+                  krTitle={blog.krTitle}
                 />
               );
             })}

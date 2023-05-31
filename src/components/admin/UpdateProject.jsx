@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -16,11 +16,15 @@ const UpdateProject = ({
   id,
   oldImage,
   updateProject,
+  oldStacks,
   image,
   setUpdate,
+  stack,
   project: { updateProjectLoading },
 }) => {
   const [imageChanged, setImageChanged] = useState(false);
+  const [stacks, setStacks] = useState(oldStacks);
+
   const [inputs, setInputs] = useState({
     enTitle: enTitle,
     arTitle: arTitle,
@@ -31,6 +35,8 @@ const UpdateProject = ({
     url: url,
   });
   const dispatch = useDispatch();
+  const [hover, setHover] = useState("");
+
   const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onKeyDown = (e) => {
     if (e.key === "13" && !e.shiftKey) {
@@ -48,9 +54,12 @@ const UpdateProject = ({
         oldImage,
         setInputs,
         imageChanged,
+        stacks,
+        setStacks,
       });
     }
   };
+
   return (
     <form
       onSubmit={(e) => {
@@ -69,6 +78,8 @@ const UpdateProject = ({
           oldImage,
           setInputs,
           imageChanged,
+          stacks,
+          setStacks,
         });
       }}
       className="createProject position-fixed flex flex-column justify-center align-center w-100 gap-2 update"
@@ -184,6 +195,33 @@ const UpdateProject = ({
         id="url"
         className={inputs.url !== "" ? "activeInputBorder" : null}
       />
+      <div className="flex flex-row justify-left align-center gap-1 w-100 flex-wrap">
+        {stack.stacks.map((val, index) => {
+          const isStackIncluded = stacks.some((item) => item.stack._id === val._id);
+          return (
+            <div
+              key={index}
+              onMouseEnter={() => setHover(val._id)}
+              onMouseLeave={() => setHover("")}
+              onClick={() => {
+                if (isStackIncluded) {
+                  setStacks((prev) => prev.filter((one) => one.stack._id !== val._id));
+                } else {
+                  setStacks((prev) => [...prev, { stack: { _id: val._id } }]);
+                }
+              }}
+              style={
+                isStackIncluded || hover === val._id
+                  ? { color: "white", border: `2px solid ${val.color}`, backgroundColor: val.color }
+                  : { color: val.color, border: `2px solid ${val.color}`, backgroundColor: "transparent" }
+              }
+              className="stack"
+            >
+              {val.name}
+            </div>
+          );
+        })}
+      </div>
       <div className="publishAndCancel flex flex-row justify-center align-center gap-2">
         <span
           className="cancelLink"
@@ -226,12 +264,14 @@ UpdateProject.propTypes = {
   admin: PropTypes.object.isRequired,
   project: PropTypes.object.isRequired,
   image: PropTypes.object.isRequired,
+  stack: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   admin: state.admin,
   project: state.project,
   image: state.image,
+  stack: state.stack,
 });
 
 const mapDispatchToProps = { updateProject };

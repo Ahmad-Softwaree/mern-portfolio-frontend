@@ -1,5 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Karla:wght@200;300;400;500;600;700;800&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@800;900&family=Roboto:wght@400;500;700;900&family=Varela&family=Varela+Round&display=swap");
 @import url("https://fonts.cdnfonts.com/css/cubano");
+/* Create my own font rabar-39 */
+@font-face {
+  font-family: rabar-39;
+  src: url(/fonts/Rabar_039.ttf);
+}
+.sectionHeader {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+@media (min-width: 767px) and (max-width: 1023px) {
+  .sectionHeader {
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
+@media (max-width: 767px) {
+  .sectionHeader {
+    font-size: 26px;
+    font-weight: 500;
+  }
+}
 .layout .header {
   position: fixed;
   z-index: 999;
@@ -13,16 +35,28 @@
 }
 .layout .header nav ul {
   padding-right: 50px;
+  min-height: 80px;
 }
 .layout .header nav ul li {
-  font-size: 21px;
+  min-height: 80px;
+  font-size: 18px;
   font-weight: bold;
   list-style-type: none;
-  transition: all 200ms;
   cursor: pointer;
 }
-.layout .header nav ul li:hover {
-  color: #707aff;
+.layout .header nav ul li span {
+  padding-inline: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  border-bottom: 2px solid transparent;
+  align-items: center;
+  min-height: 80px;
+  transition: all 200ms;
+}
+.layout .header nav ul li span:hover {
+  color: #f9004d;
+  border-color: #f9004d;
 }
 .layout .header nav ul .animatedNavItem {
   animation: animatedNavItem 1s ease-out 0.5s infinite alternate both;
@@ -42,23 +76,9 @@
 }
 .layout .header .activeNav {
   position: relative;
-  color: #707aff;
+  color: #f9004d;
   transition: all 200ms ease;
-}
-.layout .header .activeNav::after {
-  bottom: 0;
-  content: "";
-  position: absolute;
-  width: 10px;
-  border-radius: 50%;
-  background-color: #707aff;
-  height: 10px;
-  bottom: -10px;
-  transform-origin: bottom center;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  border-bottom: 2px solid #f9004d;
 }
 .layout .header .languageDiv,
 .layout .header .blogLanguageDiv {
@@ -67,10 +87,10 @@
   bottom: 0;
   margin-top: auto;
   margin-bottom: auto;
-  color: #707aff;
+  color: #f9004d;
   width: 68px;
   height: 30px;
-  border: 1.5px solid #707aff;
+  border: 1.5px solid #f9004d;
   gap: 10px;
   border-radius: 10px;
   cursor: pointer;
@@ -86,7 +106,7 @@
 .layout .header .languageDiv .languageDivBox:hover,
 .layout .header .blogLanguageDiv .languageDivBox:hover {
   color: #ffffff;
-  background-color: #707aff;
+  background-color: #f9004d;
 }
 .layout .header .languageDiv .languagesList,
 .layout .header .blogLanguageDiv .languagesList {
@@ -103,11 +123,12 @@
   text-align: center;
   background-color: #262626;
   border-radius: 6px;
+  font-size: 14px;
   transition: all 200ms;
 }
 .layout .header .languageDiv .languagesList span:hover,
 .layout .header .blogLanguageDiv .languagesList span:hover {
-  background-color: #707aff;
+  background-color: #f9004d;
 }
 .layout .header .mobileNav {
   display: flex;
@@ -122,6 +143,7 @@
   right: 0;
   left: 0;
   background-color: #121212;
+  transition: all 200ms ease-in-out;
 }
 .layout .header .mobileNav ul {
   padding-right: 0 !important;
@@ -138,47 +160,15 @@
   justify-content: center;
   align-items: center;
 }
-.layout .header .mobNavAnim {
-  animation: nav 250ms ease;
+.layout .header .hide {
+  overflow: hidden;
+  height: 0;
+  scale: 0;
 }
-@keyframes nav {
-  0% {
-    top: 1rem;
-    opacity: 0.6;
-  }
-  25% {
-    top: 1.5rem;
-    opacity: 0.7;
-  }
-  50% {
-    opacity: 0.8;
-    top: 2.5rem;
-  }
-  75% {
-    opacity: 0.9;
-    top: 3.5rem;
-  }
-  100% {
-    opacity: 1;
-    top: 5rem;
-  }
-}
-.layout .header .xMobNav {
-  position: absolute;
-  left: 2rem;
-  font-size: 1.5rem;
-  color: tomato;
-  cursor: pointer;
+.layout .header .show {
+  overflow: hidden;
   height: fit-content;
-  top: 1rem;
-  position: absolute;
-  left: 30px;
-  top: 0;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
-  font-size: 1.5rem;
-  height: fit-content;
+  scale: 1;
 }
 .layout .header .humb {
   display: none;
@@ -191,47 +181,53 @@
   margin-bottom: auto;
   font-size: 1.5rem;
   height: fit-content;
+  transition: all 200ms linear;
+  gap: 7px;
+}
+.layout .header .humb div {
+  transition: all 200ms linear;
+  width: 30px;
+  height: 3px;
+  background-color: #ffffff;
+}
+.layout .header .xMobNav {
+  transition: all 200ms linear;
+}
+.layout .header .xMobNav .x-2 {
+  background-color: transparent;
+}
+.layout .header .xMobNav .x-1 {
+  transform: rotate(45deg) translateY(14px);
+}
+.layout .header .xMobNav .x-3 {
+  transform: rotate(-45deg) translateY(-14px);
 }
 .layout .footer {
   background-color: #262626;
+  font-family: Poppins, sans-serif !important;
   color: #ffffff;
   min-height: 70px;
   padding: 20px 10px;
   text-align: center;
 }
 .layout .footer .socials span {
-  font-size: 26px;
+  font-size: 22px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-}
-.layout .footer .socials .fa-facebook {
+  padding: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #f9004d;
+  color: #f9004d;
   transition: all 200ms;
 }
-.layout .footer .socials .fa-facebook:hover {
-  color: #0c87ef;
-}
-.layout .footer .socials .fa-youtube {
-  transition: all 200ms;
-}
-.layout .footer .socials .fa-youtube:hover {
-  color: #ff0000;
-}
-.layout .footer .socials .fa-github {
-  transition: all 200ms;
-}
-.layout .footer .socials .fa-github:hover {
-  color: #babfc6;
-}
-.layout .footer .socials .fa-linkedin {
-  transition: all 200ms;
-}
-.layout .footer .socials .fa-linkedin:hover {
-  color: #0a66c2;
-}
-.layout .footer .socials .fa-b {
-  transition: all 200ms;
-}
-.layout .footer .socials .fa-b:hover {
-  color: #0a66c2;
+.layout .footer .socials span:hover {
+  background-color: #f9004d;
+  color: #ffffff;
 }
 
 @media (min-width: 1024px) {
@@ -261,6 +257,9 @@
   .layout .header .navigation {
     display: none !important;
   }
+  .layout .header nav ul li span {
+    border-bottom: 0 !important;
+  }
   .layout .header .mobileNav,
   .layout .header .humb {
     display: flex !important;
@@ -268,28 +267,6 @@
   .layout .header .activeNav::after {
     width: 8px !important;
     height: 8px !important;
-  }
-}
-/* Create my own font rabar-39 */
-@font-face {
-  font-family: rabar-39;
-  src: url(/fonts/Rabar_039.ttf);
-}
-.sectionHeader {
-  font-size: 36px;
-  font-weight: 700;
-}
-
-@media (min-width: 767px) and (max-width: 1023px) {
-  .sectionHeader {
-    font-size: 30px;
-    font-weight: 600;
-  }
-}
-@media (max-width: 767px) {
-  .sectionHeader {
-    font-size: 26px;
-    font-weight: 500;
   }
 }
 html {
@@ -307,6 +284,7 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
+  touch-action: none;
 }
 
 .kurdish_font {
@@ -314,7 +292,7 @@ body {
 }
 
 .english_font {
-  font-family: Karla, sans-serif !important;
+  font-family: Poppins, sans-serif !important;
 }
 
 :root {
@@ -467,8 +445,8 @@ img {
 
 .heading {
   margin: 0;
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 44px;
+  font-weight: 700;
 }
 
 .fallbackText {
@@ -510,7 +488,7 @@ section {
     padding-inline: 40px !important;
   }
   .heading {
-    font-size: 26px !important;
+    font-size: 38px !important;
   }
   .projectCards,
   .workCards,
@@ -523,7 +501,7 @@ section {
     padding-inline: 20px !important;
   }
   .heading {
-    font-size: 22px !important;
+    font-size: 40px !important;
   }
   .projectCards,
   .workCards,
@@ -1660,90 +1638,166 @@ section {
 .blogs {
   padding-inline: 0 !important;
   color: #ffffff;
+  padding-bottom: 20px;
+  position: relative;
   text-align: center;
 }
-.blogs .blogCards::-webkit-scrollbar {
-  display: none !important;
+.blogs *:not(.blogBack) {
+  z-index: 30;
+}
+.blogs .moreDots {
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  opacity: 0.6;
+  transition: all 200ms linear;
+}
+.blogs .activeMoreDot {
+  background-color: #f9004d !important;
+  cursor: pointer;
+  width: 20px;
+  height: 10px;
+  border-radius: 40%;
+  opacity: 1;
+  transition: all 200ms linear;
 }
 .blogs .blogCards {
-  overflow-x: auto;
+  overflow: hidden;
   width: 100%;
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: auto;
 }
 .blogs .blogCards .blogCard {
-  width: 328px;
+  overflow: hidden;
+  cursor: pointer;
+  width: 350px;
   flex: 0 0 auto;
-  background-color: #262626;
-  border-radius: 24px;
-  padding: 10px;
+  border-radius: 9px;
+  height: 470px;
   text-align: center;
-  height: 410px;
+  position: relative;
+  z-index: 20;
+}
+.blogs .blogCards .blogCard:hover .overBlog {
+  opacity: 0.7;
+  background: linear-gradient(to bottom, rgb(249, 0, 77), rgb(34, 34, 34));
+}
+.blogs .blogCards .blogCard .overBlog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 8px;
+  width: 100%;
+  background: #262626;
+  z-index: 30;
+  opacity: 0.8;
+  transition: all 200ms ease-in;
 }
 .blogs .blogCards .blogCard img {
   width: 100%;
+  height: 470px;
   object-fit: cover;
   border-radius: 12px;
-  height: 184px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
-.blogs .blogCards .blogCard p {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 139.9%;
+.blogs .blogCards .blogCard .category {
+  opacity: 0.7;
+}
+.blogs .blogCards .blogCard .readBlog,
+.blogs .blogCards .blogCard .blogTime,
+.blogs .blogCards .blogCard .wrapper,
+.blogs .blogCards .blogCard .inner {
+  position: absolute;
+  z-index: 30;
+}
+.blogs .blogCards .blogCard .wrapper {
+  height: 470px;
+  width: 100%;
+  z-index: 30;
+}
+.blogs .blogCards .blogCard .wrapper:hover {
+  background: linear-gradient(to bottom, rgb(249, 0, 77), rgb(34, 34, 34));
+}
+.blogs .blogCards .blogCard .wrapper:hover .inner {
+  top: 60%;
+}
+.blogs .blogCards .blogCard .wrapper .inner {
+  width: 100%;
+  transition: all 200ms ease-in-out;
+  min-height: 100px;
+  z-index: 40;
+  text-align: left;
+  top: 75%;
+  left: 0;
+  padding-inline: 30px;
+}
+.blogs .blogCards .blogCard .wrapper .inner h2,
+.blogs .blogCards .blogCard .wrapper .inner span {
+  width: 100%;
+}
+.blogs .blogCards .blogCard h2 {
+  font-size: 26px;
+  font-weight: 600;
 }
 .blogs .blogCards .blogCard .readBlog {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  width: 304px;
-  height: 39px;
-  background: #707aff;
-  border-radius: 9px;
-  border: none;
+  position: absolute;
+  bottom: -60px;
+  padding: 10px 20px;
+  width: fit-content;
+  background: #f9004d;
+  border-radius: 2px;
+  font-size: 12px;
   color: #ffffff;
   cursor: pointer;
   transition: all 200ms;
 }
 .blogs .blogCards .blogCard .readBlog:hover {
   background-color: #121212;
-  color: #707aff;
+  color: #f9004d;
 }
 .blogs .blogCards .blogCard .blogTime {
-  font-size: 12px;
+  top: 10px;
+  left: 10px;
+  font-size: 16px;
   font-weight: 400;
 }
 .blogs .seeMore {
   width: 200px;
-  background-color: #262626;
-  height: 40px;
+  background-color: #f9004d;
+  height: 50px;
   border-radius: 8px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
   align-items: center;
-  border: 1px #121212 solid;
+  border: 2px solid #f9004d;
   transition: all 200ms;
 }
 .blogs .seeMore:hover {
-  background-color: #121212;
-  border-color: #ffffff;
+  background-color: transparent;
+  color: #f9004d;
 }
 
 .projects {
+  user-select: none;
+  touch-action: none;
   padding-inline: 0 !important;
 }
-.projects .projectCards::-webkit-scrollbar {
-  display: none !important;
-}
 .projects .projectCards {
-  overflow-x: auto;
+  overflow-x: hidden;
+  touch-action: none;
+  padding: 0 30px;
   display: flex;
+  scroll-behavior: smooth;
 }
 .projects .projectCards .projectCard {
-  width: 350px;
+  width: 100%;
   height: 400px;
   flex: 0 0 auto;
   border: 1px #ffffff solid;
@@ -1754,81 +1808,199 @@ section {
 }
 .projects .projectCards .projectCard img {
   border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
   object-fit: cover;
-  max-height: 400px;
-  width: 100%;
-  height: 75%;
+  width: 40%;
+  height: 100%;
+}
+.projects .projectCards .projectCard img,
+.projects .projectCards .projectCard .projectCardFooter {
+  min-width: 250px;
 }
 .projects .projectCards .projectCard .projectCardFooter {
-  height: 25%;
-  width: 100%;
-  padding: 20px 0;
-  gap: 6px;
-  background-color: #707aff;
-  border-bottom-left-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+  height: 100%;
+  width: 60%;
+  gap: 10px;
+  background-color: #262626;
+  border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
+.projects .projectCards .projectCard .projectCardFooter > *:not(.backdropImage) {
+  z-index: 20;
+}
+.projects .projectCards .projectCard .projectCardFooter .backdropImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: 10;
+}
+.projects .projectCards .projectCard .projectCardFooter .used,
+.projects .projectCards .projectCard .projectCardFooter .projectWith {
+  font-size: 18px;
+}
+.projects .projectCards .projectCard .projectCardFooter .projectTitle {
+  font-size: min(6vw, 45px);
+  font-weight: 500;
+}
+.projects .projectCards .projectCard .projectCardFooter .projectType {
+  position: relative;
+  cursor: pointer;
+  font-weight: 500;
+}
+.projects .projectCards .projectCard .projectCardFooter .stacks {
+  max-width: 500px;
+}
+.projects .projectCards .projectCard .projectCardFooter .stacks .stack {
+  opacity: 0.8;
+  padding: 4px 15px;
+  border-radius: 15px;
+  border: 2px solid lightblue;
+  color: rgba(101, 146, 161, 0.6);
+  transition: all 200ms linear;
+  cursor: pointer;
+}
+.projects .projectCards .projectCard .projectCardFooter .stacks .stack:hover {
+  background-color: lightblue;
+  color: #262626;
+}
 .projects .projectCards .projectCard .projectCardFooter .projectLink {
-  background-color: #262626;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: #f9004d;
   padding: 3px 15px;
   border-radius: 5px;
   cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 200ms linear;
+  opacity: 1;
+  transition: all 200ms linear;
+  border: 2px solid #f9004d;
 }
 .projects .projectCards .projectCard .projectCardFooter .projectLink:hover {
-  opacity: 1;
+  background-color: transparent;
   text-decoration: none;
+  color: #f9004d;
+}
+.projects .pagination {
+  max-width: 300px;
+  overflow-x: auto;
+}
+.projects .pagination .active {
+  background-color: #f9004d !important;
+}
+.projects .pagination .paginationNumber {
+  cursor: pointer;
+  transition: all 200ms linear;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #262626;
+  width: 40px;
+  height: 40px;
+}
+.projects .pagination .paginationNumber:hover {
+  background-color: #f9004d;
 }
 
-@media (min-width: 767px) and (max-width: 1023px) {
-  .projectCards .projectCard {
-    width: 350px !important;
-    height: 430px !important;
-  }
-}
 @media (max-width: 767px) {
   .projectCards .projectCard {
-    height: 350px !important;
-    width: 300px !important;
+    min-height: 550px !important;
+    height: fit-content !important;
   }
-  .projectCards .projectCard .projectCardFooter {
-    height: 35% !important;
+  .projectCards .projectCard .stacks {
+    max-width: 300px !important;
   }
   .projectCards .projectCard img {
-    height: 65% !important;
+    height: 300px !important;
+    width: 100% !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-left-radius: 0 !important;
+  }
+  .projectCards .projectCard .projectCardFooter {
+    padding-bottom: 70px !important;
+    width: 100% !important;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0 !important;
   }
 }
-@media (max-width: 450px) {
-  .projectCards .projectCard {
-    width: 90% !important;
-    min-width: 250px;
-  }
+.skills {
+  min-height: 80vh;
 }
 .skills h1 {
   margin-bottom: 40px;
+  color: #f9004d;
+}
+.skills .categories {
+  width: 80%;
+  flex-wrap: wrap;
+}
+.skills .categories span {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 175px;
+  text-align: center;
+  border-bottom: 2px solid transparent;
+  transition: all 200ms linear;
+}
+.skills .categories span:hover {
+  border-bottom: 2px solid #f9004d;
+}
+.skills .categories .active {
+  border-bottom: 2px solid #f9004d;
+}
+.skills .skillsBox::-webkit-scrollbar {
+  display: none !important;
+}
+.skills .angle {
+  font-size: 30px;
+  padding: 20px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: #262626;
+  backdrop-filter: opacity(100%);
+  color: white;
+  opacity: 0.5;
+  transition: all 200ms linear;
+  cursor: pointer;
+}
+.skills .angle:hover {
+  opacity: 1;
+}
+.skills .activeAngle {
+  background-color: #f9004d;
 }
 .skills .skillsBox {
   width: 80%;
   color: #ffffff;
   background-color: #121212;
-  box-shadow: 0px 15px 43px rgba(112, 122, 255, 0.14);
+  box-shadow: 0px 2px 10px 1px #f9004d;
   border-radius: 11px;
-  border: 50px #262626 solid;
-}
-.skills .skillsBox h1 {
-  font-size: 30px;
-  padding: 0 20px;
-  margin: 0;
+  border: 30px #262626 solid;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  position: relative;
 }
 .skills .skillsBox .skillGroup {
-  padding: 20px 25px;
+  transition: all 200ms linear;
+  height: fit-content;
+  padding: 30px;
+  min-width: 100%;
 }
 .skills .skillsBox .skillGroup h2 {
-  font-size: 25px;
+  font-size: 36px;
+  text-align: center;
+  width: 100%;
   margin: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 .skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv {
   cursor: pointer;
@@ -1944,9 +2116,11 @@ section {
   .skills {
     padding-inline: 0 !important;
   }
+  .skills .categories {
+    width: 90% !important;
+  }
   .skills .skillsBox {
     width: 90% !important;
-    border-width: 20px !important;
   }
   .skills .skillsBox .littleBreak {
     height: 20px !important;
@@ -1973,10 +2147,13 @@ section {
 }
 .home {
   min-height: 100vh;
+  overflow: hidden;
+  padding-inline: 30px !important;
 }
 .home .leftHome,
 .home .rightHome {
-  width: 50%;
+  width: 60%;
+  min-width: 200px;
 }
 .home .rightHome img {
   width: 100%;
@@ -2004,6 +2181,29 @@ section {
   font-size: 32px;
   color: #ffffff;
 }
+.home .leftHome .jobs {
+  height: 60px;
+  overflow: hidden;
+  position: relative;
+  width: 600px;
+}
+.home .leftHome .jobs .innerJobs {
+  transition: all 800ms ease-in-out;
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: baseline;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.home .leftHome .jobs .innerJobs span {
+  font-size: 34px;
+  font-weight: 600;
+  height: 60px;
+  color: #f9004d;
+}
 .home .leftHome .showCV {
   width: 150px;
   height: 40px;
@@ -2018,7 +2218,7 @@ section {
   transition: all 200ms;
 }
 .home .leftHome .showCV:hover {
-  background-color: #707aff;
+  background-color: #f9004d;
   border: none;
 }
 .home .leftHome .ahmadSoftware {
@@ -2043,7 +2243,7 @@ section {
   background-color: #29ffe5;
 }
 .home .blurs .purpleBlur {
-  background-color: #707aff;
+  background-color: #f9004d;
   transform: rotate(165deg);
 }
 
@@ -2057,6 +2257,9 @@ section {
   }
   .home .leftHome p {
     font-size: 18px !important;
+  }
+  .home .leftHome .jobs .innerJobs span {
+    font-size: 28px !important;
   }
   .home .blur {
     width: 177.11px !important;
@@ -2112,6 +2315,9 @@ section {
   .home .blur {
     width: 100% !important;
     height: 140px !important;
+  }
+  .home .leftHome .jobs .innerJobs span {
+    font-size: 24px !important;
   }
 }
 .contact {
@@ -2172,44 +2378,99 @@ section {
   padding-top: 40px;
 }
 .blogsPage .allBlogs .blogCard {
-  width: 328px;
-  background-color: #262626;
-  border-radius: 24px;
-  padding: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  width: 350px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  height: 470px;
   text-align: center;
-  min-height: 410px;
+  position: relative;
+  z-index: 20;
+}
+.blogsPage .allBlogs .blogCard:hover .overBlog {
+  opacity: 0.7;
+  background: linear-gradient(to bottom, rgb(249, 0, 77), rgb(34, 34, 34));
+}
+.blogsPage .allBlogs .blogCard .overBlog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 8px;
+  width: 100%;
+  background: #262626;
+  z-index: 30;
+  opacity: 0.8;
+  transition: all 200ms ease-in;
 }
 .blogsPage .allBlogs .blogCard img {
   width: 100%;
+  height: 470px;
   object-fit: cover;
   border-radius: 12px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
-.blogsPage .allBlogs .blogCard p {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 139.9%;
+.blogsPage .allBlogs .blogCard .category {
+  opacity: 0.7;
+}
+.blogsPage .allBlogs .blogCard .readBlog,
+.blogsPage .allBlogs .blogCard .blogTime,
+.blogsPage .allBlogs .blogCard .wrapper,
+.blogsPage .allBlogs .blogCard .inner {
+  position: absolute;
+  z-index: 30;
+}
+.blogsPage .allBlogs .blogCard .wrapper {
+  height: 470px;
+  width: 100%;
+  z-index: 30;
+}
+.blogsPage .allBlogs .blogCard .wrapper:hover {
+  background: linear-gradient(to bottom, rgb(249, 0, 77), rgb(34, 34, 34));
+}
+.blogsPage .allBlogs .blogCard .wrapper:hover .inner {
+  top: 60%;
+}
+.blogsPage .allBlogs .blogCard .wrapper .inner {
+  width: 100%;
+  transition: all 200ms ease-in-out;
+  min-height: 100px;
+  z-index: 40;
+  text-align: left;
+  top: 75%;
+  left: 0;
+  padding-inline: 30px;
+}
+.blogsPage .allBlogs .blogCard .wrapper .inner h2,
+.blogsPage .allBlogs .blogCard .wrapper .inner span {
+  width: 100%;
+}
+.blogsPage .allBlogs .blogCard h2 {
+  font-size: 26px;
+  font-weight: 600;
 }
 .blogsPage .allBlogs .blogCard .readBlog {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  width: 304px;
-  height: 39px;
-  background: #707aff;
-  border-radius: 9px;
-  border: none;
+  position: absolute;
+  bottom: -60px;
+  padding: 10px 20px;
+  width: fit-content;
+  background: #f9004d;
+  border-radius: 2px;
+  font-size: 12px;
   color: #ffffff;
   cursor: pointer;
   transition: all 200ms;
 }
 .blogsPage .allBlogs .blogCard .readBlog:hover {
   background-color: #121212;
-  color: #707aff;
+  color: #f9004d;
 }
 .blogsPage .allBlogs .blogCard .blogTime {
-  font-size: 12px;
+  top: 10px;
+  left: 10px;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -2217,16 +2478,9 @@ section {
   .blogsPage .searchInputDiv {
     width: 200px !important;
   }
-  .blogsPage .allBlogs .blogCard {
-    width: 90% !important;
-    max-width: 400px !important;
-    min-width: 300px !important;
-  }
-  .blogsPage .allBlogs .blogCard .readBlog {
-    width: 100% !important;
-  }
 }
 .singleBlog {
+  position: relative;
   min-height: 100vh;
   padding: 35px;
   padding-top: 50px;
@@ -2236,22 +2490,87 @@ section {
   color: #ffffff;
 }
 .singleBlog .blogTime {
-  font-size: 12px;
+  width: 100%;
+  font-size: 20px;
+  color: #f9004d;
   font-weight: 400;
 }
-.singleBlog h1 {
-  font-size: 36px;
+.singleBlog .blogHeader {
+  height: 600px;
+}
+.singleBlog .blogHeader h1 {
+  font-size: 66px !important;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  background: linear-gradient(145deg, #f81f01, #ee076e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  line-height: 190.9%;
+}
+.singleBlog .blogOwner {
+  gap: 6px;
+  z-index: 100;
+  font-weight: 400;
+}
+.singleBlog .blogOwner img {
+  border-radius: 50%;
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+}
+.singleBlog .blogOwner span {
+  font-size: 30px;
+  color: #f9004d;
+}
+.singleBlog .blogOwner p {
+  font-size: 20px;
+}
+.singleBlog .blogOwner span,
+.singleBlog .blogOwner p {
   margin: 0;
 }
-.singleBlog .blogHeader {
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 127.9%;
+.singleBlog .overImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  opacity: 0.9;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+  z-index: 40;
 }
 .singleBlog .blogImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   width: 100%;
-  max-height: 500px;
-  border-radius: 8px !important;
+  object-fit: cover;
+  height: 600px;
+  opacity: 0.6;
+  z-index: 10;
+}
+.singleBlog .blogImage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20%; /* Adjust the height as needed */
+  background: linear-gradient(to bottom, rgba(62, 62, 62, 0.2), rgba(49, 49, 49, 0.2));
+}
+.singleBlog .blogImage::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%; /* Adjust the height as needed */
+  background: linear-gradient(to top, rgba(62, 62, 62, 0.5), rgba(255, 255, 255, 0));
 }
 .singleBlog .blogBody {
   font-weight: 500;
@@ -2261,12 +2580,44 @@ section {
 
 @media (min-width: 1024px) {
   .singleBlog {
+    padding-top: 20px !important;
     padding-inline: 100px !important;
   }
 }
 @media (max-width: 767px) {
-  .singleBlog h1 {
-    font-size: 24px !important;
+  .singleBlog .blogOwner {
+    gap: 6px;
+    z-index: 100;
+    font-weight: 400;
+  }
+  .singleBlog .blogOwner img {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+  }
+  .singleBlog .blogOwner span {
+    font-size: 20px;
+    color: #f9004d;
+  }
+  .singleBlog .blogOwner p {
+    font-size: 15px;
+  }
+  .singleBlog .blogOwner span,
+  .singleBlog .blogOwner p {
+    margin: 0;
+  }
+  .singleBlog .blogHeader {
+    height: 500px !important;
+  }
+  .singleBlog .blogHeader h1 {
+    font-size: 40px !important;
+  }
+  .singleBlog .blogImage {
+    height: 500px !important;
+  }
+  .singleBlog .overImage {
+    height: 500px !important;
   }
 }
 .login {
@@ -2280,7 +2631,7 @@ section {
   border-radius: 7px;
   min-width: 300px;
   height: fit-content;
-  border: 2px #707aff solid;
+  border: 2px #f9004d solid;
 }
 .login .loginBox h1 {
   font-size: 20px;
@@ -2307,10 +2658,12 @@ section {
 
 .works {
   padding-inline: 0 !important;
+  min-height: 70vh;
 }
 .works h1 {
   width: 100%;
   text-align: center;
+  color: #f9004d;
 }
 .works .workCards::-webkit-scrollbar {
   display: none !important;
@@ -2320,68 +2673,35 @@ section {
   width: 100%;
 }
 .works .workCards {
-  overflow-x: auto;
+  overflow-x: hidden;
   display: flex;
+  width: fit-content !important;
+  padding-inline: 100px;
 }
 .works .workCards .workCard {
+  background-color: #262626;
+  min-width: 280px;
+  min-height: 300px;
+  height: fit-content;
+  padding: 15px;
+  border-radius: 6px;
   cursor: pointer;
-  flex: 0 0 auto;
-  background: #262626;
-  border: 1px solid #707aff;
-  border-radius: 20px;
-  min-width: 278px;
-  height: 315px;
+  transition: all 200ms ease-in-out;
 }
-.works .workCards .workCard .workCardBack {
-  border-radius: 20px;
-  border-bottom-right-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  top: 0;
-  height: 40%;
-  width: 100%;
-  right: 0;
-  left: 0;
-  background: linear-gradient(114.78deg, #707aff 0%, #4a52b9 79.88%);
+.works .workCards .workCard:hover {
+  background-color: #f9004d;
 }
-.works .workCards .workCard .workCardImageDiv {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 100px;
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: auto;
-  margin-left: auto;
-  background: #121212;
-  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
-  border-radius: 35px;
-  width: 126px;
-  height: 126px;
-}
-.works .workCards .workCard .workCardImageDiv img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 7px;
-}
-.works .workCards .workCard .workCardText {
-  text-align: center;
-}
-.works .workCards .workCard h2,
 .works .workCards .workCard p {
-  color: #ffffff;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  opacity: 0.8;
 }
-.works .workCards .workCard h2 {
-  font-weight: 500;
-  font-size: 24px;
-  margin: 0;
-}
-.works .workCards .workCard .workType {
-  font-weight: 400;
-  font-size: 18px;
-  opacity: 0.6;
-  color: #ffffff;
+.works .workCards .workCard img {
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  opacity: 0.8;
 }
 
 .loginPage {
@@ -2392,8 +2712,8 @@ section {
 }
 .loginPage .loginBox {
   padding: 20px;
-  background-color: #707aff;
-  border: 2px #707aff solid;
+  background-color: #f9004d;
+  border: 2px #f9004d solid;
   border-radius: 5px;
   width: 100%;
   max-width: 400px;
@@ -2434,7 +2754,7 @@ section {
 .loginPage .emailInput {
   width: 100%;
   padding: 10px;
-  border-bottom: 2px solid #707aff;
+  border-bottom: 2px solid #f9004d;
   max-width: 350px;
   border-radius: 6px;
   color: #262626;
@@ -2442,7 +2762,7 @@ section {
 .loginPage .passwordInput {
   width: 100%;
   padding: 10px;
-  border-bottom: 2px solid #707aff;
+  border-bottom: 2px solid #f9004d;
   background-color: #ffffff;
   max-width: 350px;
   border-radius: 6px;
@@ -2478,6 +2798,7 @@ section {
 }
 
 .panel_header {
+  font-family: Karla, sans-serif !important;
   position: fixed;
   top: 0;
   background-color: #121212;
@@ -2499,6 +2820,7 @@ section {
 .panel_header .admin_logout,
 .panel_header .admin_getOut,
 .panel_header .admin_add,
+.panel_header .admin_goBack,
 .panel_header .admins {
   padding: 10px;
   width: fit-content;
@@ -2516,7 +2838,8 @@ section {
   width: 100%;
 }
 .panel_header .admin_logout,
-.panel_header .admin_getOut {
+.panel_header .admin_getOut,
+.panel_header .admin_goBack {
   width: fit-content !important;
   border-radius: 6px;
 }
@@ -2531,6 +2854,13 @@ section {
 }
 .panel_header .admin_getOut:hover {
   background-color: #00eded;
+}
+.panel_header .admin_goBack {
+  border: 1px solid #ffffff;
+}
+.panel_header .admin_goBack:hover {
+  background-color: #ffffff;
+  color: #121212;
 }
 .panel_header .admin_add,
 .panel_header .admins {
@@ -2552,7 +2882,7 @@ section {
 }
 .panel_header .admin_profile {
   padding: 2px;
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   cursor: pointer;
   opacity: 0.9;
@@ -2567,6 +2897,13 @@ section {
 }
 .panel_header .admin_left_panel {
   width: 200px;
+  top: 0;
+  left: 0;
+  background-color: #121212;
+  height: 100%;
+}
+.panel_header .admin_left_panel_blog {
+  width: fit-content;
   top: 0;
   left: 0;
   background-color: #121212;
@@ -2594,6 +2931,7 @@ section {
 }
 
 .panel {
+  font-family: Karla, sans-serif !important;
   padding-bottom: 100px;
   padding-top: 100px;
   padding-left: 220px !important;
@@ -2641,6 +2979,24 @@ section {
 .panel .admin_blogs .blogs {
   padding: 30px 0;
 }
+.panel .admin_blogs .blogs::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20%; /* Adjust the height as needed */
+  background: none;
+}
+.panel .admin_blogs .blogs::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%; /* Adjust the height as needed */
+  background: none;
+}
 .panel .admin_blogs .blogs .theBlogs {
   max-height: 500px;
   overflow-y: scroll;
@@ -2660,7 +3016,7 @@ section {
   width: 30%;
 }
 .panel .admin_blogs .blogs .blogCard .tableOperation {
-  min-width: 60px;
+  min-width: 70px;
   width: 30%;
   font-weight: 600;
 }
@@ -2677,198 +3033,6 @@ section {
   font-weight: 600;
   font-size: 22px;
 }
-.panel .admin_blogs .createBlog {
-  inset: 0;
-  max-height: 600px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  border-radius: 10px;
-  background-color: #262626;
-  max-width: 600px;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: left;
-  align-items: center;
-  z-index: 1000;
-  margin: auto;
-  padding: 40px;
-}
-.panel .admin_blogs .createBlog * {
-  width: 100%;
-}
-.panel .admin_blogs .createBlog .inner {
-  width: 100%;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: left;
-  align-items: center;
-  gap: 2rem;
-}
-.panel .admin_blogs .createBlog .blogImage {
-  display: none;
-}
-.panel .admin_blogs .createBlog .error {
-  color: #707aff;
-  font-size: 12px;
-}
-.panel .admin_blogs .createBlog input,
-.panel .admin_blogs .createBlog textarea {
-  padding: 10px;
-  border-bottom: 2px solid #121212;
-  opacity: 0.7;
-  background-color: #262626;
-  color: #ffffff !important;
-}
-.panel .admin_blogs .createBlog input::placeholder {
-  font-weight: 600;
-  font-size: 26px;
-  background-color: #262626;
-  color: #ffffff !important;
-}
-.panel .admin_blogs .createBlog input {
-  font-weight: 600;
-  font-size: 26px;
-  background-color: #262626;
-  color: #ffffff !important;
-  height: fit-content;
-}
-.panel .admin_blogs .createBlog textarea::placeholder {
-  font-weight: 500;
-  font-size: 16px;
-}
-.panel .admin_blogs .createBlog textarea {
-  font-weight: 500;
-  font-size: 16px;
-  resize: none;
-  height: 500px !important;
-  min-height: 50px;
-  border-radius: 5px;
-  color: #ffffff !important;
-  padding-bottom: 100px !important;
-  border: 2px solid #707aff;
-}
-.panel .admin_blogs .createBlog .text_decoration {
-  border-bottom: 2px solid #707aff;
-  overflow-x: scroll;
-  padding: 10px;
-}
-.panel .admin_blogs .createBlog .text_decoration * {
-  cursor: pointer;
-  padding: 5px;
-}
-.panel .admin_blogs .createBlog .activeInputBorder {
-  border-color: #707aff;
-}
-.panel .admin_blogs .createBlog .fileInputDiv {
-  width: 100%;
-  height: 481px;
-  background: #262626;
-  border: 1px dashed #707aff;
-  border-radius: 10px;
-}
-.panel .admin_blogs .createBlog .fileInputDiv .imageUploadCloud {
-  max-width: 100px;
-  object-fit: cover;
-  max-height: 100px;
-  cursor: pointer;
-}
-.panel .admin_blogs .createBlog .fileInputDiv p {
-  text-align: center;
-  font-size: 12px;
-  opacity: 0.6;
-}
-.panel .admin_blogs .createBlog .fileInputDiv .URLImage {
-  width: 100%;
-  height: 100%;
-  max-height: 600px;
-  border: 1px dashed #707aff;
-  border-radius: 10px;
-}
-.panel .admin_blogs .createBlog .fileInputDiv .URLImage img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-.panel .admin_blogs .createBlog .fileInputDiv .URLImage .x {
-  top: 1rem;
-  right: 1rem;
-  z-index: 1000;
-  width: fit-content;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
-  height: 2rem;
-  background-color: #ff0000;
-  color: #ffffff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.panel .admin_blogs .createBlog .fileInputDiv .imageUploadButton {
-  padding: 10px 20px;
-  width: 230px;
-  text-align: center;
-  height: 44px;
-  font-size: 14px;
-  background-color: #707aff;
-  color: #ffffff;
-  border-radius: 3px;
-  border: 2px solid #707aff;
-  cursor: pointer;
-  transition: all 200ms;
-}
-.panel .admin_blogs .createBlog .fileInputDiv .imageUploadButton:hover {
-  background-color: #262626;
-  color: #707aff;
-  border-color: #707aff;
-}
-.panel .admin_blogs .createBlog .publishAndCancel button,
-.panel .admin_blogs .createBlog .publishAndCancel .cancelLink {
-  width: 102px;
-  height: 42px;
-  font-weight: 400;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-}
-.panel .admin_blogs .createBlog .publishAndCancel .cancelLink {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-flow: row nowrap;
-  border: 1px solid #707aff;
-  border-radius: 4px;
-  color: #ffffff;
-  background-color: #262626;
-  transition: all 200ms;
-}
-.panel .admin_blogs .createBlog .publishAndCancel .cancelLink:hover {
-  background-color: #707aff;
-  color: #ffffff;
-}
-.panel .admin_blogs .createBlog .publishAndCancel .publish {
-  background: #888888;
-  border-radius: 4px;
-  color: #ffffff;
-  transition: all 200ms;
-}
-.panel .admin_blogs .createBlog .publishAndCancel .publish:hover {
-  background-color: #121212;
-  color: #ffffff;
-}
-.panel .admin_blogs .createBlog .publishAndCancel .activePublish {
-  background: #707aff;
-  border-radius: 4px;
-  color: #ffffff;
-  border: 1px solid #707aff;
-  transition: all 200ms;
-}
-.panel .admin_blogs .createBlog .publishAndCancel .activePublish:hover {
-  background-color: #262626;
-  color: #ffffff;
-}
 .panel .admin_blogs .update .fileInputDiv {
   position: relative;
 }
@@ -2879,7 +3043,7 @@ section {
   width: fit-content;
 }
 .panel .admin_blogs .update .fileInputDiv .blogImageUploaderLabel .editButton {
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   min-width: 60px;
   border-radius: 8px;
@@ -2970,7 +3134,7 @@ section {
   width: 30%;
 }
 .panel .admin_projects .projects .projectCard .tableOperation {
-  min-width: 60px;
+  min-width: 70px;
   width: 30%;
   font-weight: 600;
 }
@@ -3006,6 +3170,13 @@ section {
 .panel .admin_projects .createProject * {
   width: 100%;
 }
+.panel .admin_projects .createProject .stack {
+  padding: 6px 10px;
+  width: fit-content;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 200ms linear;
+}
 .panel .admin_projects .createProject .inner {
   width: 100%;
   display: flex;
@@ -3018,7 +3189,7 @@ section {
   display: none;
 }
 .panel .admin_projects .createProject .error {
-  color: #707aff;
+  color: #f9004d;
   font-size: 12px;
 }
 .panel .admin_projects .createProject input {
@@ -3042,14 +3213,14 @@ section {
   width: 200px;
 }
 .panel .admin_projects .createProject .activeInputBorder {
-  border-color: #707aff;
+  border-color: #f9004d;
 }
 .panel .admin_projects .createProject .fileInputDiv {
   width: 100%;
   height: 200px;
   max-width: 200px;
   background: #262626;
-  border: 1px dashed #707aff;
+  border: 1px dashed #f9004d;
   border-radius: 10px;
 }
 .panel .admin_projects .createProject .fileInputDiv .imageUploadCloud {
@@ -3067,7 +3238,7 @@ section {
   width: 100%;
   height: 100%;
   max-height: 600px;
-  border: 1px dashed #707aff;
+  border: 1px dashed #f9004d;
   border-radius: 10px;
 }
 .panel .admin_projects .createProject .fileInputDiv .URLImage img {
@@ -3096,17 +3267,17 @@ section {
   max-width: 130px;
   text-align: center;
   font-size: 10px;
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   border-radius: 3px;
-  border: 2px solid #707aff;
+  border: 2px solid #f9004d;
   cursor: pointer;
   transition: all 200ms;
 }
 .panel .admin_projects .createProject .fileInputDiv .imageUploadButton:hover {
   background-color: #262626;
-  color: #707aff;
-  border-color: #707aff;
+  color: #f9004d;
+  border-color: #f9004d;
 }
 .panel .admin_projects .createProject .publishAndCancel button,
 .panel .admin_projects .createProject .publishAndCancel .cancelLink {
@@ -3123,14 +3294,14 @@ section {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  border: 1px solid #707aff;
+  border: 1px solid #f9004d;
   border-radius: 4px;
   color: #ffffff;
   background-color: #262626;
   transition: all 200ms;
 }
 .panel .admin_projects .createProject .publishAndCancel .cancelLink:hover {
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
 }
 .panel .admin_projects .createProject .publishAndCancel .publish {
@@ -3144,9 +3315,9 @@ section {
   color: #ffffff;
 }
 .panel .admin_projects .createProject .publishAndCancel .activePublish {
-  background: #707aff;
+  background: #f9004d;
   border-radius: 4px;
-  border: 1px solid #707aff;
+  border: 1px solid #f9004d;
   color: #ffffff;
   transition: all 200ms;
 }
@@ -3164,7 +3335,7 @@ section {
   width: fit-content;
 }
 .panel .admin_projects .update .fileInputDiv .blogImageUploaderLabel .editButton {
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   min-width: 60px;
   border-radius: 8px;
@@ -3203,6 +3374,7 @@ section {
 .panel .admin_works {
   width: 100%;
   text-align: center;
+  min-height: 0;
 }
 .panel .admin_works .uploadButton {
   padding: 5px 10px;
@@ -3233,6 +3405,7 @@ section {
 }
 .panel .admin_works .works {
   padding: 30px 0;
+  min-height: 0 !important;
 }
 .panel .admin_works .works .theWorks {
   padding: 20px 0;
@@ -3256,7 +3429,7 @@ section {
   width: 30%;
 }
 .panel .admin_works .works .workCard .tableOperation {
-  min-width: 60px;
+  min-width: 70px;
   width: 30%;
   font-weight: 600;
 }
@@ -3304,7 +3477,7 @@ section {
   display: none;
 }
 .panel .admin_works .createWork .error {
-  color: #707aff;
+  color: #f9004d;
   font-size: 12px;
 }
 .panel .admin_works .createWork input {
@@ -3328,14 +3501,14 @@ section {
   width: 200px;
 }
 .panel .admin_works .createWork .activeInputBorder {
-  border-color: #707aff;
+  border-color: #f9004d;
 }
 .panel .admin_works .createWork .fileInputDiv {
   width: 100%;
   height: 200px;
   max-width: 200px;
   background: #262626;
-  border: 1px dashed #707aff;
+  border: 1px dashed #f9004d;
   border-radius: 10px;
 }
 .panel .admin_works .createWork .fileInputDiv .imageUploadCloud {
@@ -3353,7 +3526,7 @@ section {
   width: 100%;
   height: 100%;
   max-height: 600px;
-  border: 1px dashed #707aff;
+  border: 1px dashed #f9004d;
   border-radius: 10px;
 }
 .panel .admin_works .createWork .fileInputDiv .URLImage img {
@@ -3382,17 +3555,17 @@ section {
   max-width: 130px;
   text-align: center;
   font-size: 10px;
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   border-radius: 3px;
-  border: 2px solid #707aff;
+  border: 2px solid #f9004d;
   cursor: pointer;
   transition: all 200ms;
 }
 .panel .admin_works .createWork .fileInputDiv .imageUploadButton:hover {
   background-color: #262626;
-  color: #707aff;
-  border-color: #707aff;
+  color: #f9004d;
+  border-color: #f9004d;
 }
 .panel .admin_works .createWork .publishAndCancel button,
 .panel .admin_works .createWork .publishAndCancel .cancelLink {
@@ -3409,14 +3582,14 @@ section {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  border: 1px solid #707aff;
+  border: 1px solid #f9004d;
   border-radius: 4px;
   color: #ffffff;
   background-color: #262626;
   transition: all 200ms;
 }
 .panel .admin_works .createWork .publishAndCancel .cancelLink:hover {
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
 }
 .panel .admin_works .createWork .publishAndCancel .publish {
@@ -3430,9 +3603,9 @@ section {
   color: #ffffff;
 }
 .panel .admin_works .createWork .publishAndCancel .activePublish {
-  background: #707aff;
+  background: #f9004d;
   border-radius: 4px;
-  border: 1px solid #707aff;
+  border: 1px solid #f9004d;
   color: #ffffff;
   transition: all 200ms;
 }
@@ -3450,7 +3623,7 @@ section {
   width: fit-content;
 }
 .panel .admin_works .update .fileInputDiv .blogImageUploaderLabel .editButton {
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   min-width: 60px;
   border-radius: 8px;
@@ -3485,6 +3658,370 @@ section {
 }
 .panel .admin_works .wantToDelete .yes {
   background-color: #ff0000;
+}
+.panel .admin_stacks {
+  width: 100%;
+  text-align: center;
+  min-height: 0;
+}
+.panel .admin_stacks .uploadButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #00eded;
+  color: #121212;
+  border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_stacks .yes,
+.panel .admin_stacks .no {
+  padding: 5px 10px;
+  width: 100px;
+  font-size: 14px;
+  border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_stacks button:hover {
+  opacity: 1;
+}
+.panel .admin_stacks .stacks {
+  padding: 30px 0;
+  min-height: 0 !important;
+}
+.panel .admin_stacks .stacks .theStacks {
+  padding: 20px 0;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.panel .admin_stacks .stacks .theStacks::-webkit-scrollbar {
+  display: none;
+}
+.panel .admin_stacks .stacks .stackTable {
+  font-weight: 600;
+}
+.panel .admin_stacks .stacks .stackCard {
+  border-bottom: 2px solid #121212;
+  padding: 0 10px;
+  border-right: 0;
+  border-left: 0;
+}
+.panel .admin_stacks .stacks .stackCard .tableIndex {
+  min-width: 60px;
+  width: 30%;
+}
+.panel .admin_stacks .stacks .stackCard .tableOperation {
+  min-width: 70px;
+  width: 30%;
+  font-weight: 600;
+}
+.panel .admin_stacks .stacks .stackCard .tableOperation .fa-pen-to-square {
+  color: #00eded;
+  cursor: pointer;
+}
+.panel .admin_stacks .stacks .stackCard .tableOperation .fa-trash {
+  color: #ff0000;
+  cursor: pointer;
+}
+.panel .admin_stacks .no_stack {
+  padding: 60px 0;
+  font-weight: 600;
+  font-size: 22px;
+}
+.panel .admin_stacks .createStack {
+  inset: 0;
+  max-height: 600px;
+  height: fit-content !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+  background-color: #262626;
+  max-width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
+  align-items: center;
+  z-index: 1000;
+  margin: auto;
+  padding: 40px;
+}
+.panel .admin_stacks .createStack * {
+  width: 100%;
+}
+.panel .admin_stacks .createStack .inner {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+.panel .admin_stacks .createStack .error {
+  color: #f9004d;
+  font-size: 12px;
+}
+.panel .admin_stacks .createStack input {
+  padding: 10px;
+  border-bottom: 2px solid #121212;
+  opacity: 0.7;
+  width: 100% !important;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.panel .admin_stacks .createStack input::placeholder {
+  font-weight: 600;
+  font-size: 14px;
+}
+.panel .admin_stacks .createStack input {
+  font-weight: 600;
+  font-size: 14px;
+  height: fit-content;
+  background-color: #262626;
+  color: #ffffff !important;
+  width: 200px;
+}
+.panel .admin_stacks .createStack .activeInputBorder {
+  border-color: #f9004d;
+}
+.panel .admin_stacks .createStack .publishAndCancel button,
+.panel .admin_stacks .createStack .publishAndCancel .cancelLink {
+  width: 102px;
+  height: 42px;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+.panel .admin_stacks .createStack .publishAndCancel .cancelLink {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid #f9004d;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #262626;
+  transition: all 200ms;
+}
+.panel .admin_stacks .createStack .publishAndCancel .cancelLink:hover {
+  background-color: #f9004d;
+  color: #ffffff;
+}
+.panel .admin_stacks .createStack .publishAndCancel .publish {
+  background: #888888;
+  border-radius: 4px;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_stacks .createStack .publishAndCancel .publish:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.panel .admin_stacks .createStack .publishAndCancel .activePublish {
+  background: #f9004d;
+  border-radius: 4px;
+  border: 1px solid #f9004d;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_stacks .createStack .publishAndCancel .activePublish:hover {
+  background-color: #262626;
+  color: #ffffff;
+}
+.panel .admin_stacks .wantToDelete {
+  background-color: #262626;
+  z-index: 1200;
+  padding: 20px;
+  border-radius: 6px;
+  margin: auto;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+}
+.panel .admin_stacks .wantToDelete button {
+  font-size: 14px;
+}
+.panel .admin_stacks .wantToDelete .no {
+  background-color: #00eded;
+}
+.panel .admin_stacks .wantToDelete .yes {
+  background-color: #ff0000;
+}
+
+.createBlogPage {
+  min-height: 100vh;
+  width: 100%;
+  padding: 60px;
+  background-color: #262626;
+  display: flex;
+  padding-left: 120px !important;
+  flex-flow: column nowrap;
+  justify-content: left;
+  align-items: center;
+  z-index: 1000;
+}
+.createBlogPage .inner {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+.createBlogPage .blogImage {
+  display: none;
+}
+.createBlogPage .error {
+  color: #f9004d;
+  font-size: 12px;
+}
+.createBlogPage input,
+.createBlogPage textarea {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 2px solid #121212;
+  opacity: 0.7;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.createBlogPage input::placeholder {
+  font-weight: 600;
+  font-size: 26px;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.createBlogPage input {
+  font-weight: 600;
+  font-size: 26px;
+  background-color: #262626;
+  color: #ffffff !important;
+  height: fit-content;
+}
+.createBlogPage .styles span {
+  font-size: 25px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 200ms linear;
+}
+.createBlogPage .styles span:hover {
+  color: #f9004d;
+}
+.createBlogPage .styles .addBox {
+  right: 100px;
+  width: 300px;
+  padding: 10px;
+  z-index: 100;
+  opacity: 1 !important;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.createBlogPage .styles .addBox span {
+  font-size: 14px;
+  height: 40px;
+  width: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.createBlogPage .styles .addBox .remove {
+  background: #121212;
+}
+.createBlogPage .styles .addBox .remove:hover {
+  color: #ffffff;
+}
+.createBlogPage .styles .addBox .add {
+  background-color: #f9004d;
+}
+.createBlogPage .styles .addBox .add:hover {
+  color: #ffffff;
+}
+.createBlogPage .blogBodyDiv {
+  min-height: 300px;
+  border: 2px solid #f9004d;
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px;
+}
+.createBlogPage .blogBodyDiv p,
+.createBlogPage .blogBodyDiv h1,
+.createBlogPage .blogBodyDiv h2,
+.createBlogPage .blogBodyDiv h3,
+.createBlogPage .blogBodyDiv h4,
+.createBlogPage .blogBodyDiv h5,
+.createBlogPage .blogBodyDiv h6 {
+  width: fit-content;
+  border-bottom: 2px solid #f9004d;
+  display: inline;
+  color: #ffffff;
+}
+.createBlogPage textarea::placeholder {
+  font-weight: 500;
+  font-size: 16px;
+}
+.createBlogPage textarea {
+  resize: none;
+  border-radius: 5px;
+  color: #ffffff !important;
+  border: 2px solid #f9004d;
+  overflow: hidden;
+}
+.createBlogPage .activeInputBorder {
+  border-color: #f9004d;
+}
+.createBlogPage .publishAndCancel button,
+.createBlogPage .publishAndCancel .cancelLink {
+  width: 102px;
+  height: 42px;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+.createBlogPage .publishAndCancel .cancelLink {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid #f9004d;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #262626;
+  transition: all 200ms;
+}
+.createBlogPage .publishAndCancel .cancelLink:hover {
+  background-color: #f9004d;
+  color: #ffffff;
+}
+.createBlogPage .publishAndCancel .publish {
+  background: #888888;
+  border-radius: 4px;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.createBlogPage .publishAndCancel .publish:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.createBlogPage .publishAndCancel .activePublish {
+  background: #f9004d;
+  border-radius: 4px;
+  color: #ffffff;
+  border: 1px solid #f9004d;
+  transition: all 200ms;
+}
+.createBlogPage .publishAndCancel .activePublish:hover {
+  background-color: #262626;
+  color: #ffffff;
 }
 
 @media (max-width: 767px) {
@@ -3662,13 +4199,13 @@ section {
   cursor: pointer;
 }
 .admins_page .createAdmin .activeInputBorder {
-  border-color: #707aff;
+  border-color: #f9004d;
 }
 .admins_page .createAdmin .fileInputDiv {
   width: 100%;
   height: 200px;
   background-color: #262626;
-  border: 1px dashed #707aff;
+  border: 1px dashed #f9004d;
   border-radius: 10px;
 }
 .admins_page .createAdmin .fileInputDiv .imageUploadCloud {
@@ -3686,7 +4223,7 @@ section {
   width: 100%;
   height: 100%;
   max-height: 600px;
-  border: 1px dashed #707aff;
+  border: 1px dashed #f9004d;
   border-radius: 10px;
 }
 .admins_page .createAdmin .fileInputDiv .URLImage img {
@@ -3715,17 +4252,17 @@ section {
   max-width: 130px;
   text-align: center;
   font-size: 10px;
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   border-radius: 3px;
-  border: 2px solid #707aff;
+  border: 2px solid #f9004d;
   cursor: pointer;
   transition: all 200ms;
 }
 .admins_page .createAdmin .fileInputDiv .imageUploadButton:hover {
   background-color: #ffffff;
-  color: #707aff;
-  border-color: #707aff;
+  color: #f9004d;
+  border-color: #f9004d;
 }
 .admins_page .createAdmin .publishAndCancel button,
 .admins_page .createAdmin .publishAndCancel .cancelLink {
@@ -3742,14 +4279,14 @@ section {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  border: 1px solid #707aff;
+  border: 1px solid #f9004d;
   border-radius: 4px;
   color: #ffffff;
   background-color: #262626;
   transition: all 200ms;
 }
 .admins_page .createAdmin .publishAndCancel .cancelLink:hover {
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
 }
 .admins_page .createAdmin .publishAndCancel .publish {
@@ -3763,9 +4300,9 @@ section {
   color: #ffffff;
 }
 .admins_page .createAdmin .publishAndCancel .activePublish {
-  background: #707aff;
+  background: #f9004d;
   border-radius: 4px;
-  border: 1px solid #707aff;
+  border: 1px solid #f9004d;
   color: #ffffff;
   transition: all 200ms;
 }
@@ -3783,7 +4320,7 @@ section {
   width: fit-content;
 }
 .admins_page .update .fileInputDiv .blogImageUploaderLabel .editButton {
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   min-width: 60px;
   border-radius: 8px;
@@ -3804,7 +4341,7 @@ section {
   padding: 10px 20px;
   min-width: 100px;
   font-size: 20px;
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   border: none;
   border-radius: 6px;
@@ -3849,7 +4386,7 @@ section {
 .admins_page .admin_card {
   padding: 10px;
   border-radius: 5px;
-  background-color: #707aff;
+  background-color: #f9004d;
   color: #ffffff;
   opacity: 0.9;
   width: 100%;
@@ -3892,14 +4429,14 @@ section {
 .skeleton .title {
   height: 1.5rem;
   margin-bottom: 1rem;
-  border: 1px #707aff solid;
+  border: 1px #f9004d solid;
   border-radius: 9px;
   box-shadow: 1px 1px 5px 1px #ffffff;
 }
 .skeleton .text {
   height: 1.5rem;
   margin-bottom: 1rem;
-  border: 1px #707aff solid;
+  border: 1px #f9004d solid;
   border-radius: 9px;
   box-shadow: 1px 1px 5px 1px #ffffff;
 }
@@ -3913,7 +4450,7 @@ section {
   width: 100%;
   height: 300px;
   margin-bottom: 1rem;
-  border: 1px #707aff solid;
+  border: 1px #f9004d solid;
   border-radius: 9px;
   box-shadow: 1px 1px 5px 1px #ffffff;
 }
@@ -3934,7 +4471,7 @@ section {
   text-align: center;
 }
 .error404Page h1 {
-  color: #707aff;
+  color: #f9004d;
   font-size: 200px;
   font-weight: 700;
   margin: 0 !important;
@@ -3953,7 +4490,7 @@ section {
 }
 .error404Page button {
   color: #ffffff;
-  background-color: #707aff;
+  background-color: #f9004d;
 }
 .error404Page .toHome {
   display: flex;
@@ -3985,7 +4522,7 @@ section {
 }
 .errorPage button {
   color: #ffffff;
-  background-color: #707aff;
+  background-color: #f9004d;
 }
 .errorPage .toHome {
   display: flex;
@@ -4014,7 +4551,7 @@ section {
 }
 .singleBlogErrorPage button {
   color: #ffffff;
-  background-color: #707aff;
+  background-color: #f9004d;
 }
 .singleBlogErrorPage .toHome {
   display: flex;
@@ -4056,12 +4593,16 @@ section {
 }
 @media (pointer: coarse) {
   .home .leftHome .showCV {
-    background-color: #707aff;
+    background-color: #f9004d;
     border: none;
   }
   .home .leftHome .showCV:hover {
-    background-color: #707aff;
+    background-color: #f9004d;
     border: none;
+  }
+  .home .blurs {
+    left: 100px !important;
+    top: 200px !important;
   }
   .blogsPage .searchInputDiv .x {
     color: tomato;
@@ -4069,12 +4610,18 @@ section {
   .blogsPage .searchInputDiv:hover .x {
     color: tomato;
   }
+  .blogsPage .allBlogs .blogCard .wrapper .inner {
+    top: 60%;
+  }
   .blogsPage .allBlogs .blogCard .readBlog:hover {
-    background-color: #707aff;
+    background-color: #f9004d;
     color: #ffffff;
   }
+  .blogs .blogCards .blogCard .wrapper .inner {
+    top: 60%;
+  }
   .blogs .blogCards .blogCard .readBlog:hover {
-    background-color: #707aff;
+    background-color: #f9004d;
     color: #ffffff;
   }
   .blogs .seeMore:hover {
@@ -4085,7 +4632,7 @@ section {
     color: #ffffff;
   }
   .layout .header .blogLanguageDiv .languageDivBox:hover {
-    color: #707aff;
+    color: #f9004d;
     background-color: #121212;
   }
   .layout .header .blogLanguageDiv .languageList span:hover {
@@ -4097,8 +4644,17 @@ section {
   .layout .footer .socials .fa-linkedin:hover {
     color: #ffffff;
   }
+  .skills .angle {
+    opacity: 1;
+  }
   .skills .skillsBox .skillGroup .skillIcons .showSkillNameDiv:hover::after {
     height: 0;
+  }
+  .works .workCards .workCard:hover {
+    background-color: #262626;
+  }
+  .projects .pagination .paginationNumber:hover {
+    background-color: #262626;
   }
 }
 .appear {
@@ -4117,7 +4673,7 @@ section {
 }
 
 .popup_cards {
-  max-width: 300px;
+  font-family: Karla, sans-serif !important;
   width: 0;
   position: fixed;
   right: 0;
@@ -4168,7 +4724,7 @@ section {
   position: absolute;
   top: 0;
   background: rgb(38, 38, 38);
-  background: linear-gradient(90deg, rgb(38, 38, 38) 0%, rgb(112, 122, 255) 45%, rgb(255, 0, 0) 100%);
+  background: linear-gradient(90deg, rgb(38, 38, 38) 0%, rgb(249, 0, 77) 45%, rgb(255, 0, 0) 100%);
   left: 0;
   border-top-right-radius: 2rem;
   border-top-left-radius: 2rem;

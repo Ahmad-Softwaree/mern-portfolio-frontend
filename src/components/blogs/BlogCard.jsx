@@ -1,28 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
-const BlogCard = ({ file, language, time, id, img, enBody, arBody, krBody }) => {
-  return (
-    <div className="blogCard flex flex-column justify-between align-center  gap-1">
-      <div className="flex flex-column justify-center align-center gap-1 w-100">
-        <img src={`${img}`} alt="blogImage" />
-        {language === "en" ? (
-          <p>{DOMPurify.sanitize(enBody.replace(/<br\s*[\/]?>/gi, ""), { ADD_TAGS: ["br"] }).substring(0, 120) + "..."}</p>
-        ) : language === "ar" ? (
-          <p>{DOMPurify.sanitize(arBody.replace(/<br\s*[\/]?>/gi, ""), { ADD_TAGS: ["br"] }).substring(0, 120) + "..."}</p>
-        ) : (
-          <p>{DOMPurify.sanitize(krBody.replace(/<br\s*[\/]?>/gi, ""), { ADD_TAGS: ["br"] }).substring(0, 120) + "..."}</p>
-        )}
-      </div>
-      <div className="flex flex-column justify-center align-center gap-1 w-100">
-        <span className="blogTime">
-          {moment(time).format("MMMM Do YYYY")} {moment(time).format("dddd")}
-        </span>
+const BlogCard = ({ file, language, id, img, enTitle, arTitle, krTitle }) => {
+  const [hover, setHover] = useState(false);
 
-        <Link to={`/blogs/${id}`} className="readBlog">
-          {file.blog.read}
-        </Link>
+  return (
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="blogCard flex flex-column justify-between align-center  gap-1"
+    >
+      <div className="wrapper flex flex-column justify-left align-start gap-1 w-100">
+        <img style={hover ? { transform: "scale(1.4)" } : null} src={`${img}`} alt="blogImage" />
+        <div className="overBlog"></div>
+        <div
+          style={language === "en" ? { textAlign: "left" } : { textAlign: "right" }}
+          className={`inner flex flex-column justify-left align-start`}
+        >
+          <span className="category">Category</span>
+          <h2>{language === "en" ? enTitle : language === "ar" ? arTitle : krTitle} </h2>{" "}
+          <Link to={`/blogs/${id}`} className="readBlog">
+            {file.blog.read}
+          </Link>
+        </div>
       </div>
     </div>
   );

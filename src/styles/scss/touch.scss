@@ -12,6 +12,10 @@
         border: none;
       }
     }
+    .blurs {
+      left: 100px !important;
+      top: 200px !important;
+    }
   }
   .blogsPage {
     .searchInputDiv {
@@ -27,6 +31,11 @@
 
     .allBlogs {
       .blogCard {
+        .wrapper {
+          .inner {
+            top: 60%;
+          }
+        }
         .readBlog:hover {
           background-color: colors.$purple;
           color: colors.$white;
@@ -37,6 +46,11 @@
   .blogs {
     .blogCards {
       .blogCard {
+        .wrapper {
+          .inner {
+            top: 60%;
+          }
+        }
         .readBlog:hover {
           background-color: colors.$purple;
           color: colors.$white;
@@ -83,6 +97,9 @@
   }
 
   .skills {
+    .angle {
+      opacity: 1;
+    }
     .skillsBox {
       .skillGroup {
         .skillIcons {
@@ -90,6 +107,20 @@
             height: 0;
           }
         }
+      }
+    }
+  }
+  .works {
+    .workCards {
+      .workCard:hover {
+        background-color: colors.$lightBlack;
+      }
+    }
+  }
+  .projects {
+    .pagination {
+      .paginationNumber:hover {
+        background-color: colors.$lightBlack;
       }
     }
   }

@@ -26,7 +26,7 @@ const Landing = ({ language: { language, file } }) => {
   }, []);
 
   return (
-    <div className="landing w-100 p-0 m-0 flex flex-column justify-center align-center gap-2">
+    <div className="landing w-100 p-0 m-0 flex flex-column justify-center align-center">
       <Home file={file} />
       <Blogs language={language} file={file} />
       <Skills language={language} file={file} />

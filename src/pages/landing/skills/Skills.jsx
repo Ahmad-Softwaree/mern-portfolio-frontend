@@ -1,13 +1,59 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Element } from "react-scroll";
 
 const Skills = ({ file, language }) => {
+  const categories = ["lang", "front", "back", "game"];
+  const [active, setActive] = useState("lang");
+  const [right, setRight] = useState(1);
+  const [left, setLeft] = useState(1);
+
+  useEffect(() => {
+    const skillBox = document.querySelector(".skillsBox");
+    const activeBox = document.querySelector(".activeSkillGroup");
+    setTimeout(() => {
+      skillBox.style.height = activeBox.offsetHeight + 100 + "px";
+    }, 100);
+  }, [active]);
+
+  const forward = () => {
+    const skillBox = document.querySelector(".skillsBox");
+
+    if (categories.findIndex((one) => one === active) < categories.length - 1) {
+      setActive(categories[categories.findIndex((one) => one === active) + 1]);
+      skillBox.scrollTo((skillBox.offsetWidth - 60) * right, 0);
+      setLeft((prev) => prev - 1);
+      setRight((prev) => prev + 1);
+    }
+  };
+  const backward = () => {
+    const skillBox = document.querySelector(".skillsBox");
+
+    if (categories.findIndex((one) => one === active) > 0) {
+      setActive(categories[categories.findIndex((one) => one === active) - 1]);
+      skillBox.scrollTo(-((skillBox.offsetWidth - 60) * left), 0);
+      setRight((prev) => prev - 1);
+      setLeft((prev) => prev + 1);
+    }
+  };
+
   return (
     <Element className="w-100" name="skills">
-      <section id="skills" className="skills flex flex-column justify-center align-center w-100">
-        <h1 className="heading">{file.nav.skills}</h1>
-        <div className="skillsBox flex flex-column justify-left align-start gap-2">
-          <div className="skillGroup flex flex-column justify-left align-center w-100 gap-3">
+      <section id="skills" className={`skills flex flex-column justify-left align-center w-100`}>
+        <div className={`flex flex-row justify-center algin-center gap-2 w-100 ${language !== "en" && "flex-row-reverse"}`}>
+          <span onClick={() => backward()} className={`angle flex flex-row justify-center align-center ${left !== 1 && "activeAngle"}`}>
+            <i className={`fa-solid fa-angle-left`}></i>{" "}
+          </span>
+          <h1 className="heading">{file.nav.skills}</h1>
+          <span
+            onClick={() => forward()}
+            className={`angle flex flex-row justify-center align-center ${right !== categories.length && "activeAngle"}`}
+          >
+            <i className={`fa-solid fa-angle-right`}></i>
+          </span>
+        </div>
+
+        <div className={`skillsBox flex flex-row justify-left align-start  ${language !== "en" && "flex-row-reverse"}`}>
+          <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "lang" && "activeSkillGroup"}`}>
             <h2>{file.skills.languages}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv java">
@@ -19,13 +65,13 @@ const Skills = ({ file, language }) => {
               <div className="showSkillNameDiv c">
                 <img src="/images/icons/c.svg" alt="" />
               </div>
+              <div className="showSkillNameDiv javascript">
+                <img src="/images/icons/javascript.svg" alt="" />
+              </div>
             </div>
           </div>
-          <div className="littleBreak"></div>
 
-          {/* web dev */}
-          <h1>{file.skills.webDev}</h1>
-          <div className="skillGroup flex flex-column justify-left align-center w-100 gap-2">
+          <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "front" && "activeSkillGroup"}`}>
             <h2>{file.skills.front}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv html">
@@ -64,11 +110,7 @@ const Skills = ({ file, language }) => {
             </div>
           </div>
 
-          <div className="littleBreak"></div>
-
-          {/* backend */}
-
-          <div className="skillGroup flex flex-column justify-left align-center w-100 gap-2">
+          <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "back" && "activeSkillGroup"}`}>
             <h2>{file.skills.back}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv node">
@@ -81,11 +123,9 @@ const Skills = ({ file, language }) => {
                 <img src="/images/icons/npm.svg" alt="" />
               </div>
               <div className="showSkillNameDiv mysql">
-                {" "}
                 <img src="/images/icons/mysql.svg" alt="" />
               </div>
               <div className="showSkillNameDiv mongodb">
-                {" "}
                 <img src="/images/icons/mongodb.svg" alt="" />
               </div>
               <div className="showSkillNameDiv firebase">
@@ -100,15 +140,7 @@ const Skills = ({ file, language }) => {
             </div>
           </div>
 
-          <div className="littleBreak"></div>
-
-          {/* languages */}
-
-          <h1>{file.skills.gameDev}</h1>
-
-          {/* game dev */}
-
-          <div className="skillGroup flex flex-column justify-left align-center w-100 gap-2">
+          <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "game" && "activeSkillGroup"}`}>
             <h2>{file.skills.twoDGame}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv unity">

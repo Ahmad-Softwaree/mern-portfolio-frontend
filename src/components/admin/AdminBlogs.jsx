@@ -5,9 +5,9 @@ import { Spinner } from "@chakra-ui/react";
 import { getAllBlogsForPanel } from "../../actions/admin";
 import AdminBlog from "./AdminBlog";
 import Opacity from "../Opacity";
-import CreateBlog from "./CreateBlog";
+import CreateBlog from "../../pages/admin/CreateBlog";
+import { Link } from "react-router-dom";
 export const AdminBlogs = ({ blog: { blogs, blogLoading }, getAllBlogsForPanel }) => {
-  const [add, setAdd] = useState(false);
   useEffect(() => {
     getAllBlogsForPanel({});
   }, []);
@@ -15,18 +15,11 @@ export const AdminBlogs = ({ blog: { blogs, blogLoading }, getAllBlogsForPanel }
     <div className="admin_blogs  flex flex-column justify-center align-center gap-1">
       <div className="flex flex-row justify-center align-center gap-1 w-100">
         <h1>Blogs</h1>
-        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
-          <i className="fa-solid fa-upload"></i>
-          <span>Upload</span>
-        </button>
+        <Link to={`create_blog`} className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
+          <i className="fa-brands fa-blogger"></i>
+          <span>Create</span>
+        </Link>
       </div>
-      {add && (
-        <>
-          <Opacity />
-          <CreateBlog setAdd={setAdd} />
-        </>
-      )}
-
       {blogLoading && <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} />}
       {!blogLoading && blogs.length > 0 && (
         <div className="blogs w-100 flex flex-column justify-left align-center gap-1">

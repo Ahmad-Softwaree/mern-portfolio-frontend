@@ -54,20 +54,19 @@ const Header = React.memo(({ isHome, blog, project, work, language: { language, 
     <>
       {isHome && (
         <header className="header w-100 position-relative">
-          {mobNav && <MobileNav goNav={goNav} activeSection={activeSection} mobNav={mobNav} setMobNav={setMobNav} />}
+          <MobileNav goNav={goNav} activeSection={activeSection} mobNav={mobNav} setMobNav={setMobNav} />
 
-          {mobNav ? (
-            <span onClick={() => setMobNav(false)} className="xMobNav">
-              <i className="fa-solid fa-xmark"></i>
-            </span>
-          ) : (
-            <span onClick={() => setMobNav(true)} className="humb">
-              <i className="fa-solid fa-bars"></i>
-            </span>
-          )}
+          <div
+            onClick={() => setMobNav((prev) => !prev)}
+            className={`humb flex flex-column justify-left align-center  ${mobNav && "xMobNav"}`}
+          >
+            <div className="x-1"></div>
+            <div className="x-2"></div>
+            <div className="x-3"></div>
+          </div>
 
           <nav className="navigation flex flex-row justify-center align-center  w-100">
-            <ul className="flex flex-row justify-center align-center gap-2 w-100">
+            <ul className="flex flex-row justify-center align-center  w-100">
               <li className="navItem">
                 <span onClick={() => goNav("home")} className={`${activeSection === "home" && "activeNav"}`}>
                   {file.nav.home}
@@ -81,7 +80,9 @@ const Header = React.memo(({ isHome, blog, project, work, language: { language, 
                   </span>
                 </li>
               ) : blog.blogs.length === 0 && blog.blogLoading ? (
-                <li className="navItem animatedNavItem">{file.nav.blogs}</li>
+                <li className="navItem animatedNavItem">
+                  <span>{file.nav.blogs}</span>
+                </li>
               ) : null}
 
               <li className="navItem">
@@ -97,7 +98,9 @@ const Header = React.memo(({ isHome, blog, project, work, language: { language, 
                   </span>
                 </li>
               ) : project.projects.length === 0 && project.projectLoading ? (
-                <li className="navItem animatedNavItem">{file.nav.projects}</li>
+                <li className="navItem animatedNavItem">
+                  <span>{file.nav.projects}</span>
+                </li>
               ) : null}
 
               {work.works.length > 0 && !work.worksLoading ? (
@@ -107,7 +110,9 @@ const Header = React.memo(({ isHome, blog, project, work, language: { language, 
                   </span>
                 </li>
               ) : work.works.length === 0 && work.workLoading ? (
-                <li className="navItem animatedNavItem">{file.nav.works}</li>
+                <li className="navItem animatedNavItem">
+                  <span>{file.nav.works}</span>
+                </li>
               ) : null}
 
               <li className="navItem">

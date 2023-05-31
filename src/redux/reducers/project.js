@@ -84,10 +84,13 @@ export default function project(state = initialState, action) {
         updateProjectLoading: false,
       };
     case UPDATE_PROJECT_SUCCESS:
+      var data = state.projects;
+      var index = data.findIndex((val) => val._id === payload._id);
+      data[index] = payload;
       return {
         ...state,
         updateProjectLoading: false,
-        projects: [...state.projects.filter((project) => project._id !== payload._id), payload],
+        projects: data,
       };
     default:
       return state;

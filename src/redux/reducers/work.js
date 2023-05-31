@@ -65,7 +65,7 @@ export default function WORK(state = initialState, action) {
     case DELETE_WORK_FAIL:
       return {
         ...state,
-        deleteworkLoading: false,
+        deleteWorkLoading: false,
       };
     case DELETE_WORK_SUCCESS:
       return {
@@ -84,10 +84,13 @@ export default function WORK(state = initialState, action) {
         updateWorkLoading: false,
       };
     case UPDATE_WORK_SUCCESS:
+      var data = state.works;
+      var index = data.findIndex((val) => val._id === payload._id);
+      data[index] = payload;
       return {
         ...state,
         updateWorkLoading: false,
-        works: [...state.works.filter((WORK) => WORK._id !== payload._id), payload],
+        works: data,
       };
     default:
       return state;

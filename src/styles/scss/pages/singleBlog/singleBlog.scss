@@ -4,6 +4,7 @@
 @use "../../util/hover.scss" as hover;
 
 .singleBlog {
+  position: relative;
   min-height: 100vh;
   padding: 35px;
   padding-top: 50px;
@@ -11,25 +12,93 @@
   padding-inline: 20px;
   background-color: colors.$black;
   color: colors.$white;
+
   .blogTime {
-    font-size: 12px;
+    width: 100%;
+    font-size: 20px;
+    color: colors.$purple;
     font-weight: 400;
-  }
-  h1 {
-    font-size: 36px;
-    margin: 0;
   }
 
   .blogHeader {
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 127.9%;
+    height: 600px;
+    h1 {
+      font-size: 66px !important;
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 100;
+      background: linear-gradient(145deg, #f81f01, #ee076e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      line-height: 190.9%;
+    }
+  }
+
+  .blogOwner {
+    gap: 6px;
+    z-index: 100;
+    font-weight: 400;
+
+    img {
+      border-radius: 50%;
+      width: 6rem;
+      height: 6rem;
+      object-fit: cover;
+    }
+    span {
+      font-size: 30px;
+      color: colors.$purple;
+    }
+    p {
+      font-size: 20px;
+    }
+    span,
+    p {
+      margin: 0;
+    }
+  }
+  .overImage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    opacity: 0.9;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+    z-index: 40;
   }
   .blogImage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
     width: 100%;
-    max-height: 500px;
+    object-fit: cover;
+    height: 600px;
+    opacity: 0.6;
+    z-index: 10;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 20%; /* Adjust the height as needed */
+      background: linear-gradient(to bottom, rgba(62, 62, 62, 0.2), rgba(49, 49, 49, 0.2));
+    }
 
-    border-radius: 8px !important;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 20%; /* Adjust the height as needed */
+      background: linear-gradient(to top, rgba(62, 62, 62, 0.5), rgba(255, 255, 255, 0));
+    }
   }
   .blogBody {
     font-weight: 500;
@@ -40,14 +109,48 @@
 
 @include res.responsive(computer) {
   .singleBlog {
+    padding-top: 20px !important;
     padding-inline: 100px !important;
   }
 }
 
 @include res.responsive(mobile) {
   .singleBlog {
-    h1 {
-      font-size: 24px !important;
+    .blogOwner {
+      gap: 6px;
+      z-index: 100;
+      font-weight: 400;
+
+      img {
+        border-radius: 50%;
+        width: 4rem;
+        height: 4rem;
+        object-fit: cover;
+      }
+      span {
+        font-size: 20px;
+        color: colors.$purple;
+      }
+      p {
+        font-size: 15px;
+      }
+      span,
+      p {
+        margin: 0;
+      }
+    }
+
+    .blogHeader {
+      height: 500px !important;
+      h1 {
+        font-size: 40px !important;
+      }
+    }
+    .blogImage {
+      height: 500px !important;
+    }
+    .overImage {
+      height: 500px !important;
     }
   }
 }

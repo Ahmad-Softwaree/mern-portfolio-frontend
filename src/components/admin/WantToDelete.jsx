@@ -4,19 +4,24 @@ import { connect } from "react-redux";
 import { deleteBlog } from "../../actions/blog";
 import { deleteProject } from "../../actions/project";
 import { deleteWork } from "../../actions/work";
+import { deleteStack } from "../../actions/stack";
 
-export const WantToDelete = ({ setWantToDelete, id, image, deleteBlog, deleteProject, deleteWork, blog, work }) => {
+export const WantToDelete = ({ setWantToDelete, id, image, deleteBlog, deleteProject, deleteWork, method, deleteStack }) => {
   return (
     <div className="position-fixed wantToDelete flex flex-column justify-left align-center gap-1">
       <p>Are you sure you want to delete?</p>
       <div className="flex flex-row justify-center align-center gap-2">
         <button
           onClick={() =>
-            blog
+            method === "blog"
               ? deleteBlog({ blogId: id, image, setWantToDelete })
-              : !work
+              : method === "project"
               ? deleteProject({ projectId: id, image, setWantToDelete })
-              : deleteWork({ workId: id, image, setWantToDelete })
+              : method === "work"
+              ? deleteWork({ workId: id, image, setWantToDelete })
+              : method === "stack"
+              ? deleteStack({ stackId: id, setWantToDelete })
+              : null
           }
           className="yes"
         >
@@ -36,6 +41,6 @@ const mapStateToProps = (state) => ({
   admin: state.admin,
 });
 
-const mapDispatchToProps = { deleteBlog, deleteProject, deleteWork };
+const mapDispatchToProps = { deleteBlog, deleteProject, deleteWork, deleteStack };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WantToDelete);

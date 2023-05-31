@@ -45,13 +45,13 @@ export const getAllProjects =
 
 //admin
 export const createProject =
-  ({ enTitle, arTitle, krTitle, enType, arType, krType, url, image, setInputs, userId }) =>
+  ({ enTitle, arTitle, krTitle, enType, arType, krType, url, image, setInputs, userId, stacks, setStacks }) =>
   async (dispatch) => {
     dispatch({
       type: CREATE_PROJECT_START,
     });
     try {
-      let data = { enTitle, arTitle, krTitle, enType, arType, krType, url, user: userId };
+      let data = { enTitle, arTitle, krTitle, enType, arType, krType, url, user: userId, stacks };
       if (image) {
         const file = new FormData();
         const filename = Date.now() + image.name;
@@ -60,6 +60,7 @@ export const createProject =
         const imageURL = await saveProjectImage({ file });
         data.image = imageURL;
       }
+
       const res = await axios.post(`${CREATE_PROJECT_URL}`, data, authConfig(getCookie("admin")));
       dispatch({
         type: CREATE_PROJECT_SUCCESS,
@@ -75,6 +76,7 @@ export const createProject =
         krType: "",
         url: "",
       });
+      setStacks([]);
       dispatch({
         type: PROJECT_IMAGE,
         payload: null,
@@ -89,7 +91,23 @@ export const createProject =
   };
 
 export const updateProject =
-  ({ enTitle, arTitle, krTitle, enType, arType, krType, url, image, projectId, oldImage, setInputs, setUpdate, imageChanged }) =>
+  ({
+    enTitle,
+    arTitle,
+    krTitle,
+    enType,
+    arType,
+    krType,
+    url,
+    image,
+    projectId,
+    oldImage,
+    setInputs,
+    setUpdate,
+    imageChanged,
+    stacks,
+    setStacks,
+  }) =>
   async (dispatch) => {
     dispatch({
       type: UPDATE_PROJECT_START,
@@ -110,7 +128,7 @@ export const updateProject =
             });
           });
       }
-      let data = { enTitle, arTitle, krTitle, enType, arType, krType, url };
+      let data = { enTitle, arTitle, krTitle, enType, arType, krType, url, stacks };
       if (image) {
         const file = new FormData();
         const filename = Date.now() + image.name;
@@ -133,6 +151,7 @@ export const updateProject =
         arType: "",
         krType: "",
       });
+      setStacks([]);
       dispatch({
         type: PROJECT_UPDATE_IMAGE,
         payload: null,

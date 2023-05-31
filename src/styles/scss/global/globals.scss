@@ -21,13 +21,14 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
+  touch-action: none;
 }
 
 .kurdish_font {
   font-family: font.$rabar, sans-serif !important;
 }
 .english_font {
-  font-family: font.$karla, sans-serif !important;
+  font-family: font.$poppins, sans-serif !important;
 }
 :root {
   --chakra-fonts-body: "";
@@ -175,8 +176,8 @@ img {
 
 .heading {
   margin: 0;
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 44px;
+  font-weight: 700;
 }
 
 .fallbackText {
@@ -219,7 +220,7 @@ section {
     padding-inline: 40px !important;
   }
   .heading {
-    font-size: 26px !important;
+    font-size: 38px !important;
   }
   .projectCards,
   .workCards,
@@ -233,7 +234,7 @@ section {
     padding-inline: 20px !important;
   }
   .heading {
-    font-size: 22px !important;
+    font-size: 40px !important;
   }
 
   .projectCards,

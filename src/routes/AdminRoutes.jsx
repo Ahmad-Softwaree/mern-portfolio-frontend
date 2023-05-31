@@ -8,7 +8,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import AdminLayout from "../components/layout/AdminLayout";
 import { ENGLISH } from "../actions/types";
 import Fallback from "../components/Fallback";
-export const AdminRoutes = ({ loadUser, admin: { user, loading } }) => {
+import AdminBlogLayout from "../components/layout/AdminBlogLayout";
+export const AdminRoutes = ({ layout, loadUser, admin: { user, loading } }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -26,7 +27,8 @@ export const AdminRoutes = ({ loadUser, admin: { user, loading } }) => {
     </div>
   ) : Object.keys(user)?.length !== 0 && !loading ? (
     <>
-      <AdminLayout user={user} />
+      {layout && <AdminLayout user={user} />}
+      {!layout && <AdminBlogLayout user={user} />}
       <Outlet />
     </>
   ) : (

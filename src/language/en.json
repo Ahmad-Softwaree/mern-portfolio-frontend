@@ -11,15 +11,19 @@
     "welcome": "WELCOME TO MY WORLD",
     "who": "I'm",
     "name": " Ahmad Software",
-    "job": "Full Stack developer",
+    "job": ["Full Stack Web Developer.", "Game Developer.", "Software Developer.", "Software Engineer."],
     "cv": "Show CV"
   },
   "blog": {
-    "read": "Read blog",
+    "read": "READ MORE",
     "seeMore": "See more"
   },
+  "projects": {
+    "tech": "Technologies used",
+    "preview": "Preview"
+  },
   "work": {
-    "title": "works for clients"
+    "title": "Clients"
   },
   "skills": {
     "languages": "Languages",
@@ -28,6 +32,10 @@
     "back": "Back-end",
     "gameDev": "Game Development",
     "twoDGame": "2d game"
+  },
+  "singleBlog": {
+    "name": "Ahmad Software",
+    "ceo": "CEO & Founder of Bester Group"
   },
   "drag": "drag to view more"
 }

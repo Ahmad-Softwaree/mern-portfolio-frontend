@@ -102,10 +102,13 @@ export default function blog(state = initialState, action) {
         updateBlogLoading: false,
       };
     case UPDATE_BLOG_SUCCESS:
+      var data = state.blogs;
+      var index = data.findIndex((val) => val._id === payload._id);
+      data[index] = payload;
       return {
         ...state,
         updateBlogLoading: false,
-        blogs: [...state.blogs.filter((blog) => blog._id !== payload._id), payload],
+        blogs: data,
       };
     default:
       return state;

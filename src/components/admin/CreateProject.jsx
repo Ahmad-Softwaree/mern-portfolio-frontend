@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
 import { createProject } from "../../actions/project";
 import { PROJECT_IMAGE } from "../../actions/types";
 import { Spinner } from "@chakra-ui/react";
-const CreateProject = ({ image: { project }, createProject, project: { projects, createProjectLoading }, setAdd, admin: { user } }) => {
+import { getAllStacks } from "../../actions/stack";
+const CreateProject = ({
+  getAllStacks,
+  stack,
+  image: { project },
+  createProject,
+  project: { projects, createProjectLoading },
+  setAdd,
+  admin: { user },
+}) => {
+  const [stacks, setStacks] = useState([]);
   const [{ enTitle, arTitle, krTitle, enType, arType, krType, url }, setInputs] = useState({
     enTitle: "",
     arTitle: "",
@@ -15,19 +25,24 @@ const CreateProject = ({ image: { project }, createProject, project: { projects,
     url: "",
   });
   const dispatch = useDispatch();
+  const [hover, setHover] = useState("");
 
   const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onKeyDown = (e) => {
     if (e.key === "13" && !e.shiftKey) {
-      createProject({ enTitle, arTitle, krTitle, enType, arType, krType, url, image: project, setInputs });
+      createProject({ enTitle, arTitle, krTitle, enType, arType, krType, url, image: project, setInputs, stacks, setStacks });
     }
   };
+
+  useEffect(() => {
+    getAllStacks({});
+  }, []);
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        createProject({ enTitle, arTitle, krTitle, enType, arType, krType, url, image: project, setInputs });
+        createProject({ enTitle, arTitle, krTitle, enType, arType, krType, url, image: project, setInputs, stacks, setStacks });
       }}
       className="createProject position-fixed flex flex-column justify-center align-center w-100 gap-2"
     >
@@ -131,6 +146,33 @@ const CreateProject = ({ image: { project }, createProject, project: { projects,
           id="url"
           className={url !== "" ? "activeInputBorder" : null}
         />
+        <div className="flex flex-row justify-left align-center gap-1 w-100 flex-wrap">
+          {stack.stacks.map((val, index) => {
+            const isStackIncluded = stacks.some((item) => item.stack._id === val._id);
+            return (
+              <div
+                key={index}
+                onMouseEnter={() => setHover(val._id)}
+                onMouseLeave={() => setHover("")}
+                onClick={() => {
+                  if (isStackIncluded) {
+                    setStacks((prev) => prev.filter((one) => one.stack._id !== val._id));
+                  } else {
+                    setStacks((prev) => [...prev, { stack: { _id: val._id } }]);
+                  }
+                }}
+                style={
+                  isStackIncluded || hover === val._id
+                    ? { color: "white", border: `2px solid ${val.color}`, backgroundColor: val.color }
+                    : { color: val.color, border: `2px solid ${val.color}`, backgroundColor: "transparent" }
+                }
+                className="stack"
+              >
+                {val.name}
+              </div>
+            );
+          })}
+        </div>
         <div className="publishAndCancel flex flex-row justify-center align-center gap-2">
           <span
             className="cancelLink"
@@ -175,14 +217,17 @@ CreateProject.propTypes = {
   createProject: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired,
   image: PropTypes.object.isRequired,
+  getAllStacks: PropTypes.func.isRequired,
+  stack: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   project: state.project,
   image: state.image,
   admin: state.admin,
+  stack: state.stack,
 });
 
-const mapDispatchToProps = { createProject };
+const mapDispatchToProps = { createProject, getAllStacks };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);

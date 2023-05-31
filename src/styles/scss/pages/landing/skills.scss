@@ -4,28 +4,79 @@
 @use "../../util/hover.scss" as hover;
 
 .skills {
+  min-height: 80vh;
   h1 {
     margin-bottom: 40px;
+    color: colors.$purple;
+  }
+  .categories {
+    width: 80%;
+    flex-wrap: wrap;
+
+    span {
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      min-width: 175px;
+      text-align: center;
+      border-bottom: 2px solid transparent;
+      transition: all 200ms linear;
+      &:hover {
+        border-bottom: 2px solid colors.$purple;
+      }
+    }
+
+    .active {
+      border-bottom: 2px solid colors.$purple;
+    }
+  }
+  .skillsBox::-webkit-scrollbar {
+    display: none !important;
+  }
+  .angle {
+    font-size: 30px;
+    padding: 20px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: colors.$lightBlack;
+    backdrop-filter: opacity(100%);
+    color: white;
+    opacity: 0.5;
+    transition: all 200ms linear;
+    cursor: pointer;
+  }
+  .angle:hover {
+    opacity: 1;
+  }
+  .activeAngle {
+    background-color: colors.$purple;
   }
   .skillsBox {
-    h1 {
-      font-size: 30px;
-      padding: 0 20px;
-      margin: 0;
-    }
     width: 80%;
     color: colors.$white;
     background-color: colors.$black;
-    box-shadow: 0px 15px 43px rgba(112, 122, 255, 0.14);
+    box-shadow: 0px 2px 10px 1px colors.$purple;
     border-radius: 11px;
+    border: 30px colors.$lightBlack solid;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 
-    border: 50px colors.$lightBlack solid;
+    position: relative;
+
     .skillGroup {
-      padding: 20px 25px;
+      transition: all 200ms linear;
+      height: fit-content;
+      padding: 30px;
+      min-width: 100%;
       h2 {
-        font-size: 25px;
+        font-size: 36px;
+        text-align: center;
+        width: 100%;
         margin: 0;
-        font-weight: 500;
+        font-weight: 600;
       }
       .skillIcons {
         .showSkillNameDiv {
@@ -147,12 +198,14 @@
 @include res.responsive(mobile) {
   .skills {
     padding-inline: 0 !important;
+    .categories {
+      width: 90% !important;
+    }
     .skillsBox {
       width: 90% !important;
       .littleBreak {
         height: 20px !important;
       }
-      border-width: 20px !important;
       h1 {
         font-size: 22px !important;
       }

@@ -55,6 +55,7 @@ export const AdminProjects = ({ project: { projects, projectLoading }, getAllPro
                   krType={project.krType}
                   arType={project.arType}
                   image={project.image}
+                  stacks={project.stacks}
                   url={project.url}
                 />
               );

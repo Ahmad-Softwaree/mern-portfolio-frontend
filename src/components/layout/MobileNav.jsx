@@ -11,8 +11,8 @@ const MobileNav = ({
   language: { file, language },
 }) => {
   return (
-    <nav className={`${mobNav ? "mobileNav mobNavAnim" : "mobileNav"}`}>
-      <ul className="flex flex-column justify-center align-center gap-2 w-100">
+    <nav className={`mobileNav ${mobNav ? "show" : "hide"}`}>
+      <ul className="flex flex-column justify-center align-center w-100">
         <li className="navItem">
           <span onClick={() => goNav("home")} className={`${activeSection === "home" && "activeNav"}`}>
             {file.nav.home}

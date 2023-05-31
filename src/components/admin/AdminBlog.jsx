@@ -13,7 +13,7 @@ export const AdminBlog = ({ index, id, enTitle, arTitle, krTitle, enBody, krBody
       {wantToDelete && (
         <>
           <Opacity />
-          <WantToDelete setWantToDelete={setWantToDelete} id={id} image={image} blog={true} work={false} />
+          <WantToDelete setWantToDelete={setWantToDelete} id={id} image={image} method={`blog`} />
         </>
       )}
       {update && (
