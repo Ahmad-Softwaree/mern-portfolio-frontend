@@ -21,11 +21,7 @@ const ProjectCard = ({
 }) => {
   const [hover, setHover] = useState("");
   return (
-    <div
-      onMouseDown={onDragStart}
-      onMouseUp={onDragEnd}
-      className={`projectCard flex flex-row justify-left align-center flex-wrap ${language !== "en" && "flex-row-reverse"}`}
-    >
+    <div className={`projectCard flex flex-row justify-left align-center flex-wrap ${language !== "en" && "flex-row-reverse"}`}>
       <img src={`${img}`} alt="" />
       <div className="projectCardFooter flex flex-column justify-left align-start">
         <h1 className="projectTitle">{language === "en" ? enTitle : language === "ar" ? arTitle : krTitle}</h1>
