@@ -18,6 +18,7 @@ const ProjectCard = ({
   onTouchStart,
   onDragStart,
   onDragEnd,
+  onTouchMove,
 }) => {
   const [hover, setHover] = useState("");
   return (
@@ -26,6 +27,7 @@ const ProjectCard = ({
       onTouchEnd={onTouchEnd}
       onMouseDown={onDragStart}
       onMouseUp={onDragEnd}
+      onTouchMove={onTouchMove}
       className={`projectCard flex flex-row justify-left align-center flex-wrap ${language !== "en" && "flex-row-reverse"}`}
     >
       <img src={`${img}`} alt="" />

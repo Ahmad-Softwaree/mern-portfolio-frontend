@@ -59,6 +59,15 @@ const Projects = ({ file, language, project, getAllProjects }) => {
     }
   }, [dragStart, dragEnd]);
 
+  const onTouchMove = (e) => {
+    let project = document.querySelectorAll(".projectCard")[0];
+    console.log(project);
+    projectRef.current?.scrollTo({
+      left: (project?.offsetWidth + 36) * active,
+      behavior: "smooth",
+    });
+  };
+
   //make user can change with touch drag
   const onTouchEnd = (e) => {
     setTouchEnd(e.changedTouches[0].clientX);
@@ -70,27 +79,24 @@ const Projects = ({ file, language, project, getAllProjects }) => {
   };
 
   useEffect(() => {
-    const scroll = () => {
-      if (touchStart - 60 > touchEnd) {
-        if (canMove) {
-          if (active === project?.projects.length - 1) {
-            setActive(0);
-          } else {
-            setActive((prev) => prev + 1);
-          }
+    if (touchStart - 60 > touchEnd) {
+      if (canMove) {
+        if (active === project?.projects.length - 1) {
+          setActive(0);
+        } else {
+          setActive((prev) => prev + 1);
         }
-      } else if (touchEnd - 60 > touchStart) {
-        if (canMove) {
-          if (active === 0) {
-            setActive(project?.projects.length - 1);
-          } else {
-            setActive((prev) => prev - 1);
-          }
-        }
-        setCanMove(false);
       }
-    };
-    scroll();
+    } else if (touchEnd - 60 > touchStart) {
+      if (canMove) {
+        if (active === 0) {
+          setActive(project?.projects.length - 1);
+        } else {
+          setActive((prev) => prev - 1);
+        }
+      }
+      setCanMove(false);
+    }
   }, [touchStart, touchEnd]);
 
   return (
@@ -99,9 +105,10 @@ const Projects = ({ file, language, project, getAllProjects }) => {
         <Element className="w-100" name="projects">
           <section id="projects" className="projects flex flex-column justify-left align-center w-100 gap-2">
             <h1 className="heading">{file.nav.projects} 🚀</h1>
+
             <div
               ref={projectRef}
-              className={`projectCards flex flex-row justify-left align-center  flex-nowrap w-100  gap-2 ${
+              className={`projectCards flex flex-row justify-left align-start  flex-nowrap w-100  gap-2 ${
                 language !== "en" && "flex-row-reverse"
               }`}
             >
@@ -111,6 +118,7 @@ const Projects = ({ file, language, project, getAllProjects }) => {
                     onTouchEnd={onTouchEnd}
                     onTouchStart={onTouchStart}
                     onDragStart={onDragStart}
+                    onTouchMove={onTouchMove}
                     onDragEnd={onDragEnd}
                     file={file}
                     language={language}
@@ -129,6 +137,7 @@ const Projects = ({ file, language, project, getAllProjects }) => {
                 );
               })}
             </div>
+
             <div className={`pagination flex flex-row justify-center align-center gap-1 w-100  ${language !== "en" && "flex-row-reverse"}`}>
               <>
                 {new Array(pagination)
