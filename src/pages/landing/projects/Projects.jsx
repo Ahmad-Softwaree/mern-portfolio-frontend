@@ -61,7 +61,6 @@ const Projects = ({ file, language, project, getAllProjects }) => {
 
   const onTouchMove = (e) => {
     let project = document.querySelectorAll(".projectCard")[0];
-    console.log(project);
     projectRef.current?.scrollTo({
       left: (project?.offsetWidth + 36) * active,
       behavior: "smooth",
