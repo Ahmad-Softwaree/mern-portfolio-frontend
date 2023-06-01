@@ -1,24 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-const ProjectCard = ({
-  file,
-  language,
-  img,
-  enTitle,
-  arTitle,
-  krTitle,
-  enType,
-  arType,
-  krType,
-  id,
-  url,
-  stacks,
-  onTouchEnd,
-  onTouchStart,
-  onDragStart,
-  onDragEnd,
-}) => {
+const ProjectCard = ({ file, language, img, enTitle, arTitle, krTitle, enType, arType, krType, id, url, stacks }) => {
   const [hover, setHover] = useState("");
   return (
     <div className={`projectCard flex flex-row justify-left align-center flex-wrap ${language !== "en" && "flex-row-reverse"}`}>

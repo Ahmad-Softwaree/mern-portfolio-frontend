@@ -6,13 +6,14 @@ import { connect } from "react-redux";
 import { getAllProjects } from "../../../actions/project";
 const Projects = ({ file, language, project, getAllProjects }) => {
   const [pagination, setPagination] = useState(0);
-  const [canMove, setCanMove] = useState(true);
   const [active, setActive] = useState(0);
   const projectRef = useRef();
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  const [dragStart, setDragStart] = useState(0);
-  const [dragEnd, setDragEnd] = useState(0);
+  // const [touchStart, setTouchStart] = useState(0);
+  // const [touchEnd, setTouchEnd] = useState(0);
+  // const [dragStart, setDragStart] = useState(0);
+  // const [dragEnd, setDragEnd] = useState(0);
+  // const [canMove, setCanMove] = useState(true);
+
   useEffect(() => {
     getAllProjects({});
   }, []);
@@ -29,69 +30,69 @@ const Projects = ({ file, language, project, getAllProjects }) => {
     });
   }, [active]);
 
-  const onDragEnd = (e) => {
-    setDragStart(e.clientX);
-    setCanMove(true);
-  };
-  const onDragStart = (e) => {
-    setDragEnd(e.clientX);
-    setCanMove(false);
-  };
+  // const onDragEnd = (e) => {
+  //   setDragStart(e.clientX);
+  //   setCanMove(true);
+  // };
+  // const onDragStart = (e) => {
+  //   setDragEnd(e.clientX);
+  //   setCanMove(false);
+  // };
 
-  useEffect(() => {
-    if (dragEnd - 60 > dragStart) {
-      if (canMove) {
-        if (active === project?.projects.length - 1) {
-          setActive(0);
-        } else {
-          setActive((prev) => prev + 1);
-        }
-      }
-    } else if (dragStart - 60 > dragEnd) {
-      if (canMove) {
-        if (active === 0) {
-          setActive(project?.projects.length - 1);
-        } else {
-          setActive((prev) => prev - 1);
-        }
-      }
-      setCanMove(false);
-    }
-  }, [dragStart, dragEnd]);
+  // useEffect(() => {
+  //   if (dragEnd - 60 > dragStart) {
+  //     if (canMove) {
+  //       if (active === project?.projects.length - 1) {
+  //         setActive(0);
+  //       } else {
+  //         setActive((prev) => prev + 1);
+  //       }
+  //     }
+  //   } else if (dragStart - 60 > dragEnd) {
+  //     if (canMove) {
+  //       if (active === 0) {
+  //         setActive(project?.projects.length - 1);
+  //       } else {
+  //         setActive((prev) => prev - 1);
+  //       }
+  //     }
+  //     setCanMove(false);
+  //   }
+  // }, [dragStart, dragEnd]);
 
-  //make user can change with touch drag
-  const onTouchEnd = (e) => {
-    setTouchEnd(e.changedTouches[0].clientX);
-    setCanMove(true);
-  };
-  const onTouchStart = (e) => {
-    setTouchStart(e.touches[0].clientX);
-    setCanMove(false);
-  };
+  // //make user can change with touch drag
+  // const onTouchEnd = (e) => {
+  //   setTouchEnd(e.changedTouches[0].clientX);
+  //   setCanMove(true);
+  // };
+  // const onTouchStart = (e) => {
+  //   setTouchStart(e.touches[0].clientX);
+  //   setCanMove(false);
+  // };
 
-  useEffect(() => {
-    const scroll = () => {
-      if (touchStart - 60 > touchEnd) {
-        if (canMove) {
-          if (active === project?.projects.length - 1) {
-            setActive(0);
-          } else {
-            setActive((prev) => prev + 1);
-          }
-        }
-      } else if (touchEnd - 60 > touchStart) {
-        if (canMove) {
-          if (active === 0) {
-            setActive(project?.projects.length - 1);
-          } else {
-            setActive((prev) => prev - 1);
-          }
-        }
-        setCanMove(false);
-      }
-    };
-    scroll();
-  }, [touchStart, touchEnd]);
+  // useEffect(() => {
+  //   const scroll = () => {
+  //     if (touchStart - 60 > touchEnd) {
+  //       if (canMove) {
+  //         if (active === project?.projects.length - 1) {
+  //           setActive(0);
+  //         } else {
+  //           setActive((prev) => prev + 1);
+  //         }
+  //       }
+  //     } else if (touchEnd - 60 > touchStart) {
+  //       if (canMove) {
+  //         if (active === 0) {
+  //           setActive(project?.projects.length - 1);
+  //         } else {
+  //           setActive((prev) => prev - 1);
+  //         }
+  //       }
+  //       setCanMove(false);
+  //     }
+  //   };
+  //   scroll();
+  // }, [touchStart, touchEnd]);
 
   return (
     <>
@@ -108,10 +109,6 @@ const Projects = ({ file, language, project, getAllProjects }) => {
               {project.projects.map((project, index) => {
                 return (
                   <ProjectCard
-                    onTouchEnd={onTouchEnd}
-                    onTouchStart={onTouchStart}
-                    onDragStart={onDragStart}
-                    onDragEnd={onDragEnd}
                     file={file}
                     language={language}
                     key={index}
