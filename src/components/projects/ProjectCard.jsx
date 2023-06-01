@@ -22,8 +22,6 @@ const ProjectCard = ({
   const [hover, setHover] = useState("");
   return (
     <div
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
       onMouseDown={onDragStart}
       onMouseUp={onDragEnd}
       className={`projectCard flex flex-row justify-left align-center flex-wrap ${language !== "en" && "flex-row-reverse"}`}
