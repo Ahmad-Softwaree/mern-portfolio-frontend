@@ -1,89 +1,175 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
-import { createBlog, uploadInnerBlogImage } from "../../actions/blog";
-import { BLOG_IMAGE, INSIDE_BLOG_IMAGE } from "../../actions/types";
+import { updateBlog, getOneBlog, uploadInnerBlogImage } from "../../actions/blog";
+import { BLOG_IMAGE, BLOG_UPDATE_IMAGE, INSIDE_BLOG_IMAGE } from "../../actions/types";
 import { Spinner } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-const CreateBlog = React.memo(
+import { useNavigate, useParams } from "react-router-dom";
+const UpdateBlog = React.memo(
   ({
-    image: { blog, insideBlog },
-    createBlog,
-    blog: { blogs, createBlogLoading, uploadInnerImageLoading },
+    image,
+    getOneBlog,
+    updateBlog,
+    blog: { blog, blogs, updateBlogLoading, uploadInnerImageLoading },
     admin: { user },
     uploadInnerBlogImage,
   }) => {
+    const { blog_id } = useParams();
+    const [update, setUpdate] = useState(false);
+    useEffect(() => {
+      getOneBlog({ blogId: blog_id });
+    }, [blog_id, update]);
+
     const [{ enTitle, arTitle, krTitle, enBody, arBody, krBody }, setInputs] = useState({
-      enTitle: "",
-      krTitle: "",
-      arTitle: "",
-      enBody: "",
-      arBody: "",
-      krBody: "",
+      enTitle: blog.enTitle || "",
+      krTitle: blog.krTitle || "",
+      arTitle: blog.arTitle || "",
+      enBody: blog.enBody || "",
+      arBody: blog.arBody || "",
+      krBody: blog.krBody || "",
     });
+
+    useEffect(() => {
+      setInputs({
+        enTitle: blog.enTitle || "",
+        krTitle: blog.krTitle || "",
+        arTitle: blog.arTitle || "",
+        enBody: blog.enBody || "",
+        arBody: blog.arBody || "",
+        krBody: blog.krBody || "",
+      });
+    }, [blog]);
     const dispatch = useDispatch();
     const mainImageRef = useRef();
     const smallImageRef = useRef();
+    const [imageChanged, setImageChanged] = useState(false);
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = useState("");
 
     const onChange = useCallback((e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })), []);
 
-    const uuid = () => {
-      return crypto.randomUUID();
-    };
     const onKeyDown = useCallback(
       (e) => {
         if (e.keyCode === 13 && !e.shiftKey) {
-          createBlog({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image: blog, userId: user._id, setInputs });
+          updateBlog({
+            enTitle,
+            arTitle,
+            krTitle,
+            enBody,
+            arBody,
+            krBody,
+            image: blog,
+            userId: user._id,
+            setInputs,
+            imageChanged,
+            oldImage: blog.image,
+            blogId: blog_id,
+            image: image.updateBlog,
+            setUpdate,
+          });
         }
       },
-      [enTitle, arTitle, krTitle, blog, user._id, createBlog, enBody, arBody, krBody]
+      [enTitle, arTitle, krTitle, blog, user._id, updateBlog, arBody, enBody, krBody]
     );
 
     return (
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createBlog({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image: blog, userId: user._id, setInputs });
+          updateBlog({
+            enTitle,
+            arTitle,
+            krTitle,
+            enBody,
+            arBody,
+            krBody,
+            image: blog,
+            userId: user._id,
+            setInputs,
+            imageChanged,
+            oldImage: blog.image,
+            blogId: blog_id,
+            image: image.updateBlog,
+            setUpdate,
+          });
         }}
-        className="createBlogPage  flex flex-column justify-center align-center w-100 gap-2"
+        className="createBlogPage updateBlogPage  flex flex-column justify-center align-center w-100 gap-2"
       >
         <h1 className="headings">Create Blog</h1>
 
         <div className="fileInputDiv flex flex-column justify-center align-center gap-1">
-          {!blog ? (
+          {!image.updateBlog ? (
             <>
               <input
-                onChange={(e) =>
+                onChange={(e) => {
                   dispatch({
-                    type: BLOG_IMAGE,
+                    type: BLOG_UPDATE_IMAGE,
                     payload: e.target.files[0],
-                  })
-                }
+                  });
+                  setImageChanged(true);
+                }}
                 type="file"
-                name="blog"
-                id="blogImage"
+                name="update_blog"
+                id="update_blog"
                 className="blogImage"
                 ref={mainImageRef}
               />
-              <label className="blogImageUploaderLabel flex justify-center align-center flex-column gap-2" htmlFor="blogImage">
-                <img className="imageUploadCloud" src="/images/uploadImage.svg" alt="imageUpload" />
+              <label
+                className="blogImageUploaderLabel mainLabel flex justify-center align-center flex-column gap-2 position-relative"
+                htmlFor="update_blog"
+              >
+                <div className="overImage"></div>
+                <img className="blogUnderBlack" src={blog.image} alt="blog Image" />
+                <div className="blogHeader flex flex-column w-100 justify-center align-center gap-2">
+                  <input
+                    onChange={onChange}
+                    onKeyDown={onKeyDown}
+                    value={enTitle}
+                    placeholder="Enter the English Title"
+                    type="text"
+                    name="enTitle"
+                    id="enTitle"
+                    className={enTitle !== "" ? "activeInputBorder" : ""}
+                  />
+                  <input
+                    onChange={onChange}
+                    onKeyDown={onKeyDown}
+                    value={arTitle}
+                    placeholder="Enter the Arabic Title"
+                    type="text"
+                    name="arTitle"
+                    id="arTitle"
+                    className={arTitle !== "" ? "activeInputBorder" : ""}
+                  />
+                  <input
+                    onChange={onChange}
+                    onKeyDown={onKeyDown}
+                    value={krTitle}
+                    placeholder="Enter the Kurdish Title"
+                    type="text"
+                    name="krTitle"
+                    id="krTitle"
+                    className={krTitle !== "" ? "activeInputBorder" : ""}
+                  />
 
-                <span className="imageUploadButton">Upload an Image</span>
-
-                <p className="imageInfo">Image size 1215width 481Height</p>
+                  <div className=" blogOwner flex flex-column justify-left align-center ">
+                    <img src={`${user.image}`} alt="Blog Image" />
+                    <span>Ahmad Software</span>
+                    <p>Founder & CEO of Bester Group Company</p>
+                  </div>
+                </div>
               </label>
             </>
           ) : (
             <div className="URLImage position-relative">
-              <img className="URLImage" src={URL.createObjectURL(blog)} alt="imageUpload" />
+              <img className="URLImage" src={URL.createObjectURL(image.updateBlog)} alt="imageUpload" />
               <div className="overImage"></div>
 
               <span
                 onClick={() => {
-                  dispatch({ type: BLOG_IMAGE, payload: null });
+                  dispatch({ type: BLOG_UPDATE_IMAGE, payload: null });
                   mainImageRef.current = "";
+                  setImageChanged(false);
                 }}
                 className="position-absolute x"
               >
@@ -133,7 +219,7 @@ const CreateBlog = React.memo(
 
         <div className="inner">
           <div className="fileInputDiv smallInputDiv flex flex-column justify-center align-center gap-1">
-            {!insideBlog ? (
+            {!image.insideBlog ? (
               <>
                 <input
                   onChange={(e) =>
@@ -158,7 +244,7 @@ const CreateBlog = React.memo(
               </>
             ) : (
               <div className="URLImage position-relative">
-                <img className="URLImage" src={URL.createObjectURL(insideBlog)} alt="imageUpload" />
+                <img className="URLImage" src={URL.createObjectURL(image.insideBlog)} alt="imageUpload" />
                 <span
                   onClick={() => {
                     dispatch({ type: INSIDE_BLOG_IMAGE, payload: null });
@@ -171,7 +257,7 @@ const CreateBlog = React.memo(
                 <button
                   type="button"
                   disabled={uploadInnerImageLoading}
-                  onClick={() => uploadInnerBlogImage(insideBlog, smallImageRef, setImageUrl)}
+                  onClick={() => uploadInnerBlogImage(image.insideBlog, smallImageRef, setImageUrl)}
                   className="uploadInnerImage"
                 >
                   Upload
@@ -219,7 +305,7 @@ const CreateBlog = React.memo(
               className="cancelLink"
               onClick={() => {
                 dispatch({ type: INSIDE_BLOG_IMAGE, payload: null });
-                dispatch({ type: BLOG_IMAGE, payload: null });
+                dispatch({ type: BLOG_UPDATE_IMAGE, payload: null });
                 navigate(-1);
               }}
             >
@@ -228,19 +314,19 @@ const CreateBlog = React.memo(
 
             <button
               type="submit"
-              disabled={createBlogLoading}
+              disabled={updateBlogLoading}
               className={
-                enTitle !== "" && arTitle !== "" && krTitle !== "" && enBody !== "" && arBody !== "" && krBody !== "" && blog
+                enTitle !== "" && arTitle !== "" && krTitle !== "" && enBody !== "" && arBody !== "" && krBody !== ""
                   ? "activePublish"
                   : "publish"
               }
             >
-              {createBlogLoading ? (
+              {updateBlogLoading ? (
                 <div className="w-100 loadingSpinner">
                   <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
                 </div>
               ) : (
-                "Publish"
+                "Update"
               )}
             </button>
           </div>
@@ -250,11 +336,12 @@ const CreateBlog = React.memo(
   }
 );
 
-CreateBlog.propTypes = {
-  createBlog: PropTypes.func.isRequired,
+UpdateBlog.propTypes = {
+  updateBlog: PropTypes.func.isRequired,
   blog: PropTypes.object.isRequired,
   image: PropTypes.object.isRequired,
   uploadInnerBlogImage: PropTypes.func.isRequired,
+  getOneBlog: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -263,6 +350,6 @@ const mapStateToProps = (state) => ({
   admin: state.admin,
 });
 
-const mapDispatchToProps = { createBlog, uploadInnerBlogImage };
+const mapDispatchToProps = { updateBlog, getOneBlog, uploadInnerBlogImage };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateBlog);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateBlog);

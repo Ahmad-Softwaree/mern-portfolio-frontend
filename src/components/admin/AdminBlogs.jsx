@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { Spinner } from "@chakra-ui/react";
 import { getAllBlogsForPanel } from "../../actions/admin";
 import AdminBlog from "./AdminBlog";
-import Opacity from "../Opacity";
-import CreateBlog from "../../pages/admin/CreateBlog";
 import { Link } from "react-router-dom";
 export const AdminBlogs = ({ blog: { blogs, blogLoading }, getAllBlogsForPanel }) => {
   useEffect(() => {
@@ -15,7 +13,7 @@ export const AdminBlogs = ({ blog: { blogs, blogLoading }, getAllBlogsForPanel }
     <div className="admin_blogs  flex flex-column justify-center align-center gap-1">
       <div className="flex flex-row justify-center align-center gap-1 w-100">
         <h1>Blogs</h1>
-        <Link to={`create_blog`} className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
+        <Link to={`create_blog`} className="uploadButton flex flex-row justify-center align-center">
           <i className="fa-brands fa-blogger"></i>
           <span>Create</span>
         </Link>

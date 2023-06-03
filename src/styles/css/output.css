@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Karla:wght@200;300;400;500;600;700;800&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@800;900&family=Roboto:wght@400;500;700;900&family=Varela&family=Varela+Round&display=swap");
 @import url("https://fonts.cdnfonts.com/css/cubano");
 /* Create my own font rabar-39 */
@@ -2569,10 +2570,176 @@ section {
   height: 20%; /* Adjust the height as needed */
   background: linear-gradient(to top, rgba(62, 62, 62, 0.5), rgba(255, 255, 255, 0));
 }
+.singleBlog .karla {
+  font-family: Karla, sans-serif !important;
+}
 .singleBlog .blogBody {
-  font-weight: 500;
-  font-size: 20px;
   line-height: 40px;
+  overflow: hidden;
+}
+.singleBlog .blogBody h2,
+.singleBlog .blogBody h3,
+.singleBlog .blogBody h4,
+.singleBlog .blogBody h5,
+.singleBlog .blogBody h6 {
+  color: #ffffff;
+  width: fit-content;
+  position: relative;
+  margin: 10px 0;
+}
+.singleBlog .blogBody h2::after,
+.singleBlog .blogBody h3::after,
+.singleBlog .blogBody h4::after,
+.singleBlog .blogBody h5::after,
+.singleBlog .blogBody h6::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 130%;
+  height: 3px;
+  background-color: #f9004d;
+}
+.singleBlog .blogBody h2 {
+  font-size: 36px;
+  font-weight: 600;
+}
+.singleBlog .blogBody h3 {
+  font-size: 30px;
+  font-weight: 500;
+}
+.singleBlog .blogBody a {
+  text-decoration: underline;
+  font-weight: 500;
+  transition: all 200ms linear;
+}
+.singleBlog .blogBody a:hover {
+  color: #f9004d;
+}
+.singleBlog .blogBody br {
+  display: none;
+}
+.singleBlog .blogBody hr {
+  height: 0;
+  border: none;
+  color: #121212;
+  background-color: #121212;
+  position: relative;
+  width: 100%;
+  padding: 50px 0;
+}
+.singleBlog .blogBody hr::after {
+  content: ". . . . .";
+  color: #f9004d;
+  font-size: 120px;
+  width: 100%;
+  text-align: center; /* Align the content horizontally to the center */
+  position: absolute;
+  top: 0; /* Position the content 50% from the top */
+  left: 0;
+  right: 0;
+  margin-top: auto;
+}
+.singleBlog .blogBody p {
+  font-size: 18px;
+  font-weight: 500;
+}
+.singleBlog .blogBody .special_bold {
+  color: #f9004d;
+  font-weight: 800;
+}
+.singleBlog .blogBody .special_link {
+  color: #f9004d;
+  font-weight: 800;
+  text-decoration: underline;
+}
+.singleBlog .blogBody ul {
+  list-style: none;
+  border: none;
+}
+.singleBlog .blogBody ul li {
+  position: relative;
+  font-size: 20px;
+}
+.singleBlog .blogBody ul li::before {
+  content: "•";
+  color: #f9004d;
+  font-size: 40px;
+  bottom: 0;
+  top: 0;
+  position: absolute;
+}
+.singleBlog .blogBody img {
+  margin: 60px 0;
+}
+.singleBlog .blogBody .fullImage {
+  min-width: 100%;
+  object-fit: cover;
+}
+.singleBlog .blogBody .idea {
+  gap: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  border-bottom: 2px solid #ffc700;
+  width: fit-content;
+  margin: 8px;
+}
+.singleBlog .blogBody .idea span {
+  color: #ffc700;
+}
+.singleBlog .returnUp {
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #f9004d;
+  color: #ffffff;
+  position: fixed;
+  bottom: 2rem;
+  font-size: 20px;
+  border-radius: 6px;
+  transition: all 200ms linear;
+}
+.singleBlog .englishDots ul li {
+  margin-left: 30px;
+}
+.singleBlog .englishDots ul li::before {
+  content: "•";
+  margin-right: 8px;
+  left: -20px;
+  position: absolute;
+}
+.singleBlog .arabicDots ul li {
+  margin-right: 30px;
+}
+.singleBlog .arabicDots ul li::before {
+  content: "•";
+  margin-left: 8px;
+  right: -20px;
+  font-size: 30px;
+  position: absolute;
+}
+.singleBlog .languagesList {
+  top: 110%;
+  background-color: #121212;
+  color: #ffffff;
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px;
+}
+.singleBlog .languagesList span {
+  width: fit-content;
+  padding: 6px 20px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #262626;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 200ms;
+}
+.singleBlog .languagesList span:hover {
+  background-color: #f9004d;
+}
+.singleBlog .languagesList .active {
+  background-color: #f9004d;
 }
 
 @media (min-width: 1024px) {
@@ -2796,6 +2963,7 @@ section {
 
 .panel_header {
   font-family: Karla, sans-serif !important;
+  z-index: 999 !important;
   position: fixed;
   top: 0;
   background-color: #121212;
@@ -3856,6 +4024,8 @@ section {
   min-height: 100vh;
   width: 100%;
   padding: 60px;
+  padding-top: 150px;
+  color: #ffffff;
   background-color: #262626;
   display: flex;
   padding-left: 120px !important;
@@ -3863,6 +4033,129 @@ section {
   justify-content: left;
   align-items: center;
   z-index: 1000;
+}
+.createBlogPage .headings {
+  font-size: 30px;
+  font-weight: 400;
+}
+.createBlogPage .smallInputDiv {
+  max-width: 500px !important;
+  width: 100%;
+  height: 300px !important;
+}
+.createBlogPage .smallInputDiv img:not(.imageUploadCloud) {
+  max-width: 500px !important;
+  width: 100%;
+  height: 300px !important;
+  object-fit: cover;
+}
+.createBlogPage .smallInputDiv .uploadInnerImage {
+  position: absolute;
+  bottom: 2rem;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+  padding: 10px;
+  background: #f9004d;
+  border-radius: 6px;
+}
+.createBlogPage .smallInputDiv .uploadInnerImage:disabled {
+  background-color: #121212;
+  opacity: 0.7;
+}
+.createBlogPage .fileInputDiv {
+  width: 100%;
+  height: 800px;
+  cursor: pointer;
+}
+.createBlogPage .fileInputDiv .blogImageUploaderLabel {
+  border: 2px solid #f9004d;
+}
+.createBlogPage .fileInputDiv .URLImage {
+  width: 100%;
+}
+.createBlogPage .fileInputDiv .URLImage .x {
+  top: 2rem;
+  right: 2rem;
+  background-color: #f9004d;
+  padding: 5px 10px;
+  font-size: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 100;
+}
+.createBlogPage .fileInputDiv .URLImage .blogHeader {
+  position: absolute;
+  bottom: 2rem;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: transparent;
+  height: fit-content;
+}
+.createBlogPage .fileInputDiv .URLImage .blogHeader input {
+  font-size: 66px !important;
+  margin: 0;
+  width: fit-content;
+  text-align: center;
+  z-index: 100;
+  background: linear-gradient(145deg, #f81f01, #ee076e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  line-height: 150.9%;
+}
+.createBlogPage .fileInputDiv .URLImage .blogHeader input::placeholder {
+  background: linear-gradient(145deg, #f81f01, #ee076e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.createBlogPage .fileInputDiv .URLImage .blogOwner {
+  gap: 6px;
+  z-index: 100;
+  font-weight: 400;
+}
+.createBlogPage .fileInputDiv .URLImage .blogOwner img {
+  border-radius: 50%;
+  min-width: 0 !important;
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+}
+.createBlogPage .fileInputDiv .URLImage .blogOwner span {
+  font-size: 30px;
+  color: #f9004d;
+}
+.createBlogPage .fileInputDiv .URLImage .blogOwner p {
+  font-size: 20px;
+}
+.createBlogPage .fileInputDiv .URLImage .blogOwner span,
+.createBlogPage .fileInputDiv .URLImage .blogOwner p {
+  margin: 0;
+}
+.createBlogPage .fileInputDiv .URLImage .overImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  opacity: 0.9;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+  z-index: 40;
+}
+.createBlogPage .fileInputDiv img:not(.imageUploadCloud) {
+  object-fit: cover;
+  min-width: 100%;
+  height: 800px;
+}
+.createBlogPage .fileInputDiv label {
+  height: 800px;
+  cursor: pointer;
+  width: 100%;
 }
 .createBlogPage .inner {
   width: 100%;
@@ -3901,65 +4194,6 @@ section {
   color: #ffffff !important;
   height: fit-content;
 }
-.createBlogPage .styles span {
-  font-size: 25px;
-  color: #ffffff;
-  cursor: pointer;
-  transition: all 200ms linear;
-}
-.createBlogPage .styles span:hover {
-  color: #f9004d;
-}
-.createBlogPage .styles .addBox {
-  right: 100px;
-  width: 300px;
-  padding: 10px;
-  z-index: 100;
-  opacity: 1 !important;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-.createBlogPage .styles .addBox span {
-  font-size: 14px;
-  height: 40px;
-  width: 100px;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.createBlogPage .styles .addBox .remove {
-  background: #121212;
-}
-.createBlogPage .styles .addBox .remove:hover {
-  color: #ffffff;
-}
-.createBlogPage .styles .addBox .add {
-  background-color: #f9004d;
-}
-.createBlogPage .styles .addBox .add:hover {
-  color: #ffffff;
-}
-.createBlogPage .blogBodyDiv {
-  min-height: 300px;
-  border: 2px solid #f9004d;
-  width: 100%;
-  border-radius: 10px;
-  padding: 20px;
-}
-.createBlogPage .blogBodyDiv p,
-.createBlogPage .blogBodyDiv h1,
-.createBlogPage .blogBodyDiv h2,
-.createBlogPage .blogBodyDiv h3,
-.createBlogPage .blogBodyDiv h4,
-.createBlogPage .blogBodyDiv h5,
-.createBlogPage .blogBodyDiv h6 {
-  width: fit-content;
-  border-bottom: 2px solid #f9004d;
-  display: inline;
-  color: #ffffff;
-}
 .createBlogPage textarea::placeholder {
   font-weight: 500;
   font-size: 16px;
@@ -3967,9 +4201,12 @@ section {
 .createBlogPage textarea {
   resize: none;
   border-radius: 5px;
+  min-height: 1000px;
+  font-weight: 400;
+  font-family: "Courier New", Courier, monospace !important;
+  overflow-y: scroll;
   color: #ffffff !important;
   border: 2px solid #f9004d;
-  overflow: hidden;
 }
 .createBlogPage .activeInputBorder {
   border-color: #f9004d;
@@ -4019,6 +4256,92 @@ section {
 .createBlogPage .publishAndCancel .activePublish:hover {
   background-color: #262626;
   color: #ffffff;
+}
+
+.updateBlogPage {
+  overflow: hidden;
+}
+.updateBlogPage .mainLabel {
+  border: none !important;
+}
+.updateBlogPage .blogImageUploaderLabel {
+  overflow: hidden;
+  width: 100%;
+}
+.updateBlogPage .blogImageUploaderLabel .x {
+  top: 2rem;
+  right: 2rem;
+  background-color: #f9004d;
+  padding: 5px 10px;
+  font-size: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 100;
+}
+.updateBlogPage .blogImageUploaderLabel .blogHeader {
+  position: absolute;
+  bottom: 2rem;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: transparent;
+  height: fit-content;
+}
+.updateBlogPage .blogImageUploaderLabel .blogHeader input {
+  font-size: 66px !important;
+  margin: 0;
+  width: fit-content;
+  text-align: center;
+  z-index: 100;
+  background: linear-gradient(145deg, #f81f01, #ee076e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  line-height: 150.9%;
+}
+.updateBlogPage .blogImageUploaderLabel .blogHeader input::placeholder {
+  background: linear-gradient(145deg, #f81f01, #ee076e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.updateBlogPage .blogImageUploaderLabel .blogUnderBlack {
+  width: 100%;
+  height: 800px;
+}
+.updateBlogPage .blogImageUploaderLabel .blogOwner {
+  gap: 6px;
+  z-index: 100;
+  font-weight: 400;
+}
+.updateBlogPage .blogImageUploaderLabel .blogOwner img {
+  border-radius: 50%;
+  min-width: 0 !important;
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+}
+.updateBlogPage .blogImageUploaderLabel .blogOwner span {
+  font-size: 30px;
+  color: #f9004d;
+}
+.updateBlogPage .blogImageUploaderLabel .blogOwner p {
+  font-size: 20px;
+}
+.updateBlogPage .blogImageUploaderLabel .blogOwner span,
+.updateBlogPage .blogImageUploaderLabel .blogOwner p {
+  margin: 0;
+}
+.updateBlogPage .blogImageUploaderLabel .overImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  opacity: 0.9;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+  z-index: 40;
 }
 
 @media (max-width: 767px) {

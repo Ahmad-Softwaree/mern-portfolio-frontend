@@ -19,7 +19,7 @@ export const AdminLayout = ({ getStorageUsage, logout, user, admin: { storageSiz
           <NavLink to={`/`} className="admin_getOut">
             <i className="fa-solid fa-door-open"></i>
           </NavLink>
-          <img className="admin_profile" src={`${user.image}`} />
+          <img alt="Admin Image" className="admin_profile" src={`${user.image}`} />
         </div>
 
         <NavLink to={`/panel`} className="admin_add">

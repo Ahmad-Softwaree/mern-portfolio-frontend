@@ -2,6 +2,7 @@
 @use "../../breakpoints.scss" as res;
 @use "../../animations/animation.scss" as animation;
 @use "../../util/hover.scss" as hover;
+@use "../../util/typography.scss" as font;
 
 .singleBlog {
   position: relative;
@@ -100,10 +101,189 @@
       background: linear-gradient(to top, rgba(62, 62, 62, 0.5), rgba(255, 255, 255, 0));
     }
   }
+  .karla {
+    font-family: font.$karla, sans-serif !important;
+  }
   .blogBody {
-    font-weight: 500;
-    font-size: 20px;
     line-height: 40px;
+
+    overflow: hidden;
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: colors.$white;
+      width: fit-content;
+      position: relative;
+      margin: 10px 0;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 130%;
+        height: 3px;
+        background-color: colors.$purple;
+      }
+    }
+    h2 {
+      font-size: 36px;
+      font-weight: 600;
+    }
+    h3 {
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    a {
+      text-decoration: underline;
+      font-weight: 500;
+      transition: all 200ms linear;
+      &:hover {
+        color: colors.$purple;
+      }
+    }
+    br {
+      display: none;
+    }
+    hr {
+      height: 0;
+      border: none;
+      color: colors.$black;
+      background-color: colors.$black;
+      position: relative;
+      width: 100%;
+      padding: 50px 0;
+      &::after {
+        content: ". . . . .";
+        color: colors.$purple;
+        font-size: 120px;
+        width: 100%;
+        text-align: center; /* Align the content horizontally to the center */
+        position: absolute;
+        top: 0; /* Position the content 50% from the top */
+        left: 0;
+        right: 0;
+        margin-top: auto;
+      }
+    }
+    p {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .special_bold {
+      color: colors.$purple;
+      font-weight: 800;
+    }
+    .special_link {
+      color: colors.$purple;
+      font-weight: 800;
+      text-decoration: underline;
+    }
+
+    ul {
+      list-style: none;
+      border: none;
+      li {
+        position: relative;
+        font-size: 20px;
+        &::before {
+          content: "•";
+          color: colors.$purple;
+          font-size: 40px;
+          bottom: 0;
+          top: 0;
+          position: absolute;
+        }
+      }
+    }
+    img {
+      margin: 60px 0;
+    }
+
+    .fullImage {
+      min-width: 100%;
+      object-fit: cover;
+    }
+    .idea {
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 700;
+      border-bottom: 2px solid colors.$yellow;
+      width: fit-content;
+      margin: 8px;
+      span {
+        color: colors.$yellow;
+      }
+    }
+  }
+  .returnUp {
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: colors.$purple;
+    color: colors.$white;
+    position: fixed;
+    bottom: 2rem;
+    font-size: 20px;
+    border-radius: 6px;
+    transition: all 200ms linear;
+  }
+  .englishDots {
+    ul {
+      li {
+        margin-left: 30px;
+        &::before {
+          content: "•";
+          margin-right: 8px;
+          left: -20px;
+          position: absolute;
+        }
+      }
+    }
+  }
+  .arabicDots {
+    ul {
+      li {
+        margin-right: 30px;
+        &::before {
+          content: "•";
+          margin-left: 8px;
+          right: -20px;
+          font-size: 30px;
+          position: absolute;
+        }
+      }
+    }
+  }
+
+  .languagesList {
+    top: 110%;
+    background-color: colors.$black;
+    color: colors.$white;
+    border-radius: 10px;
+
+    width: 100%;
+    padding: 5px;
+    span {
+      width: fit-content;
+      padding: 6px 20px;
+      text-align: center;
+      cursor: pointer;
+      background-color: colors.$lightBlack;
+      border-radius: 6px;
+      font-size: 14px;
+
+      @include hover.hover-effect(
+        200ms,
+        (
+          background-color: colors.$purple,
+        )
+      );
+    }
+    .active {
+      background-color: colors.$purple;
+    }
   }
 }
 

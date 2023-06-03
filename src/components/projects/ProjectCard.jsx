@@ -30,7 +30,7 @@ const ProjectCard = ({
       onTouchMove={onTouchMove}
       className={`projectCard flex flex-row justify-left align-center flex-wrap ${language !== "en" && "flex-row-reverse"}`}
     >
-      <img src={`${img}`} alt="" />
+      <img src={`${img}`} alt="Project Image" />
       <div className="projectCardFooter flex flex-column justify-left align-start">
         <h1 className="projectTitle">{language === "en" ? enTitle : language === "ar" ? arTitle : krTitle}</h1>
 

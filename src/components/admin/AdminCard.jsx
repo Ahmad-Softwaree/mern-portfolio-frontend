@@ -24,7 +24,7 @@ export const AdminCard = ({ user }) => {
       )}
       <div className="admin_card flex flex-row justify-between align-center">
         <div className="flex flex-row justify-left align-center gap-2">
-          <img src={user.image} />
+          <img alt="User Image" src={user.image} />
           <span>{user.name}</span>
         </div>
         <div className="flex flex-row justify-right align-center gap-1">

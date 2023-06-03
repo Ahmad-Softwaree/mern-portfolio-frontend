@@ -62,7 +62,7 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
             id="searchBar"
           />
           {!x ? (
-            <img className="searchGlass" src="/images/Search.svg" alt="" />
+            <img className="searchGlass" src="/images/Search.svg" alt="Glass Image Icon" />
           ) : (
             <span
               onClick={() => {

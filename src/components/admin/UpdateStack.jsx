@@ -10,7 +10,7 @@ const UpdateStack = ({ oldStack, id, updateStack, stack: { stacks, updateLoading
   });
   const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onKeyDown = (e) => {
-    if (e.key === "13" && !e.shiftKey) {
+    if (e.keyCode === 13 && !e.shiftKey) {
       updateStack({ stackId: id, name, color, setUpdate });
     }
   };

@@ -19,7 +19,7 @@ const CreateWork = ({ image: { work }, createWork, work: { works, createWorkLoad
 
   const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onKeyDown = (e) => {
-    if (e.key === "13" && !e.shiftKey) {
+    if (e.keyCode === 13 && !e.shiftKey) {
       createWork({ enTitle, arTitle, krTitle, company, from, to, image: work, userId: user._id, setInputs });
     }
   };

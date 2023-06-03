@@ -21,8 +21,20 @@ import {
   GET_ONE_BLOG_START,
   GET_ONE_BLOG_FAIL,
   GET_ONE_BLOG_SUCCESS,
+  INSIDE_BLOG_IMAGE,
+  UPLOAD_INNER_BLOG_IMAGE_START,
+  UPLOAD_INNER_BLOG_IMAGE_SUCCESS,
+  UPLOAD_INNER_BLOG_IMAGE_FAIL,
 } from "./types";
-import { CREATE_BLOG_URL, DELETE_BLOG_URL, GET_ALL_BLOG_URL, GET_HOME_BLOG_URL, GET_ONE_BLOG, UPLOAD_BLOG_IMAGE } from "./url";
+import {
+  CREATE_BLOG_URL,
+  DELETE_BLOG_URL,
+  GET_ALL_BLOG_URL,
+  GET_HOME_BLOG_URL,
+  GET_ONE_BLOG,
+  UPLOAD_BLOG_IMAGE,
+  UPLOAD_INNER_BLOG_IMAGE,
+} from "./url";
 import { getCookie } from "../data/cookie";
 import { config, authConfig, fileAuthConfig } from "../data/config.js";
 import globalSuccess from "./success";
@@ -135,7 +147,7 @@ export const createBlog =
   };
 
 export const updateBlog =
-  ({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image, blogId, oldImage, setInputs, setUpdate, imageChanged }) =>
+  ({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image, blogId, oldImage, imageChanged, setUpdate }) =>
   async (dispatch) => {
     dispatch({
       type: UPDATE_BLOG_START,
@@ -157,6 +169,7 @@ export const updateBlog =
           });
       }
       let data = { enTitle, arTitle, krTitle, enBody, arBody, krBody };
+
       if (image) {
         const file = new FormData();
         const filename = Date.now() + image.name;
@@ -171,19 +184,12 @@ export const updateBlog =
         payload: res.data,
       });
       globalSuccess({ dispatch, text: "Blog updated successfully" });
-      setInputs({
-        enTitle: "",
-        krTitle: "",
-        arTitle: "",
-        enBody: "",
-        arBody: "",
-        krBody: "",
-      });
+
       dispatch({
         type: BLOG_UPDATE_IMAGE,
         payload: null,
       });
-      setUpdate(false);
+      setUpdate((prev) => !prev);
     } catch (error) {
       globalError({
         dispatch,
@@ -230,5 +236,42 @@ export const deleteBlog =
   };
 const saveBlogImage = async ({ file }) => {
   const res = await axios.post(`${UPLOAD_BLOG_IMAGE}`, file, fileAuthConfig(getCookie("admin")));
+  return res.data.url;
+};
+
+export const uploadInnerBlogImage = (image, ref, setImageUrl) => async (dispatch) => {
+  dispatch({
+    type: UPLOAD_INNER_BLOG_IMAGE_START,
+  });
+  try {
+    const file = new FormData();
+    const filename = Date.now() + image.name;
+    file.append("name", filename);
+    file.append("innerBlog", image);
+    let url = await saveInnerBlogImage({ file });
+    setImageUrl(url);
+    dispatch({
+      type: INSIDE_BLOG_IMAGE,
+      payload: null,
+    });
+    ref.current = "";
+    globalSuccess({
+      dispatch,
+      text: "Image Uploaded to firebase",
+    });
+    dispatch({
+      type: UPLOAD_INNER_BLOG_IMAGE_SUCCESS,
+    });
+  } catch (error) {
+    globalError({
+      dispatch,
+      text: error?.response?.data?.error ? error.response.data.error : error?.message,
+      FAIL: UPLOAD_INNER_BLOG_IMAGE_FAIL,
+    });
+  }
+};
+
+const saveInnerBlogImage = async ({ file }) => {
+  const res = await axios.post(`${UPLOAD_INNER_BLOG_IMAGE}`, file, fileAuthConfig(getCookie("admin")));
   return res.data.url;
 };

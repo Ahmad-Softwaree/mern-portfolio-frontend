@@ -16,7 +16,7 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
   const [show, setShow] = useState(false);
   const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onKeyDown = (e) => {
-    if (e.key === "13" && !e.shiftKey) {
+    if (e.keyCode === 13 && !e.shiftKey) {
       createAdmin({ name, email, password, image: admin, setInputs });
     }
   };
@@ -48,14 +48,14 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
                 className="adminImage"
               />
 
-              <img className="imageUploadCloud" src="/images/uploadImage.svg" alt="imageUpload" />
+              <img className="imageUploadCloud" src="/images/uploadImage.svg" alt="Image Upload" />
               <label className="blogImageUploaderLabel flex justify-center align-center flex-row" htmlFor="adminImage">
                 <span className="imageUploadButton">Upload an Image</span>
               </label>
             </>
           ) : (
             <div className="URLImage position-relative">
-              <img className="URLImage" src={URL.createObjectURL(admin)} alt="imageUpload" />
+              <img className="URLImage" src={URL.createObjectURL(admin)} alt="URL Image" />
               <span onClick={() => dispatch({ type: ADMIN_IMAGE, payload: null })} className="position-absolute x">
                 <i className="fa-solid fa-xmark"></i>
               </span>

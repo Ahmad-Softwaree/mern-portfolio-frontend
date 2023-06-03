@@ -13,7 +13,7 @@ export const AdminBlogLayout = ({ getStorageUsage, logout, user, admin: { storag
       <h1>Admin Panel</h1>
       <div className="admin_left_panel_blog flex position-fixed left-0 flex-column justify-left align-center w-100 ">
         <div className="admin_left_panel_three flex flex-column justify-left align-start gap-1 w-100 p-1">
-          <img className="admin_profile" src={`${user.image}`} />
+          <img alt="Admin Image" className="admin_profile" src={`${user.image}`} />
           <button className="admin_logout" onClick={() => logout({ navigate })}>
             <i className="fa-solid fa-right-from-bracket"></i>
           </button>

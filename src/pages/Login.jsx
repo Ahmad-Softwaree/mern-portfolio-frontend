@@ -15,7 +15,7 @@ const Login = React.memo(({ login, admin: { loginLoading } }) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const onKeyDown = useCallback((e) => {
-    if (e.key === "13" && !e.shiftKey) login({ email, password, navigate });
+    if (e.keyCode === 13 && !e.shiftKey) login({ email, password, navigate });
   }, []);
 
   useEffect(() => {

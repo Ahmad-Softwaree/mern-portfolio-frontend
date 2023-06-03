@@ -3,6 +3,7 @@ import {
   ADMIN_UPDATE_IMAGE,
   BLOG_IMAGE,
   BLOG_UPDATE_IMAGE,
+  INSIDE_BLOG_IMAGE,
   PROJECT_IMAGE,
   PROJECT_UPDATE_IMAGE,
   WORK_IMAGE,
@@ -18,6 +19,7 @@ const initialState = {
   updateAdmin: null,
   work: null,
   updateWork: null,
+  insideBlog: null,
 };
 
 export default function image(state = initialState, action) {
@@ -64,6 +66,11 @@ export default function image(state = initialState, action) {
       return {
         ...state,
         updateWork: payload,
+      };
+    case INSIDE_BLOG_IMAGE:
+      return {
+        ...state,
+        insideBlog: payload,
       };
     default:
       return state;

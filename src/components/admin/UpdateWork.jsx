@@ -31,7 +31,7 @@ const UpdateWork = ({
   const dispatch = useDispatch();
   const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onKeyDown = (e) => {
-    if (e.key === "13" && !e.shiftKey) {
+    if (e.keyCode === 13 && !e.shiftKey) {
       updateWork({
         enTitle: inputs.enTitle,
         krTitle: inputs.krTitle,

@@ -17,6 +17,9 @@ import {
   UPDATE_BLOG_FAIL,
   UPDATE_BLOG_START,
   UPDATE_BLOG_SUCCESS,
+  UPLOAD_INNER_BLOG_IMAGE_FAIL,
+  UPLOAD_INNER_BLOG_IMAGE_START,
+  UPLOAD_INNER_BLOG_IMAGE_SUCCESS,
 } from "../../actions/types";
 
 const initialState = {
@@ -25,6 +28,7 @@ const initialState = {
   createBlogLoading: false,
   deleteBlogLoading: false,
   updateBlogLoading: false,
+  uploadInnerImageLoading: false,
   blog: {},
 };
 
@@ -109,6 +113,17 @@ export default function blog(state = initialState, action) {
         ...state,
         updateBlogLoading: false,
         blogs: data,
+      };
+    case UPLOAD_INNER_BLOG_IMAGE_START:
+      return {
+        ...state,
+        uploadInnerImageLoading: true,
+      };
+    case UPLOAD_INNER_BLOG_IMAGE_FAIL:
+    case UPLOAD_INNER_BLOG_IMAGE_SUCCESS:
+      return {
+        ...state,
+        uploadInnerImageLoading: false,
       };
     default:
       return state;

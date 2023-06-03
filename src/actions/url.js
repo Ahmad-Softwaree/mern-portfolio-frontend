@@ -7,6 +7,7 @@ export const CREATE_BLOG_URL = `${BACKEND_HOST}/api/blogs`;
 export const UPDATE_BLOG_URL = `${BACKEND_HOST}/api/blogs`;
 export const DELETE_BLOG_URL = `${BACKEND_HOST}/api/blogs`;
 export const UPLOAD_BLOG_IMAGE = `${BACKEND_HOST}/api/upload/blog`;
+export const UPLOAD_INNER_BLOG_IMAGE = `${BACKEND_HOST}/api/upload/inner_blog`;
 
 //project
 export const GET_ALL_PROJECT_URL = `${BACKEND_HOST}/api/projects`;
@@ -22,7 +23,7 @@ export const UPDATE_WORK_URL = `${BACKEND_HOST}/api/works`;
 export const DELETE_WORK_URL = `${BACKEND_HOST}/api/works`;
 export const UPLOAD_WORK_IMAGE = `${BACKEND_HOST}/api/upload/work`;
 
-//work
+//skills
 export const GET_ALL_SKILL_URL = `${BACKEND_HOST}/api/skills`;
 export const CREATE_SKILL_URL = `${BACKEND_HOST}/api/skills`;
 export const UPDATE_SKILL_URL = `${BACKEND_HOST}/api/skills`;
