@@ -19,6 +19,7 @@ const ProjectCard = ({
   onDragStart,
   onDragEnd,
   onTouchMove,
+  index,
 }) => {
   const [hover, setHover] = useState("");
   return (

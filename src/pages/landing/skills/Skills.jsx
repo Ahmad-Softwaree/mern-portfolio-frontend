@@ -11,15 +11,15 @@ const Skills = ({ file, language }) => {
   useEffect(() => {
     const activeBox = document.querySelector(".activeSkillGroup");
     setTimeout(() => {
-      skillBoxRef.style.height = activeBox.offsetHeight + 100 + "px";
+      if (skillBoxRef.current) skillBoxRef, (current.style.height = activeBox.offsetHeight + 100 + "px");
     }, 300);
-  }, [active]);
+  }, [active, skillBoxRef]);
 
   const forward = () => {
     if (categories.findIndex((one) => one === active) < categories.length - 1) {
       let nextCategory = categories[categories.findIndex((one) => one === active) + 1];
       setActive(nextCategory);
-      scroller.scrollTo(nextCategory, {
+      scroller.scrollTo(`.${nextCategory}`, {
         duration: 500,
         smooth: "easeInOutQuart",
         containerId: "skillsBox",
@@ -33,7 +33,7 @@ const Skills = ({ file, language }) => {
     if (categories.findIndex((one) => one === active) > 0) {
       let previousCategory = categories[categories.findIndex((one) => one === active) - 11];
       setActive(previousCategory);
-      scroller.scrollTo(previousCategory, {
+      scroller.scrollTo(`.${previousCategory}`, {
         duration: 500,
         smooth: "easeInOutQuart",
         containerId: "skillsBox",
