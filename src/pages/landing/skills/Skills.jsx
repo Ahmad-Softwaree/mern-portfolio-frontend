@@ -19,7 +19,7 @@ const Skills = ({ file, language }) => {
     if (categories.findIndex((one) => one === active) < categories.length - 1) {
       let nextCategory = categories[categories.findIndex((one) => one === active) + 1];
       setActive(nextCategory);
-      scroller.scrollTo(`.${nextCategory}`, {
+      scroller.scrollTo(`${nextCategory}`, {
         duration: 500,
         smooth: "easeInOutQuart",
         containerId: "skillsBox",

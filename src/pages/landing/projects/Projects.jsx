@@ -23,7 +23,7 @@ const Projects = ({ file, language, project, getAllProjects }) => {
   }, [project]);
 
   useEffect(() => {
-    scroller.scrollTo(`.project-${active}`, {
+    scroller.scrollTo(`project-${active}`, {
       duration: 500,
       smooth: "easeInOutQuart",
       containerId: "skillsBox",
@@ -62,7 +62,7 @@ const Projects = ({ file, language, project, getAllProjects }) => {
   }, [dragStart, dragEnd]);
 
   const onTouchMove = (e) => {
-    scroller.scrollTo(`.project-${active}`, {
+    scroller.scrollTo(`project-${active}`, {
       duration: 500,
       smooth: "easeInOutQuart",
       containerId: "skillsBox",
