@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "@chakra-ui/react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { Element } from "react-scroll";
 const ProjectCard = ({
   file,
   language,
@@ -23,7 +23,8 @@ const ProjectCard = ({
 }) => {
   const [hover, setHover] = useState("");
   return (
-    <div
+    <Element
+      name={`project-${index}`}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       onMouseDown={onDragStart}
@@ -66,7 +67,7 @@ const ProjectCard = ({
           </Link>
         )}
       </div>
-    </div>
+    </Element>
   );
 };
 

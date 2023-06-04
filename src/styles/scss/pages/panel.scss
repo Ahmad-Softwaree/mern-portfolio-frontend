@@ -217,10 +217,8 @@
       }
       .theBlogs {
         max-height: 500px;
-        overflow-y: scroll;
-      }
-      .theBlogs::-webkit-scrollbar {
-        display: none;
+        overflow-y: auto;
+        overflow-x: auto;
       }
 
       .blogTable {
@@ -307,6 +305,7 @@
   .admin_projects {
     width: 100%;
     text-align: center;
+
     .uploadButton {
       padding: 5px 10px;
       font-size: 14px;
@@ -338,11 +337,10 @@
       padding: 30px 0;
       .theProjects {
         max-height: 500px;
-        overflow-y: scroll;
+        overflow-y: auto;
+        overflow-x: auto;
       }
-      .theProjects::-webkit-scrollbar {
-        display: none;
-      }
+
       .projectTable {
         font-weight: 600;
       }
@@ -628,6 +626,7 @@
     width: 100%;
     text-align: center;
     min-height: 0;
+
     .uploadButton {
       padding: 5px 10px;
       font-size: 14px;
@@ -661,11 +660,10 @@
       .theWorks {
         padding: 20px 0;
         max-height: 500px;
-        overflow-y: scroll;
+        overflow-y: auto;
+        overflow-x: auto;
       }
-      .theWorks::-webkit-scrollbar {
-        display: none;
-      }
+
       .workTable {
         font-weight: 600;
       }
@@ -944,6 +942,8 @@
     width: 100%;
     text-align: center;
     min-height: 0;
+    overflow-y: auto;
+    overflow-x: auto;
     .uploadButton {
       padding: 5px 10px;
       font-size: 14px;
@@ -977,11 +977,10 @@
       .theStacks {
         padding: 20px 0;
         max-height: 500px;
-        overflow-y: scroll;
+        overflow-y: auto;
+        overflow-x: auto;
       }
-      .theStacks::-webkit-scrollbar {
-        display: none;
-      }
+
       .stackTable {
         font-weight: 600;
       }
@@ -1155,6 +1154,223 @@
       }
     }
   }
+
+  .admin_categories {
+    width: 100%;
+    text-align: center;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: auto;
+    .uploadButton {
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: colors.$blue;
+      color: colors.$black;
+      border: none;
+      gap: 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 200ms linear;
+    }
+    .yes,
+    .no {
+      padding: 5px 10px;
+      width: 100px;
+      font-size: 14px;
+      border: none;
+      gap: 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 200ms linear;
+    }
+    button:hover {
+      opacity: 1;
+    }
+    .categories {
+      padding: 30px 0;
+      min-height: 0 !important;
+      .theCategories {
+        padding: 20px 0;
+        max-height: 500px;
+        overflow-y: auto;
+        overflow-x: auto;
+      }
+
+      .categoryTable {
+        font-weight: 600;
+      }
+
+      .categoryCard {
+        border-bottom: 2px solid colors.$black;
+        padding: 0 10px;
+        border-right: 0;
+        border-left: 0;
+        .tableIndex {
+          min-width: 60px;
+          width: 30%;
+        }
+        .tableOperation {
+          min-width: 70px;
+          width: 30%;
+          font-weight: 600;
+          .fa-pen-to-square {
+            color: colors.$blue;
+            cursor: pointer;
+          }
+          .fa-trash {
+            color: colors.$red;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .no_category {
+      padding: 60px 0;
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .createCategory {
+      * {
+        width: 100%;
+      }
+      inset: 0;
+      max-height: 600px;
+      height: fit-content !important;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      border-radius: 10px;
+      background-color: colors.$lightBlack;
+      max-width: 400px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: left;
+      align-items: center;
+      z-index: 1000;
+      margin: auto;
+      padding: 40px;
+      .inner {
+        width: 100%;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: left;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .error {
+        color: colors.$purple;
+        font-size: 12px;
+      }
+
+      input {
+        padding: 10px;
+        border-bottom: 2px solid colors.$black;
+        opacity: 0.7;
+        width: 100% !important;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+      }
+      input::placeholder {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      input {
+        font-weight: 600;
+        font-size: 14px;
+        height: fit-content;
+        background-color: colors.$lightBlack;
+        color: colors.$white !important;
+
+        width: 200px;
+      }
+
+      .activeInputBorder {
+        border-color: colors.$purple;
+      }
+
+      .publishAndCancel {
+        button,
+        .cancelLink {
+          width: 102px;
+          height: 42px;
+          font-weight: 400;
+          font-size: 14px;
+          cursor: pointer;
+          border: none;
+        }
+        .cancelLink {
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          flex-flow: row nowrap;
+          border: 1px solid colors.$purple;
+          border-radius: 4px;
+          color: colors.$white;
+          background-color: colors.$lightBlack;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$purple,
+              color: colors.$white,
+            )
+          );
+        }
+
+        .publish {
+          background: #888888;
+          border-radius: 4px;
+          color: colors.$white;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$black,
+              color: colors.$white,
+            )
+          );
+        }
+
+        .activePublish {
+          background: colors.$purple;
+          border-radius: 4px;
+          border: 1px solid colors.$purple;
+          color: colors.$white;
+          @include hover.hover-effect(
+            200ms,
+            (
+              background-color: colors.$lightBlack,
+              color: colors.$white,
+            )
+          );
+        }
+      }
+    }
+
+    .wantToDelete {
+      background-color: colors.$lightBlack;
+      z-index: 1200;
+      padding: 20px;
+      border-radius: 6px;
+      margin: auto;
+      inset: 0;
+      width: fit-content;
+      height: fit-content;
+      button {
+        font-size: 14px;
+      }
+      .no {
+        background-color: colors.$blue;
+      }
+      .yes {
+        background-color: colors.$red;
+      }
+    }
+  }
 }
 
 .createBlogPage {
@@ -1170,6 +1386,17 @@
   justify-content: left;
   align-items: center;
   z-index: 1000;
+  .category {
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: colors.$black;
+    font-size: 16px;
+    font-family: font.$karla, sans-serif !important;
+  }
+  .activeCategory {
+    background-color: colors.$purple;
+  }
   .headings {
     font-size: 30px;
     font-weight: 400;
@@ -1200,6 +1427,17 @@
         opacity: 0.7;
       }
     }
+  }
+  .deleteImageInput {
+    background-color: colors.$black;
+    color: colors.$white;
+  }
+  .deleteImageButton {
+    padding: 10px 15px;
+    background-color: colors.$purple;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
   }
   .fileInputDiv {
     width: 100%;

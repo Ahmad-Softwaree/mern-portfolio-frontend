@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
-import { createBlog, uploadInnerBlogImage } from "../../actions/blog";
+import { createBlog, uploadInnerBlogImage, deleteInnerBlogImage } from "../../actions/blog";
 import { BLOG_IMAGE, INSIDE_BLOG_IMAGE } from "../../actions/types";
 import { Spinner } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { getAllCategories } from "../../actions/category";
 const CreateBlog = React.memo(
   ({
     image: { blog, insideBlog },
@@ -12,7 +13,13 @@ const CreateBlog = React.memo(
     blog: { blogs, createBlogLoading, uploadInnerImageLoading },
     admin: { user },
     uploadInnerBlogImage,
+    deleteInnerBlogImage,
+    getAllCategories,
+    category: { categories, loading },
   }) => {
+    useEffect(() => {
+      getAllCategories({});
+    }, []);
     const [{ enTitle, arTitle, krTitle, enBody, arBody, krBody }, setInputs] = useState({
       enTitle: "",
       krTitle: "",
@@ -21,21 +28,32 @@ const CreateBlog = React.memo(
       arBody: "",
       krBody: "",
     });
+    const [activeCategories, setActiveCategories] = useState([]);
     const dispatch = useDispatch();
     const mainImageRef = useRef();
     const smallImageRef = useRef();
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = useState("");
+    const [deleteImageUrl, setDeleteImageUrl] = useState("");
 
     const onChange = useCallback((e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })), []);
 
-    const uuid = () => {
-      return crypto.randomUUID();
-    };
     const onKeyDown = useCallback(
       (e) => {
         if (e.keyCode === 13 && !e.shiftKey) {
-          createBlog({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image: blog, userId: user._id, setInputs });
+          createBlog({
+            enTitle,
+            arTitle,
+            krTitle,
+            enBody,
+            arBody,
+            krBody,
+            image: blog,
+            userId: user._id,
+            setInputs,
+            activeCategories,
+            setActiveCategories,
+          });
         }
       },
       [enTitle, arTitle, krTitle, blog, user._id, createBlog, enBody, arBody, krBody]
@@ -45,7 +63,19 @@ const CreateBlog = React.memo(
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createBlog({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image: blog, userId: user._id, setInputs });
+          createBlog({
+            enTitle,
+            arTitle,
+            krTitle,
+            enBody,
+            arBody,
+            krBody,
+            image: blog,
+            userId: user._id,
+            setInputs,
+            activeCategories,
+            setActiveCategories,
+          });
         }}
         className="createBlogPage  flex flex-column justify-center align-center w-100 gap-2"
       >
@@ -180,6 +210,15 @@ const CreateBlog = React.memo(
             )}
           </div>
           <p className="imageUrlAddress">{imageUrl}</p>
+          <input className="deleteImageInput" value={deleteImageUrl} onChange={(e) => setDeleteImageUrl(e.target.value)} type="text" />
+          <button
+            type="button"
+            disabled={uploadInnerImageLoading}
+            onClick={() => deleteInnerBlogImage(deleteImageUrl, setDeleteImageUrl)}
+            className="deleteImageButton"
+          >
+            Delete Image
+          </button>
           <textarea
             onKeyDown={(e) => {
               if (e.keyCode === 9) {
@@ -213,6 +252,30 @@ const CreateBlog = React.memo(
             name="krBody"
             id="krBody"
           />
+
+          <h3 className="w-100 text-left">Categories</h3>
+
+          <div className="flex flex-row w-100 justify-left align-center gap-2">
+            {categories?.map((category, index) => {
+              return (
+                <span
+                  onClick={() => {
+                    if (activeCategories.includes(category._id)) {
+                      setActiveCategories((prev) => {
+                        return prev.filter((val) => val !== category._id);
+                      });
+                    } else {
+                      setActiveCategories((prev) => [...prev, category._id]);
+                    }
+                  }}
+                  key={index}
+                  className={`category ${activeCategories.includes(category._id) && "activeCategory"}`}
+                >
+                  {category.enName}
+                </span>
+              );
+            })}
+          </div>
 
           <div className="publishAndCancel flex flex-row justify-left align-center gap-2">
             <span
@@ -255,14 +318,18 @@ CreateBlog.propTypes = {
   blog: PropTypes.object.isRequired,
   image: PropTypes.object.isRequired,
   uploadInnerBlogImage: PropTypes.func.isRequired,
+  category: PropTypes.object.isRequired,
+  getAllCategories: PropTypes.func.isRequired,
+  deleteInnerBlogImage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   blog: state.blog,
   image: state.image,
   admin: state.admin,
+  category: state.category,
 });
 
-const mapDispatchToProps = { createBlog, uploadInnerBlogImage };
+const mapDispatchToProps = { createBlog, uploadInnerBlogImage, getAllCategories, deleteInnerBlogImage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateBlog);

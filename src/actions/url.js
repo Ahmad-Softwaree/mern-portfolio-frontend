@@ -3,6 +3,7 @@ const BACKEND_HOST = "https://portfolio-api-4n84.onrender.com";
 export const GET_HOME_BLOG_URL = `${BACKEND_HOST}/api/blogs/home`;
 export const GET_ALL_BLOG_URL = `${BACKEND_HOST}/api/blogs/all`;
 export const GET_ONE_BLOG = `${BACKEND_HOST}/api/blogs/one`;
+export const GET_BLOGS_BY_CATEGORY = `${BACKEND_HOST}/api/blogs/category`;
 export const CREATE_BLOG_URL = `${BACKEND_HOST}/api/blogs`;
 export const UPDATE_BLOG_URL = `${BACKEND_HOST}/api/blogs`;
 export const DELETE_BLOG_URL = `${BACKEND_HOST}/api/blogs`;

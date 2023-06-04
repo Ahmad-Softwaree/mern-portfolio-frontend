@@ -25,11 +25,18 @@ import {
   UPLOAD_INNER_BLOG_IMAGE_START,
   UPLOAD_INNER_BLOG_IMAGE_SUCCESS,
   UPLOAD_INNER_BLOG_IMAGE_FAIL,
+  GET_BLOG_BY_CATEGORY_START,
+  GET_BLOG_BY_CATEGORY_FAIL,
+  GET_BLOG_BY_CATEGORY_SUCCESS,
+  DELETE_INNER_BLOG_IMAGE_START,
+  DELETE_INNER_BLOG_IMAGE_FAIL,
+  DELETE_INNER_BLOG_IMAGE_SUCCESS,
 } from "./types";
 import {
   CREATE_BLOG_URL,
   DELETE_BLOG_URL,
   GET_ALL_BLOG_URL,
+  GET_BLOGS_BY_CATEGORY,
   GET_HOME_BLOG_URL,
   GET_ONE_BLOG,
   UPLOAD_BLOG_IMAGE,
@@ -102,15 +109,36 @@ export const getOneBlog =
     }
   };
 
+export const getBlogsByCategory =
+  ({ categoryId }) =>
+  async (dispatch) => {
+    dispatch({
+      type: GET_BLOG_BY_CATEGORY_START,
+    });
+    try {
+      const res = await axios.get(`${GET_BLOGS_BY_CATEGORY}/${categoryId}`, config());
+      dispatch({
+        type: GET_BLOG_BY_CATEGORY_SUCCESS,
+        payload: res.data,
+      });
+    } catch (error) {
+      globalError({
+        dispatch,
+        text: error?.response?.data?.error ? error.response.data.error : error?.message,
+        FAIL: GET_BLOG_BY_CATEGORY_FAIL,
+      });
+    }
+  };
+
 //admin
 export const createBlog =
-  ({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image, userId, setInputs }) =>
+  ({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image, userId, setInputs, activeCategories, setActiveCategories }) =>
   async (dispatch) => {
     dispatch({
       type: CREATE_BLOG_START,
     });
     try {
-      let data = { enTitle, arTitle, krTitle, enBody, arBody, krBody, user: userId };
+      let data = { enTitle, arTitle, krTitle, enBody, arBody, krBody, user: userId, categories: activeCategories };
       if (image) {
         const file = new FormData();
         const filename = Date.now() + image.name;
@@ -137,6 +165,7 @@ export const createBlog =
         type: BLOG_IMAGE,
         payload: null,
       });
+      setActiveCategories([]);
     } catch (error) {
       globalError({
         dispatch,
@@ -147,7 +176,7 @@ export const createBlog =
   };
 
 export const updateBlog =
-  ({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image, blogId, oldImage, imageChanged, setUpdate }) =>
+  ({ enTitle, arTitle, krTitle, enBody, arBody, krBody, image, blogId, oldImage, imageChanged, setUpdate, activeCategories }) =>
   async (dispatch) => {
     dispatch({
       type: UPDATE_BLOG_START,
@@ -168,7 +197,7 @@ export const updateBlog =
             });
           });
       }
-      let data = { enTitle, arTitle, krTitle, enBody, arBody, krBody };
+      let data = { enTitle, arTitle, krTitle, enBody, arBody, krBody, categories: activeCategories };
 
       if (image) {
         const file = new FormData();
@@ -237,6 +266,36 @@ export const deleteBlog =
 const saveBlogImage = async ({ file }) => {
   const res = await axios.post(`${UPLOAD_BLOG_IMAGE}`, file, fileAuthConfig(getCookie("admin")));
   return res.data.url;
+};
+
+export const deleteInnerBlogImage = (image, setDeleteImageUrl) => async (dispatch) => {
+  dispatch({
+    type: DELETE_INNER_BLOG_IMAGE_START,
+  });
+  if (image === "") {
+    return globalError({
+      dispatch,
+      text: "please upload image url",
+      FAIL: DELETE_INNER_BLOG_IMAGE_FAIL,
+    });
+  }
+
+  const imageRef = ref(firebaseStorage, image);
+  deleteObject(imageRef)
+    .then(() => {
+      globalSuccess({ dispatch, text: "inside blog image deleted in storage" });
+    })
+    .catch((err) => {
+      return globalError({
+        dispatch,
+        text: err.message,
+        FAIL: DELETE_INNER_BLOG_IMAGE_FAIL,
+      });
+    });
+  dispatch({
+    type: DELETE_INNER_BLOG_IMAGE_SUCCESS,
+  });
+  setDeleteImageUrl("");
 };
 
 export const uploadInnerBlogImage = (image, ref, setImageUrl) => async (dispatch) => {

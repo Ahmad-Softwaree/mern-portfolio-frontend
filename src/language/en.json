@@ -35,7 +35,9 @@
   },
   "singleBlog": {
     "name": "Ahmad Software",
-    "ceo": "CEO & Founder of Bester Group"
+    "ceo": "CEO & Founder of Bester Group",
+    "categories": "Categories",
+    "related": "Related blogs"
   },
   "drag": "drag to view more"
 }

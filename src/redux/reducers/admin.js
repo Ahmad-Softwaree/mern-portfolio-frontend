@@ -50,6 +50,7 @@ export default function admin(state = initialState, action) {
         ...state,
         user: null,
         token: null,
+        loading: false,
       };
     case LOGIN_START:
       return {

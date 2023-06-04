@@ -24,10 +24,11 @@ const Projects = ({ file, language, project, getAllProjects }) => {
 
   useEffect(() => {
     scroller.scrollTo(`project-${active}`, {
-      duration: 500,
+      duration: 200,
       smooth: "easeInOutQuart",
-      containerId: "skillsBox",
+      containerId: "projectCards",
       horizontal: true,
+      offset: -22,
     });
   }, [active]);
 
@@ -63,9 +64,9 @@ const Projects = ({ file, language, project, getAllProjects }) => {
 
   const onTouchMove = (e) => {
     scroller.scrollTo(`project-${active}`, {
-      duration: 500,
+      duration: 200,
       smooth: "easeInOutQuart",
-      containerId: "skillsBox",
+      containerId: "projectCards",
       horizontal: true,
     });
   };
@@ -110,6 +111,7 @@ const Projects = ({ file, language, project, getAllProjects }) => {
 
             <div
               ref={projectRef}
+              id="projectCards"
               className={`projectCards flex flex-row justify-left align-start  flex-nowrap w-100  gap-2 ${
                 language !== "en" && "flex-row-reverse"
               }`}

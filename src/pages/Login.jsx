@@ -11,12 +11,15 @@ const Login = React.memo(({ login, admin: { loginLoading } }) => {
     password: "",
   });
   const navigate = useNavigate();
-  const onChange = useCallback((e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })), []);
+  const onChange = useCallback((e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })), [email, password]);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const onKeyDown = useCallback((e) => {
-    if (e.keyCode === 13 && !e.shiftKey) login({ email, password, navigate });
-  }, []);
+  const onKeyDown = useCallback(
+    (e) => {
+      if (e.keyCode === 13 && !e.shiftKey) login({ email, password, navigate });
+    },
+    [email, password]
+  );
 
   useEffect(() => {
     dispatch({

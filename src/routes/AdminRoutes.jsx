@@ -25,7 +25,7 @@ export const AdminRoutes = ({ layout, loadUser, admin: { user, loading } }) => {
     <div className="panelLoading flex flex-row justify-center items-center">
       <Fallback />
     </div>
-  ) : Object.keys(user)?.length !== 0 && !loading ? (
+  ) : user && Object.keys(user)?.length !== 0 && !loading ? (
     <>
       {layout && <AdminLayout user={user} />}
       {!layout && <AdminBlogLayout user={user} />}

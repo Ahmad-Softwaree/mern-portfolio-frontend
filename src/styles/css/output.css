@@ -1706,6 +1706,7 @@ section {
 }
 .blogs .blogCards .blogCard .category {
   opacity: 0.7;
+  color: #f9004d;
 }
 .blogs .blogCards .blogCard .readBlog,
 .blogs .blogCards .blogCard .blogTime,
@@ -2412,6 +2413,7 @@ section {
 }
 .blogsPage .allBlogs .blogCard .category {
   opacity: 0.7;
+  color: #f9004d;
 }
 .blogsPage .allBlogs .blogCard .readBlog,
 .blogsPage .allBlogs .blogCard .blogTime,
@@ -2573,6 +2575,121 @@ section {
 .singleBlog .karla {
   font-family: Karla, sans-serif !important;
 }
+.singleBlog .categoriesDiv h3 {
+  width: fit-content;
+  border-bottom: 2px solid #f9004d;
+}
+.singleBlog .categoriesDiv .category {
+  color: #f9004d;
+}
+.singleBlog .relatedBlogs {
+  margin-top: 200px;
+}
+.singleBlog .relatedBlogs .blogCard {
+  overflow: hidden;
+  cursor: pointer;
+  width: 250px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  height: 200px;
+  text-align: center;
+  position: relative;
+  z-index: 20;
+}
+.singleBlog .relatedBlogs .blogCard:hover .overBlog {
+  opacity: 0.7;
+  background: linear-gradient(to bottom, rgb(249, 0, 77), rgb(34, 34, 34));
+}
+.singleBlog .relatedBlogs .blogCard .overBlog {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 8px;
+  width: 100%;
+  background: #262626;
+  z-index: 30;
+  opacity: 0.8;
+  transition: all 200ms ease-in;
+}
+.singleBlog .relatedBlogs .blogCard img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.singleBlog .relatedBlogs .blogCard .category {
+  opacity: 0.7;
+  color: #f9004d;
+}
+.singleBlog .relatedBlogs .blogCard .readBlog,
+.singleBlog .relatedBlogs .blogCard .blogTime,
+.singleBlog .relatedBlogs .blogCard .wrapper,
+.singleBlog .relatedBlogs .blogCard .inner {
+  position: absolute;
+  z-index: 30;
+}
+.singleBlog .relatedBlogs .blogCard .wrapper {
+  height: 200px;
+  width: 100%;
+  z-index: 30;
+}
+.singleBlog .relatedBlogs .blogCard .wrapper:hover {
+  background: linear-gradient(to bottom, rgb(249, 0, 77), rgb(34, 34, 34));
+}
+.singleBlog .relatedBlogs .blogCard .wrapper:hover .inner {
+  top: 10%;
+}
+.singleBlog .relatedBlogs .blogCard .wrapper .inner {
+  width: 100%;
+  transition: all 200ms ease-in-out;
+  min-height: 100px;
+  z-index: 40;
+  text-align: left;
+  top: 50%;
+  left: 0;
+  padding-inline: 30px;
+}
+.singleBlog .relatedBlogs .blogCard .wrapper .inner h2,
+.singleBlog .relatedBlogs .blogCard .wrapper .inner span {
+  width: 100%;
+}
+.singleBlog .relatedBlogs .blogCard h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.singleBlog .relatedBlogs .blogCard .readBlog {
+  position: absolute;
+  bottom: -60px;
+  padding: 10px 20px;
+  width: fit-content;
+  background: #f9004d;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.singleBlog .relatedBlogs .blogCard .readBlog:hover {
+  background-color: #121212;
+  color: #f9004d;
+}
+.singleBlog .relatedBlogs .blogCard .blogTime {
+  top: 10px;
+  left: 10px;
+  font-size: 16px;
+  font-weight: 400;
+}
+.singleBlog .links a {
+  background-color: #f9004d;
+  color: #ffffff;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
 .singleBlog .blogBody {
   line-height: 40px;
   overflow: hidden;
@@ -2656,6 +2773,7 @@ section {
 .singleBlog .blogBody ul {
   list-style: none;
   border: none;
+  margin-bottom: 20px;
 }
 .singleBlog .blogBody ul li {
   position: relative;
@@ -2668,6 +2786,18 @@ section {
   bottom: 0;
   top: 0;
   position: absolute;
+}
+.singleBlog .blogBody ul .subListHeader {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+.singleBlog .blogBody ul .subListHeader::before {
+  content: "•";
+  color: #00eded;
+  font-size: 50px;
+}
+.singleBlog .blogBody ul ul {
+  margin-left: 20px;
 }
 .singleBlog .blogBody img {
   margin: 60px 0;
@@ -2697,6 +2827,7 @@ section {
   font-size: 20px;
   border-radius: 6px;
   transition: all 200ms linear;
+  z-index: 900;
 }
 .singleBlog .englishDots ul li {
   margin-left: 30px;
@@ -2782,6 +2913,9 @@ section {
   }
   .singleBlog .overImage {
     height: 500px !important;
+  }
+  .singleBlog .relatedBlogs .blogCard {
+    width: 100% !important;
   }
 }
 .login {
@@ -3164,10 +3298,8 @@ section {
 }
 .panel .admin_blogs .blogs .theBlogs {
   max-height: 500px;
-  overflow-y: scroll;
-}
-.panel .admin_blogs .blogs .theBlogs::-webkit-scrollbar {
-  display: none;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .panel .admin_blogs .blogs .blogTable {
   font-weight: 600;
@@ -3280,10 +3412,8 @@ section {
 }
 .panel .admin_projects .projects .theProjects {
   max-height: 500px;
-  overflow-y: scroll;
-}
-.panel .admin_projects .projects .theProjects::-webkit-scrollbar {
-  display: none;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .panel .admin_projects .projects .projectTable {
   font-weight: 600;
@@ -3575,10 +3705,8 @@ section {
 .panel .admin_works .works .theWorks {
   padding: 20px 0;
   max-height: 500px;
-  overflow-y: scroll;
-}
-.panel .admin_works .works .theWorks::-webkit-scrollbar {
-  display: none;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .panel .admin_works .works .workTable {
   font-weight: 600;
@@ -3828,6 +3956,8 @@ section {
   width: 100%;
   text-align: center;
   min-height: 0;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .panel .admin_stacks .uploadButton {
   padding: 5px 10px;
@@ -3863,10 +3993,8 @@ section {
 .panel .admin_stacks .stacks .theStacks {
   padding: 20px 0;
   max-height: 500px;
-  overflow-y: scroll;
-}
-.panel .admin_stacks .stacks .theStacks::-webkit-scrollbar {
-  display: none;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .panel .admin_stacks .stacks .stackTable {
   font-weight: 600;
@@ -4019,6 +4147,201 @@ section {
 .panel .admin_stacks .wantToDelete .yes {
   background-color: #ff0000;
 }
+.panel .admin_categories {
+  width: 100%;
+  text-align: center;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.panel .admin_categories .uploadButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #00eded;
+  color: #121212;
+  border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_categories .yes,
+.panel .admin_categories .no {
+  padding: 5px 10px;
+  width: 100px;
+  font-size: 14px;
+  border: none;
+  gap: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 200ms linear;
+}
+.panel .admin_categories button:hover {
+  opacity: 1;
+}
+.panel .admin_categories .categories {
+  padding: 30px 0;
+  min-height: 0 !important;
+}
+.panel .admin_categories .categories .theCategories {
+  padding: 20px 0;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.panel .admin_categories .categories .categoryTable {
+  font-weight: 600;
+}
+.panel .admin_categories .categories .categoryCard {
+  border-bottom: 2px solid #121212;
+  padding: 0 10px;
+  border-right: 0;
+  border-left: 0;
+}
+.panel .admin_categories .categories .categoryCard .tableIndex {
+  min-width: 60px;
+  width: 30%;
+}
+.panel .admin_categories .categories .categoryCard .tableOperation {
+  min-width: 70px;
+  width: 30%;
+  font-weight: 600;
+}
+.panel .admin_categories .categories .categoryCard .tableOperation .fa-pen-to-square {
+  color: #00eded;
+  cursor: pointer;
+}
+.panel .admin_categories .categories .categoryCard .tableOperation .fa-trash {
+  color: #ff0000;
+  cursor: pointer;
+}
+.panel .admin_categories .no_category {
+  padding: 60px 0;
+  font-weight: 600;
+  font-size: 22px;
+}
+.panel .admin_categories .createCategory {
+  inset: 0;
+  max-height: 600px;
+  height: fit-content !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+  background-color: #262626;
+  max-width: 400px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
+  align-items: center;
+  z-index: 1000;
+  margin: auto;
+  padding: 40px;
+}
+.panel .admin_categories .createCategory * {
+  width: 100%;
+}
+.panel .admin_categories .createCategory .inner {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+.panel .admin_categories .createCategory .error {
+  color: #f9004d;
+  font-size: 12px;
+}
+.panel .admin_categories .createCategory input {
+  padding: 10px;
+  border-bottom: 2px solid #121212;
+  opacity: 0.7;
+  width: 100% !important;
+  background-color: #262626;
+  color: #ffffff !important;
+}
+.panel .admin_categories .createCategory input::placeholder {
+  font-weight: 600;
+  font-size: 14px;
+}
+.panel .admin_categories .createCategory input {
+  font-weight: 600;
+  font-size: 14px;
+  height: fit-content;
+  background-color: #262626;
+  color: #ffffff !important;
+  width: 200px;
+}
+.panel .admin_categories .createCategory .activeInputBorder {
+  border-color: #f9004d;
+}
+.panel .admin_categories .createCategory .publishAndCancel button,
+.panel .admin_categories .createCategory .publishAndCancel .cancelLink {
+  width: 102px;
+  height: 42px;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+.panel .admin_categories .createCategory .publishAndCancel .cancelLink {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  border: 1px solid #f9004d;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #262626;
+  transition: all 200ms;
+}
+.panel .admin_categories .createCategory .publishAndCancel .cancelLink:hover {
+  background-color: #f9004d;
+  color: #ffffff;
+}
+.panel .admin_categories .createCategory .publishAndCancel .publish {
+  background: #888888;
+  border-radius: 4px;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_categories .createCategory .publishAndCancel .publish:hover {
+  background-color: #121212;
+  color: #ffffff;
+}
+.panel .admin_categories .createCategory .publishAndCancel .activePublish {
+  background: #f9004d;
+  border-radius: 4px;
+  border: 1px solid #f9004d;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.panel .admin_categories .createCategory .publishAndCancel .activePublish:hover {
+  background-color: #262626;
+  color: #ffffff;
+}
+.panel .admin_categories .wantToDelete {
+  background-color: #262626;
+  z-index: 1200;
+  padding: 20px;
+  border-radius: 6px;
+  margin: auto;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+}
+.panel .admin_categories .wantToDelete button {
+  font-size: 14px;
+}
+.panel .admin_categories .wantToDelete .no {
+  background-color: #00eded;
+}
+.panel .admin_categories .wantToDelete .yes {
+  background-color: #ff0000;
+}
 
 .createBlogPage {
   min-height: 100vh;
@@ -4033,6 +4356,17 @@ section {
   justify-content: left;
   align-items: center;
   z-index: 1000;
+}
+.createBlogPage .category {
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #121212;
+  font-size: 16px;
+  font-family: Karla, sans-serif !important;
+}
+.createBlogPage .activeCategory {
+  background-color: #f9004d;
 }
 .createBlogPage .headings {
   font-size: 30px;
@@ -4064,6 +4398,17 @@ section {
 .createBlogPage .smallInputDiv .uploadInnerImage:disabled {
   background-color: #121212;
   opacity: 0.7;
+}
+.createBlogPage .deleteImageInput {
+  background-color: #121212;
+  color: #ffffff;
+}
+.createBlogPage .deleteImageButton {
+  padding: 10px 15px;
+  background-color: #f9004d;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 .createBlogPage .fileInputDiv {
   width: 100%;
@@ -4947,6 +5292,13 @@ section {
   .blogs .seeMore:hover {
     background-color: #262626;
     border-color: #121212;
+  }
+  .singleBlog .relatedBlogs .blogCard .wrapper .inner {
+    top: 10%;
+  }
+  .singleBlog .relatedBlogs .blogCard .readBlog:hover {
+    background-color: #f9004d;
+    color: #ffffff;
   }
   .layout .header nav ul li:hover {
     color: #ffffff;

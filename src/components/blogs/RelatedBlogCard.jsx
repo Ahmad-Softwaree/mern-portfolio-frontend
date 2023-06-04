@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-const BlogCard = ({ file, language, id, img, enTitle, arTitle, krTitle, categories }) => {
+const RelatedBlogCard = ({ file, language, id, img, enTitle, arTitle, krTitle, categories }) => {
   const [hover, setHover] = useState(false);
 
   return (
-    <div
+    <Link
+      to={`/blogs/${id}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="blogCard flex flex-column justify-between align-center  gap-1"
+      className="blogCard relatedBlogCard flex flex-column justify-between align-center  gap-1"
     >
       <div className="wrapper flex flex-column justify-left align-start gap-1 w-100">
         <img style={hover ? { transform: "scale(1.4)" } : null} src={`${img}`} alt="blogImage" />
@@ -29,8 +30,8 @@ const BlogCard = ({ file, language, id, img, enTitle, arTitle, krTitle, categori
           </Link>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
-export default BlogCard;
+export default RelatedBlogCard;

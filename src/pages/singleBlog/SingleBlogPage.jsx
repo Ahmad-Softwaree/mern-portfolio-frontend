@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import LoadingSingleBlogSkeleton from "../../components/loading/LoadingSingleBlogSkeleton";
 import SingleBlogError from "../../error/SingleBlogError";
 import moment from "moment";
 import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import { getOneBlog } from "../../actions/blog";
+import { getBlogsByCategory, getOneBlog } from "../../actions/blog";
 import { ENGLISH, KURDISH, ARABIC } from "../../actions/types";
-const SingleBlogPage = ({ blog: { blog, blogLoading }, getOneBlog, language: { file, language } }) => {
+import { Spinner } from "@chakra-ui/react";
+import RelatedBlogCard from "../../components/blogs/RelatedBlogCard";
+import parse from "html-react-parser";
+import { Link } from "react-router-dom";
+
+const SingleBlogPage = ({
+  getBlogsByCategory,
+  blog: { blog, blogLoading, filterLoading, filterBlogs },
+  getOneBlog,
+  language: { file, language },
+}) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [scrollY, setScrollY] = useState(0);
@@ -17,16 +27,23 @@ const SingleBlogPage = ({ blog: { blog, blogLoading }, getOneBlog, language: { f
   }, [id]);
 
   useEffect(() => {
+    if (blog && Object.keys(blog)?.length !== 0 && !blogLoading) {
+      getBlogsByCategory({ categoryId: blog?.categories[0]?._id });
+    }
+  }, [blog]);
+
+  useEffect(() => {
     window.addEventListener("scroll", (e) => {
       setScrollY(window.scrollY);
     });
-
     return () => window.removeEventListener("scroll", () => {});
   }, [scrollY, window]);
 
+  const location = useLocation();
+
   return (
     <section className="singleBlog flex flex-column justify-left align-start gap-2 w-100 position-relative">
-      {Object.keys(blog)?.length !== 0 && !blogLoading ? (
+      {blog && Object.keys(blog)?.length !== 0 && !blogLoading ? (
         <>
           <img src={`${blog.image}`} alt="Blog Image" className="blogImage" />
           <div className="overImage"></div>
@@ -38,6 +55,17 @@ const SingleBlogPage = ({ blog: { blog, blogLoading }, getOneBlog, language: { f
                 <span>{file.singleBlog.name}</span>
                 <p>{file.singleBlog.ceo}</p>
               </div>
+            </div>
+
+            <div className={`links flex flex-row align-center gap-1 w-100 ${language === "en" ? "justify-left" : "justify-right"}`}>
+              <Link className="flex flex-row justify-left align-center gap-1" to={`/`}>
+                <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>{file.nav.home}</span>
+              </Link>
+              <Link className="flex flex-row justify-left align-center gap-1" to={`/blogs `}>
+                <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>{file.nav.blogs}</span>
+              </Link>
             </div>
 
             <div className={`languagesList flex flex-row  align-center gap-1 ${language === "en" ? "justify-left" : "justify-right"}`}>
@@ -72,11 +100,23 @@ const SingleBlogPage = ({ blog: { blog, blogLoading }, getOneBlog, language: { f
                 AR
               </span>
             </div>
+            <div className="categoriesDiv flex flex-column justify-left align-start w-100 gap-1">
+              <h3 className="w-100 text-left">{file.singleBlog.categories}</h3>
 
-            <div
-              className={`blogBody ${language === "en" ? "karla englishDots" : "arabicDots"}`}
-              dangerouslySetInnerHTML={{ __html: language === "en" ? blog.enBody : language === "ar" ? blog.arBody : blog.krBody }}
-            ></div>
+              <div className={`categories flex flex-row w-100 align-center gap-1 ${language === "en" ? "justify-left" : "justify-right"}`}>
+                {blog.categories?.map((category, index) => {
+                  return (
+                    <span key={index} className={`category`}>
+                      {language === "en" ? category.enName : language === "ar" ? category.arName : category.krName}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className={`blogBody ${language === "en" ? "karla englishDots" : "arabicDots"}`}>
+              {language === "en" ? parse(blog.enBody) : language === "ar" ? parse(blog.arBody) : parse(blog.krBody)}
+            </div>
             <span className={`blogTime flex flex-row justify-left align-center gap-1 ${language !== "en" && "justify-right"}`}>
               <i className="fa-regular fa-clock"></i>
               {moment(blog.createdAt).format("MMMM Do YYYY")} {moment(blog.createdAt).format("dddd")}
@@ -94,6 +134,31 @@ const SingleBlogPage = ({ blog: { blog, blogLoading }, getOneBlog, language: { f
                 <i className="fa-solid fa-angle-up"></i>
               </span>
             )}
+            <div className="relatedBlogs flex flex-column justify-left align-start gap-1 w-100">
+              <h2 className="related">{file.singleBlog.related}</h2>
+              <div className="flex flex-row justify-center align-center w-100 flex-wrap gap-1">
+                {filterLoading && <Spinner width={`30px`} height={`30px`} />}
+                {!filterLoading && filterBlogs.length > 0 && (
+                  <>
+                    {filterBlogs.map((val, index) => {
+                      return (
+                        <RelatedBlogCard
+                          key={index}
+                          file={file}
+                          language={language}
+                          id={val._id}
+                          img={val.image}
+                          enTitle={val.enTitle}
+                          arTitle={val.arTitle}
+                          krTitle={val.krTitle}
+                          categories={val.categories}
+                        />
+                      );
+                    })}
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </>
       ) : blogLoading ? (
@@ -109,6 +174,7 @@ SingleBlogPage.propTypes = {
   blog: PropTypes.object.isRequired,
   getOneBlog: PropTypes.func.isRequired,
   language: PropTypes.object.isRequired,
+  getBlogsByCategory: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -118,4 +184,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getOneBlog,
+  getBlogsByCategory,
 })(SingleBlogPage);

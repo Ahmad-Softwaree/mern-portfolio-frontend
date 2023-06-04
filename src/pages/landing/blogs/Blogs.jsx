@@ -61,6 +61,7 @@ const Blogs = ({ getHomeBlogs, blog, language, file }) => {
                       enTitle={blog.enTitle}
                       arTitle={blog.arTitle}
                       krTitle={blog.krTitle}
+                      categories={blog.categories}
                     />
                   )
                 );

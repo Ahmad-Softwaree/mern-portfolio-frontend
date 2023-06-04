@@ -20,7 +20,7 @@ const Home = ({ file }) => {
 
   useEffect(() => {
     const animateJobs = async () => {
-      for (let i = 0; i <= jobsArray.length; i++) {
+      for (let i = 1; i <= jobsArray.length; i++) {
         await new Promise((resolve) => setTimeout(resolve, 2000));
         const currentTop = parseInt(jobs.current?.style.top || "0", 10);
 

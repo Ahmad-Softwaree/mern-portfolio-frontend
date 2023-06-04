@@ -5,9 +5,15 @@ import {
   DELETE_BLOG_FAIL,
   DELETE_BLOG_START,
   DELETE_BLOG_SUCCESS,
+  DELETE_INNER_BLOG_IMAGE_FAIL,
+  DELETE_INNER_BLOG_IMAGE_START,
+  DELETE_INNER_BLOG_IMAGE_SUCCESS,
   GET_ALL_BLOG_FAIL,
   GET_ALL_BLOG_START,
   GET_ALL_BLOG_SUCCESS,
+  GET_BLOG_BY_CATEGORY_FAIL,
+  GET_BLOG_BY_CATEGORY_START,
+  GET_BLOG_BY_CATEGORY_SUCCESS,
   GET_HOME_BLOG_FAIL,
   GET_HOME_BLOG_START,
   GET_HOME_BLOG_SUCCESS,
@@ -24,11 +30,13 @@ import {
 
 const initialState = {
   blogs: [],
-  blogLoading: false,
+  blogLoading: true,
   createBlogLoading: false,
   deleteBlogLoading: false,
   updateBlogLoading: false,
   uploadInnerImageLoading: false,
+  filterBlogs: [],
+  filterLoading: true,
   blog: {},
 };
 
@@ -115,16 +123,38 @@ export default function blog(state = initialState, action) {
         blogs: data,
       };
     case UPLOAD_INNER_BLOG_IMAGE_START:
+    case DELETE_INNER_BLOG_IMAGE_START:
       return {
         ...state,
         uploadInnerImageLoading: true,
       };
     case UPLOAD_INNER_BLOG_IMAGE_FAIL:
     case UPLOAD_INNER_BLOG_IMAGE_SUCCESS:
+    case DELETE_INNER_BLOG_IMAGE_FAIL:
+    case DELETE_INNER_BLOG_IMAGE_SUCCESS:
       return {
         ...state,
         uploadInnerImageLoading: false,
       };
+    case GET_BLOG_BY_CATEGORY_START:
+      return {
+        ...state,
+        filterLoading: true,
+        filterBlogs: [],
+      };
+    case GET_BLOG_BY_CATEGORY_FAIL:
+      return {
+        ...state,
+        filterLoading: false,
+        filterBlogs: [],
+      };
+    case GET_BLOG_BY_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        filterLoading: false,
+        filterBlogs: payload,
+      };
+
     default:
       return state;
   }

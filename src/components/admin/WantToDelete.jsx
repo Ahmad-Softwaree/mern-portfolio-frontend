@@ -5,8 +5,19 @@ import { deleteBlog } from "../../actions/blog";
 import { deleteProject } from "../../actions/project";
 import { deleteWork } from "../../actions/work";
 import { deleteStack } from "../../actions/stack";
+import { deleteCategory } from "../../actions/category";
 
-export const WantToDelete = ({ setWantToDelete, id, image, deleteBlog, deleteProject, deleteWork, method, deleteStack }) => {
+export const WantToDelete = ({
+  setWantToDelete,
+  id,
+  image,
+  deleteBlog,
+  deleteProject,
+  deleteWork,
+  method,
+  deleteStack,
+  deleteCategory,
+}) => {
   return (
     <div className="position-fixed wantToDelete flex flex-column justify-left align-center gap-1">
       <p>Are you sure you want to delete?</p>
@@ -21,6 +32,8 @@ export const WantToDelete = ({ setWantToDelete, id, image, deleteBlog, deletePro
               ? deleteWork({ workId: id, image, setWantToDelete })
               : method === "stack"
               ? deleteStack({ stackId: id, setWantToDelete })
+              : method === "category"
+              ? deleteCategory({ categoryId: id, setWantToDelete })
               : null
           }
           className="yes"
@@ -41,6 +54,6 @@ const mapStateToProps = (state) => ({
   admin: state.admin,
 });
 
-const mapDispatchToProps = { deleteBlog, deleteProject, deleteWork, deleteStack };
+const mapDispatchToProps = { deleteBlog, deleteProject, deleteWork, deleteStack, deleteCategory };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WantToDelete);

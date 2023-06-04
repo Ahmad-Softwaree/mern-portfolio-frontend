@@ -12,38 +12,35 @@ const Skills = ({ file, language }) => {
     const activeBox = document.querySelector(".activeSkillGroup");
     setTimeout(() => {
       if (skillBoxRef.current) skillBoxRef.current.style.height = activeBox.offsetHeight + 100 + "px";
-    }, 300);
+    }, 200);
   }, [active, skillBoxRef]);
 
   const forward = () => {
     if (categories.findIndex((one) => one === active) < categories.length - 1) {
       let nextCategory = categories[categories.findIndex((one) => one === active) + 1];
       setActive(nextCategory);
+      setLeft((prev) => prev - 1);
+      setRight((prev) => prev + 1);
       scroller.scrollTo(`${nextCategory}`, {
-        duration: 500,
+        duration: 200,
         smooth: "easeInOutQuart",
         containerId: "skillsBox",
         horizontal: true,
       });
-      setLeft((prev) => prev - 1);
-      setRight((prev) => prev + 1);
     }
   };
   const backward = () => {
     if (categories.findIndex((one) => one === active) > 0) {
-      let previousCategory = categories[categories.findIndex((one) => one === active) - 11];
+      let previousCategory = categories[categories.findIndex((one) => one === active) - 1];
       setActive(previousCategory);
-      scroller.scrollTo(`.${previousCategory}`, {
-        duration: 500,
+      setRight((prev) => prev - 1);
+      setLeft((prev) => prev + 1);
+      scroller.scrollTo(`${previousCategory}`, {
+        duration: 200,
         smooth: "easeInOutQuart",
         containerId: "skillsBox",
         horizontal: true,
       });
-      setTimeout(() => {
-        skillBox.scrollTo(-((skillBox.offsetWidth - 60) * left), 0);
-      }, 100);
-      setRight((prev) => prev - 1);
-      setLeft((prev) => prev + 1);
     }
   };
 
@@ -63,8 +60,15 @@ const Skills = ({ file, language }) => {
           </span>
         </div>
 
-        <div ref={skillBoxRef} className={`skillsBox flex flex-row justify-left align-start  ${language !== "en" && "flex-row-reverse"}`}>
-          <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "lang" && "activeSkillGroup"}`}>
+        <div
+          id="skillsBox"
+          ref={skillBoxRef}
+          className={`skillsBox flex flex-row justify-left align-start  ${language !== "en" && "flex-row-reverse"}`}
+        >
+          <Element
+            name={`lang`}
+            className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 lang ${active === "lang" && "activeSkillGroup"}`}
+          >
             <h2>{file.skills.languages}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv java">
@@ -80,9 +84,14 @@ const Skills = ({ file, language }) => {
                 <img src="/images/icons/javascript.svg" alt="Icon Image" />
               </div>
             </div>
-          </div>
+          </Element>
 
-          <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "front" && "activeSkillGroup"}`}>
+          <Element
+            name={`front`}
+            className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 front ${
+              active === "front" && "activeSkillGroup"
+            }`}
+          >
             <h2>{file.skills.front}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv html">
@@ -119,9 +128,12 @@ const Skills = ({ file, language }) => {
                 <img src="/images/icons/next-js.png" alt="Icon Image" />
               </div>
             </div>
-          </div>
+          </Element>
 
-          <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "back" && "activeSkillGroup"}`}>
+          <Element
+            name={`back`}
+            className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 back ${active === "back" && "activeSkillGroup"}`}
+          >
             <h2>{file.skills.back}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv node">
@@ -149,9 +161,12 @@ const Skills = ({ file, language }) => {
                 <img src="/images/icons/postman.svg" alt="Icon Image" />
               </div>
             </div>
-          </div>
+          </Element>
 
-          <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "game" && "activeSkillGroup"}`}>
+          <Element
+            name={`game`}
+            className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 game ${active === "game" && "activeSkillGroup"}`}
+          >
             <h2>{file.skills.twoDGame}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">
               <div className="showSkillNameDiv unity">
@@ -161,7 +176,7 @@ const Skills = ({ file, language }) => {
                 <img src="/images/icons/c.svg" alt="Icon Image" />
               </div>
             </div>
-          </div>
+          </Element>
         </div>
       </section>
     </Element>

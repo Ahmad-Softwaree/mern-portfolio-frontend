@@ -76,7 +76,9 @@ export const getStorageUsage = () => async (dispatch) => {
 };
 
 export const loadUser = () => async (dispatch) => {
-  if (!getCookie("admin")) return;
+  if (!getCookie("admin")) {
+    return globalError({ dispatch, text: "There is no token", FAIL: AUTH_ERROR });
+  }
   setAuthToken(getCookie("admin"));
   try {
     const res = await axios.get(`${GET_AUTH_TOKEN}`, config());

@@ -98,6 +98,7 @@ const Blogs = ({ getAllBlogs, blog, language: { file, language } }) => {
                   enTitle={blog.enTitle}
                   arTitle={blog.arTitle}
                   krTitle={blog.krTitle}
+                  categories={blog.categories}
                 />
               );
             })}

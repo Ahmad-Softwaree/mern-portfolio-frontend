@@ -1,7 +1,6 @@
 import axios from "axios";
 import globalError from "./error";
 import {
-  CREATE_SKILL_START,
   CREATE_CATEGORY_FAIL,
   CREATE_CATEGORY_SUCCESS,
   DELETE_CATEGORY_FAIL,
@@ -16,6 +15,7 @@ import {
   UPDATE_CATEGORY_FAIL,
   UPDATE_CATEGORY_START,
   UPDATE_CATEGORY_SUCCESS,
+  CREATE_CATEGORY_START,
 } from "./types";
 import { CREATE_CATEGORY_URL, GET_ALL_CATEGORY_URL, GET_ONE_CATEGORY_URL, UPDATE_CATEGORY_URL } from "./url";
 import { authConfig } from "../data/config";
@@ -64,10 +64,10 @@ export const getOneCategory =
   };
 
 export const createCategory =
-  ({ enName, arName, krName }) =>
+  ({ enName, arName, krName, setAdd }) =>
   async (dispatch) => {
     dispatch({
-      type: CREATE_SKILL_START,
+      type: CREATE_CATEGORY_START,
     });
     try {
       const res = await axios.post(`${CREATE_CATEGORY_URL}`, { enName, arName, krName }, authConfig(getCookie("admin")));
@@ -75,6 +75,7 @@ export const createCategory =
         type: CREATE_CATEGORY_SUCCESS,
         payload: res.data,
       });
+      setAdd(false);
     } catch (error) {
       globalError({
         dispatch,
@@ -85,7 +86,7 @@ export const createCategory =
   };
 
 export const updateCategory =
-  ({ enName, arName, krName, categoryId }) =>
+  ({ enName, arName, krName, categoryId, setUpdate }) =>
   async (dispatch) => {
     dispatch({
       type: UPDATE_CATEGORY_START,
@@ -96,6 +97,7 @@ export const updateCategory =
         type: UPDATE_CATEGORY_SUCCESS,
         payload: res.data,
       });
+      setUpdate(false);
     } catch (error) {
       globalError({
         dispatch,
@@ -105,8 +107,8 @@ export const updateCategory =
     }
   };
 
-export const deleteCATEGORY =
-  ({ categoryId }) =>
+export const deleteCategory =
+  ({ categoryId, setWantToDelete }) =>
   async (dispatch) => {
     dispatch({
       type: DELETE_CATEGORY_START,
@@ -117,6 +119,7 @@ export const deleteCATEGORY =
         type: DELETE_CATEGORY_SUCCESS,
         payload: res.data,
       });
+      setWantToDelete(false);
     } catch (error) {
       globalError({
         dispatch,
