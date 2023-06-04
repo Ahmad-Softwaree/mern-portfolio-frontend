@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Element } from "react-scroll";
 import ProjectCard from "../../../components/projects/ProjectCard";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
 import { connect } from "react-redux";
