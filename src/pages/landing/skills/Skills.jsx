@@ -11,7 +11,7 @@ const Skills = ({ file, language }) => {
   useEffect(() => {
     const activeBox = document.querySelector(".activeSkillGroup");
     setTimeout(() => {
-      if (skillBoxRef.current) skillBoxRef, (current.style.height = activeBox.offsetHeight + 100 + "px");
+      if (skillBoxRef.current) skillBoxRef.current.style.height = activeBox.offsetHeight + 100 + "px";
     }, 300);
   }, [active, skillBoxRef]);
 
