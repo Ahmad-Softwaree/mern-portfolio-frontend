@@ -12,15 +12,21 @@ const Skills = ({ file, language }) => {
     const activeBox = document.querySelector(".activeSkillGroup");
     setTimeout(() => {
       skillBox.style.height = activeBox.offsetHeight + 100 + "px";
-    }, 100);
+    }, 200);
   }, [active]);
 
   const forward = () => {
     const skillBox = document.querySelector(".skillsBox");
 
     if (categories.findIndex((one) => one === active) < categories.length - 1) {
+      console.log("object");
       setActive(categories[categories.findIndex((one) => one === active) + 1]);
+      console.log("hi");
+      console.log(skillBox);
+
       skillBox.scrollTo((skillBox.offsetWidth - 60) * right, 0);
+      console.log(skillBox);
+      console.log("scroll");
       setLeft((prev) => prev - 1);
       setRight((prev) => prev + 1);
     }
