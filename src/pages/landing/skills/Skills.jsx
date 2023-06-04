@@ -19,14 +19,10 @@ const Skills = ({ file, language }) => {
     const skillBox = document.querySelector(".skillsBox");
 
     if (categories.findIndex((one) => one === active) < categories.length - 1) {
-      console.log("object");
       setActive(categories[categories.findIndex((one) => one === active) + 1]);
-      console.log("hi");
-      console.log(skillBox);
-
-      skillBox.scrollTo((skillBox.offsetWidth - 60) * right, 0);
-      console.log(skillBox);
-      console.log("scroll");
+      setTimeout(() => {
+        skillBox.scrollTo((skillBox.offsetWidth - 60) * right, 0);
+      }, 100);
       setLeft((prev) => prev - 1);
       setRight((prev) => prev + 1);
     }
@@ -36,7 +32,9 @@ const Skills = ({ file, language }) => {
 
     if (categories.findIndex((one) => one === active) > 0) {
       setActive(categories[categories.findIndex((one) => one === active) - 1]);
-      skillBox.scrollTo(-((skillBox.offsetWidth - 60) * left), 0);
+      setTimeout(() => {
+        skillBox.scrollTo(-((skillBox.offsetWidth - 60) * left), 0);
+      }, 100);
       setRight((prev) => prev - 1);
       setLeft((prev) => prev + 1);
     }
