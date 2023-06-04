@@ -1,37 +1,44 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Element } from "react-scroll";
+import { Element, animateScroll as scroll, scroller } from "react-scroll";
 
 const Skills = ({ file, language }) => {
   const categories = ["lang", "front", "back", "game"];
   const [active, setActive] = useState("lang");
   const [right, setRight] = useState(1);
   const [left, setLeft] = useState(1);
+  const skillBoxRef = useRef();
 
   useEffect(() => {
-    const skillBox = document.querySelector(".skillsBox");
     const activeBox = document.querySelector(".activeSkillGroup");
     setTimeout(() => {
-      skillBox.style.height = activeBox.offsetHeight + 100 + "px";
-    }, 200);
+      skillBoxRef.style.height = activeBox.offsetHeight + 100 + "px";
+    }, 300);
   }, [active]);
 
   const forward = () => {
-    const skillBox = document.querySelector(".skillsBox");
-
     if (categories.findIndex((one) => one === active) < categories.length - 1) {
-      setActive(categories[categories.findIndex((one) => one === active) + 1]);
-      setTimeout(() => {
-        skillBox.scrollTo((skillBox.offsetWidth - 60) * right, 0);
-      }, 100);
+      let nextCategory = categories[categories.findIndex((one) => one === active) + 1];
+      setActive(nextCategory);
+      scroller.scrollTo(nextCategory, {
+        duration: 500,
+        smooth: "easeInOutQuart",
+        containerId: "skillsBox",
+        horizontal: true,
+      });
       setLeft((prev) => prev - 1);
       setRight((prev) => prev + 1);
     }
   };
   const backward = () => {
-    const skillBox = document.querySelector(".skillsBox");
-
     if (categories.findIndex((one) => one === active) > 0) {
-      setActive(categories[categories.findIndex((one) => one === active) - 1]);
+      let previousCategory = categories[categories.findIndex((one) => one === active) - 11];
+      setActive(previousCategory);
+      scroller.scrollTo(previousCategory, {
+        duration: 500,
+        smooth: "easeInOutQuart",
+        containerId: "skillsBox",
+        horizontal: true,
+      });
       setTimeout(() => {
         skillBox.scrollTo(-((skillBox.offsetWidth - 60) * left), 0);
       }, 100);
@@ -56,7 +63,7 @@ const Skills = ({ file, language }) => {
           </span>
         </div>
 
-        <div className={`skillsBox flex flex-row justify-left align-start  ${language !== "en" && "flex-row-reverse"}`}>
+        <div ref={skillBoxRef} className={`skillsBox flex flex-row justify-left align-start  ${language !== "en" && "flex-row-reverse"}`}>
           <div className={`skillGroup flex flex-column justify-left align-center w-100 gap-2 ${active === "lang" && "activeSkillGroup"}`}>
             <h2>{file.skills.languages}</h2>
             <div className="skillIcons flex flex-row justify-center align-center w-100 flex-wrap gap-5">

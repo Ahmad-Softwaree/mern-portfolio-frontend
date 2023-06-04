@@ -4,6 +4,8 @@ import ProjectCard from "../../../components/projects/ProjectCard";
 import LoadingBlogSkeleton from "../../../components/loading/LoadingBlogSkeleton";
 import { connect } from "react-redux";
 import { getAllProjects } from "../../../actions/project";
+import { Element, animateScroll as scroll, scroller } from "react-scroll";
+
 const Projects = ({ file, language, project, getAllProjects }) => {
   const [pagination, setPagination] = useState(0);
   const [canMove, setCanMove] = useState(true);
@@ -22,10 +24,11 @@ const Projects = ({ file, language, project, getAllProjects }) => {
   }, [project]);
 
   useEffect(() => {
-    let project = document.querySelectorAll(".projectCard")[0];
-    projectRef.current?.scrollTo({
-      left: (project?.offsetWidth + 36) * active,
-      behavior: "smooth",
+    scroller.scrollTo(`project-${active}`, {
+      duration: 500,
+      smooth: "easeInOutQuart",
+      containerId: "skillsBox",
+      horizontal: true,
     });
   }, [active]);
 
@@ -60,10 +63,11 @@ const Projects = ({ file, language, project, getAllProjects }) => {
   }, [dragStart, dragEnd]);
 
   const onTouchMove = (e) => {
-    let project = document.querySelectorAll(".projectCard")[0];
-    projectRef.current?.scrollTo({
-      left: (project?.offsetWidth + 36) * active,
-      behavior: "smooth",
+    scroller.scrollTo(`project-${active}`, {
+      duration: 500,
+      smooth: "easeInOutQuart",
+      containerId: "skillsBox",
+      horizontal: true,
     });
   };
 
