@@ -65,7 +65,7 @@ const Home = ({ file }) => {
               })}
             </div>
           </div>
-          <a href="/pdf/Resume2.pdf" download className="showCV">
+          <a href="/pdf/Resume.pdf" download className="showCV">
             {file.home.cv}
           </a>
         </div>
