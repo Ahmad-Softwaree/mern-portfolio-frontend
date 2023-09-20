@@ -51,7 +51,11 @@ const Home = ({ file }) => {
             {file.home.who}
             <span className="ahmadSoftware position-relative">
               {file.home.name}
-              <img alt="Rect Image" src="/images/rect.svg" className="position-absolute" />
+              <img
+                alt="Rect Image"
+                src="/images/rect.svg"
+                className="position-absolute"
+              />
             </span>
           </h1>
           <div className="jobs">
@@ -61,15 +65,22 @@ const Home = ({ file }) => {
               })}
             </div>
           </div>
-          <a href="/pdf/Resume.pdf" download className="showCV">
+          <a href="/pdf/Resume2.pdf" download className="showCV">
             {file.home.cv}
           </a>
         </div>
 
         <div className="rightHome position-relative">
-          <img src="/images/ahmad.svg" alt="Ahmad Image" className="myImage position-relative" />
+          <img
+            src="/images/ahmad.svg"
+            alt="Ahmad Image"
+            className="myImage position-relative"
+          />
         </div>
-        <div className="blurs position-absolute flex flex-row justify-center align-center" style={blurStyle}>
+        <div
+          className="blurs position-absolute flex flex-row justify-center align-center"
+          style={blurStyle}
+        >
           <div className="greenBlur blur"></div>
           <div className="purpleBlur blur"></div>
         </div>
