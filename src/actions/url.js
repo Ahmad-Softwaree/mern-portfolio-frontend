@@ -1,4 +1,4 @@
-const BACKEND_HOST = "https://portfolio-api-4n84.onrender.com";
+const BACKEND_HOST = "https://api.ahmad-software.com";
 //blog
 export const GET_HOME_BLOG_URL = `${BACKEND_HOST}/api/blogs/home`;
 export const GET_ALL_BLOG_URL = `${BACKEND_HOST}/api/blogs/all`;

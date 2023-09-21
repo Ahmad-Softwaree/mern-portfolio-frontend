@@ -21,6 +21,7 @@
 
   .workCards {
     overflow-x: hidden;
+    flex-wrap: wrap;
     display: flex;
     width: fit-content !important;
     padding-inline: 100px;

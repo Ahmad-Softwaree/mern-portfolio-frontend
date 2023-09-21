@@ -1789,6 +1789,25 @@ section {
   user-select: none;
   padding-inline: 0 !important;
 }
+.projects .angle {
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #262626;
+  backdrop-filter: opacity(100%);
+  color: white;
+  opacity: 0.5;
+  transition: all 200ms linear;
+  cursor: pointer;
+}
+.projects .angle:hover {
+  opacity: 1;
+}
+.projects .activeAngle {
+  background-color: #f9004d;
+}
 .projects .projectCards {
   overflow-x: hidden;
   padding: 0 30px;
@@ -2972,6 +2991,7 @@ section {
 }
 .works .workCards {
   overflow-x: hidden;
+  flex-wrap: wrap;
   display: flex;
   width: fit-content !important;
   padding-inline: 100px;

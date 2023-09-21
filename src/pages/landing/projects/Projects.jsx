@@ -106,7 +106,10 @@ const Projects = ({ file, language, project, getAllProjects }) => {
     <>
       {project.projects.length > 0 && !project.projectLoading ? (
         <Element className="w-100" name="projects">
-          <section id="projects" className="projects flex flex-column justify-left align-center w-100 gap-2">
+          <section
+            id="projects"
+            className="projects flex flex-column justify-left align-center w-100 gap-2"
+          >
             <h1 className="heading">{file.nav.projects} 🚀</h1>
 
             <div
@@ -143,28 +146,47 @@ const Projects = ({ file, language, project, getAllProjects }) => {
               })}
             </div>
 
-            <div className={`pagination flex flex-row justify-center align-center gap-1 w-100  ${language !== "en" && "flex-row-reverse"}`}>
-              <>
-                {new Array(pagination)
-                  .fill(null)
-                  .map((v, i) => i)
-                  .map((val, index) => {
-                    return (
-                      <span
-                        onClick={() => setActive(index)}
-                        className={`paginationNumber flex flex-row justify-center align-center ${index === active && "active"}`}
-                        key={index}
-                      >
-                        {val + 1}
-                      </span>
-                    );
-                  })}
-              </>
+            <div
+              className={`flex flex-row justify-center algin-center gap-2 w-100 ${
+                language !== "en" && "flex-row-reverse"
+              }`}
+            >
+              <span
+                onClick={() => {
+                  if (active === 0) {
+                    setActive(project.projects.length - 1);
+                  } else {
+                    setActive((prev) => prev - 1);
+                  }
+                }}
+                className={`angle flex flex-row justify-center align-center ${
+                  active !== 0 && "activeAngle"
+                }`}
+              >
+                <i className={`fa-solid fa-angle-left`}></i>{" "}
+              </span>
+              <span
+                onClick={() => {
+                  if (active === project.projects.length - 1) {
+                    setActive(0);
+                  } else {
+                    setActive((prev) => prev + 1);
+                  }
+                }}
+                className={`angle flex flex-row justify-center align-center ${
+                  active !== project.projects.length - 1 && "activeAngle"
+                }`}
+              >
+                <i className={`fa-solid fa-angle-right`}></i>
+              </span>
             </div>
           </section>
         </Element>
       ) : project.projects.length === 0 && project.projectLoading ? (
-        <div style={{ overflowX: "hidden" }} className="flex flex-row justify-center align-center w-100 gap-5">
+        <div
+          style={{ overflowX: "hidden" }}
+          className="flex flex-row justify-center align-center w-100 gap-5"
+        >
           <LoadingBlogSkeleton />
           <LoadingBlogSkeleton />
           <LoadingBlogSkeleton />

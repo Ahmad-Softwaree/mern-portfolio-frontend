@@ -16,7 +16,7 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       "/api": {
-        target: "https://portfolio-api-4n84.onrender.com",
+        target: "https://api.ahmad-software.com",
         changeOrigin: true,
         secure: false,
         ws: true,
