@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useLayoutEffect } from "react";
+import React, { Fragment, useContext, useEffect, useLayoutEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Alert from "./Alert";
 import { LanguageContext } from "../context/LanguageContext";
@@ -20,11 +20,19 @@ import AddSkill from "./admin/AddSkill";
 import UpdateSkill from "./admin/UpdateSkill";
 import AddCertificate from "./admin/AddCertificate";
 import UpdateCertificate from "./admin/UpdateCertificate";
+import { ENGLISH } from "../context/types/language_types";
 
 export const Universal = () => {
   const {
+    dispatch: languageDispatch,
     state: { language },
   } = useContext(LanguageContext);
+
+  useEffect(() => {
+    languageDispatch({
+      type: ENGLISH,
+    });
+  }, []);
   useLayoutEffect(() => {
     if (language === "en") {
       document.body.style.direction = "ltr";
