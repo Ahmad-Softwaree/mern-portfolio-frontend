@@ -1,69 +1,97 @@
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Spinner } from "@chakra-ui/react";
-import Opacity from "../Opacity";
-import CreateStack from "./CreateStack";
-import AdminStack from "./AdminStack";
-import { getAllCategories } from "../../actions/category";
-import CreateCategory from "./CreateCategory";
+import React, { useContext, useEffect } from "react";
+import {
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { AlertContext } from "../../context/AlertContext";
+import { CategoryContext } from "../../context/CategoryContext";
+import TableSkeleton from "../loading/TableSkeleton";
+import NoData from "../global/NoData";
+import RefreshData from "../global/RefreshData";
+import { getAllCategories } from "../../context/actions/categoryAction";
 import AdminCategory from "./AdminCategory";
+import { UiContext } from "../../context/UiContext";
+import { ADD_CATEGORY } from "../../context/types/ui_types";
+export default function AdminCategories() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const { dispatch: uiDispatch } = useContext(UiContext);
+  const {
+    dispatch: categoryDispatch,
+    state: { categories, getCategoriesLoading },
+  } = useContext(CategoryContext);
 
-export const AdminWorks = ({ category: { categories, loading }, getAllCategories }) => {
-  const [add, setAdd] = useState(false);
   useEffect(() => {
-    getAllCategories({});
-  }, []);
+    getAllCategories(categoryDispatch, alertDispatch);
+  }, [categoryDispatch]);
   return (
-    <div className="admin_categories  flex flex-column justify-center align-center gap-1">
-      <div className="flex flex-row justify-center align-center gap-1 w-100">
-        <h1>Categories</h1>
-        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
-          <i className="fa-solid fa-upload"></i>
-          <span>Upload</span>
+    <div
+      data-aos="fade-left"
+      data-aos-offset="-300"
+      className="w-full flex flex-col justify-left items-center gap-10 bg-black p-5 rounded-lg shadow-xl"
+    >
+      <div className="flex flex-row justify-between items-center w-full gap-5 text-white">
+        <div className="flex flex-row justify-end items-center gap-5">
+          <h1 className="font-[500] lg:!text-[24px] md:!text-[22px]">
+            Categories
+          </h1>
+          <RefreshData
+            setter={() => getAllCategories(categoryDispatch, alertDispatch)}
+          />
+        </div>
+        <button
+          onClick={() =>
+            uiDispatch({
+              type: ADD_CATEGORY,
+            })
+          }
+          className="p-1 px-6 rounded-md border-2 border-solid border-purple text-purple transition-all duration-300 hover:text-white hover:bg-purple flex flex-row justify-center items-center gap-3"
+        >
+          <i className="fa-brands fa-plus"></i>
+          <span className="!text-[14px]">Add New</span>
         </button>
       </div>
 
-      {add && (
-        <>
-          <Opacity />
-          <CreateCategory setAdd={setAdd} />
-        </>
-      )}
+      {getCategoriesLoading ? (
+        <TableSkeleton cards={8} />
+      ) : categories.length > 0 ? (
+        <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
+          <Table variant="striped" colorScheme="black">
+            <TableCaption color={`white`}>Categories</TableCaption>
+            <Thead>
+              <Tr borderRadius={`10px`}>
+                <Th color={`white`} className="text-white">
+                  Id
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Name
+                </Th>
 
-      {loading && <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} />}
-      {!loading && categories.length > 0 && (
-        <div className="categories w-100 flex flex-column justify-left align-center gap-2">
-          <div className="categoryCard categoryTable flex flex-row justify-between align-center w-100">
-            <span className="tableIndex">Id</span>
-            <span className="tableIndex">English Name</span>
+                <Th color={`white`} className="text-white">
+                  Date
+                </Th>
 
-            <div className="flex flex-row justify-center align-center gap-2">
-              <span className="tableOperation">Update</span>
-              <span className="tableOperation">Delete</span>
-            </div>
-          </div>
-          <div className="theCategories flex flex-column justify-left align-center gap-1 w-100">
-            {categories?.map((category, index) => {
-              return <AdminCategory key={index} index={index} category={category} />;
-            })}
-          </div>
-        </div>
+                <Th color={`white`} className="text-white">
+                  Operation
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {categories.map((val, index) => {
+                return (
+                  <AdminCategory key={index} index={index + 1} val={val} />
+                );
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <NoData />
       )}
-      {!loading && categories.length === 0 && <span className="no_project">There is no category</span>}
     </div>
   );
-};
-
-AdminWorks.propTypes = {
-  category: PropTypes.object.isRequired,
-  getAllCategories: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  category: state.category,
-});
-
-const mapDispatchToProps = { getAllCategories };
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminWorks);
+}

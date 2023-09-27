@@ -8,7 +8,7 @@ const SingleBlogError = () => {
       style={{
         minHeight: "80vh",
       }}
-      className="singleBlogErrorPage flex flex-column justify-center align-center w-100 gap-3"
+      className="singleBlogNotFound flex flex-col justify-center align-center w-full gap-3"
     >
       <h1>Blog not found</h1>
       <div className="flex flex-row justify-center align-center gap-2">

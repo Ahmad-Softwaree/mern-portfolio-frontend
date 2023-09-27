@@ -1,0 +1,17 @@
+import { BACKEND_HOST } from "../../util/enum";
+
+const CERTIFICATE_URL = `${BACKEND_HOST}/api/certificates`;
+
+export const GET_HOME_CERTIFICATES_URL = `${CERTIFICATE_URL}/home`;
+export const GET_ALL_CERTIFICATES_URL = `${CERTIFICATE_URL}/all`;
+export const GET_RANDOM_CERTIFICATES_URL = `${CERTIFICATE_URL}/random`;
+export const SEARCH_CERTIFICATE_URL = `${CERTIFICATE_URL}`;
+
+export const GET_PANEL_CERTIFICATES_URL = `${CERTIFICATE_URL}/panel`;
+export const GET_ONE_CERTIFICATE = `${CERTIFICATE_URL}/one`;
+export const GET_CERTIFICATES_BY_STACK = `${CERTIFICATE_URL}/stack`;
+export const GET_CERTIFICATES_BY_TYPE = `${CERTIFICATE_URL}/type`;
+
+export const ADD_CERTIFICATE_URL = `${CERTIFICATE_URL}`;
+export const UPDATE_CERTIFICATE_URL = `${CERTIFICATE_URL}`;
+export const DELETE_CERTIFICATE_URL = `${CERTIFICATE_URL}`;

@@ -8,7 +8,7 @@
   h1 {
     color: colors.$purple;
     font-size: 200px;
-    font-weight: 700;
+    font-weight: 600;
     margin: 0 !important;
   }
   h3 {
@@ -76,7 +76,7 @@
   }
 }
 
-.singleBlogErrorPage {
+.singleBlogNotFound {
   text-align: center;
 
   h1 {
@@ -123,7 +123,7 @@
     }
   }
   .errorPage,
-  .singleBlogErrorPage {
+  .singleBlogNotFound {
     h1 {
       font-size: 40px !important;
     }

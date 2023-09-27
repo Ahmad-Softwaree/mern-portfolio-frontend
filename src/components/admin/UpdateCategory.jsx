@@ -1,100 +1,87 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { useContext, useState } from "react";
 import { Spinner } from "@chakra-ui/react";
-import { updateCategory } from "../../actions/category";
-const UpdateCategory = ({ updateCategory, oldCategory, category: { categories, updateLoading }, setUpdate, admin: { user } }) => {
-  const [{ enName, arName, krName }, setInputs] = useState({
-    enName: oldCategory.enName,
-    arName: oldCategory.arName,
-    krName: oldCategory.krName,
+import { AlertContext } from "../../context/AlertContext";
+import { CategoryContext } from "../../context/CategoryContext";
+import { updateCategory } from "../../context/actions/categoryAction";
+import TextInput from "../inputs/TextInput";
+import SpinnerLoading from "../global/SpinnerLoading";
+import { UiContext } from "../../context/UiContext";
+import { UPDATE_CATEGORY } from "../../context/types/ui_types";
+export default function UpdateCategory() {
+  const {
+    dispatch: uiDispatch,
+    state: { val },
+  } = useContext(UiContext);
+  const [inputs, setInputs] = useState({
+    enName: val.enName,
+    arName: val.arName,
+    krName: val.krName,
   });
-  const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13 && !e.shiftKey) {
-      updateCategory({ enName, arName, krName, setUpdate, categoryId: oldCategory._id });
-    }
-  };
-
+  const { enName, arName, krName } = inputs;
+  const onChange = (e) =>
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    dispatch: categoryDispatch,
+    state: { updateCategoryLoading },
+  } = useContext(CategoryContext);
   return (
     <form
+      data-aos="fade-up"
       onSubmit={(e) => {
         e.preventDefault();
-        updateCategory({ enName, arName, krName, setUpdate, categoryId: oldCategory._id });
+        updateCategory(
+          categoryDispatch,
+          alertDispatch,
+          uiDispatch,
+          val._id,
+          inputs
+        );
       }}
-      className="createCategory position-fixed flex flex-column justify-center align-center w-100 gap-2"
+      className="fixed inset-0 m-auto p-5 rounded-lg bg-black w-[95%] max-w-[500px] h-fit text-white flex flex-col justify-center items-center gap-[30px] z-[1100] shadow-xl"
     >
-      <h1>Update Category</h1>
-      <div className="inner">
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={enName}
-          placeholder="Enter English Category name"
-          type="text"
-          name="enName"
-          id="enName"
-          className={enName !== "" ? "activeInputBorder" : ""}
-        />
-
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={arName}
-          placeholder="Enter Arabic Category name"
-          type="text"
-          name="arName"
-          id="arName"
-          className={arName !== "" ? "activeInputBorder" : ""}
-        />
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={krName}
-          placeholder="Enter Kurdish Category name"
-          type="text"
-          name="krName"
-          id="krName"
-          className={krName !== "" ? "activeInputBorder" : ""}
-        />
-        <div className="publishAndCancel flex flex-row justify-center align-center gap-2">
-          <span
-            className="cancelLink"
-            onClick={() => {
-              setAdd(false);
-            }}
-          >
-            Cancel
-          </span>
-          <button
-            type="submit"
-            disabled={updateLoading}
-            className={enName !== "" && arName !== "" && krName !== "" ? "activePublish" : "Update"}
-          >
-            {updateLoading ? (
-              <div className="w-100 loadingSpinner">
-                <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
-              </div>
-            ) : (
-              "Publish"
-            )}
-          </button>
-        </div>
+      <h1 className="font-bold w-full text-center">Update Category</h1>
+      <TextInput
+        value={enName}
+        onChange={onChange}
+        name={`enName`}
+        className={`w-full`}
+        title={`English Name`}
+      />
+      <TextInput
+        value={arName}
+        onChange={onChange}
+        name={`arName`}
+        className={`w-full`}
+        title={`Arabic Name`}
+      />
+      <TextInput
+        value={krName}
+        onChange={onChange}
+        name={`krName`}
+        className={`w-full`}
+        title={`Arabic Name`}
+      />
+      <div className="w-full flex flex-row justify-center items-center gap-5">
+        <button
+          type="button"
+          className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4 disabled:bg-gray-500"
+          onClick={() =>
+            uiDispatch({
+              type: UPDATE_CATEGORY,
+            })
+          }
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={updateCategoryLoading}
+          className="my-5 !text-[14px] text-blue border-2 border-solid border-blue rounded-md transition-all duration-300 hover:bg-blue hover:text-white p-2 px-4 disabled:bg-gray-500"
+        >
+          {updateCategoryLoading ? <SpinnerLoading size={`30px`} /> : "Publish"}
+        </button>
       </div>
     </form>
   );
-};
-
-UpdateCategory.propTypes = {
-  updateCategory: PropTypes.func.isRequired,
-  category: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  category: state.category,
-  admin: state.admin,
-});
-
-const mapDispatchToProps = { updateCategory };
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateCategory);
+}

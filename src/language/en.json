@@ -5,13 +5,23 @@
     "skills": "Skills",
     "projects": "Projects",
     "works": "Works",
-    "contact": "Contact"
+    "contact": "Contact",
+    "about": "About",
+    "services": "Services",
+    "certificate": "Certificate"
   },
+  "noData": "No Data Found",
+
   "home": {
     "welcome": "WELCOME TO MY WORLD",
     "who": "I'm",
     "name": " Ahmad Software",
-    "job": ["Full Stack Web Developer.", "Game Developer.", "Software Developer.", "Software Engineer."],
+    "job": [
+      "Full Stack Web Developer.",
+      "Game Developer.",
+      "Software Developer.",
+      "Software Engineer."
+    ],
     "cv": "Show CV"
   },
   "blog": {
@@ -20,10 +30,11 @@
   },
   "projects": {
     "tech": "Technologies used",
-    "preview": "Preview"
+    "preview": "Preview",
+    "more": "More"
   },
   "work": {
-    "title": "Clients"
+    "title": "Works"
   },
   "skills": {
     "languages": "Languages",

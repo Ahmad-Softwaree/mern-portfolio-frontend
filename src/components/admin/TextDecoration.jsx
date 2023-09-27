@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { connect } from "react-redux";
 
-export const TextDecoration = ({ handleBoldClick, handleItalicClick, lang }) => {
+export const TextDecoration = ({
+  handleBoldClick,
+  handleItalicClick,
+  lang,
+}) => {
   return (
     <div className="text_decoration flex flex-row w-full justify-left items-center gap-2 fixed bottom-0">
       <span onClick={handleBoldClick}>
@@ -38,11 +41,3 @@ export const TextDecoration = ({ handleBoldClick, handleItalicClick, lang }) => 
     </div>
   );
 };
-
-TextDecoration.propTypes = {};
-
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TextDecoration);

@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect, useDispatch } from "react-redux";
 import { createAdmin } from "../../actions/admin";
 import { ADMIN_IMAGE } from "../../actions/types";
 import { Spinner } from "@chakra-ui/react";
 
-const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoading }, setAdd, admin: { user } }) => {
+const AddAdmin = ({
+  image: { admin },
+  createAdmin,
+  admin: { users, createLoading },
+  setAdd,
+  admin: { user },
+}) => {
   const [{ name, email, password }, setInputs] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const onChange = (e) =>
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onKeyDown = (e) => {
     if (e.keyCode === 13 && !e.shiftKey) {
       createAdmin({ name, email, password, image: admin, setInputs });
@@ -27,12 +32,12 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
         e.preventDefault();
         createAdmin({ name, email, password, image: admin, setInputs });
       }}
-      className="createAdmin position-fixed flex flex-column justify-left align-center w-100 gap-2"
+      className="createAdmin position-fixed flex flex-col justify-left align-center w-full gap-2"
     >
-      <h1>Create Admin</h1>
+      <h1>Add Admin</h1>
 
       <div className="inner">
-        <div className="fileInputDiv flex flex-column justify-center align-center gap-1">
+        <div className="fileInputDiv flex flex-col justify-center align-center gap-1">
           {!admin ? (
             <>
               <input
@@ -48,15 +53,29 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
                 className="adminImage"
               />
 
-              <img className="imageUploadCloud" src="/images/uploadImage.svg" alt="Image Upload" />
-              <label className="blogImageUploaderLabel flex justify-center align-center flex-row" htmlFor="adminImage">
+              <img
+                className="imageUploadCloud"
+                src="/images/uploadImage.svg"
+                alt="Image Upload"
+              />
+              <label
+                className="blogImageUploaderLabel flex justify-center align-center flex-row"
+                htmlFor="adminImage"
+              >
                 <span className="imageUploadButton">Upload an Image</span>
               </label>
             </>
           ) : (
             <div className="URLImage position-relative">
-              <img className="URLImage" src={URL.createObjectURL(admin)} alt="URL Image" />
-              <span onClick={() => dispatch({ type: ADMIN_IMAGE, payload: null })} className="position-absolute x">
+              <img
+                className="URLImage"
+                src={URL.createObjectURL(admin)}
+                alt="URL Image"
+              />
+              <span
+                onClick={() => dispatch({ type: ADMIN_IMAGE, payload: null })}
+                className="position-absolute x"
+              >
                 <i className="fa-solid fa-xmark"></i>
               </span>
             </div>
@@ -82,7 +101,7 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
           id="email"
           className={email !== "" ? "activeInputBorder" : ""}
         />
-        <div className="w-100 flex flex-row justify-between align-center passwordInput">
+        <div className="w-full flex flex-row justify-between align-center passwordInput">
           <input
             onChange={onChange}
             onKeyDown={onKeyDown}
@@ -91,12 +110,15 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
             type={show ? "text" : "password"}
             name="password"
             id="password"
-            className={password !== "" ? "activeInputBorder w-100" : "w-100"}
+            className={password !== "" ? "activeInputBorder w-full" : "w-full"}
           />
           {!show ? (
             <i onClick={() => setShow(true)} className="fa-solid fa-eye"></i>
           ) : (
-            <i onClick={() => setShow(false)} className="fa-solid fa-eye-slash"></i>
+            <i
+              onClick={() => setShow(false)}
+              className="fa-solid fa-eye-slash"
+            ></i>
           )}
         </div>
 
@@ -114,14 +136,18 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
           <button
             type="submit"
             disabled={createLoading}
-            className={name !== "" && email !== "" && password !== "" ? "activePublish" : "publish"}
+            className={
+              name !== "" && email !== "" && password !== ""
+                ? "activePublish"
+                : "publish"
+            }
           >
             {createLoading ? (
-              <div className="w-100 loadingSpinner">
+              <div className="w-full loadingSpinner">
                 <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
               </div>
             ) : (
-              "Create"
+              "Add"
             )}
           </button>
         </div>
@@ -129,18 +155,3 @@ const CreateAdmin = ({ image: { admin }, createAdmin, admin: { users, createLoad
     </form>
   );
 };
-
-CreateAdmin.propTypes = {
-  createAdmin: PropTypes.func.isRequired,
-  image: PropTypes.object.isRequired,
-  admin: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  image: state.image,
-  admin: state.admin,
-});
-
-const mapDispatchToProps = { createAdmin };
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateAdmin);

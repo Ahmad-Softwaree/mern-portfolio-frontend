@@ -1,20 +1,9 @@
 import React from "react";
-import { Box, Spinner, Text } from "@chakra-ui/react";
-const Fallback = () => {
+
+export default function Fallback() {
   return (
-    <section
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#262626",
-        color: "#fff",
-      }}
-      className="w-100 flex flex-column justify-center align-center"
-    >
-      <Box width="100%" className="w-100 flex flex-column justify-center align-center">
-        <Spinner size="xl" />
-      </Box>
+    <section className="w-full min-h-screen flex flex-row justify-center items-center text-purple bg-black">
+      <h1 className="font-bold !text-[60px] animate-pulse">Ahmad Software</h1>
     </section>
   );
-};
-
-export default Fallback;
+}

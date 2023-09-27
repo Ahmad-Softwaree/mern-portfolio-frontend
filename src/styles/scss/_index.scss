@@ -8,3 +8,7 @@
 @forward "./errors/error.scss";
 @forward "./touch.scss";
 @forward "./dialog.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

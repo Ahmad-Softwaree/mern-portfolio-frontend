@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -13,11 +13,11 @@ const Layout = ({ isHome }) => {
     window.scrollTo(0, 0);
   }, [location]);
   return (
-    <div className="layout w-100">
+    <Fragment>
       <Header isHome={isHome} />
       <Outlet />
       <Footer />
-    </div>
+    </Fragment>
   );
 };
 

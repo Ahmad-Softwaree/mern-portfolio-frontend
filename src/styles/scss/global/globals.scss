@@ -3,7 +3,7 @@
 @use "../animations/animation.scss" as animation;
 @use "../breakpoints.scss" as res;
 
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Karla:wght@200;300;400;500;600;700;800&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@800;900&family=Roboto:wght@400;500;700;900&family=Varela&family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Karla:wght@200;300;400;500;600;700;800&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&family=Varela&family=Varela+Round&display=swap");
 @import url("https://fonts.cdnfonts.com/css/cubano");
 
 html {
@@ -55,8 +55,8 @@ input::placeholder {
 }
 
 .opaBackground {
-  background: colors.$white;
-  opacity: 0.25;
+  background: colors.$black;
+  opacity: 0.8;
   position: fixed;
   z-index: 600;
   inset: 0;
@@ -177,7 +177,7 @@ img {
 .heading {
   margin: 0;
   font-size: 44px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .fallbackText {

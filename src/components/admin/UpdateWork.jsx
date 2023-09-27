@@ -1,227 +1,210 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
-import { updateWork } from "../../actions/work";
-import { Spinner } from "@chakra-ui/react";
-import { WORK_UPDATE_IMAGE } from "../../actions/types";
-const UpdateWork = ({
-  enTitle,
-  arTitle,
-  krTitle,
-  company,
-  from,
-  to,
-  id,
-  oldImage,
-  updateWork,
-  image,
-  setUpdate,
-  work: { updateWorkLoading },
-}) => {
+import React, { useContext, useState } from "react";
+import { addWork, updateWork } from "../../context/actions/workAction";
+import { AlertContext } from "../../context/AlertContext";
+import { WorkContext } from "../../context/WorkContext";
+import { ImageContext } from "../../context/ImageContext";
+import TextInput from "../inputs/TextInput";
+import { UiContext } from "../../context/UiContext";
+import { ADD_WORK, UPDATE_WORK } from "../../context/types/ui_types";
+import SpinnerLoading from "../global/SpinnerLoading";
+import { WORK_IMAGE } from "../../context/types/image_types";
+import FileInput from "../inputs/FileInput";
+import FullDateInput from "../inputs/FullDateInput";
+import { Checkbox } from "@chakra-ui/react";
+export default function UpdateWork() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    dispatch: workDispatch,
+    state: { updateWorkLoading },
+  } = useContext(WorkContext);
+
+  const {
+    dispatch: imageDispatch,
+    state: { workImage, uploadWorkImageLoading },
+  } = useContext(ImageContext);
+  const {
+    dispatch: uiDispatch,
+    state: { val },
+  } = useContext(UiContext);
   const [imageChanged, setImageChanged] = useState(false);
   const [inputs, setInputs] = useState({
-    enTitle: enTitle,
-    krTitle: krTitle,
-    arTitle: arTitle,
-    company: company,
-    from: from,
-    to: to,
+    enTitle: val.enTitle,
+    arTitle: val.arTitle,
+    krTitle: val.krTitle,
+    company: val.company,
+    link: val.link,
+    from: val.from,
+    to: val.to,
   });
-  const dispatch = useDispatch();
-  const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13 && !e.shiftKey) {
-      updateWork({
-        enTitle: inputs.enTitle,
-        krTitle: inputs.krTitle,
-        arTitle: inputs.arTitle,
-        company: inputs.company,
-        from: inputs.from,
-        to: inputs.to,
-        image: image.updateWork,
-        workId: id,
-        setUpdate,
-        oldImage,
-        setInputs,
-        imageChanged,
-      });
-    }
-  };
+  const [cont, setCont] = useState(val.continue);
+
+  const { enTitle, arTitle, krTitle, link, company, from, to } = inputs;
+  const onChange = (e) =>
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
   return (
     <form
+      data-aos="fade-up"
       onSubmit={(e) => {
         e.preventDefault();
-        updateWork({
-          enTitle: inputs.enTitle,
-          krTitle: inputs.krTitle,
-          arTitle: inputs.arTitle,
-          company: inputs.company,
-          from: inputs.from,
-          to: inputs.to,
-          image: image.updateWork,
-          workId: id,
-          setUpdate,
-          oldImage,
+        updateWork(
+          workDispatch,
+          alertDispatch,
+          uiDispatch,
+          imageDispatch,
+          { ...inputs, continue: cont },
+          val._id,
           setInputs,
-          imageChanged,
-        });
+          setCont,
+          workImage,
+          val.imageURL,
+          val.imageName,
+          imageChanged
+        );
       }}
-      className="createWork position-fixed flex flex-column justify-center align-center w-100 gap-2 update"
+      className="fixed inset-0 m-auto p-5 rounded-lg bg-black w-[95%] max-w-[500px] h-fit text-white flex flex-col justify-left items-center gap-[30px] z-[1100] shadow-xl overflow-y-auto max-h-[600px]"
     >
-      <h1>Update Work</h1>
-      <div className="inner">
-        <div className="fileInputDiv flex flex-column justify-center align-center gap-1">
-          {image.updateWork ? (
-            <div className="URLImage position-relative">
-              <img className="URLImage" src={URL.createObjectURL(image.updateWork)} alt="imageUpload" />
-              <span
-                onClick={() => {
-                  dispatch({ type: WORK_UPDATE_IMAGE, payload: null });
-                  setImageChanged(false);
-                }}
-                className="position-absolute x"
-              >
-                <i className="fa-solid fa-xmark"></i>
-              </span>
-            </div>
-          ) : (
-            <>
-              <input
-                onChange={(e) => {
-                  dispatch({
-                    type: WORK_UPDATE_IMAGE,
-                    payload: e.target.files[0],
-                  });
-                  setImageChanged(true);
-                }}
-                type="file"
-                name="work"
-                id="updateWork"
-                className="workImage"
-              />
+      <h1 className="font-bold w-full text-center">Update Work</h1>
+      {val.imageURL && !imageChanged && (
+        <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
+          <img
+            className="w-full h-[200px] object-contain rounded-md"
+            src={val.imageURL}
+            alt="imageUpload"
+          />
 
-              <img className="URLImage" src={`${oldImage}`} alt="imageUpload" />
-
-              <label className="blogImageUploaderLabel flex justify-center align-center flex-row" htmlFor="updateWork">
-                <div className="editButton flex flex-row align-center  justify-center">
-                  <img src="/images/edit.svg" alt="editImage" className="editImage" />
-                  <span>Edit</span>
-                </div>
-              </label>
-            </>
-          )}
-        </div>
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={inputs.enTitle}
-          placeholder="Enter the English Title"
-          type="text"
-          name="enTitle"
-          id="enTitle"
-          className={inputs.enTitle !== "" ? "activeInputBorder" : ""}
-        />
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={inputs.arTitle}
-          placeholder="Enter the Arabic Title"
-          type="text"
-          name="arTitle"
-          id="arTitle"
-          className={inputs.arTitle !== "" ? "activeInputBorder" : ""}
-        />
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={inputs.krTitle}
-          placeholder="Enter the Kurdish Title"
-          type="text"
-          name="krTitle"
-          id="krTitle"
-          className={inputs.krTitle !== "" ? "activeInputBorder" : ""}
-        />
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={inputs.company}
-          placeholder="Enter the Company"
-          type="text"
-          name="company"
-          id="company"
-          className={inputs.company !== "" ? "activeInputBorder" : ""}
-        />
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={inputs.from}
-          placeholder="Enter Start Date"
-          type="date"
-          name="from"
-          id="from"
-          className={inputs.from !== "" ? "activeInputBorder" : ""}
-        />
-
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={inputs.to}
-          placeholder="Enter End Date"
-          type="date"
-          name="to"
-          id="to"
-          className={inputs.to !== "" ? "activeInputBorder" : ""}
-        />
-        <div className="publishAndCancel flex flex-row justify-left align-center gap-2">
           <button
+            type="button"
             onClick={() => {
-              setUpdate(false);
-              dispatch({ type: WORK_UPDATE_IMAGE, payload: null });
+              setImageChanged(true);
             }}
-            className="cancelLink"
+            className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
           >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={updateWorkLoading}
-            className={
-              inputs.enTitle !== "" &&
-              inputs.arTitle !== "" &&
-              inputs.krTitle !== "" &&
-              inputs.company !== "" &&
-              inputs.from !== "" &&
-              inputs.to !== ""
-                ? "activePublish"
-                : "publish"
-            }
-          >
-            {updateWorkLoading ? (
-              <div className="w-100 loadingSpinner">
-                <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
-              </div>
-            ) : (
-              "Update"
-            )}
+            Remove Old Work Image
           </button>
         </div>
+      )}
+      <div className="flex flex-col justify-left items-center gap-5 w-full">
+        {!workImage && imageChanged ? (
+          <FileInput
+            title={`Work Image`}
+            value={""}
+            onChange={(e) => {
+              imageDispatch({
+                type: WORK_IMAGE,
+                payload: e.target.files[0],
+              });
+              setImageChanged(true);
+            }}
+            id={`workImage`}
+            className={`w-full`}
+          />
+        ) : workImage ? (
+          <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
+            <img
+              className="w-full h-[200px] object-contain rounded-md"
+              src={URL.createObjectURL(workImage)}
+              alt="imageUpload"
+            />
+
+            <button
+              onClick={() => {
+                imageDispatch({ type: WORK_IMAGE, payload: "" });
+                setImageChanged(false);
+              }}
+              className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
+            >
+              Remove Work Image
+            </button>
+          </div>
+        ) : null}
+      </div>
+      <TextInput
+        value={enTitle}
+        onChange={onChange}
+        name={`enTitle`}
+        className={`w-full`}
+        title={`English Title`}
+      />
+      <TextInput
+        value={arTitle}
+        onChange={onChange}
+        name={`arTitle`}
+        className={`w-full`}
+        title={`Arabic Title`}
+      />
+      <TextInput
+        value={krTitle}
+        onChange={onChange}
+        name={`krTitle`}
+        className={`w-full`}
+        title={`Kurdish Title`}
+      />
+      <TextInput
+        value={company}
+        onChange={onChange}
+        name={`company`}
+        className={`w-full`}
+        title={`Company`}
+      />
+      <TextInput
+        value={link}
+        onChange={onChange}
+        name={`link`}
+        className={`w-full`}
+        title={`Link`}
+      />
+      <FullDateInput
+        className={`w-full`}
+        value={from}
+        onChange={(date) => {
+          setInputs((prev) => ({ ...prev, from: date }));
+        }}
+      />
+      <FullDateInput
+        className={`w-full`}
+        value={to}
+        onChange={(date) => {
+          setInputs((prev) => ({ ...prev, to: date }));
+        }}
+      />
+      <Checkbox
+        isChecked={cont}
+        onChange={(e) => {
+          setCont(e.target.checked);
+        }}
+        className="!text-[12px] md:!text-[12px] w-full"
+      >
+        Continue
+      </Checkbox>
+      <div className="w-full flex flex-row justify-center items-center gap-5">
+        <button
+          type="button"
+          className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4 disabled:bg-gray-500"
+          onClick={() => {
+            uiDispatch({
+              type: UPDATE_WORK,
+            });
+            imageDispatch({
+              type: WORK_IMAGE,
+              payload: "",
+            });
+          }}
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={updateWorkLoading || uploadWorkImageLoading}
+          className="my-5 !text-[14px] text-blue border-2 border-solid border-blue rounded-md transition-all duration-300 hover:bg-blue hover:text-white p-2 px-4 disabled:bg-gray-500"
+        >
+          {updateWorkLoading || uploadWorkImageLoading ? (
+            <SpinnerLoading size={`30px`} />
+          ) : (
+            "Publish"
+          )}
+        </button>
       </div>
     </form>
   );
-};
-UpdateWork.propTypes = {
-  admin: PropTypes.object.isRequired,
-  work: PropTypes.object.isRequired,
-  image: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  admin: state.admin,
-  work: state.work,
-  image: state.image,
-});
-
-const mapDispatchToProps = { updateWork };
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateWork);
+}

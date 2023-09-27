@@ -1,68 +1,96 @@
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Spinner } from "@chakra-ui/react";
-import Opacity from "../Opacity";
-import { getAllStacks } from "../../actions/stack";
-import CreateStack from "./CreateStack";
+import React, { useContext, useEffect } from "react";
+import {
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { AlertContext } from "../../context/AlertContext";
+import { StackContext } from "../../context/StackContext";
+import TableSkeleton from "../loading/TableSkeleton";
+import NoData from "../global/NoData";
+import RefreshData from "../global/RefreshData";
+import { UiContext } from "../../context/UiContext";
+import { ADD_STACK } from "../../context/types/ui_types";
+import { getAllStacks } from "../../context/actions/stackAction";
 import AdminStack from "./AdminStack";
+export default function AdminStacks() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const { dispatch: uiDispatch } = useContext(UiContext);
+  const {
+    dispatch: stackDispatch,
+    state: { stacks, getStacksLoading },
+  } = useContext(StackContext);
 
-export const AdminWorks = ({ stack: { stacks, loading }, getAllStacks }) => {
-  const [add, setAdd] = useState(false);
   useEffect(() => {
-    getAllStacks({});
-  }, []);
+    getAllStacks(stackDispatch, alertDispatch);
+  }, [stackDispatch]);
   return (
-    <div className="admin_stacks  flex flex-column justify-center align-center gap-1">
-      <div className="flex flex-row justify-center align-center gap-1 w-100">
-        <h1>Stacks</h1>
-        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
-          <i className="fa-solid fa-upload"></i>
-          <span>Upload</span>
+    <div
+      data-aos="fade-left"
+      data-aos-offset="-900"
+      className="w-full flex flex-col justify-left items-center gap-10 bg-black p-5 rounded-lg shadow-xl"
+    >
+      <div className="flex flex-row justify-between items-center w-full gap-5 text-white">
+        <div className="flex flex-row justify-end items-center gap-5">
+          <h1 className="font-[500] lg:!text-[24px] md:!text-[22px]">Stacks</h1>
+          <RefreshData
+            setter={() => getAllStacks(stackDispatch, alertDispatch)}
+          />
+        </div>
+        <button
+          onClick={() =>
+            uiDispatch({
+              type: ADD_STACK,
+            })
+          }
+          className="p-1 px-6 rounded-md border-2 border-solid border-purple text-purple transition-all duration-300 hover:text-white hover:bg-purple flex flex-row justify-center items-center gap-3"
+        >
+          <i className="fa-brands fa-plus"></i>
+          <span className="!text-[14px]">Add New</span>
         </button>
       </div>
 
-      {add && (
-        <>
-          <Opacity />
-          <CreateStack setAdd={setAdd} />
-        </>
-      )}
+      {getStacksLoading ? (
+        <TableSkeleton cards={8} />
+      ) : stacks.length > 0 ? (
+        <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
+          <Table variant="striped" colorScheme="black">
+            <TableCaption color={`white`}>Stacks</TableCaption>
+            <Thead>
+              <Tr borderRadius={`10px`}>
+                <Th color={`white`} className="text-white">
+                  Id
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Name
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Color
+                </Th>
 
-      {loading && <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} />}
-      {!loading && stacks.length > 0 && (
-        <div className="stacks w-100 flex flex-column justify-left align-center gap-2">
-          <div className="stackCard stackTable flex flex-row justify-between align-center w-100">
-            <span className="tableIndex">Id</span>
-            <span className="tableIndex">Name</span>
-            <span className="tableIndex">Color</span>
+                <Th color={`white`} className="text-white">
+                  Date
+                </Th>
 
-            <div className="flex flex-row justify-center align-center gap-2">
-              <span className="tableOperation">Update</span>
-              <span className="tableOperation">Delete</span>
-            </div>
-          </div>
-          <div className="theStacks flex flex-column justify-left align-center gap-1 w-100">
-            {stacks?.map((stack, index) => {
-              return <AdminStack key={index} index={index} id={stack._id} name={stack.name} color={stack.color} />;
-            })}
-          </div>
-        </div>
+                <Th color={`white`} className="text-white">
+                  Operation
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {stacks.map((val, index) => {
+                return <AdminStack key={index} index={index + 1} val={val} />;
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <NoData />
       )}
-      {!loading && stacks.length === 0 && <span className="no_project">There is no stack</span>}
     </div>
   );
-};
-
-AdminWorks.propTypes = {
-  stack: PropTypes.object.isRequired,
-  getAllStacks: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  stack: state.stack,
-});
-
-const mapDispatchToProps = { getAllStacks };
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminWorks);
+}

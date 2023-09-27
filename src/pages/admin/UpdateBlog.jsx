@@ -1,7 +1,17 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
-import { connect, useDispatch } from "react-redux";
-import { updateBlog, getOneBlog, uploadInnerBlogImage, deleteInnerBlogImage } from "../../actions/blog";
+import {
+  updateBlog,
+  getOneBlog,
+  uploadInnerBlogImage,
+  deleteInnerBlogImage,
+} from "../../actions/blog";
 import { BLOG_UPDATE_IMAGE, INSIDE_BLOG_IMAGE } from "../../actions/types";
 import { Spinner } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,14 +36,15 @@ const UpdateBlog = React.memo(
       getAllCategories({});
     }, [blog_id, update]);
 
-    const [{ enTitle, arTitle, krTitle, enBody, arBody, krBody }, setInputs] = useState({
-      enTitle: blog.enTitle || "",
-      krTitle: blog.krTitle || "",
-      arTitle: blog.arTitle || "",
-      enBody: blog.enBody || "",
-      arBody: blog.arBody || "",
-      krBody: blog.krBody || "",
-    });
+    const [{ enTitle, arTitle, krTitle, enBody, arBody, krBody }, setInputs] =
+      useState({
+        enTitle: blog.enTitle || "",
+        krTitle: blog.krTitle || "",
+        arTitle: blog.arTitle || "",
+        enBody: blog.enBody || "",
+        arBody: blog.arBody || "",
+        krBody: blog.krBody || "",
+      });
     const [activeCategories, setActiveCategories] = useState([]);
     const [deleteImageUrl, setDeleteImageUrl] = useState("");
 
@@ -60,7 +71,11 @@ const UpdateBlog = React.memo(
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = useState("");
 
-    const onChange = useCallback((e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })), []);
+    const onChange = useCallback(
+      (e) =>
+        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })),
+      []
+    );
 
     const onKeyDown = useCallback(
       (e) => {
@@ -83,7 +98,17 @@ const UpdateBlog = React.memo(
           });
         }
       },
-      [enTitle, arTitle, krTitle, blog, user._id, updateBlog, arBody, enBody, krBody]
+      [
+        enTitle,
+        arTitle,
+        krTitle,
+        blog,
+        user._id,
+        updateBlog,
+        arBody,
+        enBody,
+        krBody,
+      ]
     );
 
     return (
@@ -107,11 +132,11 @@ const UpdateBlog = React.memo(
             activeCategories,
           });
         }}
-        className="createBlogPage updateBlogPage  flex flex-column justify-center align-center w-100 gap-2"
+        className="createBlogPage updateBlogPage  flex flex-col justify-center align-center w-full gap-2"
       >
-        <h1 className="headings">Create Blog</h1>
+        <h1 className="headings">Add Blog</h1>
 
-        <div className="fileInputDiv flex flex-column justify-center align-center gap-1">
+        <div className="fileInputDiv flex flex-col justify-center align-center gap-1">
           {!image.updateBlog ? (
             <>
               <input
@@ -129,12 +154,16 @@ const UpdateBlog = React.memo(
                 ref={mainImageRef}
               />
               <label
-                className="blogImageUploaderLabel mainLabel flex justify-center align-center flex-column gap-2 position-relative"
+                className="blogImageUploaderLabel mainLabel flex justify-center align-center flex-col gap-2 position-relative"
                 htmlFor="update_blog"
               >
                 <div className="overImage"></div>
-                <img className="blogUnderBlack" src={blog.image} alt="blog Image" />
-                <div className="blogHeader flex flex-column w-100 justify-center align-center gap-2">
+                <img
+                  className="blogUnderBlack"
+                  src={blog.image}
+                  alt="blog Image"
+                />
+                <div className="blogHeader flex flex-col w-full justify-center align-center gap-2">
                   <input
                     onChange={onChange}
                     onKeyDown={onKeyDown}
@@ -166,7 +195,7 @@ const UpdateBlog = React.memo(
                     className={krTitle !== "" ? "activeInputBorder" : ""}
                   />
 
-                  <div className=" blogOwner flex flex-column justify-left align-center ">
+                  <div className=" blogOwner flex flex-col justify-left align-center ">
                     <img src={`${user.image}`} alt="Blog Image" />
                     <span>Ahmad Software</span>
                     <p>Founder & CEO of Bester Group Company</p>
@@ -176,7 +205,11 @@ const UpdateBlog = React.memo(
             </>
           ) : (
             <div className="URLImage position-relative">
-              <img className="URLImage" src={URL.createObjectURL(image.updateBlog)} alt="imageUpload" />
+              <img
+                className="URLImage"
+                src={URL.createObjectURL(image.updateBlog)}
+                alt="imageUpload"
+              />
               <div className="overImage"></div>
 
               <span
@@ -189,7 +222,7 @@ const UpdateBlog = React.memo(
               >
                 <i className="fa-solid fa-xmark"></i>
               </span>
-              <div className="blogHeader flex flex-column w-100 justify-center align-center gap-2">
+              <div className="blogHeader flex flex-col w-full justify-center align-center gap-2">
                 <input
                   onChange={onChange}
                   onKeyDown={onKeyDown}
@@ -221,7 +254,7 @@ const UpdateBlog = React.memo(
                   className={krTitle !== "" ? "activeInputBorder" : ""}
                 />
 
-                <div className=" blogOwner flex flex-column justify-left align-center ">
+                <div className=" blogOwner flex flex-col justify-left align-center ">
                   <img src={`${user.image}`} alt="Blog Owner Image" />
                   <span>Ahmad Software</span>
                   <p>Founder & CEO of Bester Group Company</p>
@@ -232,7 +265,7 @@ const UpdateBlog = React.memo(
         </div>
 
         <div className="inner">
-          <div className="fileInputDiv smallInputDiv flex flex-column justify-center align-center gap-1">
+          <div className="fileInputDiv smallInputDiv flex flex-col justify-center align-center gap-1">
             {!image.insideBlog ? (
               <>
                 <input
@@ -248,8 +281,15 @@ const UpdateBlog = React.memo(
                   className="blogImage"
                   ref={smallImageRef}
                 />
-                <label className="blogImageUploaderLabel flex justify-center align-center flex-column gap-2" htmlFor="innerBlog">
-                  <img className="imageUploadCloud" src="/images/uploadImage.svg" alt="imageUpload" />
+                <label
+                  className="blogImageUploaderLabel flex justify-center align-center flex-col gap-2"
+                  htmlFor="innerBlog"
+                >
+                  <img
+                    className="imageUploadCloud"
+                    src="/images/uploadImage.svg"
+                    alt="imageUpload"
+                  />
 
                   <span className="imageUploadButton">Upload an Image</span>
 
@@ -258,7 +298,11 @@ const UpdateBlog = React.memo(
               </>
             ) : (
               <div className="URLImage position-relative">
-                <img className="URLImage" src={URL.createObjectURL(image.insideBlog)} alt="imageUpload" />
+                <img
+                  className="URLImage"
+                  src={URL.createObjectURL(image.insideBlog)}
+                  alt="imageUpload"
+                />
                 <span
                   onClick={() => {
                     dispatch({ type: INSIDE_BLOG_IMAGE, payload: null });
@@ -271,7 +315,13 @@ const UpdateBlog = React.memo(
                 <button
                   type="button"
                   disabled={uploadInnerImageLoading}
-                  onClick={() => uploadInnerBlogImage(image.insideBlog, smallImageRef, setImageUrl)}
+                  onClick={() =>
+                    uploadInnerBlogImage(
+                      image.insideBlog,
+                      smallImageRef,
+                      setImageUrl
+                    )
+                  }
                   className="uploadInnerImage"
                 >
                   Upload
@@ -280,11 +330,18 @@ const UpdateBlog = React.memo(
             )}
           </div>
           <p className="imageUrlAddress">{imageUrl}</p>
-          <input className="deleteImageInput" value={deleteImageUrl} onChange={(e) => setDeleteImageUrl(e.target.value)} type="text" />
+          <input
+            className="deleteImageInput"
+            value={deleteImageUrl}
+            onChange={(e) => setDeleteImageUrl(e.target.value)}
+            type="text"
+          />
           <button
             type="button"
             disabled={uploadInnerImageLoading}
-            onClick={() => deleteInnerBlogImage(deleteImageUrl, setDeleteImageUrl)}
+            onClick={() =>
+              deleteInnerBlogImage(deleteImageUrl, setDeleteImageUrl)
+            }
             className="deleteImageButton"
           >
             Delete Image
@@ -323,9 +380,9 @@ const UpdateBlog = React.memo(
             id="krBody"
           />
 
-          <h3 className="w-100 text-left">Categories</h3>
+          <h3 className="w-full text-left">Categories</h3>
 
-          <div className="flex flex-row w-100 justify-left align-center gap-2">
+          <div className="flex flex-row w-full justify-left align-center gap-2">
             {categories?.map((category, index) => {
               return (
                 <span
@@ -339,7 +396,9 @@ const UpdateBlog = React.memo(
                     }
                   }}
                   key={index}
-                  className={`category ${activeCategories?.includes(category._id) && "activeCategory"}`}
+                  className={`category ${
+                    activeCategories?.includes(category._id) && "activeCategory"
+                  }`}
                 >
                   {category.enName}
                 </span>
@@ -363,13 +422,18 @@ const UpdateBlog = React.memo(
               type="submit"
               disabled={updateBlogLoading}
               className={
-                enTitle !== "" && arTitle !== "" && krTitle !== "" && enBody !== "" && arBody !== "" && krBody !== ""
+                enTitle !== "" &&
+                arTitle !== "" &&
+                krTitle !== "" &&
+                enBody !== "" &&
+                arBody !== "" &&
+                krBody !== ""
                   ? "activePublish"
                   : "publish"
               }
             >
               {updateBlogLoading ? (
-                <div className="w-100 loadingSpinner">
+                <div className="w-full loadingSpinner">
                   <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
                 </div>
               ) : (
@@ -382,25 +446,3 @@ const UpdateBlog = React.memo(
     );
   }
 );
-
-UpdateBlog.propTypes = {
-  updateBlog: PropTypes.func.isRequired,
-  blog: PropTypes.object.isRequired,
-  image: PropTypes.object.isRequired,
-  uploadInnerBlogImage: PropTypes.func.isRequired,
-  getOneBlog: PropTypes.func.isRequired,
-  category: PropTypes.object.isRequired,
-  getAllCategories: PropTypes.func.isRequired,
-  deleteInnerBlogImage: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  blog: state.blog,
-  image: state.image,
-  admin: state.admin,
-  category: state.category,
-});
-
-const mapDispatchToProps = { updateBlog, getOneBlog, uploadInnerBlogImage, getAllCategories, deleteInnerBlogImage };
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateBlog);

@@ -1,73 +1,96 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import { LanguageContext } from "../../context/LanguageContext";
+export default function MobileNav({ mobNav, activeSection, setMobNav, goNav }) {
+  const {
+    state: { file, language },
+  } = useContext(LanguageContext);
 
-const MobileNav = ({
-  activeSection,
-  goNav,
-  mobNav,
-  blog: { blogs, blogLoading },
-  work: { works, workLoading },
-  project: { projects, projectLoading },
-  language: { file, language },
-}) => {
   return (
-    <nav className={`mobileNav ${mobNav ? "show" : "hide"}`}>
-      <ul className="flex flex-column justify-center align-center w-100">
-        <li className="navItem">
-          <span onClick={() => goNav("home")} className={`${activeSection === "home" && "activeNav"}`}>
-            {file.nav.home}
-          </span>
-        </li>
-        {blogs.length > 0 && !blogLoading ? (
-          <li className="navItem">
-            <span onClick={() => goNav("blogs")} className={`${activeSection === "blogs" && "activeNav"}`}>
-              {file.nav.blogs}
-            </span>
-          </li>
-        ) : blogs.length === 0 && blogLoading ? (
-          <li className="navItem animatedNavItem">{file.nav.blogs}</li>
-        ) : null}
+    <nav
+      className={`flex-col justify-left  items-start  flex xl:hidden fixed left-0 h-full w-fit transition-all duration-300 bg-black text-white z-[999] pt-[50px] py-[100px] ${
+        mobNav ? "left-0" : "left-[-300px]"
+      }`}
+    >
+      <span
+        className="text-[22px] p-3 cursor-pointer transition-all duration-200 hover:text-purple w-full text-center"
+        onClick={() => setMobNav(false)}
+      >
+        <i className="fa-solid fa-angles-left"></i>{" "}
+      </span>
+      <li
+        onClick={() => goNav("home")}
+        className={`${activeSection === "home" && "border-purple text-purple"}`}
+      >
+        <span>{file.nav.home}</span>
+      </li>
 
-        <li className="navItem">
-          <span onClick={() => goNav("skills")} className={`${activeSection === "skills" && "activeNav"}`}>
-            {file.nav.skills}
-          </span>
-        </li>
-        {projects.length > 0 && !projectLoading ? (
-          <li className="navItem">
-            <span onClick={() => goNav("projects")} className={`${activeSection === "projects" && "activeNav"}`}>
-              {file.nav.projects}
-            </span>
-          </li>
-        ) : projects.length === 0 && projectLoading ? (
-          <li className="navItem animatedNavItem">{file.nav.projects}</li>
-        ) : null}
+      <li
+        onClick={() => goNav("blogs")}
+        className={`${
+          activeSection === "blogs" && "border-purple text-purple"
+        }`}
+      >
+        <span>{file.nav.blogs}</span>
+      </li>
+      <li
+        onClick={() => goNav("about")}
+        className={`${
+          activeSection === "about" && "border-purple text-purple"
+        }`}
+      >
+        <span>{file.nav.about}</span>
+      </li>
+      <li
+        onClick={() => goNav("services")}
+        className={`${
+          activeSection === "services" && "border-purple text-purple"
+        }`}
+      >
+        <span>{file.nav.services}</span>
+      </li>
 
-        {works.length > 0 && !workLoading ? (
-          <li className="navItem">
-            <span onClick={() => goNav("works")} className={`${activeSection === "works" && "activeNav"}`}>
-              {file.nav.works}
-            </span>
-          </li>
-        ) : works.length === 0 && workLoading ? (
-          <li className="navItem animatedNavItem">{file.nav.works}</li>
-        ) : null}
+      <li
+        onClick={() => goNav("skills")}
+        className={`${
+          activeSection === "skills" && "border-purple text-purple"
+        }`}
+      >
+        <span>{file.nav.skills}</span>
+      </li>
 
-        <li className="navItem">
-          <span onClick={() => goNav("contact")} className={`${activeSection === "contact" && "activeNav"}`}>
-            {file.nav.contact}
-          </span>
-        </li>
-      </ul>
+      <li
+        onClick={() => goNav("projects")}
+        className={`${
+          activeSection === "projects" && "border-purple text-purple"
+        }`}
+      >
+        <span>{file.nav.projects}</span>
+      </li>
+      <li
+        onClick={() => goNav("certificate")}
+        className={`${
+          activeSection === "certificate" && "border-purple text-purple"
+        }`}
+      >
+        <span>{file.nav.certificate}</span>
+      </li>
+      <li
+        onClick={() => goNav("works")}
+        className={`${
+          activeSection === "works" && "border-purple text-purple"
+        }`}
+      >
+        <span>{file.nav.works}</span>
+      </li>
+
+      <li
+        onClick={() => goNav("contact")}
+        className={`${
+          activeSection === "contact" && "border-purple text-purple"
+        }`}
+      >
+        <span>{file.nav.contact}</span>
+      </li>
     </nav>
   );
-};
-
-const mapStateToProps = (state) => ({
-  blog: state.blog,
-  project: state.project,
-  work: state.work,
-  language: state.language,
-});
-
-export default connect(mapStateToProps, {})(MobileNav);
+}

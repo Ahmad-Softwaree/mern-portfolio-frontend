@@ -1,15 +1,5 @@
-import PropTypes from "prop-types";
 import React from "react";
-import { connect } from "react-redux";
 
-export const Opacity = (props) => {
-  return <div className="opaBackground"></div>;
-};
-
-Opacity.propTypes = {};
-
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Opacity);
+export default function Opacity() {
+  return <div className="fixed inset-0 bg-black opacity-80 z-[800]"></div>;
+}

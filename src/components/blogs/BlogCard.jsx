@@ -1,36 +1,64 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-const BlogCard = ({ file, language, id, img, enTitle, arTitle, krTitle, categories }) => {
-  const [hover, setHover] = useState(false);
+import { LanguageContext } from "../../context/LanguageContext";
+
+export default function BlogCard({ val }) {
+  const {
+    state: { file, language },
+  } = useContext(LanguageContext);
 
   return (
-    <div
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      className="blogCard flex flex-column justify-between align-center  gap-1"
-    >
-      <div className="wrapper flex flex-column justify-left align-start gap-1 w-100">
-        <img style={hover ? { transform: "scale(1.4)" } : null} src={`${img}`} alt="blogImage" />
-        <div className="overBlog"></div>
+    <div className="blogCard relative flex flex-col justify-between items-center gap-10  overflow-hidden cursor-pointer w-[350px]  rounded-md h-[470px] text-center z-20 text-white">
+      <div className="wrapper z-30 flex flex-col justify-left items-start gap-5 w-full h-[470px]">
+        <img
+          className="hover:scale-150 w-full h-[470px] object-cover rounded-md cursor-pointer transition-all duration-300"
+          src={`${val.imageURL}`}
+          alt="blogImage"
+        />
+        <div className="overBlog absolute inset-0 rounded-md bg-lightBlack z-30 opacity-80 transition-all duration-300 w-full h-full"></div>
         <div
-          style={language === "en" ? { textAlign: "left" } : { textAlign: "right" }}
-          className={`inner flex flex-column justify-left align-start`}
+          className={`inner z-40 text-left top-[70%] left-0 px-[30px] w-full transition-all duration-300 min-h-[100px] flex flex-col justify-left items-start gap-3 ${
+            language === "en" ? "text-left" : "text-right"
+          }`}
         >
-          <span className="category">
-            {categories.length > 0 ? (
-              <>{language === "en" ? categories[0].enName : language === "ar" ? categories[0].arName : categories[0].krName}</>
+          <span className="opacity-70 text-purple w-full font-bold">
+            {val.categories.length > 0 ? (
+              <>
+                {language === "en"
+                  ? val.categories[0].enName
+                  : language === "ar"
+                  ? val.categories[0].arName
+                  : val.categories[0].krName}
+              </>
             ) : (
               "Category"
             )}
           </span>
-          <h2>{language === "en" ? enTitle : language === "ar" ? arTitle : krTitle} </h2>{" "}
-          <Link to={`/blogs/${id}`} className="readBlog">
+          <h2 className="font-[500] !text-[26px]">
+            {language === "en"
+              ? val.enTitle
+              : language === "ar"
+              ? val.arTitle
+              : val.krTitle}
+          </h2>
+          <div className="w-full flex flex-row justify-start items-center gap-5">
+            <img
+              className="w-[40px] h-[40px] object-cover rounded-full"
+              src={val.admin.imageURL}
+              alt="adminImage"
+            />
+            <span className="font-bold text-purple !text-[14px]">
+              author: {val.admin.name}
+            </span>
+          </div>
+          <Link
+            to={`/blogs/${val._id}`}
+            className="absolute bottom-[-60px] py-[10px] px-[20px] bg-purple rounded-sm !text-[12px] text-white w-fit cursor-pointer hover:bg-black hover:text-purple transition-all duration-300 font-bold"
+          >
             {file.blog.read}
           </Link>
         </div>
       </div>
     </div>
   );
-};
-
-export default BlogCard;
+}

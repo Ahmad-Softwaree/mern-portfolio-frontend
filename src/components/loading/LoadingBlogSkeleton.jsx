@@ -1,14 +1,19 @@
-import React from "react";
-import { Box, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
-const LoadingBlogSkeleton = () => {
-  return (
-    <>
-      <Box width="350px" padding="6" boxShadow="lg" bg="dark">
-        <SkeletonCircle size="300" />
-        <SkeletonText maxWidth="300" mt="5" noOfLines={5} spacing="5" skeletonHeight="3" />
-      </Box>
-    </>
-  );
+import React, { Fragment } from "react";
+import { Box, Skeleton } from "@chakra-ui/react";
+const LoadingBlogSkeleton = ({ card }) => {
+  return Array(card)
+    .fill(0)
+    .map((val, index) => {
+      return (
+        <div key={index} className="w-[325px] h-[470px] rounded-md">
+          <Box className="w-[325px] h-[470px] rounded-md bg-lightBlack relative">
+            <Skeleton className="w-[90%] right-0 left-0 h-[240px] bg-black absolute mx-auto top-[50px] " />
+            <Skeleton className="w-[180px] h-[40px] bg-black absolute left-5 bottom-[100px]" />
+            <Skeleton className="w-[200px] h-[30px] bg-black absolute left-5 bottom-[50px]" />
+          </Box>
+        </div>
+      );
+    });
 };
 
 export default LoadingBlogSkeleton;

@@ -1,84 +1,83 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Spinner } from "@chakra-ui/react";
-import { updateStack } from "../../actions/stack";
-const UpdateStack = ({ oldStack, id, updateStack, stack: { stacks, updateLoading }, setUpdate, admin: { user } }) => {
-  const [{ name, color }, setInputs] = useState({
-    name: oldStack.name,
-    color: oldStack.color,
+import React, { useContext, useState } from "react";
+import { AlertContext } from "../../context/AlertContext";
+import { StackContext } from "../../context/StackContext";
+import TextInput from "../inputs/TextInput";
+import { UiContext } from "../../context/UiContext";
+import { ADD_STACK, UPDATE_STACK } from "../../context/types/ui_types";
+import SpinnerLoading from "../global/SpinnerLoading";
+import { addStack, updateStack } from "../../context/actions/stackAction";
+export default function UpdateStack() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    dispatch: stackDispatch,
+    state: { updateStackLoading },
+  } = useContext(StackContext);
+
+  const {
+    dispatch: uiDispatch,
+    state: { val },
+  } = useContext(UiContext);
+  const [inputs, setInputs] = useState({
+    name: val.name,
+    color: val.color,
   });
-  const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13 && !e.shiftKey) {
-      updateStack({ stackId: id, name, color, setUpdate });
-    }
-  };
+  const { name, color } = inputs;
+  const onChange = (e) =>
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   return (
     <form
+      data-aos="fade-up"
       onSubmit={(e) => {
         e.preventDefault();
-        updateStack({ stackId: id, name, color, setUpdate });
+        updateStack(
+          stackDispatch,
+          alertDispatch,
+          uiDispatch,
+          inputs,
+          val._id,
+          setInputs
+        );
       }}
-      className="createStack position-fixed flex flex-column justify-center align-center w-100 gap-2"
+      className="fixed inset-0 m-auto p-5 rounded-lg bg-black w-[95%] max-w-[500px] h-fit text-white flex flex-col justify-left items-center gap-[30px] z-[1100] shadow-xl overflow-y-auto max-h-[600px]"
     >
-      <h1>Update Stack</h1>
-      <div className="inner">
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={name}
-          placeholder="Enter name of stack"
-          type="text"
-          name="name"
-          id="name"
-          className={name !== "" ? "activeInputBorder" : ""}
-        />
+      <h1 className="font-bold w-full text-center">Add Stack</h1>
 
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={color}
-          placeholder="Enter stack color"
-          name="color"
-          id="color"
-          className={color !== "" ? "activeInputBorder" : null}
-        />
-        <div className="publishAndCancel flex flex-row justify-center align-center gap-2">
-          <span
-            className="cancelLink"
-            onClick={() => {
-              setUpdate(false);
-            }}
-          >
-            Cancel
-          </span>
-          <button type="submit" disabled={updateLoading} className={name !== "" && color !== "" ? "activePublish" : "publish"}>
-            {updateLoading ? (
-              <div className="w-100 loadingSpinner">
-                <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
-              </div>
-            ) : (
-              "Publish"
-            )}
-          </button>
-        </div>
+      <TextInput
+        value={name}
+        onChange={onChange}
+        name={`name`}
+        className={`w-full`}
+        title={`Name`}
+      />
+      <TextInput
+        value={color}
+        onChange={onChange}
+        name={`color`}
+        className={`w-full`}
+        title={`Color`}
+      />
+
+      <div className="w-full flex flex-row justify-center items-center gap-5">
+        <button
+          type="button"
+          className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4 disabled:bg-gray-500"
+          onClick={() =>
+            uiDispatch({
+              type: UPDATE_STACK,
+            })
+          }
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={updateStackLoading}
+          className="my-5 !text-[14px] text-blue border-2 border-solid border-blue rounded-md transition-all duration-300 hover:bg-blue hover:text-white p-2 px-4 disabled:bg-gray-500"
+        >
+          {updateStackLoading ? <SpinnerLoading size={`30px`} /> : "Publish"}
+        </button>
       </div>
     </form>
   );
-};
-
-UpdateStack.propTypes = {
-  updateStack: PropTypes.func.isRequired,
-  stack: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  stack: state.stack,
-  admin: state.admin,
-});
-
-const mapDispatchToProps = { updateStack };
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateStack);
+}

@@ -4,32 +4,54 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { lazy, Suspense } from "react";
-import Fallback from "./components/Fallback.jsx";
-const UpdateBlog = lazy(() => import("./pages/admin/UpdateBlog.jsx"));
-const CreateBlog = lazy(() => import("./pages/admin/CreateBlog.jsx"));
-const Landing = lazy(() => import("./pages/landing/Landing.jsx"));
-const Blogs = lazy(() => import("./pages/blogs/Blogs"));
-const SingleBlogPage = lazy(() => import("./pages/singleBlog/SingleBlogPage"));
-const Panel = lazy(() => import("./pages/panel/Panel"));
-const Login = lazy(() => import("./pages/Login"));
-const AdminRoutes = lazy(() => import("./routes/AdminRoutes"));
-const Admins = lazy(() => import("./pages/admin/Admins"));
-import ErrorPage from "./error/ErrorPage";
+import NotFound from "./error/NotFound";
 import Error from "./error/Error.jsx";
 import Layout from "./components/layout/Layout.jsx";
 import Universal from "./components/Universal.jsx";
+import { lazy, Suspense, useEffect } from "react";
+import Fallback from "./pages/Fallback";
+import "aos/dist/aos.css";
+import AOS from "aos";
+import NormalRoute from "./routes/NormalRoute";
+import AdminPublicRoute from "./routes/AdminPublicRoute";
+import AdminRoutes from "./routes/AdminRoutes";
+import AdminLayout from "./components/layout/AdminLayout";
+
+const Landing = lazy(() => import("./pages/landing/Landing.jsx"));
+const BlogsPage = lazy(() => import("./pages/BlogsPage"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
+const ProjectsByTypePage = lazy(() => import("./pages/ProjectsByTypePage"));
+const ProjectsByStackPage = lazy(() => import("./pages/ProjectsByStackPage"));
+
+const OneBlog = lazy(() => import("./pages/OneBlog"));
+const OneProject = lazy(() => import("./pages/projects/OneProject"));
+
+const OneCertificate = lazy(() =>
+  import("./pages/certificates/OneCertificate")
+);
+
+// const UpdateBlog = lazy(() => import("./pages/admin/UpdateBlog.jsx"));
+const AddBlog = lazy(() => import("./pages/admin/AddBlog.jsx"));
+const Panel = lazy(() => import("./pages/admin/Panel"));
+const Login = lazy(() => import("./pages/Login"));
+
+// const AdminRoutes = lazy(() => import("./routes/AdminRoutes"));
+// const Admins = lazy(() => import("./pages/admin/Admins"));
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Universal />}>
+    <Route element={<Universal />} errorElement={<Error />}>
       {/* home route */}
       <Route
         path="/"
         element={<Layout isHome={true} />}
         errorElement={<Error />}
       >
-        <Route index element={<Landing />} errorElement={<Error />} />
+        <Route
+          index
+          element={<NormalRoute Component={Landing} />}
+          errorElement={<Error />}
+        />
       </Route>
       {/* blogs routes */}
       <Route
@@ -37,38 +59,91 @@ const routes = createBrowserRouter(
         element={<Layout isHome={false} />}
         errorElement={<Error />}
       >
-        {/* single blog  route */}
-        <Route index element={<Blogs />} errorElement={<Error />} />
         <Route
-          path=":id"
-          element={<SingleBlogPage errorElement={<Error />} />}
+          index
+          element={<NormalRoute Component={BlogsPage} />}
+          errorElement={<Error />}
+        />
+
+        <Route
+          path=":blog_id"
+          element={<NormalRoute Component={OneBlog} />}
+          errorElement={<Error />}
         />
       </Route>
-      <Route path="/login" element={<Login />} errorElement={<Error />} />
-      <Route element={<AdminRoutes layout={true} />} errorElement={<Error />}>
-        <Route path="/panel" element={<Panel />} errorElement={<Error />} />
-        <Route path="/admins" element={<Admins />} errorElement={<Error />} />
-      </Route>
-      <Route element={<AdminRoutes layout={false} />} errorElement={<Error />}>
+      <Route
+        path="/projects"
+        element={<Layout isHome={false} />}
+        errorElement={<Error />}
+      >
         <Route
-          path="/panel/create_blog"
-          element={<CreateBlog />}
+          index
+          element={<NormalRoute Component={ProjectsPage} />}
           errorElement={<Error />}
         />
         <Route
-          path="/panel/update_blog/:blog_id"
-          element={<UpdateBlog />}
+          path="stack/:stack_id"
+          element={<NormalRoute Component={ProjectsByStackPage} />}
+          errorElement={<Error />}
+        />
+        <Route
+          path="type/:type_id"
+          element={<NormalRoute Component={ProjectsByTypePage} />}
+          errorElement={<Error />}
+        />
+        <Route
+          path=":project_id"
+          element={<NormalRoute Component={OneProject} />}
           errorElement={<Error />}
         />
       </Route>
 
-      {/* page 404 route */}
-      <Route path="*" element={<ErrorPage />} />
+      <Route
+        path="/certificates"
+        element={<Layout isHome={false} />}
+        errorElement={<Error />}
+      >
+        <Route
+          path=":certificate_id"
+          element={<NormalRoute Component={OneCertificate} />}
+          errorElement={<Error />}
+        />
+      </Route>
+      <Route
+        path="/login"
+        element={<AdminPublicRoute Component={Login} />}
+        errorElement={<Error />}
+      />
+      <Route element={<AdminLayout />} errorElement={<Error />}>
+        <Route
+          path="/panel"
+          element={<AdminRoutes Component={Panel} />}
+          errorElement={<Error />}
+        />
+        {/* <Route path="/admins" element={<Admins />} errorElement={<Error />} /> */}
+      </Route>
+
+      <Route element={<AdminLayout layout={false} />} errorElement={<Error />}>
+        <Route
+          path="/panel/create_blog"
+          element={<AdminRoutes Component={AddBlog} />}
+          errorElement={<Error />}
+        />
+        {/* <Route
+          path="/panel/update_blog/:blog_id"
+          element={<UpdateBlog />}
+          errorElement={<Error />}
+        /> */}
+      </Route>
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <Suspense fallback={<Fallback />}>
       <RouterProvider router={routes} />

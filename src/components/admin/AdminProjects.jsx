@@ -1,82 +1,102 @@
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { getAllProjects } from "../../actions/project";
-import { Spinner } from "@chakra-ui/react";
+import React, { useContext, useEffect } from "react";
+import {
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { AlertContext } from "../../context/AlertContext";
+import { ProjectContext } from "../../context/ProjectContext";
+import TableSkeleton from "../loading/TableSkeleton";
+import NoData from "../global/NoData";
+import RefreshData from "../global/RefreshData";
+import { UiContext } from "../../context/UiContext";
+import { ADD_PROJECT } from "../../context/types/ui_types";
+import { getAllProjects } from "../../context/actions/projectAction";
 import AdminProject from "./AdminProject";
-import Opacity from "../Opacity";
-import CreateProject from "./CreateProject";
+export default function AdminProjects() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const { dispatch: uiDispatch } = useContext(UiContext);
+  const {
+    dispatch: projectDispatch,
+    state: { projects, getProjectsLoading },
+  } = useContext(ProjectContext);
 
-export const AdminProjects = ({ project: { projects, projectLoading }, getAllProjects }) => {
-  const [add, setAdd] = useState(false);
   useEffect(() => {
-    getAllProjects({});
-  }, []);
+    getAllProjects(projectDispatch, alertDispatch);
+  }, [projectDispatch]);
   return (
-    <div className="admin_projects  flex flex-column justify-center align-center gap-1">
-      <div className="flex flex-row justify-center align-center gap-1 w-100">
-        <h1>Projects</h1>
-        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
-          <i className="fa-solid fa-upload"></i>
-          <span>Upload</span>
+    <div
+      data-aos="fade-left"
+      data-aos-offset="-300"
+      className="w-full flex flex-col justify-left items-center gap-10 bg-black p-5 rounded-lg shadow-xl"
+    >
+      <div className="flex flex-row justify-between items-center w-full gap-5 text-white">
+        <div className="flex flex-row justify-end items-center gap-5">
+          <h1 className="font-[500] lg:!text-[24px] md:!text-[22px]">
+            Project
+          </h1>
+          <RefreshData
+            setter={() => getAllProjects(projectDispatch, alertDispatch)}
+          />
+        </div>
+        <button
+          onClick={() =>
+            uiDispatch({
+              type: ADD_PROJECT,
+            })
+          }
+          className="p-1 px-6 rounded-md border-2 border-solid border-purple text-purple transition-all duration-300 hover:text-white hover:bg-purple flex flex-row justify-center items-center gap-3"
+        >
+          <i className="fa-brands fa-plus"></i>
+          <span className="!text-[14px]">Add New</span>
         </button>
       </div>
 
-      {add && (
-        <>
-          <Opacity />
-          <CreateProject setAdd={setAdd} />
-        </>
+      {getProjectsLoading ? (
+        <TableSkeleton cards={8} />
+      ) : projects.length > 0 ? (
+        <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
+          <Table variant="striped" colorScheme="black">
+            <TableCaption color={`white`}>Projects</TableCaption>
+            <Thead>
+              <Tr borderRadius={`10px`}>
+                <Th color={`white`} className="text-white">
+                  Id
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Title
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Type
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Image
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Date
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Stack
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Operation
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {projects.map((val, index) => {
+                return <AdminProject key={index} index={index + 1} val={val} />;
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <NoData />
       )}
-
-      {projectLoading && <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} />}
-      {!projectLoading && projects.length > 0 && (
-        <div className="projects w-100 flex flex-column justify-left align-center gap-1">
-          <div className="projectCard blogTable flex flex-row justify-between align-center w-100">
-            <span className="tableIndex">Id</span>
-            <span className="tableIndex">Title</span>
-
-            <div className="flex flex-row justify-center align-center gap-2">
-              <span className="tableOperation">Update</span>
-              <span className="tableOperation">Delete</span>
-            </div>
-          </div>
-          <div className="theProjects flex flex-column justify-left align-center gap-1 w-100">
-            {projects?.map((project, index) => {
-              return (
-                <AdminProject
-                  index={index}
-                  key={index}
-                  id={project._id}
-                  enTitle={project.enTitle}
-                  krTitle={project.krTitle}
-                  arTitle={project.arTitle}
-                  enType={project.enType}
-                  krType={project.krType}
-                  arType={project.arType}
-                  image={project.image}
-                  stacks={project.stacks}
-                  url={project.url}
-                />
-              );
-            })}
-          </div>
-        </div>
-      )}
-      {!projectLoading && projects.length === 0 && <span className="no_project">There is no project</span>}
     </div>
   );
-};
-
-AdminProjects.propTypes = {
-  project: PropTypes.object.isRequired,
-  getAllProjects: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  project: state.project,
-});
-
-const mapDispatchToProps = { getAllProjects };
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminProjects);
+}

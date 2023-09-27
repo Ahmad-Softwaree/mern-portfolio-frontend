@@ -5,9 +5,13 @@
     "skills": "مهارات",
     "projects": "مشاریع",
     "works": "عمل",
-
-    "contact": "تواصل"
+    "contact": "تواصل",
+    "about": "حول",
+    "services": "الخدمات",
+    "certificate": "شهادات"
   },
+  "noData": "لم یتم العثور على ای شیء",
+
   "home": {
     "welcome": "أهلا بك في عالمي",
     "who": "أنا ",

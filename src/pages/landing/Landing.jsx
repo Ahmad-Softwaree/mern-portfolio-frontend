@@ -1,24 +1,36 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import Blogs from "./blogs/Blogs";
-import Contact from "./contact/Contact";
-import Home from "./home/Home";
-import Projects from "./projects/Projects";
-import Skills from "./skills/Skills";
-import Works from "./work/Works";
+import React, { useEffect } from "react";
+import Blogs from "./Blogs";
+import Contact from "./Contact";
+import Home from "./Home";
+import Projects from "./Projects";
+import Skills from "./Skills";
+import Works from "./Works";
 import ScrollReveal from "scrollreveal";
-import { connect } from "react-redux";
+import About from "./About";
+import Services from "./Services";
+import Certificates from "./Certificate";
 
-const Landing = ({ language: { language, file } }) => {
+const Landing = () => {
   //scroll nice animation
 
   useEffect(() => {
-    const pageString = ["home", "blogs", "skills", "projects", "works", "contact"];
+    const pageString = [
+      "home",
+      "blogs",
+      "about",
+      "services",
+      "skills",
+      "projects",
+      "certificate",
+      "works",
+      "contact",
+    ];
     pageString.forEach((page, index) => {
       ScrollReveal().reveal(`.${page}`, {
-        duration: 1000,
+        duration: 2000,
         origin: "bottom",
-        distance: "20px",
+        distance: "40px",
+        viewOffset: "150px",
         reverse: true,
         opacity: 1,
       });
@@ -26,23 +38,20 @@ const Landing = ({ language: { language, file } }) => {
   }, []);
 
   return (
-    <div className="landing w-100 p-0 m-0 flex flex-column justify-center align-center">
-      <Home file={file} />
-      <Blogs language={language} file={file} />
-      <Skills language={language} file={file} />
-      <Projects language={language} file={file} />
-      <Works language={language} file={file} />
-      <Contact file={file} />
+    <div
+      className={`w-full min-h-screen flex flex-col justify-left items-center pt-[60px]`}
+    >
+      <Home />
+      <Blogs />
+      <About />
+      <Services />
+      <Skills />
+      <Projects />
+      <Certificates />
+      <Works />
+      <Contact />
     </div>
   );
 };
 
-Landing.propTypes = {
-  language: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  language: state.language,
-});
-
-export default connect(mapStateToProps, {})(Landing);
+export default Landing;

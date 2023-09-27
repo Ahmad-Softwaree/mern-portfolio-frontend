@@ -1,81 +1,104 @@
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { getAllWorks } from "../../actions/work";
-import { Spinner } from "@chakra-ui/react";
-import Opacity from "../Opacity";
-import CreateWork from "./CreateWork";
+import React, { useContext, useEffect } from "react";
+import {
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { AlertContext } from "../../context/AlertContext";
+import { WorkContext } from "../../context/WorkContext";
+import TableSkeleton from "../loading/TableSkeleton";
+import NoData from "../global/NoData";
+import RefreshData from "../global/RefreshData";
+import { UiContext } from "../../context/UiContext";
+import { ADD_WORK } from "../../context/types/ui_types";
+import { getAllWorks } from "../../context/actions/workAction";
 import AdminWork from "./AdminWork";
+export default function AdminWorks() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const { dispatch: uiDispatch } = useContext(UiContext);
+  const {
+    dispatch: workDispatch,
+    state: { works, getWorksLoading },
+  } = useContext(WorkContext);
 
-export const AdminWorks = ({ work: { works, workLoading }, getAllWorks }) => {
-  const [add, setAdd] = useState(false);
   useEffect(() => {
-    getAllWorks({});
-  }, []);
+    getAllWorks(workDispatch, alertDispatch);
+  }, [workDispatch]);
   return (
-    <div className="admin_works  flex flex-column justify-center align-center gap-1">
-      <div className="flex flex-row justify-center align-center gap-1 w-100">
-        <h1>Works</h1>
-        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
-          <i className="fa-solid fa-upload"></i>
-          <span>Upload</span>
+    <div
+      data-aos="fade-left"
+      data-aos-offset="-300"
+      className="w-full flex flex-col justify-left items-center gap-10 bg-black p-5 rounded-lg shadow-xl"
+    >
+      <div className="flex flex-row justify-between items-center w-full gap-5 text-white">
+        <div className="flex flex-row justify-end items-center gap-5">
+          <h1 className="font-[500] lg:!text-[24px] md:!text-[22px]">Works</h1>
+          <RefreshData
+            setter={() => getAllWorks(workDispatch, alertDispatch)}
+          />
+        </div>
+        <button
+          onClick={() =>
+            uiDispatch({
+              type: ADD_WORK,
+            })
+          }
+          className="p-1 px-6 rounded-md border-2 border-solid border-purple text-purple transition-all duration-300 hover:text-white hover:bg-purple flex flex-row justify-center items-center gap-3"
+        >
+          <i className="fa-brands fa-plus"></i>
+          <span className="!text-[14px]">Add New</span>
         </button>
       </div>
 
-      {add && (
-        <>
-          <Opacity />
-          <CreateWork setAdd={setAdd} />
-        </>
-      )}
+      {getWorksLoading ? (
+        <TableSkeleton cards={8} />
+      ) : works.length > 0 ? (
+        <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
+          <Table variant="striped" colorScheme="black">
+            <TableCaption color={`white`}>Works</TableCaption>
+            <Thead>
+              <Tr borderRadius={`10px`}>
+                <Th color={`white`} className="text-white">
+                  Id
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Title
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Company
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Image
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Date
+                </Th>
+                <Th color={`white`} className="text-white">
+                  Start
+                </Th>
+                <Th color={`white`} className="text-white">
+                  End
+                </Th>
 
-      {workLoading && <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} />}
-      {!workLoading && works.length > 0 && (
-        <div className="works w-100 flex flex-column justify-left align-center gap-2">
-          <div className="workCard workTable flex flex-row justify-between align-center w-100">
-            <span className="tableIndex">Id</span>
-            <span className="tableIndex">Company</span>
-
-            <div className="flex flex-row justify-center align-center gap-2">
-              <span className="tableOperation">Update</span>
-              <span className="tableOperation">Delete</span>
-            </div>
-          </div>
-          <div className="theProjects flex flex-column justify-left align-center gap-1 w-100">
-            {works?.map((work, index) => {
-              return (
-                <AdminWork
-                  index={index}
-                  key={index}
-                  id={work._id}
-                  enTitle={work.enTitle}
-                  krTitle={work.krTitle}
-                  arTitle={work.arTitle}
-                  company={work.company}
-                  from={work.from}
-                  to={work.to}
-                  image={work.image}
-                  url={work.url}
-                />
-              );
-            })}
-          </div>
-        </div>
+                <Th color={`white`} className="text-white">
+                  Operation
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {works.map((val, index) => {
+                return <AdminWork key={index} index={index + 1} val={val} />;
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <NoData />
       )}
-      {!workLoading && works.length === 0 && <span className="no_project">There is no work</span>}
     </div>
   );
-};
-
-AdminWorks.propTypes = {
-  work: PropTypes.object.isRequired,
-  getAllWorks: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  work: state.work,
-});
-
-const mapDispatchToProps = { getAllWorks };
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminWorks);
+}

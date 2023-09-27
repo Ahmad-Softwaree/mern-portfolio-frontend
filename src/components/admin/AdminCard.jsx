@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import DeleteAdmin from "./DeleteAdmin";
 import Opacity from "../Opacity";
 import UpdateAdmin from "./UpdateAdmin";
@@ -12,14 +11,24 @@ export const AdminCard = ({ user }) => {
     <>
       {wantToDelete && (
         <>
-          <DeleteAdmin setWantToDelete={setWantToDelete} id={user._id} image={user.image} />
+          <DeleteAdmin
+            setWantToDelete={setWantToDelete}
+            id={user._id}
+            image={user.image}
+          />
           <Opacity />
         </>
       )}
       {update && (
         <>
           <Opacity />
-          <UpdateAdmin name={user.name} email={user.email} id={user._id} oldImage={user.image} setUpdate={setUpdate} />
+          <UpdateAdmin
+            name={user.name}
+            email={user.email}
+            id={user._id}
+            oldImage={user.image}
+            setUpdate={setUpdate}
+          />
         </>
       )}
       <div className="admin_card flex flex-row justify-between align-center">

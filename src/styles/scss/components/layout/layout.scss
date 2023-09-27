@@ -21,7 +21,7 @@
         li {
           min-height: 80px;
           font-size: 18px;
-          font-weight: bold;
+          font-weight: lighter;
           list-style-type: none;
           span {
             padding-inline: 20px;
@@ -123,48 +123,6 @@
       }
     }
 
-    .mobileNav {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      z-index: 999;
-      display: none !important;
-      position: absolute;
-      top: 5rem;
-      right: 0;
-      left: 0;
-      background-color: colors.$black;
-      transition: all 200ms ease-in-out;
-
-      ul {
-        padding-right: 0 !important;
-        padding: 20px 0;
-        li {
-          text-align: center;
-          width: 100%;
-          span {
-            font-size: 16px !important;
-            width: 100% !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-        }
-      }
-    }
-    .hide {
-      overflow: hidden;
-      height: 0;
-      scale: 0;
-    }
-    .show {
-      overflow: hidden;
-      height: fit-content;
-      scale: 1;
-    }
-
     .humb {
       display: none;
       cursor: pointer;
@@ -198,6 +156,62 @@
         transform: rotate(-45deg) translateY(-14px);
       }
     }
+  }
+
+  .mobileNav {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    min-width: 200px;
+    height: 100%;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: colors.$black;
+    transition: all 400ms ease-in-out;
+    border-right: 2px solid colors.$purple;
+    ul {
+      padding-right: 0 !important;
+      padding: 20px 0;
+      .activeNav {
+        position: relative;
+        color: colors.$purple;
+        transition: all 200ms ease;
+        border-bottom: 2px solid colors.$purple;
+      }
+      li:hover {
+        position: relative;
+        color: colors.$purple;
+        transition: all 200ms ease;
+        border-bottom: 2px solid colors.$purple;
+      }
+
+      li {
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+        color: colors.$white;
+        transition: all 400ms linear;
+        border: 2px solid colors.$black;
+        span {
+          font-size: 16px !important;
+          width: 100% !important;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+        }
+      }
+    }
+  }
+  .hide {
+    left: -400px;
+  }
+  .show {
+    left: 0;
   }
 
   .footer {

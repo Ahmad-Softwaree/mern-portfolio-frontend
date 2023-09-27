@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect, useDispatch } from "react-redux";
 import { updateAdmin } from "../../actions/admin";
 import { ADMIN_UPDATE_IMAGE } from "../../actions/types";
 import { Spinner } from "@chakra-ui/react";
 
-const UpdateAdmin = ({ name, email, id, image, oldImage, updateAdmin, admin: { users, updateLoading }, setUpdate, admin: { user } }) => {
+const UpdateAdmin = ({
+  name,
+  email,
+  id,
+  image,
+  oldImage,
+  updateAdmin,
+  admin: { users, updateLoading },
+  setUpdate,
+  admin: { user },
+}) => {
   const [imageChanged, setImageChanged] = useState(false);
 
   const [inputs, setInputs] = useState({
@@ -15,7 +24,8 @@ const UpdateAdmin = ({ name, email, id, image, oldImage, updateAdmin, admin: { u
   });
 
   const dispatch = useDispatch();
-  const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const onChange = (e) =>
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   const onKeyDown = (e) => {
     if (e.keyCode === 13 && !e.shiftKey) {
       updateAdmin({
@@ -46,12 +56,12 @@ const UpdateAdmin = ({ name, email, id, image, oldImage, updateAdmin, admin: { u
           imageChanged,
         });
       }}
-      className="createAdmin position-fixed flex flex-column justify-left align-center w-100 gap-2 update"
+      className="createAdmin position-fixed flex flex-col justify-left align-center w-full gap-2 update"
     >
       <h1>update Admin</h1>
 
       <div className="inner">
-        <div className="fileInputDiv flex flex-column justify-center align-center gap-1">
+        <div className="fileInputDiv flex flex-col justify-center align-center gap-1">
           {!image.updateAdmin ? (
             <>
               <input
@@ -70,16 +80,27 @@ const UpdateAdmin = ({ name, email, id, image, oldImage, updateAdmin, admin: { u
 
               <img className="URLImage" src={`${oldImage}`} alt="imageUpload" />
 
-              <label className="blogImageUploaderLabel flex justify-center align-center flex-row" htmlFor="updateAdmin">
+              <label
+                className="blogImageUploaderLabel flex justify-center align-center flex-row"
+                htmlFor="updateAdmin"
+              >
                 <div className="editButton flex flex-row align-center  justify-center">
-                  <img src="/images/edit.svg" alt="editImage" className="editImage" />
+                  <img
+                    src="/images/edit.svg"
+                    alt="editImage"
+                    className="editImage"
+                  />
                   <span>Edit</span>
                 </div>
               </label>
             </>
           ) : (
             <div className="URLImage position-relative">
-              <img className="URLImage" src={URL.createObjectURL(image.updateAdmin)} alt="imageUpload" />
+              <img
+                className="URLImage"
+                src={URL.createObjectURL(image.updateAdmin)}
+                alt="imageUpload"
+              />
               <span
                 onClick={() => {
                   dispatch({ type: ADMIN_UPDATE_IMAGE, payload: null });
@@ -127,10 +148,14 @@ const UpdateAdmin = ({ name, email, id, image, oldImage, updateAdmin, admin: { u
           <button
             type="submit"
             disabled={updateLoading}
-            className={inputs.name !== "" && inputs.email !== "" ? "activePublish" : "publish"}
+            className={
+              inputs.name !== "" && inputs.email !== ""
+                ? "activePublish"
+                : "publish"
+            }
           >
             {updateLoading ? (
-              <div className="w-100 loadingSpinner">
+              <div className="w-full loadingSpinner">
                 <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
               </div>
             ) : (
@@ -142,18 +167,3 @@ const UpdateAdmin = ({ name, email, id, image, oldImage, updateAdmin, admin: { u
     </form>
   );
 };
-
-UpdateAdmin.propTypes = {
-  updateAdmin: PropTypes.func.isRequired,
-  image: PropTypes.object.isRequired,
-  admin: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  image: state.image,
-  admin: state.admin,
-});
-
-const mapDispatchToProps = { updateAdmin };
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateAdmin);

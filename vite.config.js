@@ -2,6 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path-browserify";
 // https://vitejs.dev/config/
+
+//http://localhost:3001
+//https://api.ahmad-software.com
+
 export default defineConfig({
   plugins: [react()],
   build: {

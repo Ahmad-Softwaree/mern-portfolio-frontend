@@ -1,40 +1,38 @@
-import PropTypes from "prop-types";
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import Opacity from "../Opacity";
-import WantToDelete from "./WantToDelete";
-import { Link } from "react-router-dom";
-export const AdminBlog = ({ index, id, enTitle, arTitle, krTitle, enBody, krBody, arBody, image }) => {
-  const [wantToDelete, setWantToDelete] = useState(false);
+import React, { Fragment, useState } from "react";
+import { Tr, Td } from "@chakra-ui/react";
+import DateMoment from "../global/DateMoment";
+export default function AdminBlog({ val, index }) {
   return (
-    <>
-      {wantToDelete && (
-        <>
-          <Opacity />
-          <WantToDelete setWantToDelete={setWantToDelete} id={id} image={image} method={`blog`} />
-        </>
-      )}
-
-      <div className="blogCard flex flex-row justify-between align-center w-100">
-        <span className="tableIndex">{index}</span>
-        <span className="tableIndex">{enTitle}</span>
-        <div className="flex flex-row justify-center align-center gap-2">
-          <Link to={`update_blog/${id}`} className="tableOperation">
-            <i className="fa-solid fa-pen-to-square"></i>
-          </Link>
-          <span onClick={() => setWantToDelete(true)} className="tableOperation">
-            <i className="fa-solid fa-trash"></i>
+    <Fragment key={index}>
+      <Tr borderRadius={`10px`}>
+        <Td>{index}</Td>
+        <Td>{val.enTitle}</Td>
+        <Td>
+          <img
+            className="w-[100px] h-[60px] object-cover rounded-md"
+            src={val.imageURL}
+            alt=""
+          />
+        </Td>
+        <Td>
+          <DateMoment date={val.createdAt} />
+        </Td>
+        <Td>
+          <span className="p-2 rounded-md border-2 border-solid border-blue text-blue !text-[14px] transition-all duration-300 hover:bg-blue hover:text-black cursor-pointer">
+            {val.categories[0]?.category.enName}
           </span>
-        </div>
-      </div>
-    </>
+        </Td>
+        <Td>
+          <div className="flex flex-row justify-start items-center gap-3">
+            <span className="p-1 rounded-full px-2 border-2 border-solid border-yellow text-yellow transition-all duration-300 hover:bg-yellow hover:text-white cursor-pointer !text-[12px]">
+              <i className="fa-solid fa-pen"></i>
+            </span>
+            <span className="p-1 rounded-full px-2 border-2 border-solid border-purple text-purple transition-all duration-300 hover:bg-purple hover:text-white cursor-pointer !text-[12px]">
+              <i className="fa-solid fa-trash"></i>
+            </span>
+          </div>
+        </Td>
+      </Tr>
+    </Fragment>
   );
-};
-
-AdminBlog.propTypes = {};
-
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminBlog);
+}

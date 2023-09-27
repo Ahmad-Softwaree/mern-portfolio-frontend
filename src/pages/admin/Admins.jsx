@@ -5,7 +5,7 @@ import { Box, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 import { getAllAdmins } from "../../actions/admin";
 import AdminCard from "../../components/admin/AdminCard";
 import Opacity from "../../components/Opacity";
-import CreateAdmin from "../../components/admin/CreateAdmin";
+import AddAdmin from "../../components/admin/AddAdmin";
 export const Admins = ({ admin: { users, usersLoading }, getAllAdmins }) => {
   const [add, setAdd] = useState(false);
   useEffect(() => {
@@ -14,18 +14,21 @@ export const Admins = ({ admin: { users, usersLoading }, getAllAdmins }) => {
 
   return (
     <section className="admins_page">
-      <div className="flex flex-row justify-center align-center gap-1 w-100">
+      <div className="flex flex-row justify-center align-center gap-1 w-full">
         <h1>Admins</h1>
-        <button className="uploadButton flex flex-row justify-center align-center" onClick={() => setAdd(true)}>
+        <button
+          className="uploadButton flex flex-row justify-center align-center"
+          onClick={() => setAdd(true)}
+        >
           <i className="fa-solid fa-upload"></i>
-          <span>Create</span>
+          <span>Add</span>
         </button>
       </div>
 
       {add && (
         <>
           <Opacity />
-          <CreateAdmin setAdd={setAdd} />
+          <AddAdmin setAdd={setAdd} />
         </>
       )}
 
@@ -39,7 +42,14 @@ export const Admins = ({ admin: { users, usersLoading }, getAllAdmins }) => {
           bg="white"
         >
           <SkeletonCircle size="50" />
-          <SkeletonText width="100%" maxWidth="200" mt="5" noOfLines={4} spacing="3" skeletonHeight="2" />
+          <SkeletonText
+            width="100%"
+            maxWidth="200"
+            mt="5"
+            noOfLines={4}
+            spacing="3"
+            skeletonHeight="2"
+          />
         </Box>
       )}
       {!usersLoading && users.length > 0 && (

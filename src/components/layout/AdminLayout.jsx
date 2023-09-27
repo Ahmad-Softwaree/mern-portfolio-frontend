@@ -1,56 +1,59 @@
-import PropTypes from "prop-types";
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { getStorageUsage, logout } from "../../actions/admin";
-export const AdminLayout = ({ getStorageUsage, logout, user, admin: { storageSize, storageSizeLoading } }) => {
+import React, { Fragment, useContext } from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { adminLogout } from "../../context/actions/adminAction";
+import { AlertContext } from "../../context/AlertContext";
+import { AdminContext } from "../../context/AdminContext";
+import SpinnerLoading from "../global/SpinnerLoading";
+export default function AdminLayout() {
   const navigate = useNavigate();
-  useEffect(() => {
-    getStorageUsage();
-  }, []);
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    dispatch: adminDispatch,
+    state: { logoutLoading, admin },
+  } = useContext(AdminContext);
+
   return (
-    <header className="panel_header w-100 position-relative flex flex-row justify-center align-center">
-      <h1>Admin Panel</h1>
-      <div className="admin_left_panel flex position-fixed left-0 flex-column justify-left align-center w-100 ">
-        <div className="admin_left_panel_three flex flex-row justify-center align-center gap-1 w-100 p-1">
-          <button className="admin_logout" onClick={() => logout({ navigate })}>
-            <i className="fa-solid fa-right-from-bracket"></i>
-          </button>
-          <NavLink to={`/`} className="admin_getOut">
+    <Fragment>
+      <aside className="fixed w-fit bg-black z-[900] left-0 top-0 bottom-0 h-full p-5 text-white flex flex-col justify-between items-center gap-[30px] shadow-xl">
+        <img
+          alt="Admin Image"
+          className="w-[40px] h-[40px] rounded-full object-cover border-2 border-solid border-purple"
+          src={`${admin?.imageURL}`}
+        />
+        <div className="flex flex-col justify-center items-center gap-5">
+          <NavLink
+            to={`/`}
+            className="admin_link p-2 transition-all duration-300 border-2 border-solid border-green hover:bg-green rounded-full text-white !text-[16px] px-3"
+          >
             <i className="fa-solid fa-door-open"></i>
           </NavLink>
-          <img alt="Admin Image" className="admin_profile" src={`${user.image}`} />
-        </div>
 
-        <NavLink to={`/panel`} className="admin_add">
-          <i className="fa-solid fa-database"></i>
-          <span>Database</span>
-        </NavLink>
-        <NavLink to={`/admins`} className="admins">
-          <i className="fa-solid fa-users"></i>
-          <span>Admins</span>
-        </NavLink>
-        <div className="storage flex flex-row justify-left align-center gap-1 flex-wrap">
-          <i className="fa-solid fa-fire"></i>
-          <div className="storageOuter">
-            <div style={{ width: `${storageSize * 10}px` }} className="storageInner"></div>
-          </div>
-          <span>firebase storage {storageSize} MB / 5GB</span>
+          <NavLink
+            to={`/panel`}
+            className="admin_link p-2 transition-all duration-300 border-2 border-solid border-green hover:bg-green rounded-full text-white !text-[16px] px-3"
+          >
+            <i className="fa-solid fa-database"></i>
+          </NavLink>
+          <NavLink
+            to={`/admins`}
+            className="admin_link p-2 transition-all duration-300 border-2 border-solid border-green hover:bg-green rounded-full text-white !text-[16px] px-3"
+          >
+            <i className="fa-solid fa-user-secret"></i>
+          </NavLink>
         </div>
-      </div>
-    </header>
+        <button
+          disabled={logoutLoading}
+          className="p-2 transition-all duration-300 border-2 border-solid border-purple hover:bg-purple cursor-pointer rounded-full text-white !text-[16px] px-3"
+          onClick={() => adminLogout(adminDispatch, alertDispatch, navigate)}
+        >
+          {logoutLoading ? (
+            <SpinnerLoading size={`30px`} />
+          ) : (
+            <i className="fa-solid fa-right-from-bracket"></i>
+          )}
+        </button>
+      </aside>
+      <Outlet />
+    </Fragment>
   );
-};
-
-AdminLayout.propTypes = {};
-
-const mapStateToProps = (state) => ({
-  admin: state.admin,
-});
-
-const mapDispatchToProps = {
-  getStorageUsage,
-  logout,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminLayout);
+}

@@ -1,53 +1,24 @@
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { connect, useDispatch } from "react-redux";
-import { loadUser, logout } from "../actions/admin";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Spinner } from "@chakra-ui/react";
-import { Navigate, Outlet } from "react-router-dom";
-import AdminLayout from "../components/layout/AdminLayout";
-import { ENGLISH } from "../actions/types";
-import Fallback from "../components/Fallback";
-import AdminBlogLayout from "../components/layout/AdminBlogLayout";
-export const AdminRoutes = ({ layout, loadUser, admin: { user, loading } }) => {
-  const location = useLocation();
-  const dispatch = useDispatch();
+import React, { useContext, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { AlertContext } from "../context/AlertContext";
+import { getAuthAdmin } from "../context/actions/adminAction";
+import { AdminContext } from "../context/AdminContext";
+import Fallback from "../pages/Fallback";
+
+export default function AdminRoutes({ Component }) {
+  const {
+    dispatch: adminDispatch,
+    state: { admin, loading, token },
+  } = useContext(AdminContext);
+
+  const { dispatch: alertDispatch } = useContext(AlertContext);
 
   useEffect(() => {
-    loadUser();
-    dispatch({
-      type: ENGLISH,
-    });
-  }, [location]);
+    getAuthAdmin(adminDispatch, alertDispatch);
+  }, [adminDispatch]);
 
-  //there must be user and not verified yet
-  return loading ? (
-    <div className="panelLoading flex flex-row justify-center items-center">
-      <Fallback />
-    </div>
-  ) : user && Object.keys(user)?.length !== 0 && !loading ? (
-    <>
-      {layout && <AdminLayout user={user} />}
-      {!layout && <AdminBlogLayout user={user} />}
-      <Outlet />
-    </>
-  ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
-  );
-};
-
-AdminRoutes.propTypes = {
-  admin: PropTypes.object.isRequired,
-  loadUser: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  admin: state.admin,
-});
-
-const mapDispatchToProps = {
-  loadUser,
-  logout,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminRoutes);
+  if (loading) return <Fallback />;
+  if (token === null || admin === null)
+    return <Navigate replace to={`/login`} />;
+  if (admin && token) return <Component />;
+}

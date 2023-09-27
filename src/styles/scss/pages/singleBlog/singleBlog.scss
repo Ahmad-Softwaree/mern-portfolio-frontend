@@ -32,7 +32,7 @@
       background: linear-gradient(145deg, #f81f01, #ee076e);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 700;
+      font-weight: 600;
       line-height: 190.9%;
     }
   }
@@ -68,7 +68,11 @@
     width: 100%;
     height: 600px;
     opacity: 0.9;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.8)
+    );
     z-index: 40;
   }
   .blogImage {
@@ -88,7 +92,11 @@
       left: 0;
       right: 0;
       height: 20%; /* Adjust the height as needed */
-      background: linear-gradient(to bottom, rgba(62, 62, 62, 0.2), rgba(49, 49, 49, 0.2));
+      background: linear-gradient(
+        to bottom,
+        rgba(62, 62, 62, 0.2),
+        rgba(49, 49, 49, 0.2)
+      );
     }
 
     &::after {
@@ -98,7 +106,11 @@
       left: 0;
       right: 0;
       height: 20%; /* Adjust the height as needed */
-      background: linear-gradient(to top, rgba(62, 62, 62, 0.5), rgba(255, 255, 255, 0));
+      background: linear-gradient(
+        to top,
+        rgba(62, 62, 62, 0.5),
+        rgba(255, 255, 255, 0)
+      );
     }
   }
   .karla {
@@ -128,7 +140,11 @@
       &:hover {
         .overBlog {
           opacity: 0.7;
-          background: linear-gradient(to bottom, rgba(249, 0, 77, 1), rgba(34, 34, 34, 1));
+          background: linear-gradient(
+            to bottom,
+            rgba(249, 0, 77, 1),
+            rgba(34, 34, 34, 1)
+          );
         }
       }
       .overBlog {
@@ -167,7 +183,11 @@
         height: 200px;
         width: 100%;
         &:hover {
-          background: linear-gradient(to bottom, rgba(249, 0, 77, 1), rgba(34, 34, 34, 1));
+          background: linear-gradient(
+            to bottom,
+            rgba(249, 0, 77, 1),
+            rgba(34, 34, 34, 1)
+          );
           .inner {
             top: 10%;
           }
@@ -350,7 +370,7 @@
     .idea {
       gap: 10px;
       font-size: 24px;
-      font-weight: 700;
+      font-weight: 600;
       border-bottom: 2px solid colors.$yellow;
       width: fit-content;
       margin: 8px;

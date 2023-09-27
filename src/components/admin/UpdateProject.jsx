@@ -1,279 +1,359 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
-import { updateProject } from "../../actions/project";
-import { Spinner } from "@chakra-ui/react";
-import { PROJECT_UPDATE_IMAGE } from "../../actions/types";
-const UpdateProject = ({
-  enTitle,
-  arTitle,
-  krTitle,
-  enType,
-  arType,
-  krType,
-  url,
-  id,
-  oldImage,
-  updateProject,
-  oldStacks,
-  image,
-  setUpdate,
-  stack,
-  project: { updateProjectLoading },
-}) => {
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { getAllStacks } from "../../context/actions/stackAction";
+import { addProject, updateProject } from "../../context/actions/projectAction";
+import { AlertContext } from "../../context/AlertContext";
+import { ProjectContext } from "../../context/ProjectContext";
+import { ImageContext } from "../../context/ImageContext";
+import TextInput from "../inputs/TextInput";
+import { StackContext } from "../../context/StackContext";
+import { UiContext } from "../../context/UiContext";
+import { UPDATE_PROJECT } from "../../context/types/ui_types";
+import SpinnerLoading from "../global/SpinnerLoading";
+import { PROJECT_IMAGE } from "../../context/types/image_types";
+import FileInput from "../inputs/FileInput";
+import { setAlert } from "../../context/actions/alertAction";
+import Git from "./Git";
+import { TypeContext } from "../../context/TypeContext";
+import { getAllTypes } from "../../context/actions/typeAction";
+import CustomTextArea from "../inputs/CustomTextArea";
+import FullDateInput from "../inputs/FullDateInput";
+export default function UpdateProject() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    dispatch: projectDispatch,
+    state: { updateProjectLoading },
+  } = useContext(ProjectContext);
+  const {
+    dispatch: stackDispatch,
+    state: { stacks, getStacksLoading },
+  } = useContext(StackContext);
+  const {
+    dispatch: typeDispatch,
+    state: { types, getTypesLoading },
+  } = useContext(TypeContext);
+  const {
+    dispatch: imageDispatch,
+    state: { projectImage, uploadProjectImageLoading },
+  } = useContext(ImageContext);
+  const {
+    dispatch: uiDispatch,
+    state: { val },
+  } = useContext(UiContext);
+  const [selectedStacks, setSelectedStacks] = useState(
+    val.stacks?.map((val) => ({
+      stack: val.stack?._id,
+    }))
+  );
+  const [selectedTypes, setSelectedTypes] = useState(
+    val.types?.map((val) => ({
+      type: val.type?._id,
+    }))
+  );
+
   const [imageChanged, setImageChanged] = useState(false);
-  const [stacks, setStacks] = useState(oldStacks);
-
+  const [gits, setGits] = useState(val.gits);
+  const [git, setGit] = useState("");
+  const [gitName, setGitName] = useState("");
   const [inputs, setInputs] = useState({
-    enTitle: enTitle,
-    arTitle: arTitle,
-    krTitle: krTitle,
-    enType: enType,
-    arType: arType,
-    krType: krType,
-    url: url,
+    enTitle: val.enTitle,
+    arTitle: val.arTitle,
+    krTitle: val.krTitle,
+    enDesc: val.enDesc,
+    arDesc: val.arDesc,
+    krDesc: val.krDesc,
+    url: val.url,
+    date: val.date,
   });
-  const dispatch = useDispatch();
-  const [hover, setHover] = useState("");
+  const { enTitle, arTitle, krTitle, enDesc, arDesc, krDesc, url, date } =
+    inputs;
+  const onChange = (e) =>
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const onChange = (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13 && !e.shiftKey) {
-      updateProject({
-        enTitle: inputs.enTitle,
-        arTitle: inputs.arTitle,
-        krTitle: inputs.krTitle,
-        enType: inputs.enType,
-        arType: inputs.arType,
-        krType: inputs.krType,
-        url: inputs.url,
-        image: image.updateProject,
-        projectId: id,
-        setUpdate,
-        oldImage,
-        setInputs,
-        imageChanged,
-        stacks,
-        setStacks,
-      });
-    }
-  };
+  useEffect(() => {
+    getAllStacks(stackDispatch, alertDispatch);
+  }, [stackDispatch]);
+
+  useEffect(() => {
+    getAllTypes(typeDispatch, alertDispatch);
+  }, [typeDispatch]);
 
   return (
     <form
+      data-aos="fade-up"
       onSubmit={(e) => {
         e.preventDefault();
-        updateProject({
-          enTitle: inputs.enTitle,
-          arTitle: inputs.arTitle,
-          krTitle: inputs.krTitle,
-          enType: inputs.enType,
-          arType: inputs.arType,
-          krType: inputs.krType,
-          url: inputs.url,
-          image: image.updateProject,
-          projectId: id,
-          setUpdate,
-          oldImage,
+        updateProject(
+          projectDispatch,
+          alertDispatch,
+          imageDispatch,
+          uiDispatch,
+          { ...inputs, stacks: selectedStacks, gits, types: selectedTypes },
+          val._id,
           setInputs,
+          projectImage,
+          val.imageURL,
+          val.imageName,
           imageChanged,
-          stacks,
-          setStacks,
-        });
+          setSelectedStacks,
+          setSelectedTypes,
+          setGits
+        );
       }}
-      className="createProject position-fixed flex flex-column justify-center align-center w-100 gap-2 update"
+      className="fixed inset-0 m-auto p-5 rounded-lg bg-black w-[95%] max-w-[500px] h-fit text-white flex flex-col justify-left items-center gap-[30px] z-[1100] shadow-xl overflow-y-auto max-h-[600px]"
     >
-      <h1>Update Project</h1>
-      <div className="fileInputDiv flex flex-column justify-center align-center gap-1">
-        {image.updateProject ? (
-          <div className="URLImage position-relative">
-            <img className="URLImage" src={URL.createObjectURL(image.updateProject)} alt="imageUpload" />
-            <span
-              onClick={() => {
-                dispatch({ type: BLOG_UPDATE_IMAGE, payload: null });
-                setImageChanged(false);
-              }}
-              className="position-absolute x"
-            >
-              <i className="fa-solid fa-xmark"></i>
-            </span>
-          </div>
-        ) : (
-          <>
-            <input
-              onChange={(e) => {
-                dispatch({
-                  type: PROJECT_UPDATE_IMAGE,
-                  payload: e.target.files[0],
-                });
-                setImageChanged(true);
-              }}
-              type="file"
-              name="project"
-              id="updateProject"
-              className="projectImage"
+      <h1 className="font-bold w-full text-center">Update Project</h1>
+      {val.imageURL && !imageChanged && (
+        <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
+          <img
+            className="w-full h-[200px] object-cover rounded-md"
+            src={val.imageURL}
+            alt="imageUpload"
+          />
+
+          <button
+            type="button"
+            onClick={() => {
+              setImageChanged(true);
+            }}
+            className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
+          >
+            Remove Old Project Image
+          </button>
+        </div>
+      )}
+
+      <div className="flex flex-col justify-left items-center gap-5 w-full">
+        {!projectImage && imageChanged ? (
+          <FileInput
+            title={`Project Image`}
+            value={""}
+            onChange={(e) => {
+              imageDispatch({
+                type: PROJECT_IMAGE,
+                payload: e.target.files[0],
+              });
+              setImageChanged(true);
+            }}
+            id={`projectImage`}
+            className={`w-full`}
+          />
+        ) : projectImage ? (
+          <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
+            <img
+              className="w-full h-[200px] object-cover rounded-md"
+              src={URL.createObjectURL(projectImage)}
+              alt="imageUpload"
             />
 
-            <img className="URLImage" src={`${oldImage}`} alt="imageUpload" />
-
-            <label
-              className="blogImageUploaderLabel projectImageUploaderLabel flex justify-center align-center flex-row"
-              htmlFor="updateProject"
+            <button
+              type="button"
+              onClick={() => {
+                imageDispatch({ type: PROJECT_IMAGE, payload: "" });
+                setImageChanged(false);
+              }}
+              className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
             >
-              <div className="editButton flex flex-row align-center  justify-center">
-                <img src="/images/edit.svg" alt="editImage" className="editImage" />
-                <span>Edit</span>
-              </div>
-            </label>
-          </>
-        )}
+              Remove Project Image
+            </button>
+          </div>
+        ) : null}
       </div>
-      <input
+      <TextInput
+        value={enTitle}
         onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputs.enTitle}
-        placeholder="Enter the English Title"
-        type="text"
-        name="enTitle"
-        id="enTitle"
-        className={inputs.enTitle !== "" ? "activeInputBorder" : ""}
+        name={`enTitle`}
+        className={`w-full`}
+        title={`English Title`}
       />
-      <input
+      <TextInput
+        value={arTitle}
         onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputs.arTitle}
-        placeholder="Enter the Arabic Title"
-        type="text"
-        name="arTitle"
-        id="arTitle"
-        className={inputs.arTitle !== "" ? "activeInputBorder" : ""}
-      />{" "}
-      <input
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputs.krTitle}
-        placeholder="Enter the Kurdish Title"
-        type="text"
-        name="krTitle"
-        id="krTitle"
-        className={inputs.krTitle !== "" ? "activeInputBorder" : ""}
+        name={`arTitle`}
+        className={`w-full`}
+        title={`Arabic Title`}
       />
-      <input
+      <TextInput
+        value={krTitle}
         onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputs.enType}
-        placeholder="enter english project type"
-        name="enType"
-        id="enType"
-        className={inputs.enType !== "" ? "activeInputBorder" : null}
+        name={`krTitle`}
+        className={`w-full`}
+        title={`Kurdish Title`}
       />
-      <input
+      <CustomTextArea
+        className={`w-full`}
+        title={`English Description`}
         onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputs.arType}
-        placeholder="enter arabic project type"
-        name="arType"
-        id="arType"
-        className={inputs.arType !== "" ? "activeInputBorder" : null}
+        name="enDesc"
+        value={enDesc}
       />
-      <input
+
+      <CustomTextArea
+        className={`w-full`}
+        title={`Arabic Description`}
         onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputs.krType}
-        placeholder="enter kurdish project type"
-        name="krType"
-        id="krType"
-        className={inputs.krType !== "" ? "activeInputBorder" : null}
+        name="arDesc"
+        value={arDesc}
       />
-      <input
+
+      <CustomTextArea
+        className={`w-full`}
+        title={`Kurdish Description`}
         onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputs.url}
-        placeholder="enter project url"
-        name="url"
-        id="url"
-        className={inputs.url !== "" ? "activeInputBorder" : null}
+        name="krDesc"
+        value={krDesc}
       />
-      <div className="flex flex-row justify-left align-center gap-1 w-100 flex-wrap">
-        {stack.stacks.map((val, index) => {
-          const isStackIncluded = stacks.some((item) => item.stack._id === val._id);
+
+      <TextInput
+        value={url}
+        onChange={onChange}
+        name={`url`}
+        className={`w-full`}
+        title={`Project URL`}
+      />
+
+      <FullDateInput
+        className={`w-full`}
+        value={val.date}
+        onChange={(date) => {
+          setInputs((prev) => ({ ...prev, date: date }));
+        }}
+      />
+      <TextInput
+        value={git}
+        onChange={(e) => setGit(e.target.value)}
+        name={`git`}
+        className={`w-full`}
+        title={`Git URL`}
+      />
+      <TextInput
+        value={gitName}
+        onChange={(e) => setGitName(e.target.value)}
+        name={`gitName`}
+        className={`w-full`}
+        title={`Git Name`}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          if (git === "" || gitName === "")
+            return setAlert(
+              projectDispatch,
+              alertDispatch,
+              null,
+              null,
+              "Select Git and Git name to add",
+              "error"
+            );
+          const isIncluded = gits.some((val) => val.git === git);
+          if (isIncluded) {
+            return setAlert(
+              projectDispatch,
+              alertDispatch,
+              null,
+              null,
+              "Git and Git name included",
+              "error"
+            );
+          } else {
+            setGits((prev) => [...prev, { git: git, name: gitName }]);
+            setGit("");
+            setGitName("");
+          }
+        }}
+        className="my-5 !text-[14px] text-blue border-2 border-solid border-blue rounded-md transition-all duration-300 hover:bg-blue hover:text-white p-2 px-4"
+      >
+        Add Git Link
+      </button>
+      <div className="flex flex-row justify-left items-center gap-5 w-full flex-wrap">
+        {gits?.map((val, index) => {
+          return <Git val={val} key={index} setGits={setGits} gits={gits} />;
+        })}
+      </div>
+      <h1 className="font-bold w-full text-left !text-[20px]">Select Stacks</h1>
+
+      <div className="flex flex-row justify-left items-center gap-5 w-full flex-wrap">
+        {stacks?.map((val, index) => {
+          const isStackIncluded = selectedStacks.some(
+            (item) => item.stack === val._id
+          );
           return (
             <div
               key={index}
-              onMouseEnter={() => setHover(val._id)}
-              onMouseLeave={() => setHover("")}
               onClick={() => {
                 if (isStackIncluded) {
-                  setStacks((prev) => prev.filter((one) => one.stack._id !== val._id));
+                  setSelectedStacks((prev) =>
+                    prev.filter((one) => one.stack !== val._id)
+                  );
                 } else {
-                  setStacks((prev) => [...prev, { stack: { _id: val._id } }]);
+                  setSelectedStacks((prev) => [...prev, { stack: val._id }]);
                 }
               }}
-              style={
-                isStackIncluded || hover === val._id
-                  ? { color: "white", border: `2px solid ${val.color}`, backgroundColor: val.color }
-                  : { color: val.color, border: `2px solid ${val.color}`, backgroundColor: "transparent" }
-              }
-              className="stack"
+              className={`!text-[14px] p-2 rounded-md border-2 border-solid border-blue transition-all duration-300  hover:bg-blue hover:text-black cursor-pointer ${
+                isStackIncluded ? "bg-blue text-black" : "text-blue"
+              }`}
             >
               {val.name}
             </div>
           );
         })}
       </div>
-      <div className="publishAndCancel flex flex-row justify-center align-center gap-2">
-        <span
-          className="cancelLink"
+      <h1 className="font-bold w-full text-left !text-[20px]">Select Types</h1>
+
+      <div className="flex flex-row justify-left items-center gap-5 w-full flex-wrap">
+        {types?.map((val, index) => {
+          const isTypeInclude = selectedTypes.some(
+            (item) => item.type === val._id
+          );
+          return (
+            <div
+              key={index}
+              onClick={() => {
+                if (isTypeInclude) {
+                  setSelectedTypes((prev) =>
+                    prev.filter((one) => one.type !== val._id)
+                  );
+                } else {
+                  setSelectedTypes((prev) => [...prev, { type: val._id }]);
+                }
+              }}
+              className={`!text-[14px] p-2 rounded-md border-2 border-solid border-blue transition-all duration-300  hover:bg-blue hover:text-black cursor-pointer ${
+                isTypeInclude ? "bg-blue text-black" : "text-blue"
+              }`}
+            >
+              {val.enName}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="w-full flex flex-row justify-center items-center gap-5">
+        <button
+          type="button"
+          className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4 disabled:bg-gray-500"
           onClick={() => {
-            setUpdate(false);
-            dispatch({ type: PROJECT_UPDATE_IMAGE, payload: null });
+            imageDispatch({
+              type: PROJECT_IMAGE,
+              payload: "",
+            });
+            uiDispatch({
+              type: UPDATE_PROJECT,
+            });
           }}
         >
           Cancel
-        </span>
+        </button>
         <button
           type="submit"
-          disabled={updateProjectLoading}
-          className={
-            inputs.enTitle !== "" &&
-            inputs.arTitle !== "" &&
-            inputs.krTitle !== "" &&
-            inputs.enType !== "" &&
-            inputs.arType !== "" &&
-            inputs.krType !== "" &&
-            inputs.url !== "" &&
-            (image.updateProject !== null || oldImage !== null)
-              ? "activePublish"
-              : "publish"
-          }
+          disabled={updateProjectLoading || uploadProjectImageLoading}
+          className="my-5 !text-[14px] text-blue border-2 border-solid border-blue rounded-md transition-all duration-300 hover:bg-blue hover:text-white p-2 px-4 disabled:bg-gray-500"
         >
-          {updateProjectLoading ? (
-            <div className="w-100 loadingSpinner">
-              <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
-            </div>
+          {updateProjectLoading || uploadProjectImageLoading ? (
+            <SpinnerLoading size={`30px`} />
           ) : (
-            "Update"
+            "Publish"
           )}
         </button>
       </div>
     </form>
   );
-};
-UpdateProject.propTypes = {
-  admin: PropTypes.object.isRequired,
-  project: PropTypes.object.isRequired,
-  image: PropTypes.object.isRequired,
-  stack: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  admin: state.admin,
-  project: state.project,
-  image: state.image,
-  stack: state.stack,
-});
-
-const mapDispatchToProps = { updateProject };
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateProject);
+}

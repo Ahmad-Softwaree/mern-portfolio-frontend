@@ -1,104 +1,66 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect, useDispatch } from "react-redux";
-import { login } from "../actions/admin";
-import { Spinner } from "@chakra-ui/react";
-import { ENGLISH } from "../actions/types";
-const Login = React.memo(({ login, admin: { loginLoading } }) => {
-  const [{ email, password }, setInputs] = useState({
+import React, { useState, useCallback, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { adminLogin } from "../context/actions/adminAction";
+import { AlertContext } from "../context/AlertContext";
+import { AdminContext } from "../context/AdminContext";
+import EmailInput from "../components/inputs/EmailInput";
+import PasswordInput from "../components/inputs/PasswordInput";
+import SpinnerLoading from "../components/global/SpinnerLoading";
+export default function Login() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    dispatch: adminDispatch,
+    state: { loginLoading },
+  } = useContext(AdminContext);
+  const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+  const { email, password } = inputs;
   const navigate = useNavigate();
-  const onChange = useCallback((e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })), [email, password]);
-  const dispatch = useDispatch();
-  const [show, setShow] = useState(false);
-  const onKeyDown = useCallback(
-    (e) => {
-      if (e.keyCode === 13 && !e.shiftKey) login({ email, password, navigate });
-    },
+  const onChange = useCallback(
+    (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })),
     [email, password]
   );
 
-  useEffect(() => {
-    dispatch({
-      type: ENGLISH,
-    });
-  }, []);
-
-  const animate = (e) => {
-    e.target.nextElementSibling.classList.toggle("animateInputTextFocus");
-  };
   return (
-    <div className="loginPage flex flex-row justify-center align-center w-100 position-relative">
-      <Link className="backToHome" to={`/`}>
-        <span>
-          <i className="fa-solid fa-backward"></i>
-        </span>
-      </Link>
+    <section
+      data-aos="fade-up"
+      className="w-full bg-black min-h-screen flex flex-row justify-center items-center"
+    >
       <form
+        data-aos="fade-right"
         onSubmit={(e) => {
           e.preventDefault();
-          login({ email, password, navigate });
+          adminLogin(adminDispatch, alertDispatch, inputs, navigate);
         }}
-        className="flex flex-column justify-center align-center w-100 gap-2 p-2"
+        className="bg-lightBlack p-5 rounded-lg text-white w-[95%] max-w-[600px] h-fit flex flex-col justify-center items-center gap-[30px] py-[50px]"
       >
-        <div className="loginBox flex flex-column justify-center align-center gap-2">
-          <h1>Admin Login</h1>
-          <div className="flex flex-row justify-left align-center w-100 position-relative">
-            <input
-              onChange={onChange}
-              onKeyDown={onKeyDown}
-              onBlur={animate}
-              onFocus={animate}
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Enter your email"
-              className="emailInput"
-            />
-            <span className="animateInputText position-absolute">Your Email:</span>
-          </div>
+        <h1 className="w-full text-center">Admin Login</h1>
+        <EmailInput
+          name={`email`}
+          value={email}
+          onChange={onChange}
+          title={`Email`}
+          className={`w-[300px]`}
+        />
 
-          <div className="w-100 flex flex-row justify-between align-center passwordInput position-relative">
-            <input
-              onChange={onChange}
-              onKeyDown={onKeyDown}
-              onBlur={animate}
-              onFocus={animate}
-              value={password}
-              placeholder="Enter the password"
-              type={show ? "text" : "password"}
-              name="password"
-              id="password"
-              className="w-100"
-            />
-            <span className="animateInputText position-absolute">Your Password:</span>
-            {!show ? (
-              <i onClick={() => setShow(true)} className="fa-solid fa-eye"></i>
-            ) : (
-              <i onClick={() => setShow(false)} className="fa-solid fa-eye-slash"></i>
-            )}
-          </div>
-          <button disabled={loginLoading} type="submit">
-            {loginLoading ? <Spinner minWidth={`20px`} minHeight={`20px`} size={`lg`} /> : "Login"}
-          </button>
-        </div>
+        <PasswordInput
+          name={`password`}
+          value={password}
+          onChange={onChange}
+          title={`Password`}
+          className={`w-[300px]`}
+        />
+
+        <button
+          className="p-2 px-6 rounded-md border-2 border-solid border-purple text-purple transition-all duration-300 hover:bg-purple hover:text-white cursor-pointer"
+          disabled={loginLoading}
+          type="submit"
+        >
+          {loginLoading ? <SpinnerLoading size={`30px`} /> : "Login"}
+        </button>
       </form>
-    </div>
+    </section>
   );
-});
-
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  admin: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  admin: state.admin,
-});
-
-const mapDispatchToProps = { login };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+}
