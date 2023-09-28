@@ -90,6 +90,15 @@ export const searchProjects = async (
     projectDispatch({
       type: GET_PROJECTS_START,
     });
+    if (search === "")
+      setAlert(
+        projectDispatch,
+        alertDispatch,
+        GET_PROJECTS_FAIL,
+        null,
+        "please enter something",
+        "error"
+      );
     const { data } = await api.get(`${SEARCH_PROJECT_URL}/${search}`);
     projectDispatch({
       type: GET_PROJECTS_SUCCESS,

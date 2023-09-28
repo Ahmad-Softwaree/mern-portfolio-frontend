@@ -17,7 +17,6 @@ export default function SearchBox({ setSearch, method }) {
         if (method === "blog") searchBlogs(blogDispatch, alertDispatch, input);
         else if (method === "project")
           searchProjects(projectDispatch, alertDispatch, input);
-
         setSearch(false);
       }}
       data-aos="fade-up"

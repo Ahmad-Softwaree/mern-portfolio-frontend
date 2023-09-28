@@ -84,6 +84,15 @@ export const searchBlogs = async (blogDispatch, alertDispatch, search) => {
     type: GET_BLOGS_START,
   });
   try {
+    if (search === "")
+      setAlert(
+        projectDispatch,
+        alertDispatch,
+        GET_PROJECTS_FAIL,
+        null,
+        "please enter something",
+        "error"
+      );
     const { data } = await api.get(`${SEARCH_BLOG_URL}/${search}`);
     blogDispatch({
       type: GET_BLOGS_SUCCESS,
