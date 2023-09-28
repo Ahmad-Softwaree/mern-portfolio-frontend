@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 export default function SkillCard({ val }) {
-  useEffect(() => {
-    console.log(val);
-  }, [val]);
   return (
     <div className="w-[150px] h-[250px] md:w-[200px] md:h-[300px] rounded-md cursor-pointer  p-5 transition-all flex flex-col justify-center items-center gap-3 border-niceBlack  duration-300 bg-black shadow-xl hover:border-purple  border-2 border-solid hover:scale-[1.1] hover:text-red">
       <img
