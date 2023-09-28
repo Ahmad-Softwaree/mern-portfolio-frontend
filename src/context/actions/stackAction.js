@@ -55,7 +55,6 @@ export const getOneStack = async (stackDispatch, alertDispatch, id) => {
       type: GET_ONE_STACK_START,
     });
     const { data } = await api.get(`${GET_ONE_STACK_URL}/${id}`);
-    console.log(data);
     stackDispatch({
       type: GET_ONE_STACK_SUCCESS,
       payload: data,
@@ -105,7 +104,6 @@ export const addStack = async (
       type: ADD_STACK,
     });
   } catch (error) {
-    console.log(error);
     generateAlert(
       error,
       stackDispatch,

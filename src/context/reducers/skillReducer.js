@@ -27,7 +27,6 @@ export const skillReducer = (state = skillInitialState, action) => {
     case GET_ALL_SKILL_START:
       return {
         ...state,
-        skills: [],
         getSkillsLoading: true,
       };
     case GET_ALL_SKILL_FAIL:
@@ -38,8 +37,9 @@ export const skillReducer = (state = skillInitialState, action) => {
     case GET_ALL_SKILL_SUCCESS:
       return {
         ...state,
-        getSkillsLoading: false,
         skills: payload,
+
+        getSkillsLoading: false,
       };
     case ADD_SKILL_START:
       return {
@@ -54,8 +54,9 @@ export const skillReducer = (state = skillInitialState, action) => {
     case ADD_SKILL_SUCCESS:
       return {
         ...state,
-        addSkillLoading: false,
         skills: [...state.skills, payload],
+
+        addSkillLoading: false,
       };
     case DELETE_SKILL_START:
       return {
@@ -70,8 +71,9 @@ export const skillReducer = (state = skillInitialState, action) => {
     case DELETE_SKILL_SUCCESS:
       return {
         ...state,
+        skills: state.skills.filter((val) => val._id !== payload),
+
         deleteSkillLoading: false,
-        skills: state.skills.filter((SKILL) => SKILL._id !== payload),
       };
     case UPDATE_SKILL_START:
       return {
@@ -89,8 +91,9 @@ export const skillReducer = (state = skillInitialState, action) => {
       data[index] = payload;
       return {
         ...state,
-        updateSkillLoading: false,
         skills: data,
+
+        updateSkillLoading: false,
       };
     default:
       return state;

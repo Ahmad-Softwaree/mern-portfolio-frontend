@@ -53,7 +53,7 @@ export default function UpdateType() {
         onChange={onChange}
         name={`krName`}
         className={`w-full`}
-        title={`Arabic Name`}
+        title={`Kurdish Name`}
       />
       <div className="w-full flex flex-row justify-center items-center gap-5">
         <button

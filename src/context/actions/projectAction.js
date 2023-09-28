@@ -335,7 +335,12 @@ export const updateProject = async (
     var imageURL = "";
     var imageName = "";
     if (image) {
-      let data = await addProjectImage(imageDispatch, alertDispatch, image);
+      let data = await addProjectImage(
+        projectDispatch,
+        imageDispatch,
+        alertDispatch,
+        image
+      );
       imageURL = data.imageURL;
       imageName = data.imageName;
     }

@@ -33,7 +33,6 @@ export const categoryReducer = (state = categoryInitialState, action) => {
       return {
         ...state,
         getCategoriesLoading: true,
-        categories: [],
       };
     case GET_ALL_CATEGORY_FAIL:
       return {
@@ -43,14 +42,14 @@ export const categoryReducer = (state = categoryInitialState, action) => {
     case GET_ALL_CATEGORY_SUCCESS:
       return {
         ...state,
-        getCategoriesLoading: false,
         categories: payload,
+
+        getCategoriesLoading: false,
       };
     case GET_ONE_CATEGORY_START:
       return {
         ...state,
         getCategoriesLoading: true,
-        category: {},
       };
     case GET_ONE_CATEGORY_FAIL:
       return {
@@ -60,8 +59,9 @@ export const categoryReducer = (state = categoryInitialState, action) => {
     case GET_ONE_CATEGORY_SUCCESS:
       return {
         ...state,
-        getCategoriesLoading: false,
         category: payload,
+
+        getCategoriesLoading: false,
       };
     case ADD_CATEGORY_START:
       return {
@@ -76,8 +76,9 @@ export const categoryReducer = (state = categoryInitialState, action) => {
     case ADD_CATEGORY_SUCCESS:
       return {
         ...state,
-        addCategoryLoading: false,
         categories: [payload, ...state.categories],
+
+        addCategoryLoading: false,
       };
     case UPDATE_CATEGORY_START:
       return {
@@ -95,8 +96,9 @@ export const categoryReducer = (state = categoryInitialState, action) => {
       data[index] = payload;
       return {
         ...state,
-        updateCategoryLoading: false,
         categories: data,
+
+        updateCategoryLoading: false,
       };
     case DELETE_CATEGORY_START:
       return {
@@ -109,14 +111,12 @@ export const categoryReducer = (state = categoryInitialState, action) => {
         deleteCategoryLoading: false,
       };
     case DELETE_CATEGORY_SUCCESS:
-      console.log(payload);
-      console.log(state.categories);
       return {
         ...state,
-        deleteCategoryLoading: false,
         categories: state.categories.filter(
           (val) => val._id.toString() !== payload
         ),
+        deleteCategoryLoading: false,
       };
     default:
       return state;

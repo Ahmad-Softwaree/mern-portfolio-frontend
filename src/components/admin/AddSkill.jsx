@@ -27,7 +27,8 @@ export default function AddSkill() {
     state: { skillImage, uploadSkillImageLoading },
   } = useContext(ImageContext);
   const { dispatch: uiDispatch } = useContext(UiContext);
-  const [type, setType] = useState("");
+  const [selectedTypes, setSelectedTypes] = useState([]);
+
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -44,9 +45,9 @@ export default function AddSkill() {
           alertDispatch,
           imageDispatch,
           uiDispatch,
-          { type, name },
+          { types: selectedTypes, name },
           skillImage,
-          setType,
+          setSelectedTypes,
           setName
         );
       }}
@@ -95,18 +96,27 @@ export default function AddSkill() {
         title={`Name`}
       />
 
-      <h1 className="font-bold w-full text-left !text-[20px]">Select Type</h1>
+      <h1 className="font-bold w-full text-left !text-[20px]">Select Types</h1>
 
       <div className="flex flex-row justify-left items-center gap-5 w-full flex-wrap">
         {types?.map((val, index) => {
+          const isTypeInclude = selectedTypes.some(
+            (item) => item.type === val._id
+          );
           return (
             <div
               key={index}
               onClick={() => {
-                setType(val._id);
+                if (isTypeInclude) {
+                  setSelectedTypes((prev) =>
+                    prev.filter((one) => one.type !== val._id)
+                  );
+                } else {
+                  setSelectedTypes((prev) => [...prev, { type: val._id }]);
+                }
               }}
               className={`!text-[14px] p-2 rounded-md border-2 border-solid border-blue transition-all duration-300  hover:bg-blue hover:text-black cursor-pointer ${
-                type === val._id ? "bg-blue text-black" : "text-blue"
+                isTypeInclude ? "bg-blue text-black" : "text-blue"
               }`}
             >
               {val.enName}

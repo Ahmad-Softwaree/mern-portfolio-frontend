@@ -7,7 +7,7 @@ const LoadingProjectSkeleton = ({ card }) => {
       return (
         <div
           key={index}
-          className={`relative bg-niceBlack flex flex-col justify-left items-end my-5 flex-wrap max-w-[550px] w-full h-[600px] shadow-xl p-5 mx-5 rounded-lg`}
+          className={`relative bg-niceBlack flex flex-col justify-left items-end my-5 flex-wrap min-w-[350px] md:w-[550px] h-[600px] shadow-xl p-5  rounded-lg`}
         >
           <div className="flex flex-col justify-left items-start gap-10 w-full">
             <span className="text-white"></span>

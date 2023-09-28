@@ -18,3 +18,8 @@ export const UPDATE_SKILL = "UPDATE_SKILL";
 
 export const ADD_CERTIFICATE = "ADD_CERTIFICATE";
 export const UPDATE_CERTIFICATE = "UPDATE_CERTIFICATE";
+
+export const PRIVATE = "PRIVATE";
+
+export const ADD_ADMIN = "ADD_ADMIN";
+export const UPDATE_ADMIN = "UPDATE_ADMIN";

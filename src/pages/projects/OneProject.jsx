@@ -12,6 +12,8 @@ import ProjectType from "../../components/projects/ProjectType";
 import ProjectGit from "../../components/projects/ProjectGit";
 import ProjectStack from "../../components/projects/ProjectStack";
 import LoadingOneProjectSkeleton from "../../components/loading/LoadingOneProjectSkeleton";
+import ReturnBack from "../../components/global/ReturnBack";
+import ReturnHome from "../../components/global/ReturnHome";
 export default function OneProject() {
   const { project_id } = useParams();
   const {
@@ -33,6 +35,10 @@ export default function OneProject() {
         <LoadingOneProjectSkeleton />
       ) : (
         <Fragment>
+          <div className="w-full flex flex-row justify-left items-center gap-5">
+            <ReturnBack />
+            <ReturnHome />
+          </div>
           <div className="flex flex-col justify-left items-start gap-[30px] w-full">
             <img
               className="w-full h-[340px] md:h-[450px] rounded-md object-contain border-2 border-solid border-niceBlack"
@@ -98,9 +104,17 @@ export default function OneProject() {
                 Gits
               </span>
             </div>
-            {project.gits.map((val, index) => {
-              return <ProjectGit val={val} key={index} />;
-            })}
+            {project.gits.length > 0 ? (
+              <Fragment>
+                {val.gits.map((val, index) => {
+                  return <ProjectGit val={val} key={index} />;
+                })}
+              </Fragment>
+            ) : (
+              <span className="!text-[14px] md:!text-[16px] text-purple">
+                Cannot access, private git
+              </span>
+            )}
           </div>
           <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
             <div className="w-full flex flex-row justify-left items-center gap-5">

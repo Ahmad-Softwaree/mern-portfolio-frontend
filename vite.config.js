@@ -20,7 +20,7 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       "/api": {
-        target: "https://api.ahmad-software.com",
+        target: "http://localhost:3001",
         changeOrigin: true,
         secure: false,
         ws: true,

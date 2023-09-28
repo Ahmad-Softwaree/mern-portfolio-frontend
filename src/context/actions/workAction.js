@@ -190,7 +190,6 @@ export const updateWork = async (
       type: UPDATE_WORK,
     });
   } catch (error) {
-    console.log(error);
     //delete the image
     if (imageName) deleteImage("work", imageName, workDispatch, alertDispatch);
     generateAlert(

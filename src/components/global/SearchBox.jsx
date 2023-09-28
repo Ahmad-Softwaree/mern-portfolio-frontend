@@ -14,10 +14,9 @@ export default function SearchBox({ setSearch, method }) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (method === "blog")
-          searchBlogs(blogDispatch, alertDispatch, { search: input });
+        if (method === "blog") searchBlogs(blogDispatch, alertDispatch, input);
         else if (method === "project")
-          searchProjects(projectDispatch, alertDispatch, { search: input });
+          searchProjects(projectDispatch, alertDispatch, input);
 
         setSearch(false);
       }}

@@ -33,7 +33,6 @@ export const typeReducer = (state = typeInitialState, action) => {
       return {
         ...state,
         getTypesLoading: true,
-        types: [],
       };
     case GET_ALL_TYPE_FAIL:
       return {
@@ -43,14 +42,14 @@ export const typeReducer = (state = typeInitialState, action) => {
     case GET_ALL_TYPE_SUCCESS:
       return {
         ...state,
-        getTypesLoading: false,
         types: payload,
+
+        getTypesLoading: false,
       };
     case GET_ONE_TYPE_START:
       return {
         ...state,
         getTypesLoading: true,
-        type: {},
       };
     case GET_ONE_TYPE_FAIL:
       return {
@@ -60,8 +59,9 @@ export const typeReducer = (state = typeInitialState, action) => {
     case GET_ONE_TYPE_SUCCESS:
       return {
         ...state,
-        getTypesLoading: false,
         type: payload,
+
+        getTypesLoading: false,
       };
     case ADD_TYPE_START:
       return {
@@ -76,8 +76,9 @@ export const typeReducer = (state = typeInitialState, action) => {
     case ADD_TYPE_SUCCESS:
       return {
         ...state,
-        addTypeLoading: false,
         types: [payload, ...state.types],
+
+        addTypeLoading: false,
       };
     case UPDATE_TYPE_START:
       return {
@@ -95,8 +96,9 @@ export const typeReducer = (state = typeInitialState, action) => {
       data[index] = payload;
       return {
         ...state,
-        updateTypeLoading: false,
         types: data,
+
+        updateTypeLoading: false,
       };
     case DELETE_TYPE_START:
       return {
@@ -109,12 +111,11 @@ export const typeReducer = (state = typeInitialState, action) => {
         deleteTypeLoading: false,
       };
     case DELETE_TYPE_SUCCESS:
-      console.log(payload);
-      console.log(state.types);
       return {
         ...state,
-        deleteTypeLoading: false,
         types: state.types.filter((val) => val._id.toString() !== payload),
+
+        deleteTypeLoading: false,
       };
     default:
       return state;

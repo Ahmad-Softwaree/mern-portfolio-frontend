@@ -4,6 +4,7 @@ import { UtilContext } from "../../context/UtilContext";
 import { TOGGLE_WANT_TO_DELETE } from "../../context/types/util_types";
 import { CategoryContext } from "../../context/CategoryContext";
 import {
+  DELETE_ONE_ADMIN_METHOD,
   DELETE_ONE_CATEGORY_METHOD,
   DELETE_ONE_CERTIFICATE_METHOD,
   DELETE_ONE_PROJECT_METHOD,
@@ -26,6 +27,8 @@ import { deleteStack } from "../../context/actions/stackAction";
 import { deleteCertificate } from "../../context/actions/certificateAction";
 import { TypeContext } from "../../context/TypeContext";
 import { deleteType } from "../../context/actions/typeAction";
+import { AdminContext } from "../../context/AdminContext";
+import { deleteAdmin } from "../../context/actions/adminAction";
 
 export default function WantToDelete() {
   const { dispatch: alertDispatch } = useContext(AlertContext);
@@ -62,6 +65,10 @@ export default function WantToDelete() {
     dispatch: typeDispatch,
     state: { deleteTypeLoading },
   } = useContext(TypeContext);
+  const {
+    dispatch: adminDispatch,
+    state: { deleteAdminLoading },
+  } = useContext(AdminContext);
 
   const flag = Boolean(
     deleteCategoryLoading ||
@@ -70,7 +77,8 @@ export default function WantToDelete() {
       deleteSkillLoading ||
       deleteStackLoading ||
       deleteCertificateLoading ||
-      deleteTypeLoading
+      deleteTypeLoading ||
+      deleteAdminLoading
   );
 
   return (
@@ -121,6 +129,14 @@ export default function WantToDelete() {
             );
           case DELETE_ONE_TYPE_METHOD:
             return deleteType(typeDispatch, alertDispatch, utilDispatch, id);
+          case DELETE_ONE_ADMIN_METHOD:
+            return deleteAdmin(
+              adminDispatch,
+              alertDispatch,
+              utilDispatch,
+              id,
+              image
+            );
         }
       }}
       data-aos="fade-up"

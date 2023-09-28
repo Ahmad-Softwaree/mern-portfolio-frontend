@@ -9,8 +9,6 @@ export const generateAlert = (
 ) => {
   const errors = error?.response?.data;
   if (Array.isArray(errors)) {
-    console.log("first");
-    console.log(errors);
     errors.forEach((val) => {
       setAlert(
         dispatch1,
@@ -22,7 +20,6 @@ export const generateAlert = (
       );
     });
   } else {
-    console.log(errors);
     setAlert(
       dispatch1,
       dispatch2,

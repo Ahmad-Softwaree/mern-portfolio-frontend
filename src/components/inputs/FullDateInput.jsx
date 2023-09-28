@@ -18,9 +18,10 @@ export default function FullDateInput({
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
+  const [change, setChange] = useState(false);
 
   useEffect(() => {
-    if (value === "") {
+    if (value === "" || change) {
       if (
         year !== "" &&
         month !== "" &&
@@ -39,7 +40,7 @@ export default function FullDateInput({
     if (value !== "") {
       let date = convertTimeStampToDateWithoutZero(value);
       setYear(date.split("-")[0]);
-      setMonth(date.split("-")[1]);
+      setMonth(date.split("-")[1] - 1);
       setDay(date.split("-")[2]);
     }
   }, [value]);
@@ -75,7 +76,10 @@ export default function FullDateInput({
             name="year"
             id="year"
             value={year}
-            onChange={(e) => setYear(e.target.value)}
+            onChange={(e) => {
+              setYear(e.target.value);
+              setChange(true);
+            }}
           >
             <option value="default"></option>
             {Array.from(
@@ -117,7 +121,10 @@ export default function FullDateInput({
             value={month}
             name="month"
             id="month"
-            onChange={(e) => setMonth(e.target.value)}
+            onChange={(e) => {
+              setMonth(e.target.value);
+              setChange(true);
+            }}
           >
             <option value="default"></option>
             {Array.from({ length: 12 }, (_, index) => index + 1)
@@ -156,7 +163,10 @@ export default function FullDateInput({
             value={day}
             name="day"
             id="day"
-            onChange={(e) => setDay(e.target.value)}
+            onChange={(e) => {
+              setDay(e.target.value);
+              setChange(true);
+            }}
           >
             <option value="default"></option>
             {Array.from({ length: 31 }, (_, index) => index + 1)

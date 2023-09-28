@@ -68,10 +68,6 @@ export default function AddBlog() {
     []
   );
 
-  useEffect(() => {
-    console.log(activeCategories);
-  }, [activeCategories]);
-
   return (
     <section
       data-aos="fade-up"

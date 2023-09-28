@@ -28,7 +28,7 @@ export default function Certificates() {
     >
       <section
         id="certificate"
-        className={`flex flex-col justify-left items-center w-full px-10 overflow-hidden`}
+        className={`flex flex-col justify-left items-center w-full px-5 md:px-10 overflow-hidden`}
       >
         <h1 className="font-bold text-white">Certificates</h1>
 

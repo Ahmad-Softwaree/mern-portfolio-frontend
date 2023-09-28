@@ -8,6 +8,8 @@ import DateMoment from "../../components/global/DateMoment";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 import LoadingOneCertificateSkeleton from "../../components/loading/LoadingOneCertificateSkeleton";
+import ReturnBack from "../../components/global/ReturnBack";
+import ReturnHome from "../../components/global/ReturnHome";
 export default function OneCertificate() {
   const { certificate_id } = useParams();
   const {
@@ -29,6 +31,10 @@ export default function OneCertificate() {
         <LoadingOneCertificateSkeleton />
       ) : (
         <Fragment>
+          <div className="w-full flex flex-row justify-left items-center gap-5">
+            <ReturnBack />
+            <ReturnHome />
+          </div>
           <div className="flex flex-col justify-left items-start gap-[30px] w-full">
             <img
               className="w-full h-[340px] md:h-[450px] rounded-md object-contain border-2 border-solid border-niceBlack"

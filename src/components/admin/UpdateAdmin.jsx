@@ -1,169 +1,148 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { updateAdmin } from "../../actions/admin";
-import { ADMIN_UPDATE_IMAGE } from "../../actions/types";
-import { Spinner } from "@chakra-ui/react";
+import React, { useContext, useState } from "react";
+import { updateAdmin } from "../../context/actions/adminAction";
+import { AlertContext } from "../../context/AlertContext";
+import { AdminContext } from "../../context/AdminContext";
+import { ImageContext } from "../../context/ImageContext";
+import TextInput from "../inputs/TextInput";
+import { UiContext } from "../../context/UiContext";
+import { UPDATE_ADMIN } from "../../context/types/ui_types";
+import SpinnerLoading from "../global/SpinnerLoading";
+import { ADMIN_IMAGE } from "../../context/types/image_types";
+import FileInput from "../inputs/FileInput";
 
-const UpdateAdmin = ({
-  name,
-  email,
-  id,
-  image,
-  oldImage,
-  updateAdmin,
-  admin: { users, updateLoading },
-  setUpdate,
-  admin: { user },
-}) => {
+export default function UpdateAdmin() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    dispatch: adminDispatch,
+    state: { updateAdminLoading },
+  } = useContext(AdminContext);
+
+  const {
+    dispatch: imageDispatch,
+    state: { adminImage, uploadAdminImageLoading },
+  } = useContext(ImageContext);
+  const {
+    dispatch: uiDispatch,
+    state: { val },
+  } = useContext(UiContext);
+
   const [imageChanged, setImageChanged] = useState(false);
-
-  const [inputs, setInputs] = useState({
-    name: name,
-    email: email,
-  });
-
-  const dispatch = useDispatch();
-  const onChange = (e) =>
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13 && !e.shiftKey) {
-      updateAdmin({
-        name: inputs.name,
-        email: inputs.email,
-        image: image.updateAdmin,
-        oldImage,
-        setInputs,
-        setUpdate,
-        adminId: id,
-        imageChanged,
-      });
-    }
-  };
+  const [name, setName] = useState(val.name);
 
   return (
     <form
+      data-aos="fade-up"
       onSubmit={(e) => {
         e.preventDefault();
-        updateAdmin({
-          name: inputs.name,
-          email: inputs.email,
-          image: image.updateAdmin,
-          oldImage,
-          setInputs,
-          setUpdate,
-          adminId: id,
-          imageChanged,
-        });
+        updateAdmin(
+          adminDispatch,
+          alertDispatch,
+          imageDispatch,
+          uiDispatch,
+          { name: name },
+          val._id,
+          setName,
+          adminImage,
+          val.imageURL,
+          val.imageName,
+          imageChanged
+        );
       }}
-      className="createAdmin position-fixed flex flex-col justify-left align-center w-full gap-2 update"
+      className="fixed inset-0 m-auto p-5 rounded-lg bg-black w-[95%] max-w-[500px] h-fit text-white flex flex-col justify-left items-center gap-[30px] z-[1100] shadow-xl overflow-y-auto max-h-[600px]"
     >
-      <h1>update Admin</h1>
-
-      <div className="inner">
-        <div className="fileInputDiv flex flex-col justify-center align-center gap-1">
-          {!image.updateAdmin ? (
-            <>
-              <input
-                onChange={(e) => {
-                  dispatch({
-                    type: ADMIN_UPDATE_IMAGE,
-                    payload: e.target.files[0],
-                  });
-                  setImageChanged(true);
-                }}
-                type="file"
-                name="admin"
-                id="updateAdmin"
-                className="adminImage"
-              />
-
-              <img className="URLImage" src={`${oldImage}`} alt="imageUpload" />
-
-              <label
-                className="blogImageUploaderLabel flex justify-center align-center flex-row"
-                htmlFor="updateAdmin"
-              >
-                <div className="editButton flex flex-row align-center  justify-center">
-                  <img
-                    src="/images/edit.svg"
-                    alt="editImage"
-                    className="editImage"
-                  />
-                  <span>Edit</span>
-                </div>
-              </label>
-            </>
-          ) : (
-            <div className="URLImage position-relative">
-              <img
-                className="URLImage"
-                src={URL.createObjectURL(image.updateAdmin)}
-                alt="imageUpload"
-              />
-              <span
-                onClick={() => {
-                  dispatch({ type: ADMIN_UPDATE_IMAGE, payload: null });
-                  setImageChanged(false);
-                }}
-                className="position-absolute x"
-              >
-                <i className="fa-solid fa-xmark"></i>
-              </span>
-            </div>
-          )}
-        </div>
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={inputs.name}
-          placeholder="Enter the name"
-          type="text"
-          name="name"
-          id="name"
-          className={inputs.name !== "" ? "activeInputBorder" : ""}
-        />
-        <input
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={inputs.email}
-          placeholder="Enter the email"
-          type="email"
-          name="email"
-          id="email"
-          className={inputs.email !== "" ? "activeInputBorder" : ""}
-        />
-
-        <div className="publishAndCancel flex flex-row justify-center align-center gap-2">
-          <span
-            className="cancelLink"
-            onClick={() => {
-              setUpdate(false);
-              dispatch({ type: ADMIN_UPDATE_IMAGE, payload: null });
-            }}
-          >
-            Cancel
-          </span>
+      <h1 className="font-bold w-full text-center">Update Admin</h1>
+      {val.imageURL && !imageChanged && (
+        <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
+          <img
+            className="w-full h-[200px] object-contain rounded-md"
+            src={val.imageURL}
+            alt="imageUpload"
+          />
 
           <button
-            type="submit"
-            disabled={updateLoading}
-            className={
-              inputs.name !== "" && inputs.email !== ""
-                ? "activePublish"
-                : "publish"
-            }
+            type="button"
+            onClick={() => {
+              setImageChanged(true);
+            }}
+            className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
           >
-            {updateLoading ? (
-              <div className="w-full loadingSpinner">
-                <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
-              </div>
-            ) : (
-              "Update"
-            )}
+            Remove Old Admin Image
           </button>
         </div>
+      )}
+
+      <div className="flex flex-col justify-left items-center gap-5 w-full">
+        {!adminImage && imageChanged ? (
+          <FileInput
+            title={`Admin Image`}
+            value={""}
+            onChange={(e) => {
+              imageDispatch({
+                type: ADMIN_IMAGE,
+                payload: e.target.files[0],
+              });
+              setImageChanged(true);
+            }}
+            id={`adminImage`}
+            className={`w-full`}
+          />
+        ) : adminImage ? (
+          <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
+            <img
+              className="w-full h-[200px] object-contain rounded-md"
+              src={URL.createObjectURL(adminImage)}
+              alt="imageUpload"
+            />
+
+            <button
+              type="button"
+              onClick={() => {
+                imageDispatch({ type: ADMIN_IMAGE, payload: "" });
+                setImageChanged(false);
+              }}
+              className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
+            >
+              Remove Admin Image
+            </button>
+          </div>
+        ) : null}
+      </div>
+      <TextInput
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        name={`name`}
+        className={`w-full`}
+        title={`Name`}
+      />
+
+      <div className="w-full flex flex-row justify-center items-center gap-5">
+        <button
+          type="button"
+          className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4 disabled:bg-gray-500"
+          onClick={() => {
+            imageDispatch({
+              type: ADMIN_IMAGE,
+              payload: "",
+            });
+            uiDispatch({
+              type: UPDATE_ADMIN,
+            });
+          }}
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={updateAdminLoading || uploadAdminImageLoading}
+          className="my-5 !text-[14px] text-blue border-2 border-solid border-blue rounded-md transition-all duration-300 hover:bg-blue hover:text-white p-2 px-4 disabled:bg-gray-500"
+        >
+          {updateAdminLoading || uploadAdminImageLoading ? (
+            <SpinnerLoading size={`30px`} />
+          ) : (
+            "Publish"
+          )}
+        </button>
       </div>
     </form>
   );
-};
+}

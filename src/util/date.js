@@ -97,7 +97,7 @@ export const convertTimeStampToMomentMonth = (date) => {
   } else {
     currentDate = new Date();
   }
-  let month = months[currentDate.getMonth() + 1];
+  let month = months[currentDate.getMonth()];
   let day = currentDate.getDate();
   let year = currentDate.getFullYear();
   if (day < 10) {

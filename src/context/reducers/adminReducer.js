@@ -36,7 +36,7 @@ export const adminInitialState = {
   getAdminsLoading: true,
   deleteAdminLoading: false,
   updateAdminLoading: false,
-  createAdminLoading: false,
+  addAdminLoading: false,
 };
 
 export const adminReducer = (state = adminInitialState, action) => {
@@ -106,24 +106,26 @@ export const adminReducer = (state = adminInitialState, action) => {
     case GET_ALL_ADMINS_SUCCESS:
       return {
         ...state,
-        getAdminsLoading: false,
         admins: payload,
+
+        getAdminsLoading: false,
       };
     case ADD_ADMIN_START:
       return {
         ...state,
-        createAdminLoading: true,
+        addAdminLoading: true,
       };
     case ADD_ADMIN_FAIL:
       return {
         ...state,
-        createAdminLoading: false,
+        addAdminLoading: false,
       };
     case ADD_ADMIN_SUCCESS:
       return {
         ...state,
-        createAdminLoading: false,
         admins: [...state.admins, payload.admin],
+
+        addAdminLoading: false,
       };
     case DELETE_ADMIN_START:
       return {
@@ -138,8 +140,9 @@ export const adminReducer = (state = adminInitialState, action) => {
     case DELETE_ADMIN_SUCCESS:
       return {
         ...state,
-        deleteAdminLoading: false,
         admins: state.admins.filter((admin) => admin._id !== payload),
+
+        deleteAdminLoading: false,
       };
     case UPDATE_ADMIN_START:
       return {
@@ -154,12 +157,9 @@ export const adminReducer = (state = adminInitialState, action) => {
     case UPDATE_ADMIN_SUCCESS:
       return {
         ...state,
+        admin: payload,
+
         updateAdminLoading: false,
-        admins: [
-          ...state.admins.filter((admin) => admin._id !== payload._id),
-          payload,
-        ],
-        admin: payload.isMe ? payload.admin : state.admin,
       };
     case GET_STORAGE_SIZE_START:
       return {
@@ -174,8 +174,9 @@ export const adminReducer = (state = adminInitialState, action) => {
     case GET_STORAGE_SIZE_SUCCESS:
       return {
         ...state,
-        storageSizeLoading: false,
         storageSize: payload,
+
+        storageSizeLoading: false,
       };
     default:
       return state;

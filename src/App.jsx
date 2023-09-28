@@ -35,8 +35,7 @@ const AddBlog = lazy(() => import("./pages/admin/AddBlog.jsx"));
 const Panel = lazy(() => import("./pages/admin/Panel"));
 const Login = lazy(() => import("./pages/Login"));
 
-// const AdminRoutes = lazy(() => import("./routes/AdminRoutes"));
-// const Admins = lazy(() => import("./pages/admin/Admins"));
+const Admins = lazy(() => import("./pages/admin/Admins"));
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -120,7 +119,11 @@ const routes = createBrowserRouter(
           element={<AdminRoutes Component={Panel} />}
           errorElement={<Error />}
         />
-        {/* <Route path="/admins" element={<Admins />} errorElement={<Error />} /> */}
+        <Route
+          path="/admins"
+          element={<AdminRoutes Component={Admins} />}
+          errorElement={<Error />}
+        />
       </Route>
 
       <Route element={<AdminLayout layout={false} />} errorElement={<Error />}>

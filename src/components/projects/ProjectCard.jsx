@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Element } from "react-scroll";
 import { Link } from "react-router-dom";
 import DateMoment from "../global/DateMoment";
@@ -8,12 +8,15 @@ import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import ProjectStack from "./ProjectStack";
 import ProjectGit from "./ProjectGit";
 import ProjectType from "./ProjectType";
+import { UiContext } from "../../context/UiContext";
+import { PRIVATE } from "../../context/types/ui_types";
 export default function ProjectCard({ index, val }) {
   const {
     state: { file, language },
   } = useContext(LanguageContext);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [show, setShow] = useState(false);
+  const { dispatch: uiDispatch } = useContext(UiContext);
   const moveBackground = (e) => {
     const { clientX, clientY } = e;
     const projectCardRect = e.currentTarget.getBoundingClientRect();
@@ -34,9 +37,10 @@ export default function ProjectCard({ index, val }) {
     <Element
       onMouseMove={moveBackground}
       name={`project-${index}`}
+      data-aos="fade-right"
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
-      className={`project-${index} relative bg-niceBlack flex flex-col justify-center items-end gap-5 md:gap-10 flex-wrap w-[350px] md:w-[550px] h-[780px] md:h-[750px] shadow-xl p-5 rounded-lg  ${
+      className={`project-${index} relative bg-niceBlack flex flex-col justify-center items-end gap-5  flex-wrap  w-[350px] md:w-[550px] h-[650px] md:h-[600px] shadow-xl p-5 rounded-lg  ${
         language !== "en" && "items-start"
       }`}
     >
@@ -69,10 +73,17 @@ export default function ProjectCard({ index, val }) {
           </h2>
           <h2 className="text-niceGray !text-[16px] md:!text-[18px] font-[500] w-full ">
             {language === "en"
-              ? val.enDesc
+              ? val.enDesc.substring(0, 60).concat("...")
               : language === "ar"
-              ? val.arDesc
-              : val.krDesc}
+              ? val.arDesc.substring(0, 60).concat("...")
+              : val.krDesc.substring(0, 60).concat("...")}
+            &nbsp;
+            <Link
+              to={`/projects/${val._id}`}
+              className="!text-[14px] text-purple"
+            >
+              see more
+            </Link>
           </h2>
         </div>
       </div>
@@ -84,8 +95,14 @@ export default function ProjectCard({ index, val }) {
           <span className="!text-[16px] md:!text-[18px] text-white">Types</span>
         </div>
         {val.types.map((val, index) => {
-          return <ProjectType val={val} key={index} />;
+          return index < 2 && <ProjectType val={val} key={index} />;
         })}
+        <Link
+          to={`/projects/${val._id}`}
+          className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
+        >
+          More...
+        </Link>
       </div>
 
       <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
@@ -95,9 +112,23 @@ export default function ProjectCard({ index, val }) {
           </span>
           <span className="!text-[16px] md:!text-[18px] text-white">Gits</span>
         </div>
-        {val.gits.map((val, index) => {
-          return <ProjectGit val={val} key={index} />;
-        })}
+        {val.gits.length > 0 ? (
+          <Fragment>
+            {val.gits.map((val, index) => {
+              return index < 1 && <ProjectGit val={val} key={index} />;
+            })}
+            <Link
+              to={`/projects/${val._id}`}
+              className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
+            >
+              More...
+            </Link>
+          </Fragment>
+        ) : (
+          <span className="!text-[14px] md:!text-[16px] text-purple">
+            Cannot access, private git
+          </span>
+        )}
       </div>
       <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
         <div className="w-full flex flex-row justify-left items-center gap-5">
@@ -110,11 +141,17 @@ export default function ProjectCard({ index, val }) {
         </div>
 
         {val.stacks.map((val, index) => {
-          return <ProjectStack val={val} key={index} />;
+          return index < 4 && <ProjectStack val={val} key={index} />;
         })}
+        <Link
+          to={`/projects/${val._id}`}
+          className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
+        >
+          More...
+        </Link>
       </div>
       <div className="w-full flex flex-row justify-between items-center gap-5">
-        {val.url && (
+        {val.url ? (
           <a
             href={`${val.url}`}
             target="_blank"
@@ -125,6 +162,16 @@ export default function ProjectCard({ index, val }) {
             </span>
             <OpenInNewIcon className="text-white" fontSize="14px" />
           </a>
+        ) : (
+          <button
+            onClick={() => {
+              uiDispatch({ type: PRIVATE });
+            }}
+            className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
+          >
+            <span className="!text-[14px] text-white">private</span>
+            <OpenInNewIcon className="text-white" fontSize="14px" />
+          </button>
         )}
         <Link
           to={`/projects/${val._id}`}

@@ -239,8 +239,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: none !important;
 }
 
+.projectCards::-webkit-scrollbar {
+  display: none !important;
+}
+
+.projectCards {
+  scroll-behavior: smooth;
+}
+
 @layer components {
-  section:not(.admin) {
+  section:not(.admin):not(.projects) {
     @apply py-[50px] md:!px-10 !px-5;
   }
   section {
@@ -276,3 +284,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     @apply bg-green text-black;
   }
 }
+
+/* @media (max-width: 768px) {
+  [data-aos] {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  [data-aos-offset] {
+    data-aos-offset: -600;
+  }
+}
+
+@media (min-width: 769px) {
+  [data-aos] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  [data-aos-offset] {
+    data-aos-offset: -200;
+  }
+} */

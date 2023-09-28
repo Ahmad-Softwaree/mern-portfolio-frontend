@@ -344,7 +344,12 @@ export const updateCertificate = async (
     var imageURL = "";
     var imageName = "";
     if (image) {
-      let data = await addCertificateImage(imageDispatch, alertDispatch, image);
+      let data = await addCertificateImage(
+        certificateDispatch,
+        imageDispatch,
+        alertDispatch,
+        image
+      );
       imageURL = data.imageURL;
       imageName = data.imageName;
     }

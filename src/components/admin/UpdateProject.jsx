@@ -105,7 +105,7 @@ export default function UpdateProject() {
       {val.imageURL && !imageChanged && (
         <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
           <img
-            className="w-full h-[200px] object-cover rounded-md"
+            className="w-full h-[200px] object-contain rounded-md"
             src={val.imageURL}
             alt="imageUpload"
           />
@@ -140,7 +140,7 @@ export default function UpdateProject() {
         ) : projectImage ? (
           <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
             <img
-              className="w-full h-[200px] object-cover rounded-md"
+              className="w-full h-[200px] object-contain rounded-md"
               src={URL.createObjectURL(projectImage)}
               alt="imageUpload"
             />

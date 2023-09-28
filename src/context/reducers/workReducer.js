@@ -27,7 +27,6 @@ export const workReducer = (state = workInitialState, action) => {
     case GET_ALL_WORK_START:
       return {
         ...state,
-        works: [],
         workLoading: true,
       };
     case GET_ALL_WORK_FAIL:
@@ -38,8 +37,9 @@ export const workReducer = (state = workInitialState, action) => {
     case GET_ALL_WORK_SUCCESS:
       return {
         ...state,
-        workLoading: false,
         works: payload,
+
+        workLoading: false,
       };
     case ADD_WORK_START:
       return {
@@ -54,8 +54,9 @@ export const workReducer = (state = workInitialState, action) => {
     case ADD_WORK_SUCCESS:
       return {
         ...state,
-        addWorkLoading: false,
         works: [...state.works, payload],
+
+        addWorkLoading: false,
       };
     case DELETE_WORK_START:
       return {
@@ -70,8 +71,9 @@ export const workReducer = (state = workInitialState, action) => {
     case DELETE_WORK_SUCCESS:
       return {
         ...state,
-        deleteWorkLoading: false,
         works: state.works.filter((WORK) => WORK._id !== payload),
+
+        deleteWorkLoading: false,
       };
     case UPDATE_WORK_START:
       return {
@@ -89,8 +91,9 @@ export const workReducer = (state = workInitialState, action) => {
       data[index] = payload;
       return {
         ...state,
-        updateWorkLoading: false,
         works: data,
+
+        updateWorkLoading: false,
       };
     default:
       return state;

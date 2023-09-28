@@ -1,4 +1,5 @@
 import {
+  ADD_ADMIN,
   ADD_CATEGORY,
   ADD_CERTIFICATE,
   ADD_PROJECT,
@@ -6,6 +7,8 @@ import {
   ADD_STACK,
   ADD_TYPE,
   ADD_WORK,
+  PRIVATE,
+  UPDATE_ADMIN,
   UPDATE_CATEGORY,
   UPDATE_CERTIFICATE,
   UPDATE_PROJECT,
@@ -30,6 +33,9 @@ export const uiInitialState = {
   updateSkill: false,
   addCertificate: false,
   updateCertificate: false,
+  addAdmin: false,
+  updateAdmin: false,
+  private: false,
   val: null,
 };
 
@@ -37,6 +43,11 @@ export const uiReducer = (state = uiInitialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case PRIVATE:
+      return {
+        ...state,
+        private: !state.private,
+      };
     case ADD_CATEGORY:
       return {
         ...state,
@@ -118,6 +129,18 @@ export const uiReducer = (state = uiInitialState, action) => {
       return {
         ...state,
         updateCertificate: !state.updateCertificate,
+        val: payload ? payload : null,
+      };
+
+    case ADD_ADMIN:
+      return {
+        ...state,
+        addAdmin: !state.addAdmin,
+      };
+    case UPDATE_ADMIN:
+      return {
+        ...state,
+        updateAdmin: !state.updateAdmin,
         val: payload ? payload : null,
       };
     default:

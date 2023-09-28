@@ -41,7 +41,6 @@ export const getHomeBlogs = async (blogDispatch, alertDispatch) => {
   });
   try {
     const { data } = await api.get(`${GET_HOME_BLOGS_URL}`);
-    console.log(data);
     blogDispatch({
       type: GET_BLOGS_SUCCESS,
       payload: data,
@@ -284,7 +283,12 @@ export const updateBlog = async (
     var imageURL = "";
     var imageName = "";
     if (image) {
-      let data = await addBlogImage(imageDispatch, alertDispatch, image);
+      let data = await addBlogImage(
+        blogDispatch,
+        imageDispatch,
+        alertDispatch,
+        image
+      );
       imageURL = data.imageURL;
       imageName = data.imageName;
     }

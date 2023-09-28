@@ -30,7 +30,11 @@ export default function UpdateSkill() {
     state: { val },
   } = useContext(UiContext);
   const [imageChanged, setImageChanged] = useState(false);
-  const [type, setType] = useState(val.type._id);
+  const [selectedTypes, setSelectedTypes] = useState(
+    val.types?.map((val) => ({
+      type: val.type?._id,
+    }))
+  );
   const [name, setName] = useState(val.name);
 
   useEffect(() => {
@@ -47,9 +51,9 @@ export default function UpdateSkill() {
           alertDispatch,
           uiDispatch,
           imageDispatch,
-          { type, name },
+          { types: selectedTypes, name },
           val._id,
-          setType,
+          setSelectedTypes,
           setName,
           skillImage,
           val.imageURL,
@@ -126,14 +130,23 @@ export default function UpdateSkill() {
 
       <div className="flex flex-row justify-left items-center gap-5 w-full flex-wrap">
         {types?.map((val, index) => {
+          const isTypeInclude = selectedTypes.some(
+            (item) => item.type === val._id
+          );
           return (
             <div
               key={index}
               onClick={() => {
-                setType(val._id);
+                if (isTypeInclude) {
+                  setSelectedTypes((prev) =>
+                    prev.filter((one) => one.type !== val._id)
+                  );
+                } else {
+                  setSelectedTypes((prev) => [...prev, { type: val._id }]);
+                }
               }}
               className={`!text-[14px] p-2 rounded-md border-2 border-solid border-blue transition-all duration-300  hover:bg-blue hover:text-black cursor-pointer ${
-                type === val._id ? "bg-blue text-black" : "text-blue"
+                isTypeInclude ? "bg-blue text-black" : "text-blue"
               }`}
             >
               {val.enName}

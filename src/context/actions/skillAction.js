@@ -56,7 +56,7 @@ export const addSkill = async (
   uiDispatch,
   form,
   image,
-  setType,
+  setSelectedTypes,
   setName
 ) => {
   try {
@@ -85,7 +85,7 @@ export const addSkill = async (
       "success"
     );
     setName("");
-    setType("");
+    setSelectedTypes([]);
     imageDispatch({
       type: SKILL_IMAGE,
       payload: "",
@@ -115,7 +115,7 @@ export const updateSkill = async (
   imageDispatch,
   form,
   id,
-  setType,
+  setSelectedTypes,
   setName,
   image,
   oldImageURL,
@@ -170,7 +170,7 @@ export const updateSkill = async (
       payload: "",
     });
     setName("");
-    setType("");
+    setSelectedTypes([]);
     uiDispatch({
       type: UPDATE_SKILL,
     });

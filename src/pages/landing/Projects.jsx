@@ -33,7 +33,13 @@ export default function Projects() {
 
   const scroll = (dist) => {
     if (projectRef.current) {
-      let width = window.innerWidth / 2;
+      let width;
+      if (window.innerWidth > 770) {
+        width = 550 + 50;
+      } else {
+        width = 350 + 50;
+      }
+
       if (dist === "right") {
         projectRef.current.scrollTo({
           left: projectRef.current.scrollLeft + width,
@@ -61,17 +67,22 @@ export default function Projects() {
   };
 
   return (
-    <Element data-aos="fade-up" className="w-full" name="projects">
+    <Element
+      data-aos-offset="-400"
+      data-aos="fade-up"
+      className="w-full"
+      name="projects"
+    >
       <section
         id="projects"
-        className="projects flex flex-col justify-left items-center w-full gap-2 px-10 overflow-auto"
+        className="projects flex flex-col justify-left items-center w-full gap-2 overflow-auto !px-0"
       >
         <h1 className="text-white font-bold">{file.nav.projects}</h1>
 
         <div
           ref={projectRef}
           id="projectCards"
-          className={`projectCards flex flex-row justify-left align-start  flex-nowrap w-full  gap-[50px] py-[50px] ${
+          className={`projectCards flex flex-col justify-left items-start max-h-[900px] flex-wrap gap-[50px] !px-5 md:!px-10 py-[50px] overflow-auto ${
             language !== "en" && "flex-row-reverse"
           }`}
         >

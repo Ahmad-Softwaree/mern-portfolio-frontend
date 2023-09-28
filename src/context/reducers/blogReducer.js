@@ -20,7 +20,7 @@ export const blogInitialState = {
   blogs: [],
   getBlogsLoading: true,
   getOneBlogLoading: true,
-  createBlogLoading: false,
+  addBlogLoading: false,
   deleteBlogLoading: false,
   updateBlogLoading: false,
   blog: null,
@@ -64,18 +64,19 @@ export const blogReducer = (state = blogInitialState, action) => {
     case ADD_BLOG_START:
       return {
         ...state,
-        createBlogLoading: true,
+        addBlogLoading: true,
       };
     case ADD_BLOG_FAIL:
       return {
         ...state,
-        createBlogLoading: false,
+        addBlogLoading: false,
       };
     case ADD_BLOG_SUCCESS:
       return {
         ...state,
-        createBlogLoading: false,
         blogs: [...state.blogs, payload],
+
+        addBlogLoading: false,
       };
     case DELETE_BLOG_START:
       return {
@@ -90,8 +91,9 @@ export const blogReducer = (state = blogInitialState, action) => {
     case DELETE_BLOG_SUCCESS:
       return {
         ...state,
-        deleteBlogLoading: false,
         blogs: state.blogs.filter((blog) => blog._id !== payload),
+
+        deleteBlogLoading: false,
       };
     case UPDATE_BLOG_START:
       return {
@@ -109,8 +111,9 @@ export const blogReducer = (state = blogInitialState, action) => {
       data[index] = payload;
       return {
         ...state,
-        updateBlogLoading: false,
         blogs: data,
+
+        updateBlogLoading: false,
       };
 
     default:

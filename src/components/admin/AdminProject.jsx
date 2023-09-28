@@ -24,7 +24,7 @@ export default function AdminProject({ val, index }) {
           />
         </Td>
         <Td>
-          <DateMoment date={val.createdAt} />
+          <DateMoment date={val.date} />
         </Td>
         <Td>
           <span

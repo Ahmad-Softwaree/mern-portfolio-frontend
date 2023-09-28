@@ -21,6 +21,8 @@ import UpdateSkill from "./admin/UpdateSkill";
 import AddCertificate from "./admin/AddCertificate";
 import UpdateCertificate from "./admin/UpdateCertificate";
 import { ENGLISH } from "../context/types/language_types";
+import Private from "./global/Private";
+import UpdateAdmin from "./admin/UpdateAdmin";
 
 export const Universal = () => {
   const {
@@ -64,6 +66,9 @@ export const Universal = () => {
       updateSkill,
       addCertificate,
       updateCertificate,
+      private: privateProject,
+      updateAdmin,
+      addAdmin,
     },
   } = useContext(UiContext);
   const flag = Boolean(
@@ -81,7 +86,10 @@ export const Universal = () => {
       addSkill ||
       updateSkill ||
       addCertificate ||
-      updateCertificate
+      updateCertificate ||
+      privateProject ||
+      addAdmin ||
+      updateAdmin
   );
   return (
     <Fragment>
@@ -101,6 +109,8 @@ export const Universal = () => {
       {updateSkill && <UpdateSkill />}
       {addCertificate && <AddCertificate />}
       {updateCertificate && <UpdateCertificate />}
+      {updateAdmin && <UpdateAdmin />}
+      {privateProject && <Private />}
       <Alert />
       <Outlet />
     </Fragment>

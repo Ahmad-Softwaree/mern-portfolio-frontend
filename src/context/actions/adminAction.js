@@ -2,15 +2,9 @@ import { getCookie, removeCookie, setCookie } from "../../util/cookie";
 import { setAxiosConfig } from "../../util/axiosConfig";
 import {
   AUTH_ERROR,
-  ADD_ADMIN_FAIL,
-  ADD_ADMIN_START,
-  ADD_ADMIN_SUCCESS,
   DELETE_ADMIN_FAIL,
   DELETE_ADMIN_START,
   DELETE_ADMIN_SUCCESS,
-  GET_ALL_ADMINS_FAIL,
-  GET_ALL_ADMINS_START,
-  GET_ALL_ADMINS_SUCCESS,
   GET_STORAGE_SIZE_FAIL,
   GET_STORAGE_SIZE_START,
   GET_STORAGE_SIZE_SUCCESS,
@@ -27,21 +21,22 @@ import {
 } from "../types/admin_types";
 
 import {
-  GET_AUTH_TOKEN,
+  GET_AUTH_TOKEN_URL,
   ADMIN_LOGIN_URL,
-  GET_ALL_ADMINS,
-  DELETE_ADMIN,
-  ADD_ADMIN,
-  UPDATE_ADMIN,
+  DELETE_ADMIN_URL,
+  UPDATE_ADMIN_URL,
 } from "../url/admin_url";
-import axios from "axios";
-import { authConfig } from "../../util/config";
 import firebaseStorage from "../../firebase_storage";
-import { ref, deleteObject, getMetadata, listAll } from "firebase/storage";
+import { ref, getMetadata, listAll } from "firebase/storage";
 import { adminAuthApi, api } from "../../util/api";
 import { ADMIN_COOKIE_NAME } from "../../util/enum";
 import { generateAlert } from "../../util/generateAlert";
 import { setAlert } from "./alertAction";
+import { ADMIN_IMAGE } from "../types/image_types";
+import { addAdminImage } from "./imageAction";
+import { deleteImage } from "../../util/deleteFirebaseImage";
+import { TOGGLE_WANT_TO_DELETE } from "../types/util_types";
+import { UPDATE_ADMIN } from "../types/ui_types";
 
 export const getStorageUsage = async (adminDispatch, alertDispatch) => {
   try {
@@ -87,7 +82,7 @@ export const getStorageUsage = async (adminDispatch, alertDispatch) => {
 
 export const getAuthAdmin = async (adminDispatch, alertDispatch) => {
   try {
-    const { data } = await adminAuthApi.get(`${GET_AUTH_TOKEN}`);
+    const { data } = await adminAuthApi.get(`${GET_AUTH_TOKEN_URL}`);
     setAxiosConfig(`Bearer ${getCookie(ADMIN_COOKIE_NAME)}`);
     adminDispatch({
       type: AUTH_ADMIN,
@@ -162,198 +157,121 @@ export const adminLogout = async (adminDispatch, alertDispatch, navigate) => {
   }
 };
 
-export const getAllAdmins =
-  ({}) =>
-  async (adminDispatch) => {
-    adminDispatch({
-      type: GET_ALL_ADMINS_START,
-    });
-    try {
-      const res = await axios.get(
-        `${GET_ALL_ADMINS}`,
-        authConfig(getCookie("admin"))
-      );
-      adminDispatch({
-        type: GET_ALL_ADMINS_SUCCESS,
-        payload: res.data,
-      });
-    } catch (error) {
-      generateAlert({
-        adminDispatch,
-        text: error?.response?.data?.error
-          ? error.response.data.error
-          : error?.message,
-        FAIL: GET_ALL_ADMINS_FAIL,
-      });
-    }
-  };
-
-export const createAdmin =
-  ({ userId, name, email, password, image, setInputs }) =>
-  async (adminDispatch) => {
-    adminDispatch({
-      type: ADD_ADMIN_START,
-    });
-    try {
-      let data = { name, email, password };
-      if (image) {
-        const file = new FormData();
-        const filename = Date.now() + image.name;
-        file.append("name", filename);
-        file.append("admin", image);
-        const imageURL = await saveAdminImage({ file });
-        data.image = imageURL;
-      }
-      const res = await axios.post(
-        `${ADD_ADMIN}`,
-        data,
-        authConfig(getCookie("admin"))
-      );
-      adminDispatch({
-        type: ADD_ADMIN_SUCCESS,
-        payload: res.data,
-      });
-      generateAlert({ adminDispatch, text: "admin successfully created" });
-      setInputs({
-        name: "",
-        email: "",
-        password: "",
-      });
-      adminDispatch({
-        type: ADMIN_IMAGE,
-        payload: null,
-      });
-    } catch (error) {
-      generateAlert({
-        adminDispatch,
-        text: error?.response?.data?.error
-          ? error.response.data.error
-          : error?.message,
-        FAIL: ADD_ADMIN_FAIL,
-      });
-    }
-  };
-
-export const updateAdmin =
-  ({
-    name,
-    email,
-    image,
-    adminId,
-    oldImage,
-    setInputs,
-    setUpdate,
-    imageChanged,
-  }) =>
-  async (adminDispatch) => {
+export const updateAdmin = async (
+  adminDispatch,
+  alertDispatch,
+  imageDispatch,
+  uiDispatch,
+  form,
+  id,
+  setName,
+  image,
+  oldImageURL,
+  oldImageName,
+  imageChanged
+) => {
+  try {
     adminDispatch({
       type: UPDATE_ADMIN_START,
     });
-    try {
-      if (oldImage && imageChanged) {
-        //delete any old images if there exist
-        const imageRef = ref(firebaseStorage, oldImage);
-        deleteObject(imageRef)
-          .then(() => {
-            generateAlert({
-              adminDispatch,
-              text: "admin old image deleted in storage",
-            });
-          })
-          .catch((err) => {
-            generateAlert({
-              adminDispatch,
-              text: err.message,
-              FAIL: null,
-            });
-          });
-      }
-      let data = { name, email };
-      if (image) {
-        const file = new FormData();
-        const filename = Date.now() + image.name;
-        file.append("name", filename);
-        file.append("admin", image);
-        const imageURL = await saveAdminImage({ file });
-        data.image = imageURL;
-      } else data.image = oldImage;
-      const res = await axios.put(
-        `${UPDATE_ADMIN}/${adminId}`,
-        data,
-        authConfig(getCookie("admin"))
-      );
-      adminDispatch({
-        type: UPDATE_ADMIN_SUCCESS,
-        payload: res.data,
-      });
-      generateAlert({ adminDispatch, text: "Admin updated successfully" });
-      setInputs({
-        name: "",
-        email: "",
-      });
-      adminDispatch({
-        type: ADMIN_UPDATE_IMAGE,
-        payload: null,
-      });
-      setUpdate(false);
-    } catch (error) {
-      generateAlert({
-        adminDispatch,
-        text: error?.response?.data?.error
-          ? error.response.data.error
-          : error?.message,
-        FAIL: UPDATE_ADMIN_FAIL,
-      });
-    }
-  };
 
-export const deleteAdmin =
-  ({ userId, currentUser, navigate, image, setWantToDelete }) =>
-  async (adminDispatch) => {
+    if (imageChanged && oldImageName && oldImageURL && image)
+      await deleteImage("admin", oldImageName, adminDispatch, alertDispatch);
+
+    var imageURL = "";
+    var imageName = "";
+    if (image) {
+      let data = await addAdminImage(
+        adminDispatch,
+        imageDispatch,
+        alertDispatch,
+        image
+      );
+      imageURL = data.imageURL;
+      imageName = data.imageName;
+    }
+
+    let finalData = form;
+    if (imageURL && imageURL !== "") {
+      finalData.imageURL = imageURL;
+      finalData.imageName = imageName;
+    }
+    if (imageChanged && !image) {
+      finalData.imageURL = "";
+      finalData.imageName = "";
+    }
+
+    const {
+      data: { data, message },
+    } = await adminAuthApi.put(`${UPDATE_ADMIN_URL}/${id}`, finalData);
+    setAlert(
+      adminDispatch,
+      alertDispatch,
+      UPDATE_ADMIN_SUCCESS,
+      data,
+      message,
+      "success"
+    );
+    setName("");
+
+    imageDispatch({
+      type: ADMIN_IMAGE,
+      payload: "",
+    });
+    uiDispatch({
+      type: UPDATE_ADMIN,
+    });
+  } catch (error) {
+    //delete the image
+    if (imageName)
+      deleteImage("admin", imageName, adminDispatch, alertDispatch);
+    generateAlert(
+      error,
+      adminDispatch,
+      alertDispatch,
+      UPDATE_ADMIN_FAIL,
+      null,
+      "error"
+    );
+  }
+};
+
+export const deleteAdmin = async (
+  adminDispatch,
+  alertDispatch,
+  utilDispatch,
+  id,
+  imageName
+) => {
+  try {
     adminDispatch({
       type: DELETE_ADMIN_START,
     });
-    try {
-      if (image) {
-        //delete any old images if there exist
-        const imageRef = ref(firebaseStorage, image);
-        deleteObject(imageRef)
-          .then(() => {
-            generateAlert({
-              adminDispatch,
-              text: "admin image deleted in storage",
-            });
-          })
-          .catch((err) => {
-            generateAlert({
-              adminDispatch,
-              text: err.message,
-              FAIL: null,
-            });
-          });
-      }
-      const res = await axios.delete(
-        `${DELETE_ADMIN}/${userId}`,
-        authConfig(getCookie("admin"))
-      );
-      adminDispatch({
-        type: DELETE_ADMIN_SUCCESS,
-        payload: res.data,
-      });
-      generateAlert({ adminDispatch, text: "Admin Deleted successfully" });
-      setWantToDelete(false);
-      if (userId === currentUser) {
-        removeCookie("admin");
-        setAuthConfig(null);
-        navigate("/");
-      }
-    } catch (error) {
-      generateAlert({
-        adminDispatch,
-        text: error?.response?.data?.error
-          ? error.response.data.error
-          : error?.message,
-        FAIL: DELETE_ADMIN_FAIL,
-      });
-    }
-  };
+    const {
+      data: { data, message },
+    } = await adminAuthApi.delete(`${DELETE_ADMIN_URL}/${id}`);
+    setAlert(
+      adminDispatch,
+      alertDispatch,
+      DELETE_ADMIN_SUCCESS,
+      data,
+      message,
+      "success"
+    );
+    if (imageName)
+      await deleteImage("admin", imageName, adminDispatch, alertDispatch);
+    utilDispatch({
+      type: TOGGLE_WANT_TO_DELETE,
+      payload: null,
+    });
+  } catch (error) {
+    generateAlert(
+      error,
+      adminDispatch,
+      alertDispatch,
+      DELETE_ADMIN_FAIL,
+      null,
+      "error"
+    );
+  }
+};

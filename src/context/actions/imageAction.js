@@ -27,6 +27,10 @@ import {
   UPLOAD_CERTIFICATE_IMAGE_SUCCESS,
   CERTIFICATE_IMAGE,
   UPLOAD_CERTIFICATE_IMAGE_START,
+  UPLOAD_ADMIN_IMAGE_FAIL,
+  UPLOAD_ADMIN_IMAGE_SUCCESS,
+  ADMIN_IMAGE,
+  UPLOAD_ADMIN_IMAGE_START,
 } from "../types/image_types";
 import { setAlert } from "./alertAction";
 import { generateAlert } from "../../util/generateAlert";
@@ -37,6 +41,7 @@ import { ADD_PROJECT_FAIL } from "../types/project_types";
 import { ADD_WORK_FAIL } from "../types/work_types";
 import { ADD_SKILL_FAIL } from "../types/skill_types";
 import { ADD_CERTIFICATE_FAIL } from "../types/certificate_types";
+import { ADD_ADMIN_FAIL } from "../types/admin_types";
 
 export const addBlogImage = async (
   blogDispatch,
@@ -133,7 +138,6 @@ export const addInnerBlogImage = async (
       return { imageURL: null, imageName: null };
     }
   } catch (error) {
-    console.log(error);
     generateAlert(
       error,
       blogDispatch,
@@ -236,6 +240,59 @@ export const addProjectImage = async (
       projectDispatch,
       alertDispatch,
       ADD_PROJECT_FAIL,
+      null,
+      "error"
+    );
+  }
+};
+
+export const addAdminImage = async (
+  adminDispatch,
+  alertDispatch,
+  imageDispatch,
+  image
+) => {
+  try {
+    imageDispatch({
+      type: UPLOAD_ADMIN_IMAGE_START,
+    });
+    if (image && image !== "" && image !== null) {
+      const imageRef = ref(
+        firebaseStorage,
+        `admin/${image.name + new Date().getTime()}`
+      );
+      const data = await uploadBytes(imageRef, image);
+      const imageURL = await getDownloadURL(data.ref);
+      imageDispatch({
+        type: ADMIN_IMAGE,
+        payload: "",
+      });
+      setAlert(
+        imageDispatch,
+        alertDispatch,
+        UPLOAD_ADMIN_IMAGE_SUCCESS,
+        imageURL,
+        "Image Uploaded Successfully",
+        "success"
+      );
+      return { imageURL, imageName: data.metadata.name };
+    } else {
+      setAlert(
+        imageDispatch,
+        alertDispatch,
+        UPLOAD_ADMIN_IMAGE_FAIL,
+        null,
+        "Please Enter Image",
+        "error"
+      );
+      return { imageURL: null, imageName: null };
+    }
+  } catch (error) {
+    generateAlert(
+      error,
+      adminDispatch,
+      alertDispatch,
+      ADD_ADMIN_FAIL,
       null,
       "error"
     );

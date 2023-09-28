@@ -25,6 +25,11 @@ import {
   CERTIFICATE_IMAGE,
   UPLOAD_CERTIFICATE_IMAGE_START,
   UPLOAD_CERTIFICATE_IMAGE_SUCCESS,
+  UPLOAD_CERTIFICATE_IMAGE_FAIL,
+  ADMIN_IMAGE,
+  UPLOAD_ADMIN_IMAGE_START,
+  UPLOAD_ADMIN_IMAGE_SUCCESS,
+  UPLOAD_ADMIN_IMAGE_FAIL,
 } from "../../context/types/image_types";
 
 export const imageInitialState = {
@@ -41,6 +46,8 @@ export const imageInitialState = {
   uploadSkillImageLoading: false,
   certificateImage: "",
   uploadCertificateImageLoading: false,
+  adminImage: "",
+  uploadAdminImageLoading: false,
 };
 
 export const imageReducer = (state = imageInitialState, action) => {
@@ -176,7 +183,7 @@ export const imageReducer = (state = imageInitialState, action) => {
         ...state,
         uploadCertificateImageLoading: true,
       };
-    case UPLOAD_CERTIFICATE_IMAGE_START:
+    case UPLOAD_CERTIFICATE_IMAGE_FAIL:
       return {
         ...state,
         uploadCertificateImageLoading: false,
@@ -185,6 +192,27 @@ export const imageReducer = (state = imageInitialState, action) => {
       return {
         ...state,
         uploadCertificateImageLoading: false,
+      };
+
+    case ADMIN_IMAGE:
+      return {
+        ...state,
+        adminImage: payload,
+      };
+    case UPLOAD_ADMIN_IMAGE_START:
+      return {
+        ...state,
+        uploadAdminImageLoading: true,
+      };
+    case UPLOAD_ADMIN_IMAGE_FAIL:
+      return {
+        ...state,
+        uploadAdminImageLoading: false,
+      };
+    case UPLOAD_ADMIN_IMAGE_SUCCESS:
+      return {
+        ...state,
+        uploadAdminImageLoading: false,
       };
     default:
       return state;

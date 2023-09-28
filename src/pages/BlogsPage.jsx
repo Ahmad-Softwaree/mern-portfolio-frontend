@@ -9,6 +9,8 @@ import Opacity from "../components/Opacity";
 import SearchBox from "../components/global/SearchBox";
 import NoData from "../components/global/NoData";
 import RefreshData from "../components/global/RefreshData";
+import ReturnBack from "../components/global/ReturnBack";
+import ReturnHome from "../components/global/ReturnHome";
 export default function BlogsPage() {
   const { dispatch: alertDispatch } = useContext(AlertContext);
   const {
@@ -46,6 +48,10 @@ export default function BlogsPage() {
     <section className="w-full min-h-screen flex flex-col justify-left items-center gap-10">
       {search && <Opacity />}
       {search && <SearchBox method={`blog`} setSearch={setSearch} />}
+      <div className="w-full flex flex-row justify-left items-center gap-5">
+        <ReturnBack />
+        <ReturnHome />
+      </div>
       <div className="flex flex-row justify-between items-center w-full px-5 md:px-10">
         <h1 className="text-white font-bold">{file.nav.blogs}</h1>
         <div

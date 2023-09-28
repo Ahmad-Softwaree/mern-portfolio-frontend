@@ -15,7 +15,7 @@ export default function AdminSkill({ val, index }) {
       <Tr borderRadius={`10px`}>
         <Td>{index}</Td>
         <Td>{val.name}</Td>
-        <Td>{val.type.enName}</Td>
+        <Td>{val?.types[0]?.type?.enName}</Td>
 
         <Td>
           <img

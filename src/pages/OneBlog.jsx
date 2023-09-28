@@ -13,6 +13,8 @@ import { LanguageContext } from "../context/LanguageContext";
 import { BlogContext } from "../context/BlogContext";
 import { AlertContext } from "../context/AlertContext";
 import DateMoment from "../components/global/DateMoment";
+import ReturnBack from "../components/global/ReturnBack";
+import ReturnHome from "../components/global/ReturnHome";
 
 export default function OneBlog() {
   const {
@@ -49,6 +51,10 @@ export default function OneBlog() {
         <LoadingSingleBlogSkeleton />
       ) : blog ? (
         <Fragment>
+          <div className="w-full flex flex-row justify-left items-center gap-5">
+            <ReturnBack />
+            <ReturnHome />
+          </div>
           <div className="absolute w-full top-0 right-0 left-0 h-[500px] md:h-[700px]">
             <img
               src={`${blog.imageURL}`}

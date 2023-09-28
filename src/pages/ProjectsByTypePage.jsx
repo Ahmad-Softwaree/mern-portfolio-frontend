@@ -12,6 +12,8 @@ import LoadingProjectSkeleton from "../components/loading/LoadingProjectSkeleton
 import { Link, useParams } from "react-router-dom";
 import { getOneType } from "../context/actions/typeAction";
 import { TypeContext } from "../context/TypeContext";
+import ReturnBack from "../components/global/ReturnBack";
+import ReturnHome from "../components/global/ReturnHome";
 export default function ProjectsByTypePage() {
   const { type_id } = useParams();
   const { dispatch: alertDispatch } = useContext(AlertContext);
@@ -58,6 +60,10 @@ export default function ProjectsByTypePage() {
     <section className="w-full min-h-screen flex flex-col justify-left items-center gap-10">
       {search && <Opacity />}
       {search && <SearchBox method={`project`} setSearch={setSearch} />}
+      <div className="w-full flex flex-row justify-left items-center gap-5">
+        <ReturnBack />
+        <ReturnHome />
+      </div>
       <div className="flex flex-col md:flex-row gap-5 justify-between items-start md:items-center w-full px-5 md:px-10">
         <div className="flex flex-row justify-left items-center gap-5">
           <h1 className="text-white font-bold">
