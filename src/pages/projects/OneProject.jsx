@@ -56,7 +56,6 @@ export default function OneProject() {
                   className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
                 >
                   <span className="!text-[14px] text-white">
-                    {" "}
                     {file.projects.preview}
                   </span>
                   <OpenInNewIcon className="text-white" fontSize="14px" />
@@ -106,7 +105,7 @@ export default function OneProject() {
             </div>
             {project.gits.length > 0 ? (
               <Fragment>
-                {val.gits.map((val, index) => {
+                {project.gits.map((val, index) => {
                   return <ProjectGit val={val} key={index} />;
                 })}
               </Fragment>
