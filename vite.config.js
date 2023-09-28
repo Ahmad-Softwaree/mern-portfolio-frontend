@@ -20,7 +20,7 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       "/api": {
-        target: "https://api.ahmad-softare.com",
+        target: "https://api.ahmad-software.com",
         changeOrigin: true,
         secure: false,
         ws: true,
