@@ -8,7 +8,7 @@ import NotFound from "./error/NotFound";
 import Error from "./error/Error.jsx";
 import Layout from "./components/layout/Layout.jsx";
 import Universal from "./components/Universal.jsx";
-import { lazy, Suspense, useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import Fallback from "./pages/Fallback";
 import "aos/dist/aos.css";
 import AOS from "aos";
@@ -16,26 +16,18 @@ import NormalRoute from "./routes/NormalRoute";
 import AdminPublicRoute from "./routes/AdminPublicRoute";
 import AdminRoutes from "./routes/AdminRoutes";
 import AdminLayout from "./components/layout/AdminLayout";
-
-const Landing = lazy(() => import("./pages/landing/Landing.jsx"));
-const BlogsPage = lazy(() => import("./pages/BlogsPage"));
-const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
-const ProjectsByTypePage = lazy(() => import("./pages/ProjectsByTypePage"));
-const ProjectsByStackPage = lazy(() => import("./pages/ProjectsByStackPage"));
-
-const OneBlog = lazy(() => import("./pages/OneBlog"));
-const OneProject = lazy(() => import("./pages/projects/OneProject"));
-
-const OneCertificate = lazy(() =>
-  import("./pages/certificates/OneCertificate")
-);
-
-// const UpdateBlog = lazy(() => import("./pages/admin/UpdateBlog.jsx"));
-const AddBlog = lazy(() => import("./pages/admin/AddBlog.jsx"));
-const Panel = lazy(() => import("./pages/admin/Panel"));
-const Login = lazy(() => import("./pages/Login"));
-
-const Admins = lazy(() => import("./pages/admin/Admins"));
+import Landing from "./pages/landing/Landing.jsx";
+import BlogsPage from "./pages/BlogsPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ProjectsByTypePage from "./pages/ProjectsByTypePage";
+import ProjectsByStackPage from "./pages/ProjectsByStackPage";
+import OneBlog from "./pages/OneBlog";
+import OneProject from "./pages/projects/OneProject";
+import OneCertificate from "./pages/certificates/OneCertificate";
+import AddBlog from "./pages/admin/AddBlog.jsx";
+import Panel from "./pages/admin/Panel";
+import Login from "./pages/Login";
+import Admins from "./pages/admin/Admins";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
