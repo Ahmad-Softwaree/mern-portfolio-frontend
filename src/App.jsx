@@ -28,6 +28,7 @@ import AddBlog from "./pages/admin/AddBlog.jsx";
 import Panel from "./pages/admin/Panel";
 import Login from "./pages/Login";
 import Admins from "./pages/admin/Admins";
+import UpdateBlog from "./pages/admin/UpdateBlog";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -124,11 +125,11 @@ const routes = createBrowserRouter(
           element={<AdminRoutes Component={AddBlog} />}
           errorElement={<Error />}
         />
-        {/* <Route
+        <Route
           path="/panel/update_blog/:blog_id"
-          element={<UpdateBlog />}
+          element={<AdminRoutes Component={UpdateBlog} />}
           errorElement={<Error />}
-        /> */}
+        />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Route>

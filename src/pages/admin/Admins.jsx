@@ -36,7 +36,7 @@ export default function Admins() {
         </div>
 
         {loading ? (
-          <TableSkeleton cards={8} />
+          <TableSkeleton cards={4} />
         ) : admin ? (
           <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
             <Table variant="striped" colorScheme="black">

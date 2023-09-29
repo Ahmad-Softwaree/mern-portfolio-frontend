@@ -44,10 +44,10 @@ input::placeholder {
   align-items: center;
 }
 
-textarea {
+/* textarea {
   resize: none;
   border: 0;
-}
+} */
 
 input {
   border: 0;
@@ -245,6 +245,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .projectCards {
   scroll-behavior: smooth;
+}
+
+.blogBody > * {
+  width: 100%;
 }
 
 @layer components {

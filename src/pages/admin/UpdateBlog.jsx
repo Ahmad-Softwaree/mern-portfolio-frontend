@@ -1,403 +1,371 @@
 import React, {
   useCallback,
+  useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
-import PropTypes from "prop-types";
 import {
-  updateBlog,
-  getOneBlog,
-  uploadInnerBlogImage,
+  addInnerBlogImage,
   deleteInnerBlogImage,
-} from "../../actions/blog";
-import { BLOG_UPDATE_IMAGE, INSIDE_BLOG_IMAGE } from "../../actions/types";
-import { Spinner } from "@chakra-ui/react";
+} from "../../context/actions/imageAction";
+import { BLOG_IMAGE, INSIDE_BLOG_IMAGE } from "../../context/types/image_types";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAllCategories } from "../../actions/category";
-const UpdateBlog = React.memo(
-  ({
-    image,
-    getOneBlog,
-    updateBlog,
-    blog: { blog, blogs, updateBlogLoading, uploadInnerImageLoading },
-    admin: { user },
-    uploadInnerBlogImage,
-    getAllCategories,
-    deleteInnerBlogImage,
-    category: { categories, loading },
-  }) => {
-    const { blog_id } = useParams();
-    const [update, setUpdate] = useState(false);
+import { getOneBlog, updateBlog } from "../../context/actions/blogAction";
+import { BlogContext } from "../../context/BlogContext";
+import { AlertContext } from "../../context/AlertContext";
+import { ImageContext } from "../../context/ImageContext";
+import FileInput from "../../components/inputs/FileInput";
+import TextInput from "../../components/inputs/TextInput";
+import CustomTextArea from "../../components/inputs/CustomTextArea";
+import FakeInput from "../../components/inputs/FakeInput";
+import { CategoryContext } from "../../context/CategoryContext";
+import { getAllCategories } from "../../context/actions/categoryAction";
+import SpinnerLoading from "../../components/global/SpinnerLoading";
+export default function UpdateBlog() {
+  const { blog_id } = useParams();
+  const {
+    dispatch: blogDispatch,
+    state: { updateBlogLoading, blog, getOneBlogLoading },
+  } = useContext(BlogContext);
+  const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    dispatch: imageDispatch,
+    state: {
+      blogImage,
+      insideBlogImage,
+      deleteInnerBlogImageLoading,
+      uploadInnerBlogImageLoading,
+      uploadBlogImageLoading,
+    },
+  } = useContext(ImageContext);
+  const {
+    dispatch: categoryDispatch,
+    state: { categories, getCategoriesLoading },
+  } = useContext(CategoryContext);
 
-    useEffect(() => {
-      getOneBlog({ blogId: blog_id });
-      getAllCategories({});
-    }, [blog_id, update]);
+  useEffect(() => {
+    getOneBlog(blogDispatch, alertDispatch, blog_id);
+  }, [blogDispatch]);
 
-    const [{ enTitle, arTitle, krTitle, enBody, arBody, krBody }, setInputs] =
-      useState({
-        enTitle: blog.enTitle || "",
-        krTitle: blog.krTitle || "",
-        arTitle: blog.arTitle || "",
-        enBody: blog.enBody || "",
-        arBody: blog.arBody || "",
-        krBody: blog.krBody || "",
-      });
-    const [activeCategories, setActiveCategories] = useState([]);
-    const [deleteImageUrl, setDeleteImageUrl] = useState("");
+  useEffect(() => {
+    getAllCategories(categoryDispatch, alertDispatch);
+  }, [categoryDispatch]);
 
-    useEffect(() => {
+  const [inputs, setInputs] = useState({
+    enTitle: blog?.enTitle,
+    krTitle: blog?.krTitle,
+    arTitle: blog?.arTitle,
+    enBody: blog?.enBody,
+    arBody: blog?.arBody,
+    krBody: blog?.krBody,
+  });
+  const { enTitle, arTitle, krTitle, enBody, arBody, krBody } = inputs;
+  const [activeCategories, setActiveCategories] = useState(
+    blog?.categories.map((val) => val.category._id)
+  );
+  const mainImageRef = useRef("");
+  const smallImageRef = useRef("");
+  const navigate = useNavigate();
+  const [imageUrl, setImageUrl] = useState("");
+  const [deleteImageUrl, setDeleteImageUrl] = useState("");
+  const [insideImages, setInsideImages] = useState([]);
+  const [imageChanged, setImageChanged] = useState(false);
+
+  useEffect(() => {
+    if (blog) {
       setInputs({
-        enTitle: blog.enTitle || "",
-        krTitle: blog.krTitle || "",
-        arTitle: blog.arTitle || "",
-        enBody: blog.enBody || "",
-        arBody: blog.arBody || "",
-        krBody: blog.krBody || "",
+        enTitle: blog?.enTitle,
+        krTitle: blog?.krTitle,
+        arTitle: blog?.arTitle,
+        enBody: blog?.enBody,
+        arBody: blog?.arBody,
+        krBody: blog?.krBody,
       });
-
       setActiveCategories(
-        blog.categories?.map((val) => {
-          return val._id;
-        })
+        blog?.categories.map((val) => ({
+          category: val.category._id,
+        }))
       );
-    }, [blog]);
-    const dispatch = useDispatch();
-    const mainImageRef = useRef();
-    const smallImageRef = useRef();
-    const [imageChanged, setImageChanged] = useState(false);
-    const navigate = useNavigate();
-    const [imageUrl, setImageUrl] = useState("");
+    }
+  }, [blog]);
 
-    const onChange = useCallback(
-      (e) =>
-        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })),
-      []
-    );
+  const onChange = useCallback(
+    (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })),
+    []
+  );
 
-    const onKeyDown = useCallback(
-      (e) => {
-        if (e.keyCode === 13 && !e.shiftKey) {
-          updateBlog({
-            enTitle,
-            arTitle,
-            krTitle,
-            enBody,
-            arBody,
-            krBody,
-            userId: user._id,
-            setInputs,
-            imageChanged,
-            oldImage: blog.image,
-            blogId: blog_id,
-            image: image.updateBlog,
-            setUpdate,
-            activeCategories,
-          });
-        }
-      },
-      [
-        enTitle,
-        arTitle,
-        krTitle,
-        blog,
-        user._id,
-        updateBlog,
-        arBody,
-        enBody,
-        krBody,
-      ]
-    );
+  useEffect(() => {
+    const imgSrcs = extractImageSrcs(enBody);
+    setInsideImages(imgSrcs);
+  }, [enBody]);
 
-    return (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          updateBlog({
-            enTitle,
-            arTitle,
-            krTitle,
-            enBody,
-            arBody,
-            krBody,
-            userId: user._id,
-            setInputs,
-            imageChanged,
-            oldImage: blog.image,
-            blogId: blog_id,
-            image: image.updateBlog,
-            setUpdate,
-            activeCategories,
-          });
-        }}
-        className="createBlogPage updateBlogPage  flex flex-col justify-center align-center w-full gap-2"
-      >
-        <h1 className="headings">Add Blog</h1>
+  const extractImageSrcs = (htmlString) => {
+    const imgSrcs = [];
+    const imgTagRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/g;
+    let match;
 
-        <div className="fileInputDiv flex flex-col justify-center align-center gap-1">
-          {!image.updateBlog ? (
-            <>
-              <input
+    while ((match = imgTagRegex.exec(htmlString)) !== null) {
+      imgSrcs.push(match[1]);
+    }
+
+    return imgSrcs;
+  };
+  return (
+    <section
+      data-aos="fade-up"
+      className="w-full flex flex-col justify-left items-center gap-5 min-h-screen text-white overflow-hidden pl-[150px] pr-[50px] pb-[200px] bg-niceb"
+    >
+      {!getOneBlogLoading && (
+        <form
+          className="w-full h-fit flex flex-col justify-left items-center gap-[30px]"
+          onSubmit={(e) => {
+            e.preventDefault();
+            updateBlog(
+              blogDispatch,
+              alertDispatch,
+              imageDispatch,
+              { ...inputs, categories: activeCategories },
+              blog._id,
+              setInputs,
+              setActiveCategories,
+              blogImage,
+              blog.imageURL,
+              blog.imageName,
+              imageChanged,
+              navigate
+            );
+          }}
+        >
+          <h1 className="font-bold w-full text-center">Add Blog</h1>
+          {blog.imageURL && !imageChanged && (
+            <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
+              <img
+                className="w-full h-[400px] object-cover rounded-md"
+                src={blog.imageURL}
+                alt="imageUpload"
+              />
+              <div className="absolute w-full top-0 right-0 left-0 z-50 bg-black opacity-80 h-[400px] rounded-md"></div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setImageChanged(true);
+                }}
+                className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
+              >
+                Remove Old Blog Image
+              </button>
+            </div>
+          )}
+          <div className="flex flex-col justify-left items-center gap-5 w-full">
+            {!blogImage && imageChanged ? (
+              <FileInput
+                title={`Background Image`}
+                value={""}
                 onChange={(e) => {
-                  dispatch({
-                    type: BLOG_UPDATE_IMAGE,
+                  imageDispatch({
+                    type: BLOG_IMAGE,
                     payload: e.target.files[0],
                   });
                   setImageChanged(true);
                 }}
-                type="file"
-                name="update_blog"
-                id="update_blog"
-                className="blogImage"
                 ref={mainImageRef}
+                id={`blogImage`}
+                className={`w-[300px] md:w-[600px]`}
               />
-              <label
-                className="blogImageUploaderLabel mainLabel flex justify-center align-center flex-col gap-2 position-relative"
-                htmlFor="update_blog"
-              >
-                <div className="overImage"></div>
+            ) : blogImage ? (
+              <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
                 <img
-                  className="blogUnderBlack"
-                  src={blog.image}
-                  alt="blog Image"
-                />
-                <div className="blogHeader flex flex-col w-full justify-center align-center gap-2">
-                  <input
-                    onChange={onChange}
-                    onKeyDown={onKeyDown}
-                    value={enTitle}
-                    placeholder="Enter the English Title"
-                    type="text"
-                    name="enTitle"
-                    id="enTitle"
-                    className={enTitle !== "" ? "activeInputBorder" : ""}
-                  />
-                  <input
-                    onChange={onChange}
-                    onKeyDown={onKeyDown}
-                    value={arTitle}
-                    placeholder="Enter the Arabic Title"
-                    type="text"
-                    name="arTitle"
-                    id="arTitle"
-                    className={arTitle !== "" ? "activeInputBorder" : ""}
-                  />
-                  <input
-                    onChange={onChange}
-                    onKeyDown={onKeyDown}
-                    value={krTitle}
-                    placeholder="Enter the Kurdish Title"
-                    type="text"
-                    name="krTitle"
-                    id="krTitle"
-                    className={krTitle !== "" ? "activeInputBorder" : ""}
-                  />
-
-                  <div className=" blogOwner flex flex-col justify-left align-center ">
-                    <img src={`${user.image}`} alt="Blog Image" />
-                    <span>Ahmad Software</span>
-                    <p>Founder & CEO of Bester Group Company</p>
-                  </div>
-                </div>
-              </label>
-            </>
-          ) : (
-            <div className="URLImage position-relative">
-              <img
-                className="URLImage"
-                src={URL.createObjectURL(image.updateBlog)}
-                alt="imageUpload"
-              />
-              <div className="overImage"></div>
-
-              <span
-                onClick={() => {
-                  dispatch({ type: BLOG_UPDATE_IMAGE, payload: null });
-                  mainImageRef.current = "";
-                  setImageChanged(false);
-                }}
-                className="position-absolute x"
-              >
-                <i className="fa-solid fa-xmark"></i>
-              </span>
-              <div className="blogHeader flex flex-col w-full justify-center align-center gap-2">
-                <input
-                  onChange={onChange}
-                  onKeyDown={onKeyDown}
-                  value={enTitle}
-                  placeholder="Enter the English Title"
-                  type="text"
-                  name="enTitle"
-                  id="enTitle"
-                  className={enTitle !== "" ? "activeInputBorder" : ""}
-                />
-                <input
-                  onChange={onChange}
-                  onKeyDown={onKeyDown}
-                  value={arTitle}
-                  placeholder="Enter the Arabic Title"
-                  type="text"
-                  name="arTitle"
-                  id="arTitle"
-                  className={arTitle !== "" ? "activeInputBorder" : ""}
-                />
-                <input
-                  onChange={onChange}
-                  onKeyDown={onKeyDown}
-                  value={krTitle}
-                  placeholder="Enter the Kurdish Title"
-                  type="text"
-                  name="krTitle"
-                  id="krTitle"
-                  className={krTitle !== "" ? "activeInputBorder" : ""}
-                />
-
-                <div className=" blogOwner flex flex-col justify-left align-center ">
-                  <img src={`${user.image}`} alt="Blog Owner Image" />
-                  <span>Ahmad Software</span>
-                  <p>Founder & CEO of Bester Group Company</p>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="inner">
-          <div className="fileInputDiv smallInputDiv flex flex-col justify-center align-center gap-1">
-            {!image.insideBlog ? (
-              <>
-                <input
-                  onChange={(e) =>
-                    dispatch({
-                      type: INSIDE_BLOG_IMAGE,
-                      payload: e.target.files[0],
-                    })
-                  }
-                  type="file"
-                  name="innerBlog"
-                  id="innerBlog"
-                  className="blogImage"
-                  ref={smallImageRef}
-                />
-                <label
-                  className="blogImageUploaderLabel flex justify-center align-center flex-col gap-2"
-                  htmlFor="innerBlog"
-                >
-                  <img
-                    className="imageUploadCloud"
-                    src="/images/uploadImage.svg"
-                    alt="imageUpload"
-                  />
-
-                  <span className="imageUploadButton">Upload an Image</span>
-
-                  <p className="imageInfo">The Url will be down here</p>
-                </label>
-              </>
-            ) : (
-              <div className="URLImage position-relative">
-                <img
-                  className="URLImage"
-                  src={URL.createObjectURL(image.insideBlog)}
+                  className="w-full h-[400px] object-cover rounded-md"
+                  src={URL.createObjectURL(blogImage)}
                   alt="imageUpload"
                 />
-                <span
-                  onClick={() => {
-                    dispatch({ type: INSIDE_BLOG_IMAGE, payload: null });
-                    smallImageRef.current = "";
-                  }}
-                  className="position-absolute x"
-                >
-                  <i className="fa-solid fa-xmark"></i>
-                </span>
+                <div className="absolute w-full top-0 right-0 left-0 z-50 bg-black opacity-80 h-[400px] rounded-md"></div>
+
                 <button
-                  type="button"
-                  disabled={uploadInnerImageLoading}
-                  onClick={() =>
-                    uploadInnerBlogImage(
-                      image.insideBlog,
-                      smallImageRef,
-                      setImageUrl
-                    )
-                  }
-                  className="uploadInnerImage"
+                  onClick={() => {
+                    imageDispatch({ type: BLOG_IMAGE, payload: "" });
+                    mainImageRef.current = "";
+                    setImageChanged(false);
+                  }}
+                  className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
                 >
-                  Upload
+                  Remove Background Image
                 </button>
+              </div>
+            ) : null}
+          </div>
+          <div className="flex flex-col justify-left items-center gap-5 w-full">
+            {!insideBlogImage ? (
+              <FileInput
+                title={`Inside Blog Image`}
+                value={""}
+                onChange={(e) => {
+                  imageDispatch({
+                    type: INSIDE_BLOG_IMAGE,
+                    payload: e.target.files[0],
+                  });
+                }}
+                ref={smallImageRef}
+                id={`insideBlogImage`}
+                className={`w-[300px] md:w-[600px]`}
+              />
+            ) : (
+              <div className="relative w-full h-full flex flex-col justify-left items-center gap-5">
+                <img
+                  className="w-full h-[300px] object-cover rounded-md"
+                  src={URL.createObjectURL(insideBlogImage)}
+                  alt="imageUpload"
+                />
+
+                <div className="w-full flex flex-row justify-center items-center gap-5">
+                  <button
+                    disabled={uploadInnerBlogImageLoading}
+                    onClick={() => {
+                      addInnerBlogImage(
+                        blogDispatch,
+                        alertDispatch,
+                        imageDispatch,
+                        insideBlogImage
+                      );
+                    }}
+                    className="my-5 !text-[14px] text-blue border-2 border-solid border-blue rounded-md transition-all duration-300 hover:bg-blue hover:text-white p-2 px-4 disabled:bg-gray-500"
+                  >
+                    Upload Inside Blog Image
+                  </button>
+                  <button
+                    disabled={uploadInnerBlogImageLoading}
+                    onClick={() => {
+                      imageDispatch({ type: INSIDE_BLOG_IMAGE, payload: "" });
+                      mainImageRef.current = "";
+                    }}
+                    className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4 disabled:bg-gray-500"
+                  >
+                    Remove Inside Blog Image
+                  </button>
+                </div>
               </div>
             )}
           </div>
-          <p className="imageUrlAddress">{imageUrl}</p>
-          <input
-            className="deleteImageInput"
+          <FakeInput
+            title={`Inside Blog Image URL`}
+            text={imageUrl}
+            className={`w-[300px] md:w-[600px]`}
+          />
+          <span className="w-[300px] md:w-[600px] text-left  text-white !text-[20px]">
+            Inside Blog Images Uploaded URL
+          </span>
+          {insideImages.map((val, index) => {
+            return (
+              <FakeInput
+                key={index}
+                title={`Inside Blog Image URL ${index + 1}`}
+                text={val}
+                className={`w-[300px] md:w-[600px]`}
+              />
+            );
+          })}
+          <TextInput
             value={deleteImageUrl}
             onChange={(e) => setDeleteImageUrl(e.target.value)}
-            type="text"
+            title={`Delete Image URL`}
+            name={`deleteImageURL`}
+            className={`w-[300px] md:w-[600px]`}
           />
           <button
-            type="button"
-            disabled={uploadInnerImageLoading}
-            onClick={() =>
-              deleteInnerBlogImage(deleteImageUrl, setDeleteImageUrl)
-            }
-            className="deleteImageButton"
+            disabled={deleteInnerBlogImageLoading}
+            onClick={() => {
+              deleteInnerBlogImage(
+                blogDispatch,
+                alertDispatch,
+                imageDispatch,
+                deleteImageUrl,
+                setDeleteImageUrl
+              );
+            }}
+            className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4 disabled:bg-gray-500"
           >
             Delete Image
           </button>
-          <textarea
-            onKeyDown={(e) => {
-              if (e.keyCode === 9) {
-                e.preventDefault();
-              }
-            }}
-            onChange={onChange}
-            value={enBody}
-            name="enBody"
-            id="enBody"
-          />
-          <textarea
-            onKeyDown={(e) => {
-              if (e.keyCode === 9) {
-                e.preventDefault();
-              }
-            }}
-            onChange={onChange}
-            value={arBody}
-            name="arBody"
-            id="arBody"
-          />
-          <textarea
-            onKeyDown={(e) => {
-              if (e.keyCode === 9) {
-                e.preventDefault();
-              }
-            }}
-            onChange={onChange}
-            value={krBody}
-            name="krBody"
-            id="krBody"
-          />
+          <div className="w-full flex flex-row justify-center items-center gap-[30px] flex-wrap">
+            <TextInput
+              value={enTitle}
+              onChange={onChange}
+              title={`English Title`}
+              name={`enTitle`}
+              className={`w-[300px] md:w-[600px]`}
+            />
+            <TextInput
+              value={arTitle}
+              onChange={onChange}
+              title={`Arabic Title`}
+              name={`arTitle`}
+              className={`w-[300px] md:w-[600px]`}
+            />
+            <TextInput
+              value={krTitle}
+              onChange={onChange}
+              title={`Kurdish Title`}
+              name={`krTitle`}
+              className={`w-[300px] md:w-[600px]`}
+            />
 
-          <h3 className="w-full text-left">Categories</h3>
-
-          <div className="flex flex-row w-full justify-left align-center gap-2">
+            <CustomTextArea
+              id={`enBody`}
+              className={`w-[300px] md:w-[600px]`}
+              title={`English Body`}
+              onChange={onChange}
+              name="enBody"
+              value={enBody}
+            />
+            <CustomTextArea
+              className={`w-[300px] md:w-[600px]`}
+              title={`Arabic Body`}
+              onChange={onChange}
+              name="arBody"
+              value={arBody}
+            />
+            <CustomTextArea
+              className={`w-[300px] md:w-[600px]`}
+              title={`Kurdish Body`}
+              onChange={onChange}
+              name="krBody"
+              value={krBody}
+            />
+          </div>
+          <span className="w-[300px] md:w-[600px] text-left  text-white !text-[20px]">
+            Select Categories
+          </span>
+          <div className="flex flex-row justify-start items-center gap-5 flex-wrap md:w-[600px] w-[300px]">
             {categories?.map((category, index) => {
               return (
                 <span
                   onClick={() => {
-                    if (activeCategories?.includes(category._id)) {
+                    if (
+                      activeCategories.find(
+                        (val) => val.category === category._id
+                      )
+                    ) {
                       setActiveCategories((prev) => {
-                        return prev.filter((val) => val !== category._id);
+                        return prev.filter(
+                          (val) => val.category !== category._id
+                        );
                       });
                     } else {
-                      setActiveCategories((prev) => [...prev, category._id]);
+                      setActiveCategories((prev) => [
+                        ...prev,
+                        { category: category._id },
+                      ]);
                     }
                   }}
                   key={index}
-                  className={`category ${
-                    activeCategories?.includes(category._id) && "activeCategory"
+                  className={`!text-[14px] p-2 rounded-md border-2 border-solid border-blue transition-all duration-300  hover:bg-blue hover:text-black cursor-pointer ${
+                    activeCategories?.find(
+                      (val) => val.category === category._id
+                    )
+                      ? "bg-blue text-black"
+                      : "text-blue"
                   }`}
                 >
                   {category.enName}
@@ -405,44 +373,33 @@ const UpdateBlog = React.memo(
               );
             })}
           </div>
-
-          <div className="publishAndCancel flex flex-row justify-left align-center gap-2">
-            <span
-              className="cancelLink"
+          <div className="w-full flex flex-row justify-center items-center gap-5">
+            <button
+              type="button"
+              className="my-5 !text-[14px] text-purple border-2 border-solid border-purple rounded-md transition-all duration-300 hover:bg-purple hover:text-white p-2 px-4"
               onClick={() => {
                 dispatch({ type: INSIDE_BLOG_IMAGE, payload: null });
-                dispatch({ type: BLOG_UPDATE_IMAGE, payload: null });
+                dispatch({ type: BLOG_IMAGE, payload: null });
                 navigate(-1);
               }}
             >
               Cancel
-            </span>
+            </button>
 
             <button
               type="submit"
-              disabled={updateBlogLoading}
-              className={
-                enTitle !== "" &&
-                arTitle !== "" &&
-                krTitle !== "" &&
-                enBody !== "" &&
-                arBody !== "" &&
-                krBody !== ""
-                  ? "activePublish"
-                  : "publish"
-              }
+              className="my-5 !text-[14px] text-blue border-2 border-solid border-blue rounded-md transition-all duration-300 hover:bg-blue hover:text-white p-2 px-4 disabled:bg-gray-500"
+              disabled={updateBlogLoading || uploadBlogImageLoading}
             >
-              {updateBlogLoading ? (
-                <div className="w-full loadingSpinner">
-                  <Spinner minWidth={`10px`} minHeight={`10px`} size={`sm`} />
-                </div>
+              {updateBlogLoading || uploadBlogImageLoading ? (
+                <SpinnerLoading size={`30px`} />
               ) : (
-                "Update"
+                "Publish"
               )}
             </button>
           </div>
-        </div>
-      </form>
-    );
-  }
-);
+        </form>
+      )}
+    </section>
+  );
+}

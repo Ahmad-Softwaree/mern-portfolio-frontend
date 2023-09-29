@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableCaption,
@@ -16,6 +16,7 @@ import RefreshData from "../global/RefreshData";
 import { UiContext } from "../../context/UiContext";
 import { ADD_SKILL } from "../../context/types/ui_types";
 import { getAllSkills } from "../../context/actions/skillAction";
+import { Tooltip } from "@chakra-ui/react";
 import AdminSkill from "./AdminSkill";
 export default function AdminSkills() {
   const { dispatch: alertDispatch } = useContext(AlertContext);
@@ -55,15 +56,23 @@ export default function AdminSkills() {
       </div>
 
       {getSkillsLoading ? (
-        <TableSkeleton cards={8} />
+        <TableSkeleton cards={4} />
       ) : skills.length > 0 ? (
         <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
           <Table variant="striped" colorScheme="black">
             <TableCaption color={`white`}>Skills</TableCaption>
             <Thead>
               <Tr borderRadius={`10px`}>
-                <Th color={`white`} className="text-white">
-                  Id
+                <Th
+                  color={`white`}
+                  className="text-white flex flex-row justify-left items-center gap-2"
+                >
+                  <Tooltip label="Sort Skills" aria-label="A tooltip">
+                    <span className="!text-[14px] cursor-pointer transition-all duration-300 hover:text-purple">
+                      <i className={`fa-solid fa-arrow-up`}></i>
+                    </span>
+                  </Tooltip>
+                  <span className="!text-[14px]">Id</span>
                 </Th>
                 <Th color={`white`} className="text-white">
                   Name

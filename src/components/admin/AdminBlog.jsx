@@ -1,7 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import { Tr, Td } from "@chakra-ui/react";
 import DateMoment from "../global/DateMoment";
+import { Link } from "react-router-dom";
+import { UtilContext } from "../../context/UtilContext";
+import { TOGGLE_WANT_TO_DELETE } from "../../context/types/util_types";
+import { DELETE_ONE_BLOG_METHOD } from "../../context/types/delete_types";
 export default function AdminBlog({ val, index }) {
+  const { dispatch: utilDispatch } = useContext(UtilContext);
   return (
     <Fragment key={index}>
       <Tr borderRadius={`10px`}>
@@ -24,10 +29,25 @@ export default function AdminBlog({ val, index }) {
         </Td>
         <Td>
           <div className="flex flex-row justify-start items-center gap-3">
-            <span className="p-1 rounded-full px-2 border-2 border-solid border-yellow text-yellow transition-all duration-300 hover:bg-yellow hover:text-white cursor-pointer !text-[12px]">
+            <Link
+              to={`update_blog/${val._id}`}
+              className="p-1 rounded-full px-2 border-2 border-solid border-yellow text-yellow transition-all duration-300 hover:bg-yellow hover:text-white cursor-pointer !text-[12px]"
+            >
               <i className="fa-solid fa-pen"></i>
-            </span>
-            <span className="p-1 rounded-full px-2 border-2 border-solid border-purple text-purple transition-all duration-300 hover:bg-purple hover:text-white cursor-pointer !text-[12px]">
+            </Link>
+            <span
+              onClick={() => {
+                utilDispatch({
+                  type: TOGGLE_WANT_TO_DELETE,
+                  payload: {
+                    method: DELETE_ONE_BLOG_METHOD,
+                    id: val._id,
+                    image: val.imageName,
+                  },
+                });
+              }}
+              className="p-1 rounded-full px-2 border-2 border-solid border-purple text-purple transition-all duration-300 hover:bg-purple hover:text-white cursor-pointer !text-[12px]"
+            >
               <i className="fa-solid fa-trash"></i>
             </span>
           </div>

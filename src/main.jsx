@@ -8,7 +8,7 @@ import { MainContext } from "./context/Index";
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <MainContext>
-    <ChakraProvider>
+    <ChakraProvider resetCSS={false}>
       <App />
     </ChakraProvider>
   </MainContext>

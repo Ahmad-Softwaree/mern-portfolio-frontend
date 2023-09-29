@@ -6,11 +6,13 @@ export default function CustomTextArea({
   name,
   value,
   onChange,
+  ref = null,
   placeholder,
   title,
   className,
   textInputClass,
   disabled = false,
+  id,
 }) {
   const [focus, setFocus] = useState(false);
   return (
@@ -43,6 +45,8 @@ export default function CustomTextArea({
           </span>
         )}
         <Textarea
+          id={id}
+          ref={ref}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
           color={`white`}

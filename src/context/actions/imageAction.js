@@ -93,6 +93,9 @@ export const addBlogImage = async (
       null,
       "error"
     );
+    imageDispatch({
+      type: UPLOAD_BLOG_IMAGE_FAIL,
+    });
   }
 };
 
@@ -146,6 +149,9 @@ export const addInnerBlogImage = async (
       null,
       "error"
     );
+    imageDispatch({
+      type: UPLOAD_INNER_BLOG_IMAGE_FAIL,
+    });
   }
 };
 
@@ -190,6 +196,9 @@ export const deleteInnerBlogImage = async (
       null,
       "error"
     );
+    imageDispatch({
+      type: DELETE_INNER_BLOG_IMAGE_FAIL,
+    });
   }
 };
 
@@ -243,6 +252,9 @@ export const addProjectImage = async (
       null,
       "error"
     );
+    imageDispatch({
+      type: UPLOAD_PROJECT_IMAGE_FAIL,
+    });
   }
 };
 
@@ -296,6 +308,9 @@ export const addAdminImage = async (
       null,
       "error"
     );
+    imageDispatch({
+      type: UPLOAD_ADMIN_IMAGE_FAIL,
+    });
   }
 };
 
@@ -349,6 +364,9 @@ export const addWorkImage = async (
       null,
       "error"
     );
+    imageDispatch({
+      type: UPLOAD_WORK_IMAGE_FAIL,
+    });
   }
 };
 
@@ -402,6 +420,9 @@ export const addSkillImage = async (
       null,
       "error"
     );
+    imageDispatch({
+      type: UPLOAD_SKILL_IMAGE_FAIL,
+    });
   }
 };
 
@@ -455,5 +476,8 @@ export const addCertificateImage = async (
       null,
       "error"
     );
+    imageDispatch({
+      type: UPLOAD_CERTIFICATE_IMAGE_FAIL,
+    });
   }
 };

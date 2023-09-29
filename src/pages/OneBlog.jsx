@@ -35,7 +35,7 @@ export default function OneBlog() {
 
   useEffect(() => {
     if (blog && !getOneBlogLoading)
-      getBlogsByCategory(blogDispatch, alertDispatch, blog?.categories[0]._id);
+      getBlogsByCategory(blogDispatch, alertDispatch, blog?.categories[0]?._id);
   }, [blog, blogDispatch]);
 
   useEffect(() => {
@@ -51,19 +51,15 @@ export default function OneBlog() {
         <LoadingSingleBlogSkeleton />
       ) : blog ? (
         <Fragment>
-          <div className="w-full flex flex-row justify-left items-center gap-5">
-            <ReturnBack />
-            <ReturnHome />
-          </div>
           <div className="absolute w-full top-0 right-0 left-0 h-[500px] md:h-[700px]">
             <img
               src={`${blog.imageURL}`}
               alt="Blog Image"
-              className="absolute z-30 top-0 right-0 left-0 w-full h-[500px] md:h-[700px]"
+              className="absolute object-cover z-30 top-0 right-0 left-0 w-full h-[500px] md:h-[700px]"
             />
             <div className="bg-black opacity-90 z-50 absolute top-0 right-0 left-0 w-full h-[500px] md:h-[700px]"></div>{" "}
-            <div className="absolute top-[100px] md:top-[250px] left-0 right-0 mx-auto flex flex-col justify-center items-center gap-[50px] md:gap-[100px] z-50">
-              <h1 className="blogHeader w-full !text-[40px] md:!text-[55px] lg:!text-[70px] text-purple text-center font-bold">
+            <div className="absolute top-[100px] md:top-[200px] left-0 right-0 mx-auto flex flex-col justify-center items-center gap-[20px] md:gap-[100px] z-50">
+              <h1 className="blogHeader w-full !text-[40px] md:!text-[50px] lg:!text-[60px] text-purple text-center font-bold">
                 {language === "en"
                   ? blog.enTitle
                   : language === "ar"
@@ -108,7 +104,7 @@ export default function OneBlog() {
               </Link>
             </div>
 
-            <div
+            {/* <div
               className={`w-full flex flex-row items-center gap-5 ${
                 language === "en" ? "justify-left" : "justify-right"
               }`}
@@ -149,7 +145,7 @@ export default function OneBlog() {
               >
                 AR
               </span>
-            </div>
+            </div> */}
             <div className="w-full flex flex-col justify-left items-start gap-5">
               <h3 className="font-bold p-1 border-b-2 border-purple border-solid">
                 {file.singleBlog.categories}
@@ -174,8 +170,8 @@ export default function OneBlog() {
               </div>
             </div>
 
-            {/* <div
-              className={`blogBody ${
+            <div
+              className={`blogBody w-full ${
                 language === "en" ? "karla englishDots" : "arabicDots"
               }`}
             >
@@ -184,13 +180,13 @@ export default function OneBlog() {
                 : language === "ar"
                 ? parse(blog.arBody)
                 : parse(blog.krBody)}
-            </div> */}
+            </div>
             <span
-              className={`flex flex-row justify-left items-center gap-3 !text-[14px] ${
+              className={`flex w-full flex-row justify-left items-center gap-3 !text-[14px] ${
                 language !== "en" && "justify-right"
               }`}
             >
-              <i className="fa-regular fa-clock"></i>
+              <i className="fa-regular fa-clock text-purple"></i>
               <DateMoment date={blog.createdAt} />
             </span>
 

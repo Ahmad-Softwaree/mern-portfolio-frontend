@@ -62,16 +62,33 @@ export default function AddBlog() {
   const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
   const [deleteImageUrl, setDeleteImageUrl] = useState("");
+  const [insideImages, setInsideImages] = useState([]);
 
   const onChange = useCallback(
     (e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value })),
     []
   );
 
+  useEffect(() => {
+    const imgSrcs = extractImageSrcs(enBody);
+    setInsideImages(imgSrcs);
+  }, [enBody]);
+
+  const extractImageSrcs = (htmlString) => {
+    const imgSrcs = [];
+    const imgTagRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/g;
+    let match;
+
+    while ((match = imgTagRegex.exec(htmlString)) !== null) {
+      imgSrcs.push(match[1]);
+    }
+
+    return imgSrcs;
+  };
   return (
     <section
       data-aos="fade-up"
-      className="w-full flex flex-col justify-left items-center gap-5 min-h-screen text-white overflow-hidden pl-[150px] pr-[50px] pb-[200px] bg-black"
+      className="w-full flex flex-col justify-left items-center gap-5 min-h-screen text-white overflow-hidden pl-[150px] pr-[50px] pb-[200px] bg-niceb"
     >
       <form
         className="w-full h-fit flex flex-col justify-left items-center gap-[30px]"
@@ -81,10 +98,11 @@ export default function AddBlog() {
             blogDispatch,
             alertDispatch,
             imageDispatch,
-            { ...inputs, activeCategories },
+            { ...inputs, categories: activeCategories },
             blogImage,
             setInputs,
-            setActiveCategories
+            setActiveCategories,
+            navigate
           );
         }}
       >
@@ -182,6 +200,19 @@ export default function AddBlog() {
           text={imageUrl}
           className={`w-[300px] md:w-[600px]`}
         />
+        <span className="w-[300px] md:w-[600px] text-left  text-white !text-[20px]">
+          Inside Blog Images Uploaded URL
+        </span>
+        {insideImages.map((val, index) => {
+          return (
+            <FakeInput
+              key={index}
+              title={`Inside Blog Image URL ${index + 1}`}
+              text={val}
+              className={`w-[300px] md:w-[600px]`}
+            />
+          );
+        })}
         <TextInput
           value={deleteImageUrl}
           onChange={(e) => setDeleteImageUrl(e.target.value)}
@@ -228,6 +259,7 @@ export default function AddBlog() {
           />
 
           <CustomTextArea
+            id={`enBody`}
             className={`w-[300px] md:w-[600px]`}
             title={`English Body`}
             onChange={onChange}
@@ -248,7 +280,10 @@ export default function AddBlog() {
             name="krBody"
             value={krBody}
           />
-        </div>{" "}
+        </div>
+        <span className="w-[300px] md:w-[600px] text-left  text-white !text-[20px]">
+          Select Categories
+        </span>
         <div className="flex flex-row justify-start items-center gap-5 flex-wrap md:w-[600px] w-[300px]">
           {categories?.map((category, index) => {
             return (

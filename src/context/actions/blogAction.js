@@ -217,6 +217,7 @@ export const addBlog = async (
       type: ADD_BLOG_START,
     });
     var { imageURL, imageName } = await addBlogImage(
+      blogDispatch,
       imageDispatch,
       alertDispatch,
       image
@@ -229,10 +230,7 @@ export const addBlog = async (
       imageURL,
       imageName,
     });
-    blogDispatch({
-      type: ADD_BLOG_SUCCESS,
-      payload: res.data,
-    });
+
     setAlert(
       blogDispatch,
       alertDispatch,
@@ -256,6 +254,7 @@ export const addBlog = async (
     });
     navigate("/panel");
   } catch (error) {
+    console.log(error);
     if (imageName) deleteImage("blog", imageName, blogDispatch, alertDispatch);
     generateAlert(
       error,
@@ -275,6 +274,7 @@ export const updateBlog = async (
   form,
   id,
   setInputs,
+  setActiveCategories,
   image,
   oldImageURL,
   oldImageName,
@@ -324,13 +324,18 @@ export const updateBlog = async (
       "success"
     );
     setInputs({
-      class: "",
-      type: "",
-      subject: "",
-      classType: "",
-      link: "",
+      enTitle: "",
+      krTitle: "",
+      arTitle: "",
+      enBody: "",
+      arBody: "",
+      krBody: "",
     });
-    setTutor("");
+    setActiveCategories([]);
+    blogDispatch({
+      type: BLOG_IMAGE,
+      payload: "",
+    });
     navigate("/panel");
   } catch (error) {
     //delete the image

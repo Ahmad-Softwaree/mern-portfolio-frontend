@@ -5,6 +5,7 @@ import { TOGGLE_WANT_TO_DELETE } from "../../context/types/util_types";
 import { CategoryContext } from "../../context/CategoryContext";
 import {
   DELETE_ONE_ADMIN_METHOD,
+  DELETE_ONE_BLOG_METHOD,
   DELETE_ONE_CATEGORY_METHOD,
   DELETE_ONE_CERTIFICATE_METHOD,
   DELETE_ONE_PROJECT_METHOD,
@@ -29,6 +30,7 @@ import { TypeContext } from "../../context/TypeContext";
 import { deleteType } from "../../context/actions/typeAction";
 import { AdminContext } from "../../context/AdminContext";
 import { deleteAdmin } from "../../context/actions/adminAction";
+import { BlogContext } from "../../context/BlogContext";
 
 export default function WantToDelete() {
   const { dispatch: alertDispatch } = useContext(AlertContext);
@@ -70,6 +72,11 @@ export default function WantToDelete() {
     state: { deleteAdminLoading },
   } = useContext(AdminContext);
 
+  const {
+    dispatch: blogDispatch,
+    state: { deleteBlogLoading },
+  } = useContext(BlogContext);
+
   const flag = Boolean(
     deleteCategoryLoading ||
       deleteProjectLoading ||
@@ -78,7 +85,8 @@ export default function WantToDelete() {
       deleteStackLoading ||
       deleteCertificateLoading ||
       deleteTypeLoading ||
-      deleteAdminLoading
+      deleteAdminLoading ||
+      deleteBlogLoading
   );
 
   return (
@@ -132,6 +140,14 @@ export default function WantToDelete() {
           case DELETE_ONE_ADMIN_METHOD:
             return deleteAdmin(
               adminDispatch,
+              alertDispatch,
+              utilDispatch,
+              id,
+              image
+            );
+          case DELETE_ONE_BLOG_METHOD:
+            return deleteAdmin(
+              blogDispatch,
               alertDispatch,
               utilDispatch,
               id,

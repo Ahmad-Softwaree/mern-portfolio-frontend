@@ -57,10 +57,10 @@ export default function AdminProjects() {
       </div>
 
       {getProjectsLoading ? (
-        <TableSkeleton cards={8} />
+        <TableSkeleton cards={4} />
       ) : projects.length > 0 ? (
-        <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
-          <Table variant="striped" colorScheme="black">
+        <TableContainer className="w-full min-w-[500px]  overflow-auto text-white">
+          <Table variant="striped" colorScheme="black" maxHeight={500}>
             <TableCaption color={`white`}>Projects</TableCaption>
             <Thead>
               <Tr borderRadius={`10px`}>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export default function TextInput({
   icon,
+  ref = null,
   name,
   value,
   onChange,
@@ -42,6 +43,7 @@ export default function TextInput({
           </span>
         )}
         <input
+          ref={ref}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
           className={`p-2 w-full text-left placeholder:text-right bg-black ${textInputClass}`}

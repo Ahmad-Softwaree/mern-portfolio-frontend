@@ -17,7 +17,7 @@ export default function BlogCard({ val }) {
         />
         <div className="overBlog absolute inset-0 rounded-md bg-lightBlack z-30 opacity-80 transition-all duration-300 w-full h-full"></div>
         <div
-          className={`inner z-40 text-left top-[70%] left-0 px-[30px] w-full transition-all duration-300 min-h-[100px] flex flex-col justify-left items-start gap-3 ${
+          className={`inner z-40 text-left top-[75%] left-0 px-[30px] w-full transition-all duration-300 min-h-[100px] flex flex-col justify-left items-start gap-3 ${
             language === "en" ? "text-left" : "text-right"
           }`}
         >
@@ -36,10 +36,10 @@ export default function BlogCard({ val }) {
           </span>
           <h2 className="font-[500] !text-[26px]">
             {language === "en"
-              ? val.enTitle
+              ? val.enTitle.substring(0, 20).concat("...")
               : language === "ar"
-              ? val.arTitle
-              : val.krTitle}
+              ? val.arTitle.substring(0, 20).concat("...")
+              : val.krTitle.substring(0, 20).concat("...")}
           </h2>
           <div className="w-full flex flex-row justify-start items-center gap-5">
             <img

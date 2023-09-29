@@ -55,7 +55,7 @@ export default function AdminWorks() {
       </div>
 
       {getWorksLoading ? (
-        <TableSkeleton cards={8} />
+        <TableSkeleton cards={4} />
       ) : works.length > 0 ? (
         <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
           <Table variant="striped" colorScheme="black">

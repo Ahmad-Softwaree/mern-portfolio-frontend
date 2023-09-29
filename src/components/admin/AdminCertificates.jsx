@@ -59,7 +59,7 @@ export default function AdminCertificates() {
       </div>
 
       {getCertificatesLoading ? (
-        <TableSkeleton cards={8} />
+        <TableSkeleton cards={4} />
       ) : certificates.length > 0 ? (
         <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
           <Table variant="striped" colorScheme="black">
