@@ -15,7 +15,7 @@ import {
 
 export const workInitialState = {
   works: [],
-  workLoading: false,
+  getWorksLoading: false,
   addWorkLoading: false,
   deleteWorkLoading: false,
   updateWorkLoading: false,
@@ -27,19 +27,19 @@ export const workReducer = (state = workInitialState, action) => {
     case GET_ALL_WORK_START:
       return {
         ...state,
-        workLoading: true,
+        getWorksLoading: true,
       };
     case GET_ALL_WORK_FAIL:
       return {
         ...state,
-        workLoading: false,
+        getWorksLoading: false,
       };
     case GET_ALL_WORK_SUCCESS:
       return {
         ...state,
         works: payload,
 
-        workLoading: false,
+        getWorksLoading: false,
       };
     case ADD_WORK_START:
       return {
@@ -71,7 +71,7 @@ export const workReducer = (state = workInitialState, action) => {
     case DELETE_WORK_SUCCESS:
       return {
         ...state,
-        works: state.works.filter((WORK) => WORK._id !== payload),
+        works: state.works.filter((val) => val._id !== payload),
 
         deleteWorkLoading: false,
       };

@@ -29,6 +29,7 @@ import Panel from "./pages/admin/Panel";
 import Login from "./pages/Login";
 import Admins from "./pages/admin/Admins";
 import UpdateBlog from "./pages/admin/UpdateBlog";
+import Subscribes from "./pages/admin/Subscribes";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -115,6 +116,11 @@ const routes = createBrowserRouter(
         <Route
           path="/admins"
           element={<AdminRoutes Component={Admins} />}
+          errorElement={<Error />}
+        />
+        <Route
+          path="/subscribes"
+          element={<AdminRoutes Component={Subscribes} />}
           errorElement={<Error />}
         />
       </Route>

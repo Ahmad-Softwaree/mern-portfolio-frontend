@@ -11,6 +11,7 @@ import {
   DELETE_ONE_PROJECT_METHOD,
   DELETE_ONE_SKILL_METHOD,
   DELETE_ONE_STACK_METHOD,
+  DELETE_ONE_SUBSCRIBE_METHOD,
   DELETE_ONE_TYPE_METHOD,
   DELETE_ONE_WORK_METHOD,
 } from "../../context/types/delete_types";
@@ -31,6 +32,8 @@ import { deleteType } from "../../context/actions/typeAction";
 import { AdminContext } from "../../context/AdminContext";
 import { deleteAdmin } from "../../context/actions/adminAction";
 import { BlogContext } from "../../context/BlogContext";
+import { SubscribeContext } from "../../context/SubscribeContext";
+import { deleteSubscribe } from "../../context/actions/subscribeAction";
 
 export default function WantToDelete() {
   const { dispatch: alertDispatch } = useContext(AlertContext);
@@ -77,6 +80,11 @@ export default function WantToDelete() {
     state: { deleteBlogLoading },
   } = useContext(BlogContext);
 
+  const {
+    dispatch: subscribeDispatch,
+    state: { deleteSubscribeLoading },
+  } = useContext(SubscribeContext);
+
   const flag = Boolean(
     deleteCategoryLoading ||
       deleteProjectLoading ||
@@ -86,7 +94,8 @@ export default function WantToDelete() {
       deleteCertificateLoading ||
       deleteTypeLoading ||
       deleteAdminLoading ||
-      deleteBlogLoading
+      deleteBlogLoading ||
+      deleteSubscribeLoading
   );
 
   return (
@@ -152,6 +161,13 @@ export default function WantToDelete() {
               utilDispatch,
               id,
               image
+            );
+          case DELETE_ONE_SUBSCRIBE_METHOD:
+            return deleteSubscribe(
+              blogDispatch,
+              alertDispatch,
+              utilDispatch,
+              id
             );
         }
       }}

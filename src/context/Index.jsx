@@ -12,6 +12,7 @@ import { StackContextProvider } from "./StackContext";
 import { TypeContextProvider } from "./TypeContext";
 import { SkillContextProvider } from "./SkillContext";
 import { CertificateContextProvider } from "./CertificateContext";
+import { SubscribeContextProvider } from "./SubscribeContext";
 
 export const MainContext = ({ children }) => {
   return (
@@ -29,7 +30,9 @@ export const MainContext = ({ children }) => {
                           <TypeContextProvider>
                             <SkillContextProvider>
                               <CertificateContextProvider>
-                                {children}
+                                <SubscribeContextProvider>
+                                  {children}
+                                </SubscribeContextProvider>
                               </CertificateContextProvider>
                             </SkillContextProvider>
                           </TypeContextProvider>

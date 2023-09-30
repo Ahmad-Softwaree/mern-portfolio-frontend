@@ -35,6 +35,13 @@ export default function AdminLayout() {
             <i className="fa-solid fa-database"></i>
           </NavLink>
           <NavLink
+            to={`/subscribes`}
+            className="admin_link p-2 transition-all duration-300 border-2 border-solid border-green hover:bg-green rounded-full text-white !text-[16px] px-3"
+          >
+            <i className="fa-solid fa-layer-group"></i>
+          </NavLink>
+
+          <NavLink
             to={`/admins`}
             className="admin_link p-2 transition-all duration-300 border-2 border-solid border-green hover:bg-green rounded-full text-white !text-[16px] px-3"
           >

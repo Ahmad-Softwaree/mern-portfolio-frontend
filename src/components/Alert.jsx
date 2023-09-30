@@ -41,7 +41,11 @@ export default function Alert() {
                 val.type === "error" ? "purple" : "blue"
               } font-bold !text-[14px]`}
             >
-              <i className="fa-solid fa-bug"></i>
+              {val.type === "error" ? (
+                <i className="fa-solid fa-bug"></i>
+              ) : (
+                <i class="fa-solid fa-square-check"></i>
+              )}
             </span>
             <span
               className={`text-${

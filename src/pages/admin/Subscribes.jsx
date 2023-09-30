@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
-import { AdminContext } from "../../context/AdminContext";
-import AdminCard from "../../components/admin/AdminCard";
+import React, { useContext, useEffect } from "react";
+import { SubscribeContext } from "../../context/SubscribeContext";
 import {
   Table,
   TableCaption,
@@ -11,12 +10,21 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import TableSkeleton from "../../components/loading/TableSkeleton";
+import { AlertContext } from "../../context/AlertContext";
+import { getAllSubscribes } from "../../context/actions/subscribeAction";
+import SubscribeCard from "../../components/admin/SubscribeCard";
 import NoData from "../../components/global/NoData";
 
-export default function Admins() {
+export default function Subscribes() {
+  const { dispatch: alertDispatch } = useContext(AlertContext);
   const {
-    state: { admin, loading },
-  } = useContext(AdminContext);
+    dispatch: subscribeDispatch,
+    state: { subscribes, getSubscribesLoading },
+  } = useContext(SubscribeContext);
+
+  useEffect(() => {
+    getAllSubscribes(subscribeDispatch, alertDispatch);
+  }, [subscribeDispatch]);
 
   return (
     <section
@@ -31,27 +39,25 @@ export default function Admins() {
         <div className="flex flex-row justify-between items-center w-full gap-5 text-white">
           <div className="flex flex-row justify-end items-center gap-5">
             <h1 className="font-[500] lg:!text-[24px] md:!text-[22px]">
-              Admins
+              Subscribes
             </h1>
           </div>
         </div>
 
-        {loading ? (
+        {getSubscribesLoading ? (
           <TableSkeleton cards={4} />
-        ) : admin ? (
+        ) : subscribes.length > 0 ? (
           <TableContainer className="w-full min-w-[500px] overflow-scroll text-white">
             <Table variant="striped" colorScheme="black">
-              <TableCaption color={`white`}>Admins</TableCaption>
+              <TableCaption color={`white`}>Subscribes</TableCaption>
               <Thead>
                 <Tr borderRadius={`10px`}>
                   <Th color={`white`} className="text-white">
                     Id
                   </Th>
+
                   <Th color={`white`} className="text-white">
-                    Name
-                  </Th>
-                  <Th color={`white`} className="text-white">
-                    Image
+                    Email
                   </Th>
                   <Th color={`white`} className="text-white">
                     Date
@@ -63,7 +69,9 @@ export default function Admins() {
                 </Tr>
               </Thead>
               <Tbody>
-                <AdminCard val={admin} />
+                {subscribes.map((val, index) => {
+                  return <SubscribeCard val={val} key={index} />;
+                })}
               </Tbody>
             </Table>
           </TableContainer>
