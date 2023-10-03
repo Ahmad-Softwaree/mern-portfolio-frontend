@@ -114,7 +114,6 @@ export const stackReducer = (state = stackInitialState, action) => {
       return {
         ...state,
         stacks: state.stacks.filter((val) => val._id !== payload),
-
         deleteStackLoading: false,
       };
     default:

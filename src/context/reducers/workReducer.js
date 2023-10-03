@@ -72,7 +72,6 @@ export const workReducer = (state = workInitialState, action) => {
       return {
         ...state,
         works: state.works.filter((val) => val._id !== payload),
-
         deleteWorkLoading: false,
       };
     case UPDATE_WORK_START:
@@ -92,7 +91,6 @@ export const workReducer = (state = workInitialState, action) => {
       return {
         ...state,
         works: data,
-
         updateWorkLoading: false,
       };
     default:

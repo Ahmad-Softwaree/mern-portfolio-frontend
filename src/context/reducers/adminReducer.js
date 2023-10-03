@@ -141,7 +141,6 @@ export const adminReducer = (state = adminInitialState, action) => {
       return {
         ...state,
         admins: state.admins.filter((admin) => admin._id !== payload),
-
         deleteAdminLoading: false,
       };
     case UPDATE_ADMIN_START:
@@ -175,7 +174,6 @@ export const adminReducer = (state = adminInitialState, action) => {
       return {
         ...state,
         storageSize: payload,
-
         storageSizeLoading: false,
       };
     default:

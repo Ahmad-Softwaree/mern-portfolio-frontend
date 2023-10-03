@@ -72,7 +72,6 @@ export const skillReducer = (state = skillInitialState, action) => {
       return {
         ...state,
         skills: state.skills.filter((val) => val._id !== payload),
-
         deleteSkillLoading: false,
       };
     case UPDATE_SKILL_START:
@@ -92,7 +91,6 @@ export const skillReducer = (state = skillInitialState, action) => {
       return {
         ...state,
         skills: data,
-
         updateSkillLoading: false,
       };
     default:

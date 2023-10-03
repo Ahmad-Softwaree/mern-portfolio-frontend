@@ -75,7 +75,6 @@ export const projectReducer = (state = projectInitialState, action) => {
       return {
         ...state,
         projects: [...state.projects, payload],
-
         addProjectLoading: false,
       };
     case DELETE_PROJECT_START:

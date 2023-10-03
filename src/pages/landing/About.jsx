@@ -56,7 +56,7 @@ export default function About() {
                 Front-end Developer
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Developer Good UI/UX Front-end With React.js
+                Developing Good UI/UX Front-end With React.js
               </p>
             </div>
             <div className="flex flex-col justify-left items-start gap-1 w-full">
@@ -64,7 +64,7 @@ export default function About() {
                 Back-end Developer
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Developer Good Back-end With Node.js & Express.js
+                Developing Good Back-end With Node.js & Express.js
               </p>
             </div>
           </div>

@@ -92,7 +92,6 @@ export const blogReducer = (state = blogInitialState, action) => {
       return {
         ...state,
         blogs: state.blogs.filter((blog) => blog._id !== payload),
-
         deleteBlogLoading: false,
       };
     case UPDATE_BLOG_START:

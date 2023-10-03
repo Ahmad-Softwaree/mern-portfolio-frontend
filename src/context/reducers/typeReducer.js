@@ -97,7 +97,6 @@ export const typeReducer = (state = typeInitialState, action) => {
       return {
         ...state,
         types: data,
-
         updateTypeLoading: false,
       };
     case DELETE_TYPE_START:
@@ -114,7 +113,6 @@ export const typeReducer = (state = typeInitialState, action) => {
       return {
         ...state,
         types: state.types.filter((val) => val._id.toString() !== payload),
-
         deleteTypeLoading: false,
       };
     default:
