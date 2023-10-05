@@ -14,35 +14,45 @@ export default function About() {
         id="about"
         className="w-full flex flex-col justify-left items-center gap-10 bg-niceBlack text-white px-10 pb-[200px] "
       >
-        <h1 className="font-bold text-white">About Me</h1>
+        <h1 className="font-bold text-white">{file.about.header}</h1>
 
-        <p className="text-niceGray w-full">
-          My name is Ahmad, I'm 20 Years Old from Kurdistan Iraq
-        </p>
+        <p className="text-niceGray w-full">{file.about.about}</p>
         <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
           <p
             onClick={() => setPart("main")}
-            className={`text-white  cursor-pointer about transition-all text-left duration-300 !text-[18px] w-[200px] ${
+            className={`text-white ${
+              language === "en"
+                ? "after:left-0 text-left"
+                : "after:right-0 text-right"
+            }  cursor-pointer about transition-all  duration-300 !text-[18px] w-[200px] ${
               part === "main" && "active"
             }`}
           >
-            Main Skills
+            {file.about.main.header}
           </p>
           <p
             onClick={() => setPart("exp")}
-            className={`text-white cursor-pointer about transition-all text-left duration-300 !text-[18px] w-[200px] ${
+            className={`text-white ${
+              language === "en"
+                ? "after:left-0 text-left"
+                : "after:right-0 text-right"
+            } cursor-pointer about transition-all  duration-300 !text-[18px] w-[200px] ${
               part === "exp" && "active"
             }`}
           >
-            Experience
+            {file.about.exp.header}
           </p>
           <p
             onClick={() => setPart("edu")}
-            className={`text-white cursor-pointer about transition-all text-left duration-300 !text-[18px] w-[200px] ${
+            className={`text-white ${
+              language === "en"
+                ? "after:left-0 text-left"
+                : "after:right-0 text-right"
+            } cursor-pointer about transition-all  duration-300 !text-[18px] w-[200px] ${
               part === "edu" && "active"
             }`}
           >
-            Education & Certification
+            {file.about.edu.header}
           </p>
         </div>
 
@@ -53,18 +63,18 @@ export default function About() {
           >
             <div className="flex flex-col justify-left items-start gap-1 w-full">
               <p className="font-bold  !text-[18px] text-purple">
-                Front-end Developer
+                {file.about.main.one.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Developing Good UI/UX Front-end With React.js
+                {file.about.main.one.body}
               </p>
             </div>
             <div className="flex flex-col justify-left items-start gap-1 w-full">
               <p className="font-bold  !text-[18px] text-purple">
-                Back-end Developer
+                {file.about.main.two.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Developing Good Back-end With Node.js & Express.js
+                {file.about.main.two.body}
               </p>
             </div>
           </div>
@@ -77,34 +87,34 @@ export default function About() {
           >
             <div className="flex flex-col justify-left items-start gap-1 w-full">
               <p className="font-bold  !text-[18px] text-purple">
-                CEO & Founder
+                {file.about.exp.one.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                CEO & Founder Of Bester Group
+                {file.about.exp.one.body}
               </p>
             </div>
             <div className="flex flex-col justify-left items-start gap-1 w-full">
               <p className="font-bold  !text-[18px] text-purple">
-                Full-stack Developer
+                {file.about.exp.two.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Full-stack Developer in Bester Group
+                {file.about.exp.two.body}
               </p>
             </div>
             <div className="flex flex-col justify-left items-start gap-1 w-full">
               <p className="font-bold  !text-[18px] text-purple">
-                Full-stack Developer
+                {file.about.exp.three.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Full-stack Developer in Kurdferga Group
+                {file.about.exp.three.body}
               </p>
             </div>
             <div className="flex flex-col justify-left items-start gap-1 w-full">
               <p className="font-bold  !text-[18px] text-purple">
-                Front-end Developer
+                {file.about.exp.four.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Front-end Developer in Informatics
+                {file.about.exp.four.body}
               </p>
             </div>
           </div>
@@ -117,18 +127,18 @@ export default function About() {
           >
             <div className="flex flex-col justify-left items-start gap-1 w-full">
               <p className="font-bold  !text-[18px] text-purple">
-                Bachelor Degree
+                {file.about.edu.one.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Bachelor Degree In Computer Science, Sulaymaniah University
+                {file.about.edu.one.body}
               </p>
             </div>
             <div className="flex flex-col justify-left items-start gap-1 w-full">
               <p className="font-bold  !text-[18px] text-purple">
-                Bachelor Degree
+                {file.about.edu.two.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                Student In Software Engineer, Salahadin University
+                {file.about.edu.one.body}
               </p>
             </div>
           </div>

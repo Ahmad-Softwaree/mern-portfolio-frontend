@@ -216,7 +216,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   content: "";
   position: absolute;
   bottom: -6px;
-  left: 0;
   transform-origin: bottom right;
   transition: all 300ms ease-in-out;
   height: 4px;
@@ -259,7 +258,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     @apply py-[50px] overflow-hidden;
   }
   li {
-    @apply border-b-4 border-black p-5  list-none cursor-pointer w-[120px] text-center transition-all duration-200 hover:border-purple hover:text-purple font-bold;
+    @apply border-b-4 border-transparent p-5  list-none cursor-pointer w-[120px] text-center transition-all duration-200 hover:border-purple hover:text-purple font-bold;
   }
   li span {
     @apply !text-[12px] md:!text-[16px];

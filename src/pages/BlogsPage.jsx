@@ -61,7 +61,7 @@ export default function BlogsPage() {
           <span className="!text-[14px] searchBox">
             <i className="fa-solid fa-magnifying-glass"></i>
           </span>
-          <span className="!text-[14px] searchBox">click to search</span>
+          <span className="!text-[14px] searchBox">{file.search.search}</span>
         </div>
       </div>
 

@@ -47,7 +47,7 @@ export default function OneProject() {
             />
             <div className="w-full flex flex-row justify-between items-center gap-5">
               <span className="text-white font-bold !text-[14px] md:!text-[16px]">
-                Date: <DateMoment date={project.date} />
+                {file.date}: <DateMoment date={project.date} />
               </span>
               {project.url && (
                 <a
@@ -86,7 +86,7 @@ export default function OneProject() {
                 <i className="fa-solid fa-diagram-project"></i>{" "}
               </span>
               <span className="!text-[16px] md:!text-[18px] text-white">
-                Types
+                {file.projects.types}
               </span>
             </div>
             {project.types.map((val, index) => {
@@ -100,7 +100,7 @@ export default function OneProject() {
                 <i className="fa-brands fa-github"></i>
               </span>
               <span className="!text-[16px] md:!text-[18px] text-white">
-                Gits
+                {file.projects.gits}
               </span>
             </div>
             {project.gits.length > 0 ? (
@@ -111,7 +111,7 @@ export default function OneProject() {
               </Fragment>
             ) : (
               <span className="!text-[14px] md:!text-[16px] text-purple">
-                Cannot access, private git
+                {file.projects.privateGit}
               </span>
             )}
           </div>
@@ -121,7 +121,7 @@ export default function OneProject() {
                 <i className="fa-solid fa-cubes"></i>
               </span>
               <span className="!text-[16px] md:!text-[18px] text-white">
-                Stacks
+                {file.projects.stacks}
               </span>
             </div>
 

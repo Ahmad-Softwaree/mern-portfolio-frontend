@@ -5,11 +5,15 @@ import { AlertContext } from "../../context/AlertContext";
 import { searchProjects } from "../../context/actions/projectAction";
 import { ProjectContext } from "../../context/ProjectContext";
 import { Kbd } from "@chakra-ui/react";
+import { LanguageContext } from "../../context/LanguageContext";
 export default function SearchBox({ setSearch, method }) {
   const [input, setInput] = useState("");
   const { dispatch: blogDispatch } = useContext(BlogContext);
   const { dispatch: projectDispatch } = useContext(ProjectContext);
   const { dispatch: alertDispatch } = useContext(AlertContext);
+  const {
+    state: { file },
+  } = useContext(LanguageContext);
   return (
     <form
       onSubmit={(e) => {
@@ -24,7 +28,7 @@ export default function SearchBox({ setSearch, method }) {
     >
       <input
         className="w-full p-2 rounded-md searchBox"
-        placeholder="search for data"
+        placeholder={file.search.holder}
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -32,9 +36,9 @@ export default function SearchBox({ setSearch, method }) {
         id="search"
       />
       <button className="searchBox w-full p-2 rounded-md text-purple bg-lightBlack border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white">
-        Search
+        {file.search.btn}
       </button>
-      <span className="!text-[20px] text-white">
+      <span className="!text-[20px] text-white font-Poppins">
         press <Kbd className="!text-black">Esc</Kbd> to remove box
       </span>
     </form>

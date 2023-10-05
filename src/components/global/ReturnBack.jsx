@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { LanguageContext } from "../../context/LanguageContext";
 
 export default function ReturnBack() {
   const navigate = useNavigate();
+  const {
+    state: { file },
+  } = useContext(LanguageContext);
   return (
     <button
       onClick={() => navigate(-1)}
@@ -11,7 +15,7 @@ export default function ReturnBack() {
       <span className="!text-[16px] font-bold">
         <i className="fa-solid fa-circle-arrow-left"></i>
       </span>
-      <span className="!text-[16px] font-bold">back</span>
+      <span className="!text-[16px] font-bold">{file.return}</span>
     </button>
   );
 }

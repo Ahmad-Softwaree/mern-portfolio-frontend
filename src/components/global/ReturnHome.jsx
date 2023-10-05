@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { LanguageContext } from "../../context/LanguageContext";
 
 export default function ReturnHome() {
+  const {
+    state: { file },
+  } = useContext(LanguageContext);
   return (
     <Link
       to={`/`}
@@ -10,7 +14,7 @@ export default function ReturnHome() {
       <span className="!text-[16px] font-bold">
         <i className="fa-solid fa-house"></i>{" "}
       </span>
-      <span className="!text-[16px] font-bold">Home</span>
+      <span className="!text-[16px] font-bold">{file.nav.home}</span>
     </Link>
   );
 }

@@ -7,21 +7,25 @@ export default function WorkCard({ val }) {
     state: { file, language },
   } = useContext(LanguageContext);
   return (
-    <div className="flex flex-col justify-left items-start gap-5 bg-niceBlack p-5 transition-all w-[300px] h-[250px] duration-300 cursor-pointer rounded-md text-white hover:scale-[1.1] hover:border-purple border-2 border-solid border-niceBlack">
-      <img
-        src={`${val.imageURL}`}
-        alt="workCardImage"
-        className="w-[60px] h-[60px] rounded-full border-2 border-solid border-purple"
-      />
-      <p className="!text-[16px]">
-        Title: &nbsp;
-        {language === "en"
-          ? val.enTitle
-          : language === "ar"
-          ? val.arTitle
-          : val.krTitle}
-      </p>
-      <p className="!text-[16px]">Company: &nbsp;{val.company}</p>
+    <div className="flex flex-col justify-between gap-5 items-start  bg-niceBlack p-5 transition-all w-[300px] h-[280px] duration-300 cursor-pointer rounded-md text-white hover:scale-[1.1] hover:border-purple border-2 border-solid border-niceBlack">
+      <div className="w-full flex flex-col justify-left items-start gap-5">
+        <img
+          src={`${val.imageURL}`}
+          alt="workCardImage"
+          className="w-[60px] h-[60px] rounded-full border-2 border-solid border-purple"
+        />
+        <p className="!text-[16px]">
+          {file.work.title}: &nbsp;
+          {language === "en"
+            ? val.enTitle
+            : language === "ar"
+            ? val.arTitle
+            : val.krTitle}
+        </p>
+        <p className="!text-[16px]">
+          {file.work.company}: &nbsp;{val.company}
+        </p>
+      </div>
       {val.link && (
         <a
           href={`${val.link}`}

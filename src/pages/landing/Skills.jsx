@@ -27,7 +27,7 @@ export default function Skills() {
         id="skills"
         className={`flex flex-col justify-left items-center w-full`}
       >
-        <h1 className="font-bold text-white">Skills</h1>
+        <h1 className="font-bold text-white">{file.skills.header}</h1>
 
         <div
           className={`flex flex-row justify-center items-center py-[30px] flex-wrap ${

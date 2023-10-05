@@ -6,7 +6,7 @@ export default function ProjectStack({ val }) {
     <Link
       to={`/projects/stack/${val.stack._id}`}
       style={{ borderColor: val.stack.color }}
-      className={`p-1 px-2 border-[3px] hover:bg-lightBlack border-solid  transition-all duration-300 w-fit text-white !text-[14px] rounded-md bg-transparent  cursor-pointer`}
+      className={`p-1 px-2 border-[3px] hover:bg-lightBlack border-solid  transition-all duration-300 w-fit text-white !text-[14px] rounded-md bg-transparent  cursor-pointer font-Poppins`}
     >
       {val.stack.name}
     </Link>

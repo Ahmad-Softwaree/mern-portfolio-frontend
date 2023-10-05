@@ -82,9 +82,7 @@ export default function Projects() {
         <div
           ref={projectRef}
           id="projectCards"
-          className={`projectCards flex flex-col justify-left items-start max-h-[900px] flex-wrap gap-[50px] !px-5 md:!px-10 py-[50px] overflow-auto ${
-            language !== "en" && "flex-row-reverse"
-          }`}
+          className={`projectCards  flex flex-col justify-left items-start max-h-[900px] flex-wrap gap-[50px] !px-5 md:!px-10 py-[50px] overflow-auto`}
         >
           {getProjectsLoading ? (
             <LoadingProjectSkeleton card={3} />

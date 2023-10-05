@@ -1,4 +1,11 @@
 {
+  "return": "Back",
+  "date": "Date",
+  "search": {
+    "search": "click to search",
+    "holder": "Search for data",
+    "btn": "Search"
+  },
   "nav": {
     "home": "Home",
     "blogs": "Blogs",
@@ -24,31 +31,113 @@
     ],
     "cv": "Show CV"
   },
+  "about": {
+    "header": "About Me",
+    "about": "My name is Ahmad, I'm two0 Years Old from Kurdistan Iraq",
+    "main": {
+      "header": "Main Skills",
+      "one": {
+        "title": "Front-end Developer",
+        "body": "Developing Good UI/UX Front-end With React.js"
+      },
+      "two": {
+        "title": "Back-end Developer",
+        "body": "Developing Good Back-end With Node.js & Express.js"
+      }
+    },
+    "exp": {
+      "header": "Experience",
+      "one": {
+        "title": "CEO & Founder",
+        "body": "CEO & Founder Of Bester Group"
+      },
+      "two": {
+        "title": "Full-stack Developer",
+        "body": "Full-stack Developer in Bester Group"
+      },
+      "three": {
+        "title": "Full-stack Developer",
+        "body": "Full-stack Developer in Kurdferga Group"
+      },
+      "four": {
+        "title": "Front-end Developer",
+        "body": "Front-end Developer in Informatics"
+      }
+    },
+    "edu": {
+      "header": "Education & Certification",
+      "one": {
+        "title": "Bachelor Degree",
+        "body": "Bachelor Degree In Computer Science, Sulaymaniah University"
+      },
+      "two": {
+        "title": "Bachelor Degree",
+        "body": "Student In Software Engineer, Salahadin University"
+      }
+    }
+  },
+  "services": {
+    "header": "Services",
+    "one": {
+      "title": "Web development",
+      "body": "Developing website with newest technologies, clean code and configuration"
+    },
+    "two": {
+      "title": "System development",
+      "body": "Developing Systems with newest technologies, clean code and configuration"
+    },
+    "three": {
+      "title": "Online teaching",
+      "body": "Teaching Fields online with good plan, I can bring attention of everyone"
+    },
+    "four": {
+      "title": "Server management",
+      "body": "Managing Servers and Maintain Them, Switching and Protecting Server and Hosts"
+    },
+    "five": {
+      "title": "API integration",
+      "body": "Building Secure and most high performance API as much as It could be"
+    },
+    "six": {
+      "title": "Database",
+      "body": "Build and Join Tables and Data, With SQL and NoSql databases"
+    }
+  },
   "blog": {
     "read": "READ MORE",
-    "seeMore": "See more"
+    "seeMore": "See more",
+    "author": "author"
   },
   "projects": {
-    "tech": "Technologies used",
     "preview": "Preview",
-    "more": "More"
+    "more": "More",
+    "private": "private",
+    "types": "Types",
+    "gits": "Gits",
+    "stacks": "Stacks",
+    "privateGit": "Cannot access, private git"
+  },
+  "certificates": {
+    "header": "Certificates",
+    "link": "Course Link"
   },
   "work": {
-    "title": "Works"
+    "title": "Title",
+    "company": "Company"
   },
   "skills": {
-    "languages": "Languages",
-    "webDev": "Web & App Development",
-    "front": "Front-end",
-    "back": "Back-end",
-    "gameDev": "Game Development",
-    "twoDGame": "2d game"
+    "header": "Skills"
   },
   "singleBlog": {
     "name": "Ahmad Software",
     "ceo": "CEO & Founder of Bester Group",
     "categories": "Categories",
     "related": "Related blogs"
+  },
+  "contact": {
+    "get": "Get the best deals",
+    "sub": "Subscribe to get more",
+    "subButton": "Subscribe"
   },
   "drag": "drag to view more"
 }

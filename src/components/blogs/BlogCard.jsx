@@ -48,7 +48,7 @@ export default function BlogCard({ val }) {
               alt="adminImage"
             />
             <span className="font-bold text-purple !text-[14px]">
-              author: {val.admin.name}
+              {file.blog.author}: {val.admin.name}
             </span>
           </div>
           <Link

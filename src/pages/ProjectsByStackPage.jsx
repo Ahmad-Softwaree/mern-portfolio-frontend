@@ -66,9 +66,20 @@ export default function ProjectsByStackPage() {
       </div>
       <div className="flex flex-col md:flex-row gap-5 justify-between items-start md:items-center w-full px-5 md:px-10">
         <div className="flex flex-row justify-left items-center gap-5">
-          <h1 className="text-white font-bold">
-            {stack?.name} {file.nav.projects}
-          </h1>
+          {language === "en" ? (
+            <h1 className="text-white font-bold">
+              {stack?.name}
+              {file.nav.projects}
+            </h1>
+          ) : (
+            <h1 className="text-white font-bold">
+              {language === "kr"
+                ? file.nav.projects.concat("ی")
+                : file.nav.projects}{" "}
+              &nbsp;
+              {stack?.name}
+            </h1>
+          )}
           <Link
             to={`/`}
             className="!text-[20px] text-white transition-all duration-300 hover:text-purple cursor-pointer"
@@ -83,7 +94,7 @@ export default function ProjectsByStackPage() {
           <span className="!text-[14px] searchBox">
             <i className="fa-solid fa-magnifying-glass"></i>
           </span>
-          <span className="!text-[14px] searchBox">click to search</span>
+          <span className="!text-[14px] searchBox">{file.search.search}</span>
         </div>
       </div>
 

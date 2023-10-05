@@ -18,40 +18,38 @@ export default function Services() {
         id="services"
         className="w-full flex flex-col justify-left items-center gap-10 bg-black text-white px-10 "
       >
-        <h1 className="font-bold text-white">Services</h1>
+        <h1 className="font-bold text-white">{file.services.header}</h1>
 
         <div className="w-full flex flex-row justify-center items-center gap-10 flex-wrap">
           <ServiceCard
             icon={`code`}
-            header={`Web Developing`}
-            body={`Developing website with newest technologies, clean code and configuration`}
+            header={file.services.one.title}
+            body={file.services.one.body}
           />
           <ServiceCard
             icon={`computer`}
-            header={`System Developing`}
-            body={`Developing Systems with newest technologies, clean code and configuration`}
+            header={file.services.two.title}
+            body={file.services.two.body}
           />
           <ServiceCard
             icon={`chalkboard-user`}
-            header={`Online Teaching`}
-            body={`Teaching Fields online with good plan, I can bring attention of everyone`}
+            header={file.services.three.title}
+            body={file.services.three.body}
           />
           <ServiceCard
             icon={`server`}
-            header={`Server Management`}
-            body={`Managing Servers and Maintain Them, Switching and Protecting
-            Server and Hosts`}
+            header={file.services.four.title}
+            body={file.services.four.body}
           />
           <ServiceCard
             icon={`map`}
-            header={`API Integration`}
-            body={` Building Secure and most high performance API as much as It could
-            be`}
+            header={file.services.five.title}
+            body={file.services.five.body}
           />{" "}
           <ServiceCard
             icon={`database`}
-            header={`Database`}
-            body={` Build and Join Tables and Data, With SQL and NoSql databases`}
+            header={file.services.six.title}
+            body={file.services.six.body}
           />
         </div>
       </section>

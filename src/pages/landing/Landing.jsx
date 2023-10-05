@@ -39,7 +39,7 @@ const Landing = () => {
 
   return (
     <div
-      className={`w-full min-h-screen flex flex-col justify-left items-center pt-[60px]`}
+      className={`w-full min-h-screen flex flex-col justify-left items-center`}
     >
       <Home />
       <Blogs />

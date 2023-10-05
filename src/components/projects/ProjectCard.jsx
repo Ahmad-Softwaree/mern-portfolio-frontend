@@ -40,7 +40,7 @@ export default function ProjectCard({ index, val }) {
       data-aos="fade-right"
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
-      className={`project-${index} relative bg-niceBlack flex flex-col justify-center items-end gap-5  flex-wrap  w-[350px] md:w-[550px] h-[650px] md:h-[600px] shadow-xl p-5 rounded-lg  ${
+      className={`project-${index} projectCard relative bg-niceBlack flex flex-col justify-center items-end gap-5  flex-wrap  w-[350px] md:w-[550px] h-[650px] md:h-[600px] shadow-xl p-5 rounded-lg  ${
         language !== "en" && "items-start"
       }`}
     >
@@ -54,7 +54,7 @@ export default function ProjectCard({ index, val }) {
       )}
 
       <div className="flex flex-col justify-left items-start gap-5 w-full">
-        <span className="text-white !text-[14px] md:!text-[16px]">
+        <span className="text-white !text-[14px] md:!text-[16px] font-Poppins">
           <DateMoment date={val.date} />
         </span>
         <img
@@ -82,7 +82,7 @@ export default function ProjectCard({ index, val }) {
               to={`/projects/${val._id}`}
               className="!text-[14px] text-purple"
             >
-              see more
+              {file.blog.seeMore}
             </Link>
           </h2>
         </div>
@@ -92,7 +92,9 @@ export default function ProjectCard({ index, val }) {
           <span className="!text-[16px] md:!text-[18px] text-white">
             <i className="fa-solid fa-diagram-project"></i>{" "}
           </span>
-          <span className="!text-[16px] md:!text-[18px] text-white">Types</span>
+          <span className="!text-[16px] md:!text-[18px] text-white">
+            {file.projects.types}
+          </span>
         </div>
         {val.types.map((val, index) => {
           return index < 2 && <ProjectType val={val} key={index} />;
@@ -101,7 +103,7 @@ export default function ProjectCard({ index, val }) {
           to={`/projects/${val._id}`}
           className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
         >
-          More...
+          {file.blog.seeMore}..
         </Link>
       </div>
 
@@ -110,7 +112,9 @@ export default function ProjectCard({ index, val }) {
           <span className="!text-[16px] md:!text-[18px] text-white">
             <i className="fa-brands fa-github"></i>
           </span>
-          <span className="!text-[16px] md:!text-[18px] text-white">Gits</span>
+          <span className="!text-[16px] md:!text-[18px] text-white">
+            {file.projects.gits}
+          </span>
         </div>
         {val.gits.length > 0 ? (
           <Fragment>
@@ -121,12 +125,12 @@ export default function ProjectCard({ index, val }) {
               to={`/projects/${val._id}`}
               className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
             >
-              More...
+              {file.blog.seeMore}..
             </Link>
           </Fragment>
         ) : (
           <span className="!text-[14px] md:!text-[16px] text-purple">
-            Cannot access, private git
+            {file.projects.privateGit}
           </span>
         )}
       </div>
@@ -136,7 +140,7 @@ export default function ProjectCard({ index, val }) {
             <i className="fa-solid fa-cubes"></i>
           </span>
           <span className="!text-[16px] md:!text-[18px] text-white">
-            Stacks
+            {file.projects.stacks}
           </span>
         </div>
 
@@ -147,7 +151,7 @@ export default function ProjectCard({ index, val }) {
           to={`/projects/${val._id}`}
           className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
         >
-          More...
+          {file.blog.seeMore}..
         </Link>
       </div>
       <div className="w-full flex flex-row justify-between items-center gap-5">
@@ -169,7 +173,9 @@ export default function ProjectCard({ index, val }) {
             }}
             className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
           >
-            <span className="!text-[14px] text-white">private</span>
+            <span className="!text-[14px] text-white">
+              {file.projects.private}
+            </span>
             <OpenInNewIcon className="text-white" fontSize="14px" />
           </button>
         )}

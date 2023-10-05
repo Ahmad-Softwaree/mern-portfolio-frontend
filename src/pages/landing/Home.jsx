@@ -49,34 +49,50 @@ export default function Home() {
       <section
         onMouseMove={moveBackground}
         id="home"
-        className="relative flex min-h-screen flex-col md:flex-row justify-center items-center gap-10 w-full bg-black text-white flex-wrap overflow-hidden"
+        className="relative flex min-h-screen flex-col md:flex-row justify-center items-center gap-10 w-full bg-black text-white flex-wrap overflow-hidden !pt-0"
       >
+        <img
+          data-aos="fade-right"
+          src="/images/hero.jpg"
+          alt="Ahmad Image"
+          className="absolute z-[1000] min-h-screen w-full object-cover xl:object-contain aspect-square   filter brightness-105 contrast-100 saturate-150 opacity-20   blur-[2px]"
+        />
+        <div className="absolute z-[1100] min-h-screen w-full  opacity-70  aspect-square bg-black"></div>
         <div
           data-aos="fade-left"
-          className="flex flex-col justify-center items-center md:items-start gap-5  w-[95%] md:w-[40%] min-w-[300px] z-[200]"
+          className="relative flex flex-col justify-center items-center  gap-5  w-[95%] min-w-[300px] z-[1200]"
         >
-          <h1 className="font-[500]">{file.home.welcome}</h1>
+          <h1 className="font-[500] !text-[30px] md:!text-[35px] text-center w-full lg:!text-[50px]">
+            {file.home.welcome}
+          </h1>
           <div className="flex flex-row gap-2">
-            <h1 className="font-[500]">{file.home.who}</h1>
+            <h1 className="font-[500] !text-[25px] md:!text-[30px] lg:!text-[40px]">
+              {file.home.who}
+            </h1>
             <div className="relative text-white">
               <img
                 alt="Rect Image"
                 src="/images/rect.svg"
                 className="absolute inset-0 z-1"
               />
-              <h1 className="z-20 relative font-[500]">{file.home.name}</h1>
+              <h1 className="z-20 relative font-[500]    !text-[25px] md:!text-[30px] lg:!text-[40px]">
+                {file.home.name}
+              </h1>
             </div>
           </div>
-          <div className={`relative w-full overflow-hidden h-[60px]`}>
+          <div
+            className={`relative w-full text-center overflow-hidden h-[60px]`}
+          >
             <div
               ref={jobs}
-              className={`absolute top-0 w-full transition-all duration-700 flex flex-col justify-center items-center left-0 ${
-                language === "en" ? "md:items-baseline" : "md:items-stretch"
-              }`}
+              className={`absolute top-0 w-full text-center transition-all duration-700 flex flex-col justify-center items-center left-0 `}
             >
               {jobsArray.map((val, index) => {
                 return (
-                  <h1 className="font-bold h-[60px] text-purple" key={index}>
+                  <h1
+                    className="font-bold    !text-[25px] md:!text-[30px] lg:!text-[40px] h-[60px] text-purple"
+                    key={index}
+                  >
                     {val}
                   </h1>
                 );
@@ -86,22 +102,12 @@ export default function Home() {
           <a
             href="/pdf/Resume.pdf"
             download
-            className="p-2 px-8 bg-transparent border-2 border-solid border-purple transition-all duration-200 hover:bg-purple text-white rounded-md"
+            className="p-2 px-8 bg-transparent border-2 border-solid border-purple transition-all duration-200 hover:bg-purple text-white rounded-md  !text-[15px] md:!text-[20px]"
           >
             {file.home.cv}
           </a>
         </div>
 
-        <div
-          data-aos="fade-right"
-          className="relative w-[95%] md:w-[40%] flex justify-center z-[200]"
-        >
-          <img
-            src="/images/ahmad.svg"
-            alt="Ahmad Image"
-            className="relative w-full md:max-w-none max-w-[400px]"
-          />
-        </div>
         <div
           className="w-fit absolute z-[100] flex flex-row justify-center items-center gap-2"
           style={blurStyle}

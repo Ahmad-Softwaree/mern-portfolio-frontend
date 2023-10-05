@@ -1,9 +1,11 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { adminLogout } from "../../context/actions/adminAction";
 import { AlertContext } from "../../context/AlertContext";
 import { AdminContext } from "../../context/AdminContext";
 import SpinnerLoading from "../global/SpinnerLoading";
+import { LanguageContext } from "../../context/LanguageContext";
+import { ENGLISH } from "../../context/types/language_types";
 export default function AdminLayout() {
   const navigate = useNavigate();
   const { dispatch: alertDispatch } = useContext(AlertContext);
@@ -11,6 +13,13 @@ export default function AdminLayout() {
     dispatch: adminDispatch,
     state: { logoutLoading, admin },
   } = useContext(AdminContext);
+  const { dispatch: languageDispatch } = useContext(LanguageContext);
+
+  useEffect(() => {
+    languageDispatch({
+      type: ENGLISH,
+    });
+  }, [languageDispatch]);
 
   return (
     <Fragment>

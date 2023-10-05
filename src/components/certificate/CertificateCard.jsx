@@ -54,7 +54,9 @@ export default function CertificateCard({ val, index }) {
             target="_blank"
             className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
           >
-            <span className="!text-[14px] text-white">Course Link</span>
+            <span className="!text-[14px] text-white">
+              {file.certificates.link}
+            </span>
             <OpenInNewIcon className="text-white" fontSize="14px" />
           </a>
         )}

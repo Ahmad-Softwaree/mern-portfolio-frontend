@@ -100,8 +100,24 @@ export default function Header({ isHome }) {
       duration: 50,
       delay: 0,
       smooth: "linear",
+      offset: -150,
     });
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        document.querySelector("header")?.classList.remove("bg-transparent");
+        document.querySelector("header")?.classList.add("bg-black");
+      } else {
+        document.querySelector("header")?.classList.add("bg-transparent");
+        document.querySelector("header")?.classList.remove("bg-black");
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", () => {});
+    };
+  }, [window]);
 
   return (
     <Fragment>
@@ -115,7 +131,7 @@ export default function Header({ isHome }) {
       {mobNav && <Opacity />}
       {isHome && (
         <header
-          className={`w-full fixed top-0 right-0 left-0 bg-black text-white  flex flex-row justify-between items-center gap-5 px-5 min-h-[60px] z-[900] shadow-xl`}
+          className={`w-full fixed top-0 right-0 left-0 bg-transparent text-white  flex flex-row justify-between items-center gap-5 px-5 min-h-[60px] z-[900] transition-all duration-300`}
         >
           <div
             onClick={() => setMobNav((prev) => !prev)}
@@ -215,7 +231,7 @@ export default function Header({ isHome }) {
               <span>{file.nav.contact}</span>
             </li>
           </nav>
-          {/* <div
+          <div
             onClick={() => setLanguages((prev) => !prev)}
             className={`absolute ${
               language === "en" ? "right-5" : "left-5"
@@ -275,7 +291,7 @@ export default function Header({ isHome }) {
                 </span>
               </div>
             )}
-          </div> */}
+          </div>
         </header>
       )}
     </Fragment>

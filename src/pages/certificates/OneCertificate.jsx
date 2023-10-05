@@ -43,7 +43,7 @@ export default function OneCertificate() {
             />
             <div className="w-full flex flex-row justify-between items-center gap-5">
               <span className="text-white font-bold !text-[14px] md:!text-[16px]">
-                Date: <DateMoment date={certificate.date} />
+                {file.date}: <DateMoment date={certificate.date} />
               </span>
               {certificate.url && (
                 <a
@@ -51,7 +51,10 @@ export default function OneCertificate() {
                   href={`${certificate.url}`}
                   className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
                 >
-                  <span className="!text-[14px] text-white"> Course Link</span>
+                  <span className="!text-[14px] text-white">
+                    {" "}
+                    {file.certificates.link}
+                  </span>
                   <OpenInNewIcon className="text-white" fontSize="14px" />
                 </a>
               )}
@@ -77,10 +80,10 @@ export default function OneCertificate() {
           <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
             <div className="w-full flex flex-row justify-left items-center gap-5">
               <span className="!text-[16px] md:!text-[18px] text-white">
-                <i className="fa-solid fa-diagram-certificate"></i>{" "}
+                <i className="fa-solid fa-diagram-project"></i>{" "}
               </span>
               <span className="!text-[16px] md:!text-[18px] text-white">
-                Types
+                {file.projects.types}
               </span>
             </div>
             {certificate.types.map((val, index) => {
@@ -89,7 +92,11 @@ export default function OneCertificate() {
                   key={index}
                   className="p-1 px-2 border-[3px] hover:bg-lightBlack border-solid border-lightBlack transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
                 >
-                  {val.type.enName}
+                  {language === "en"
+                    ? val.type.enName
+                    : language === "ar"
+                    ? val.type.arName
+                    : val.type.krName}
                 </span>
               );
             })}
@@ -101,7 +108,7 @@ export default function OneCertificate() {
                 <i className="fa-solid fa-cubes"></i>
               </span>
               <span className="!text-[16px] md:!text-[18px] text-white">
-                Stacks
+                {file.projects.stack}
               </span>
             </div>
 
@@ -110,7 +117,7 @@ export default function OneCertificate() {
                 <span
                   key={index}
                   style={{ borderColor: val.stack.color }}
-                  className={`p-1 px-2 border-[3px] hover:bg-lightBlack border-solid  transition-all duration-300 w-fit text-white !text-[14px] rounded-md bg-transparent  cursor-pointer`}
+                  className={`p-1 px-2 border-[3px] hover:bg-lightBlack border-solid  transition-all duration-300 w-fit text-white !text-[14px] rounded-md bg-transparent  cursor-pointer font-Poppins`}
                 >
                   {val.stack.name}
                 </span>
