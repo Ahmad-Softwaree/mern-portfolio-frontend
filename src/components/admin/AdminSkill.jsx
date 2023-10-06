@@ -14,6 +14,8 @@ export default function AdminSkill({ val, index }) {
     <Fragment key={index}>
       <Tr borderRadius={`10px`}>
         <Td>{index}</Td>
+        <Td>{val.sequence}</Td>
+
         <Td>{val.name}</Td>
         <Td>{val?.types[0]?.type?.enName}</Td>
 

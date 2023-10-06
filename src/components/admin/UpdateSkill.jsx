@@ -11,11 +11,12 @@ import { SKILL_IMAGE } from "../../context/types/image_types";
 import FileInput from "../inputs/FileInput";
 import { TypeContext } from "../../context/TypeContext";
 import { getAllTypes } from "../../context/actions/typeAction";
+import SelectInput from "../inputs/SelectInput";
 export default function UpdateSkill() {
   const { dispatch: alertDispatch } = useContext(AlertContext);
   const {
     dispatch: skillDispatch,
-    state: { updateSkillLoading },
+    state: { updateSkillLoading, skills },
   } = useContext(SkillContext);
   const {
     dispatch: typeDispatch,
@@ -35,7 +36,14 @@ export default function UpdateSkill() {
       type: val.type?._id,
     }))
   );
-  const [name, setName] = useState(val.name);
+  const [inputs, setInputs] = useState({
+    name: val.name,
+    sequence: val.sequence,
+  });
+
+  const { name, sequence } = inputs;
+  const onChange = (e) =>
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   useEffect(() => {
     getAllTypes(typeDispatch, alertDispatch);
@@ -51,10 +59,10 @@ export default function UpdateSkill() {
           alertDispatch,
           uiDispatch,
           imageDispatch,
-          { types: selectedTypes, name },
+          { name, sequence: parseInt(sequence), types: selectedTypes },
           val._id,
           setSelectedTypes,
-          setName,
+          setInputs,
           skillImage,
           val.imageURL,
           val.imageName,
@@ -120,12 +128,27 @@ export default function UpdateSkill() {
       </div>
       <TextInput
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={onChange}
         name={`name`}
         className={`w-full`}
         title={`Name`}
       />
-
+      <SelectInput
+        value={sequence}
+        onChange={onChange}
+        name={`sequence`}
+        className={`w-full`}
+        title={`sequence`}
+        options={Array.from(
+          { length: skills.length + 1 },
+          (_, index) => index + 1
+        ).map((val, index) => {
+          return {
+            name: val,
+            value: val,
+          };
+        })}
+      />
       <h1 className="font-bold w-full text-left !text-[20px]">Select Type</h1>
 
       <div className="flex flex-row justify-left items-center gap-5 w-full flex-wrap">

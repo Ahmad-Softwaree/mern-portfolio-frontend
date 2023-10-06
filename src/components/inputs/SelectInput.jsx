@@ -18,20 +18,18 @@ export default function SelectInput({
     >
       {title && title !== "" && (
         <span
-          className={`input_title text-right z-[50] text-blue absolute  p-2 text-[14px] w-fit transition-all duration-200 ${
-            focus || (value !== "" && value !== "default")
+          className={`input_title text-right z-[50] text-purple absolute  p-2 !text-[14px] w-fit transition-all duration-200 ${
+            focus || value !== ""
               ? "right-0 top-[-50%] bg-none"
-              : "right-[20px] top-[-20%] bg-white"
+              : "right-[20px] top-[-25%] bg-black"
           }`}
         >
           {title}
         </span>
       )}
       <div
-        className={`w-full flex flex-row justify-between items-center border-2 border-solid border-blue rounded-md px-1 ${
-          focus || (value !== "" && value !== "default")
-            ? "opacity-100"
-            : "opacity-70"
+        className={`w-full flex flex-row justify-between items-center border-2 border-solid border-purple rounded-md px-1 ${
+          focus || value !== "" ? "opacity-100" : "opacity-70"
         }`}
       >
         {icon && (
@@ -46,7 +44,7 @@ export default function SelectInput({
         <select
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
-          className={`p-2 w-full text-left placeholder:text-right transition-all duration-300`}
+          className={`p-2 w-full text-left placeholder:text-right transition-all duration-300 bg-black`}
           type="date"
           name={name}
           id={name}

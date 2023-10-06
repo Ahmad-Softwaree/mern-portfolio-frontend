@@ -75,6 +75,9 @@ export default function AdminSkills() {
                   <span className="!text-[14px]">Id</span>
                 </Th>
                 <Th color={`white`} className="text-white">
+                  Sequence
+                </Th>
+                <Th color={`white`} className="text-white">
                   Name
                 </Th>
                 <Th color={`white`} className="text-white">
@@ -93,9 +96,11 @@ export default function AdminSkills() {
               </Tr>
             </Thead>
             <Tbody>
-              {skills.map((val, index) => {
-                return <AdminSkill key={index} index={index + 1} val={val} />;
-              })}
+              {skills
+                .sort((a, b) => a.sequence - b.sequence)
+                .map((val, index) => {
+                  return <AdminSkill key={index} index={index + 1} val={val} />;
+                })}
             </Tbody>
           </Table>
         </TableContainer>

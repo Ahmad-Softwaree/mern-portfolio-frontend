@@ -116,7 +116,7 @@ export const updateSkill = async (
   form,
   id,
   setSelectedTypes,
-  setName,
+  setInputs,
   image,
   oldImageURL,
   oldImageName,
@@ -169,7 +169,10 @@ export const updateSkill = async (
       type: SKILL_IMAGE,
       payload: "",
     });
-    setName("");
+    setInputs({
+      name: "",
+      sequence: "",
+    });
     setSelectedTypes([]);
     uiDispatch({
       type: UPDATE_SKILL,
