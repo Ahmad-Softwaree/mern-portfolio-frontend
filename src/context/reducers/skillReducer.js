@@ -85,9 +85,13 @@ export const skillReducer = (state = skillInitialState, action) => {
         updateSkillLoading: false,
       };
     case UPDATE_SKILL_SUCCESS:
-      var data = state.skills;
-      var index = data.findIndex((val) => val._id === payload._id);
-      data[index] = payload;
+      let ids = payload.map((val) => val._id);
+      let data = state.skills;
+      data.forEach((val, index) => {
+        if (ids.includes(val._id)) {
+          data[index] = payload.filter((one) => one._id === val._id)[0];
+        }
+      });
       return {
         ...state,
         skills: data,

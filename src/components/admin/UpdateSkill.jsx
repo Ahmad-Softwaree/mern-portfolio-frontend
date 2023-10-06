@@ -140,7 +140,7 @@ export default function UpdateSkill() {
         className={`w-full`}
         title={`sequence`}
         options={Array.from(
-          { length: skills.length + 1 },
+          { length: skills.length },
           (_, index) => index + 1
         ).map((val, index) => {
           return {
