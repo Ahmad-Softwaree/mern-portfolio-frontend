@@ -66,6 +66,19 @@ export default function Projects() {
     }
   };
 
+  useEffect(() => {
+    if (language === "en") {
+      document.querySelectorAll(".projectCard").forEach((val) => {
+        val.style.direction = "ltr";
+      });
+    } else {
+      document.querySelectorAll(".projectCard").forEach((val) => {
+        val.style.direction = "rtl";
+      });
+    }
+    document.querySelector(".projectCards").style.direction = "ltr";
+  }, [language, projects]);
+
   return (
     <Element
       data-aos-offset="-400"

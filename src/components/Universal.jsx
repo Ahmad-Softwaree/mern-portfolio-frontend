@@ -33,21 +33,13 @@ export const Universal = () => {
   useLayoutEffect(() => {
     if (language === "en") {
       document.body.style.direction = "ltr";
-      document.querySelectorAll(".projectCard").forEach((val) => {
-        val.style.direction = "ltr";
-      });
       document.body.classList.remove("font-rabar");
       document.body.classList.add("font-poppins");
     } else {
       document.body.style.direction = "rtl";
-      document.querySelectorAll(".projectCard").forEach((val) => {
-        val.style.direction = "rtl";
-      });
       document.body.classList.remove("font-poppins");
       document.body.classList.add("font-rabar");
     }
-    if (document.querySelector(".projectCards"))
-      document.querySelector(".projectCards").style.direction = "ltr";
   }, [language]);
 
   const {
