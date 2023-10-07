@@ -7,8 +7,10 @@ export default function MobileNav({ mobNav, activeSection, setMobNav, goNav }) {
 
   return (
     <nav
-      className={`flex-col justify-left  items-start  flex xl:hidden fixed left-0 h-full w-fit transition-all duration-300 bg-black text-white z-[999] pt-[50px] py-[100px] ${
-        mobNav ? "left-0" : "left-[-300px]"
+      className={`flex-col justify-left  items-start  flex xl:hidden fixed  h-full w-fit transition-all duration-300 bg-black text-white z-[999] pt-[50px] py-[100px] ${
+        mobNav
+          ? `${language === "en" ? "left-0" : "right-0"}`
+          : `${language === "en" ? "left-[-300px]" : "right-[-300px]"}`
       }`}
     >
       <span
