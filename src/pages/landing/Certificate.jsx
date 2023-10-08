@@ -33,7 +33,7 @@ export default function Certificates() {
         <h1 className="font-bold text-white">{file.certificates.header}</h1>
 
         <div
-          className={`flex flex-col gap-10 justify-center items-center w-full py-[30px] ${
+          className={`flex flex-col gap-[100px] justify-center items-center w-full py-[30px] ${
             language !== "en" && "flex-row-reverse"
           }`}
         >
