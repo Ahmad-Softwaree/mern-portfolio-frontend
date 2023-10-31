@@ -138,7 +138,7 @@ export default function About() {
                 {file.about.edu.two.title}
               </p>
               <p className="font-[400]  !text-[16px] opacity-80 ">
-                {file.about.edu.one.body}
+                {file.about.edu.two.body}
               </p>
             </div>
           </div>
