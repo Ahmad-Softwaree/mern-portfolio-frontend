@@ -18,7 +18,7 @@ export default function CertificateCard({ val, index }) {
       }`}
     >
       <div
-        className={`relative bg-black flex flex-col justify-center items-end gap-5 md:gap-10 flex-wrap w-[350px] md:w-[550px] h-[350px] md:h-[400px] shadow-xl p-5 rounded-lg  ${
+        className={`relative bg-black flex flex-col justify-center items-end gap-5 md:gap-10 flex-wrap w-[350px] md:w-[550px] h-[380px] md:h-[400px] shadow-xl p-5 rounded-lg  ${
           language !== "en" && "items-start"
         }`}
       >
