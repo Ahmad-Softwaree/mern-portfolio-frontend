@@ -2,13 +2,16 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LanguageContext } from "../../context/LanguageContext";
 
-export default function BlogCard({ val }) {
+export default function BlogCard({ val, index }) {
   const {
     state: { file, language },
   } = useContext(LanguageContext);
 
   return (
-    <div className="blogCard relative flex flex-col justify-between items-center gap-10  overflow-hidden cursor-pointer w-[350px]  rounded-md h-[470px] text-center z-20 text-white">
+    <div
+      id={`blogCardId-${index}`}
+      className="blogCard relative flex flex-col justify-between items-center gap-10  overflow-hidden cursor-pointer w-[350px]  rounded-md h-[470px] text-center z-20 text-white"
+    >
       <div className="wrapper z-30 flex flex-col justify-left items-start gap-5 w-full h-[470px]">
         <img
           className="hover:scale-150 w-full h-[470px] object-cover rounded-md cursor-pointer transition-all duration-300"

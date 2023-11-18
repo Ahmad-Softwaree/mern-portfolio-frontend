@@ -20,15 +20,64 @@ import AddSkill from "./admin/AddSkill";
 import UpdateSkill from "./admin/UpdateSkill";
 import AddCertificate from "./admin/AddCertificate";
 import UpdateCertificate from "./admin/UpdateCertificate";
-import { ENGLISH } from "../context/types/language_types";
 import Private from "./global/Private";
 import UpdateAdmin from "./admin/UpdateAdmin";
+import { driver } from "driver.js";
 
 export const Universal = () => {
   const {
-    dispatch: languageDispatch,
     state: { language },
   } = useContext(LanguageContext);
+
+  const driverObj = driver({
+    showProgress: true,
+    popoverClass: "driverPopOver",
+    steps: [
+      {
+        element: ".header",
+        popover: {
+          title: "Navigation",
+          description: "You can navigate through my website here",
+        },
+      },
+      {
+        element: ".header .languageDiv",
+        popover: {
+          title: "Language",
+          description: "You can change the language from here",
+        },
+      },
+      {
+        element: ".downloadCV",
+        popover: {
+          title: "CV",
+          description: "You can download my cv here and see it (PDF)",
+        },
+      },
+      {
+        element: "#blogs h1",
+        popover: {
+          title: "Blogs",
+          description:
+            "You can see my latest blogs here in this section, my thought and ideas about everything",
+        },
+      },
+      {
+        element: "#blogs #blogCardId-0",
+        popover: {
+          title: "Blog Card",
+          description: "Hover this card and you can see more about this blog",
+        },
+      },
+      {
+        element: "#blogs .blogsLink",
+        popover: {
+          title: "See more blogs",
+          description: "You can see more blogs by click this button",
+        },
+      },
+    ],
+  });
 
   useLayoutEffect(() => {
     if (language === "en") {
@@ -40,7 +89,11 @@ export const Universal = () => {
       document.body.classList.remove("font-poppins");
       document.body.classList.add("font-rabar");
     }
-  }, [language]);
+  }, [language, driverObj]);
+
+  useEffect(() => {
+    driverObj.drive();
+  }, [driverObj]);
 
   const {
     state: { wantToDelete },

@@ -286,6 +286,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   a.admin_link.active {
     @apply bg-green text-black;
   }
+
+  .driverPopOver {
+    @apply !bg-black !text-white;
+  }
+  .driverPopOver
+    :is(
+      .driver-popover-close-btn,
+      .driver-popover-progress-text,
+      .driver-popover-arrow,
+      .driver-popover-next-btn,
+      .driver-popover-prev-btn
+    ) {
+    @apply !text-purple;
+  }
 }
 
 /* @media (max-width: 768px) {

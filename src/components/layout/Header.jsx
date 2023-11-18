@@ -131,7 +131,7 @@ export default function Header({ isHome }) {
       {mobNav && <Opacity />}
       {isHome && (
         <header
-          className={`w-full fixed top-0 right-0 left-0 bg-transparent text-white  flex flex-row justify-between items-center gap-5 px-5 min-h-[60px] z-[900] transition-all duration-300`}
+          className={`header w-full fixed top-0 right-0 left-0 bg-transparent text-white  flex flex-row justify-between items-center gap-5 px-5 min-h-[60px] z-[900] transition-all duration-300`}
         >
           <div
             onClick={() => setMobNav((prev) => !prev)}
@@ -233,7 +233,7 @@ export default function Header({ isHome }) {
           </nav>
           <div
             onClick={() => setLanguages((prev) => !prev)}
-            className={`absolute ${
+            className={`languageDiv absolute ${
               language === "en" ? "right-5" : "left-5"
             } top-0 bottom-0 my-auto h-fit z-[900]`}
           >

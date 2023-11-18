@@ -88,7 +88,9 @@ export default function Blogs() {
               {blogs.map((val, index) => {
                 return (
                   index < (page + 1) * number &&
-                  index >= page * number && <BlogCard key={index} val={val} />
+                  index >= page * number && (
+                    <BlogCard index={index} key={index} val={val} />
+                  )
                 );
               })}
             </div>
@@ -111,7 +113,7 @@ export default function Blogs() {
             </div>
 
             <Link
-              className="p-2 px-6 rounded-lg cursor-pointer text-white bg-transparent border-2 border-purple border-solid transition-all duration-300 hover:bg-purple hover:text-white"
+              className="blogsLink p-2 px-6 rounded-lg cursor-pointer text-white bg-transparent border-2 border-purple border-solid transition-all duration-300 hover:bg-purple hover:text-white"
               to={`/blogs`}
             >
               {file.blog.seeMore}

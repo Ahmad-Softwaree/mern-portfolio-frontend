@@ -102,7 +102,7 @@ export default function Home() {
           <a
             href="/pdf/Resume.pdf"
             download
-            className="p-2 px-8 bg-transparent border-2 border-solid border-purple transition-all duration-200 hover:bg-purple text-white rounded-md  !text-[15px] md:!text-[20px]"
+            className="downloadCV p-2 px-8 bg-transparent border-2 border-solid border-purple transition-all duration-200 hover:bg-purple text-white rounded-md  !text-[15px] md:!text-[20px]"
           >
             {file.home.cv}
           </a>
