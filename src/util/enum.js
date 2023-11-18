@@ -1,4 +1,2 @@
-export const BACKEND_HOST = "https://api.ahmad-software.com";
-export const ADMIN_COOKIE_NAME = "ahmad-software";
-//https://api.ahmad-software.com
-//http://localhost:3001
+export const BACKEND_HOST = import.meta.env.VITE_BACKEND_API;
+export const ADMIN_COOKIE_NAME = import.meta.env.VITE_ADMIN_COOKIE_NAME;

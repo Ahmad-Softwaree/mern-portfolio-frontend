@@ -3,9 +3,6 @@ import react from "@vitejs/plugin-react";
 import path from "path-browserify";
 // https://vitejs.dev/config/
 
-//http://localhost:3001
-//https://api.ahmad-software.com
-
 export default defineConfig({
   plugins: [react()],
   build: {
@@ -20,7 +17,7 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       "/api": {
-        target: "https://api.ahmad-software.com",
+        target: import.meta.env?.VITE_BACKED_API,
         changeOrigin: true,
         secure: false,
         ws: true,
