@@ -14,7 +14,9 @@ export default function About() {
         id="about"
         className="w-full flex flex-col justify-left items-center gap-10 bg-niceBlack text-white px-10 pb-[200px] "
       >
-        <h1 className="font-bold text-white">{file.about.header}</h1>
+        <h1 className="aboutHeader font-bold text-white">
+          {file.about.header}
+        </h1>
 
         <p className="text-niceGray w-full">{file.about.about}</p>
         <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">

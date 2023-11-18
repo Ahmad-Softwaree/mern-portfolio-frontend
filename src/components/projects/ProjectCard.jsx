@@ -40,6 +40,7 @@ export default function ProjectCard({ index, val }) {
       data-aos="fade-right"
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
+      id={`projectCardId-${index}`}
       className={`project-${index} projectCard relative bg-niceBlack flex flex-col justify-center items-end gap-5  flex-wrap  w-[350px] md:w-[550px] h-[650px] md:h-[600px] shadow-xl p-5 rounded-lg  ${
         language !== "en" && "items-start"
       }`}
@@ -87,7 +88,7 @@ export default function ProjectCard({ index, val }) {
           </h2>
         </div>
       </div>
-      <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
+      <div className="types w-full flex flex-row justify-left items-center gap-5 flex-wrap">
         <div className="w-full flex flex-row justify-left items-center gap-5">
           <span className="!text-[16px] md:!text-[18px] text-white">
             <i className="fa-solid fa-diagram-project"></i>{" "}
@@ -107,7 +108,7 @@ export default function ProjectCard({ index, val }) {
         </Link>
       </div>
 
-      <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
+      <div className="gits w-full flex flex-row justify-left items-center gap-5 flex-wrap">
         <div className="w-full flex flex-row justify-left items-center gap-5">
           <span className="!text-[16px] md:!text-[18px] text-white">
             <i className="fa-brands fa-github"></i>
@@ -134,7 +135,7 @@ export default function ProjectCard({ index, val }) {
           </span>
         )}
       </div>
-      <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
+      <div className="stacks w-full flex flex-row justify-left items-center gap-5 flex-wrap">
         <div className="w-full flex flex-row justify-left items-center gap-5">
           <span className="!text-[16px] md:!text-[18px] text-white">
             <i className="fa-solid fa-cubes"></i>
@@ -159,7 +160,7 @@ export default function ProjectCard({ index, val }) {
           <a
             href={`${val.url}`}
             target="_blank"
-            className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
+            className="preview flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
           >
             <span className="!text-[14px] text-white">
               {file.projects.preview}
@@ -181,7 +182,7 @@ export default function ProjectCard({ index, val }) {
         )}
         <Link
           to={`/projects/${val._id}`}
-          className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
+          className="more flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
         >
           <span className="!text-[14px] text-white">{file.projects.more}</span>
           <ReadMoreIcon className="text-white" fontSize="14px" />

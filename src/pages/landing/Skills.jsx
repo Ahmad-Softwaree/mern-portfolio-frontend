@@ -27,7 +27,9 @@ export default function Skills() {
         id="skills"
         className={`flex flex-col justify-left items-center w-full`}
       >
-        <h1 className="font-bold text-white">{file.skills.header}</h1>
+        <h1 className="skillsHeader font-bold text-white">
+          {file.skills.header}
+        </h1>
 
         <div
           className={`flex flex-row justify-center items-center py-[30px] flex-wrap ${
@@ -39,7 +41,7 @@ export default function Skills() {
           ) : skills.length > 0 ? (
             <Fragment>
               {skills.map((val, index) => {
-                return <SkillCard key={index} val={val} />;
+                return <SkillCard index={index} key={index} val={val} />;
               })}
             </Fragment>
           ) : (

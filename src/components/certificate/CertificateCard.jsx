@@ -12,6 +12,7 @@ export default function CertificateCard({ val, index }) {
 
   return (
     <div
+      id={`certificateCardId-${index}`}
       data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}
       className={`relative w-full flex justify-between items-center gap-5 ${
         index % 2 === 0 ? "flex-row self-end" : "flex-row-reverse self-start"
@@ -55,7 +56,7 @@ export default function CertificateCard({ val, index }) {
             <a
               href={`${val.url}`}
               target="_blank"
-              className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
+              className="link flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
             >
               <span className="!text-[14px] text-white">
                 {file.certificates.link}
@@ -65,7 +66,7 @@ export default function CertificateCard({ val, index }) {
           )}
           <Link
             to={`/certificates/${val._id}`}
-            className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
+            className="more flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
           >
             <span className="!text-[14px] text-white">
               {file.projects.more}
@@ -78,7 +79,7 @@ export default function CertificateCard({ val, index }) {
       <img
         src={val.imageURL}
         alt="certificateImage"
-        className="hidden lg:flex w-[800px] h-[400px] object-contain origin-center"
+        className="image hidden lg:flex w-[800px] h-[400px] object-contain origin-center"
       />
     </div>
   );

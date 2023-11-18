@@ -30,7 +30,9 @@ export default function Certificates() {
         id="certificate"
         className={`flex flex-col justify-left items-center w-full px-5 md:px-10 overflow-hidden`}
       >
-        <h1 className="font-bold text-white">{file.certificates.header}</h1>
+        <h1 className="certificateHeader font-bold text-white">
+          {file.certificates.header}
+        </h1>
 
         <div
           className={`flex flex-col gap-[100px] justify-center items-center w-full py-[30px] ${

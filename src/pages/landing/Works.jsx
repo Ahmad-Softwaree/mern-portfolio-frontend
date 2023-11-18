@@ -26,7 +26,7 @@ export default function Work() {
         id="works"
         className="works flex flex-col justify-left items-center w-full gap-2 px-10 overflow-auto"
       >
-        <h1 className="text-white font-bold">{file.nav.works}</h1>
+        <h1 className="workHeader text-white font-bold">{file.nav.works}</h1>
 
         <div
           className={`flex flex-row justify-center md:justify-left align-center  flex-wrap w-full  gap-[50px] py-[50px] ${
@@ -38,7 +38,7 @@ export default function Work() {
           ) : works.length > 0 ? (
             <Fragment>
               {works.map((val, index) => {
-                return <WorkCard key={index} val={val} />;
+                return <WorkCard index={index} key={index} val={val} />;
               })}
             </Fragment>
           ) : (

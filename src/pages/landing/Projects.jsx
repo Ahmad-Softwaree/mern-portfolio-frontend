@@ -90,7 +90,9 @@ export default function Projects() {
         id="projects"
         className="projects flex flex-col justify-left items-center w-full gap-2 overflow-auto !px-0"
       >
-        <h1 className="text-white font-bold">{file.nav.projects}</h1>
+        <h1 className="projectsHeader text-white font-bold">
+          {file.nav.projects}
+        </h1>
 
         <div
           ref={projectRef}

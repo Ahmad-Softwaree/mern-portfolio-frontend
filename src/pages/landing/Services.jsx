@@ -18,7 +18,9 @@ export default function Services() {
         id="services"
         className="w-full flex flex-col justify-left items-center gap-10 bg-black text-white px-10 "
       >
-        <h1 className="font-bold text-white">{file.services.header}</h1>
+        <h1 className="serviceHeader font-bold text-white">
+          {file.services.header}
+        </h1>
 
         <div className="w-full flex flex-row justify-center items-center gap-10 flex-wrap">
           <ServiceCard

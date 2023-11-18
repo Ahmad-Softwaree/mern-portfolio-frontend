@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 
-export default function SkillCard({ val }) {
+export default function SkillCard({ val, index }) {
   const {
     state: { language },
   } = useContext(LanguageContext);
   return (
-    <div className="w-[150px] h-[250px] md:w-[200px] md:h-[300px] rounded-md cursor-pointer  p-5 px-0 transition-all flex flex-col justify-center items-center gap-3 border-niceBlack  duration-300 bg-black shadow-xl hover:border-purple  border-2 border-solid hover:scale-[1.1] hover:text-red">
+    <div
+      id={`skillCardId-${index}`}
+      className="w-[150px] h-[250px] md:w-[200px] md:h-[300px] rounded-md cursor-pointer  p-5 px-0 transition-all flex flex-col justify-center items-center gap-3 border-niceBlack  duration-300 bg-black shadow-xl hover:border-purple  border-2 border-solid hover:scale-[1.1] hover:text-red"
+    >
       <img
         className="w-full h-[50px] md:h-[100px] object-contain px-5"
         src={val.imageURL}
