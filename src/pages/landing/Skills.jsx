@@ -32,7 +32,7 @@ export default function Skills() {
         </h1>
 
         <div
-          className={`flex flex-row justify-center items-center py-[30px] flex-wrap ${
+          className={`flex flex-row justify-center items-stretch py-[30px] flex-wrap ${
             language !== "en" && "flex-row-reverse"
           }`}
         >
