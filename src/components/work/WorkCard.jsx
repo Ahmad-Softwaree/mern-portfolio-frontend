@@ -15,7 +15,7 @@ export default function WorkCard({ val, index }) {
         <img
           src={`${val.imageURL}`}
           alt="workCardImage"
-          className="w-[60px] h-[60px] rounded-full border-2 border-solid border-purple"
+          className="w-[60px] h-[60px] rounded-full border-2 border-solid border-purple object-contain"
         />
         <p className="!text-[16px]">
           {file.work.title}: &nbsp;
