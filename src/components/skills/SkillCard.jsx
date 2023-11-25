@@ -21,21 +21,23 @@ export default function SkillCard({ val, index }) {
       <div className="w-full flex flex-row flex-wrap justify-center items-center gap-2">
         {val.types.map((one, index) => {
           return (
-            <span
-              key={index}
-              className="w-fit text-left text-white opacity-60 font-[500] !text-[12px]"
-            >
-              {language === "en"
-                ? one?.type?.enName
-                : language === "ar"
-                ? one?.type?.arName
-                : one?.type?.krName}{" "}
+            <div className="flex flex-row justify-center items-center gap-2">
+              <span
+                key={index}
+                className="w-fit text-left text-white opacity-60 font-[500] !text-[12px]"
+              >
+                {language === "en"
+                  ? one?.type?.enName
+                  : language === "ar"
+                  ? one?.type?.arName
+                  : one?.type?.krName}
+              </span>
               {index !== val?.types?.length - 1 && (
-                <small className="ml-2 text-purple !text-[20px] font-bold">
+                <small className="mb-1.5 text-purple !text-[20px] font-bold">
                   +
                 </small>
               )}
-            </span>
+            </div>
           );
         })}
       </div>
