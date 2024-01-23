@@ -1,10 +1,10 @@
 import { createContext, useReducer } from "react";
-import { imageInitialState, imageReducer } from "./reducers/imageReducer";
+import { imageState, imageReducer } from "./reducers/image.reducer";
 
 export const ImageContext = createContext();
 
 export const ImageContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(imageReducer, imageInitialState);
+  const [state, dispatch] = useReducer(imageReducer, imageState);
 
   return (
     <ImageContext.Provider value={{ state, dispatch }}>

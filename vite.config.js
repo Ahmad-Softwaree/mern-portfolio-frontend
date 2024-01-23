@@ -1,20 +1,19 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path-browserify";
-// https://vitejs.dev/config/
+import path from "path";
 
 export default defineConfig({
   plugins: [react()],
   build: {
     outDir: "build",
   },
-  server: {
-    watch: {
-      usePolling: true,
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
-    open: true,
+  },
+  server: {
     port: 3000,
-    strictPort: true,
     proxy: {
       "/api": {
         target: import.meta.env?.VITE_BACKED_API,
@@ -25,12 +24,6 @@ export default defineConfig({
           "^/api": "",
         },
       },
-    },
-  },
-
-  resolve: {
-    alias: {
-      path: "path-browserify",
     },
   },
 });

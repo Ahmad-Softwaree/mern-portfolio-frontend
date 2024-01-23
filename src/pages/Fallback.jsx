@@ -1,11 +1,10 @@
+import Logo from "@/components/shared/Logo";
 import React from "react";
 
 export default function Fallback() {
   return (
-    <section className="w-full min-h-screen flex flex-row justify-center items-center text-purple bg-black">
-      <h1 className="font-bold !text-[60px] animate-pulse text-center">
-        Ahmad Software
-      </h1>
-    </section>
+    <div className="w-full min-h-screen flex flex-row justify-center items-center bg-black-500">
+      <Logo className={`animate-pulse text-primary-500`} size="xl" />
+    </div>
   );
 }

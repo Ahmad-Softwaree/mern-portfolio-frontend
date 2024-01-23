@@ -27,7 +27,8 @@
       "Full Stack Web Developer.",
       "Game Developer.",
       "Software Developer.",
-      "Software Engineer."
+      "Software Engineer.",
+      "Full Stack Mobile Developer"
     ],
     "cv": "Show CV"
   },
@@ -135,7 +136,7 @@
     "related": "Related blogs"
   },
   "contact": {
-    "get": "Get the best deals",
+    "get": "Get in contact",
     "sub": "Subscribe to get more",
     "subButton": "Subscribe"
   },

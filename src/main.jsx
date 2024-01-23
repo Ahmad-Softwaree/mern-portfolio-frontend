@@ -1,18 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { ChakraProvider } from "@chakra-ui/react";
-import "../src/styles/css/style.css";
-import { MainContext } from "./context/Index";
-import "driver.js/dist/driver.css";
-
+import App from "./App.jsx";
+import "./global.css";
+import { MainContext } from "./context/Index.jsx";
+import ChakraUIProvider from "./providers/chakra/ChakraUIProvider.jsx";
+import QueryProvider from "./providers/react-query/QueryProvider.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <MainContext>
-    <ChakraProvider resetCSS={false}>
-      <App />
-    </ChakraProvider>
+    <ChakraUIProvider>
+      <QueryProvider>
+        <App />
+      </QueryProvider>
+    </ChakraUIProvider>
   </MainContext>
 
-  //  </React.StrictMode>
+  /* </React.StrictMode> */
 );

@@ -1,14 +1,10 @@
 import { createContext, useReducer } from "react";
-import {
-  languageInitialState,
-  languageReducer,
-} from "./reducers/languageReducer";
+import { languageState, languageReducer } from "./reducers/language.reducer";
 
 export const LanguageContext = createContext();
 
 export const LanguageContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(languageReducer, languageInitialState);
-
+  const [state, dispatch] = useReducer(languageReducer, languageState);
   return (
     <LanguageContext.Provider value={{ state, dispatch }}>
       {children}

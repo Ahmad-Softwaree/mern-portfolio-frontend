@@ -1,0 +1,9 @@
+export { default as Dashboard } from "./Dashboard";
+export { default as Users } from "./Users";
+export { default as Configs } from "./Configs";
+export { default as Projects } from "./Projects";
+export { default as Subscribers } from "./Subscribers";
+export { default as Blogs } from "./Blogs";
+export { default as Works } from "./Works";
+export { default as Skills } from "./Skills";
+export { default as Certificates } from "./Certificates";

@@ -1,0 +1,20 @@
+[
+  {
+    "image": "/images/team/yad.jpg",
+    "name": "Yad Jamal",
+    "role": "UI/UX Designer",
+    "profile": "https://www.instagram.com/ya10.uiux/"
+  },
+  {
+    "image": "/images/team/ahmad.jpg",
+    "name": "Ahmad Salah",
+    "role": "Full-stack Developer",
+    "profile": "https://ahmad-software.com"
+  },
+  {
+    "image": "/images/team/rekar.svg",
+    "name": "Rekar Omar",
+    "role": "Full-stack Developer",
+    "profile": "https://rekarromar.me"
+  }
+]
