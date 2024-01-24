@@ -19,6 +19,9 @@ export const ENUMs = {
 
   SEARCH_PARAM: "search",
   FILTER_PARAM: "filter",
+  CATEGORY_PARAM: "category",
+  TYPE_PARAM: "type",
+  STACK_PARAM: "stack",
 
   //PAGINATION
   PAGINATION: "10",

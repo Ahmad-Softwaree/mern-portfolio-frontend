@@ -118,7 +118,7 @@ export const ProjectCard = ({ val, index }) => {
               onMouseMove={moveBackground}
               onMouseEnter={() => setShow(true)}
               onMouseLeave={() => setShow(false)}
-              className={`project-${index} projectCard relative bg-black-500 col-span-full md:col-span-6 ld:col-span-4 flex flex-col justify-center items-end gap-5  flex-wrap w-full shadow-xl p-5 rounded-lg  ${
+              className={`project-${index} projectCard h-full relative bg-black-500 col-span-full md:col-span-6 ld:col-span-4 flex flex-col justify-center items-end gap-5  flex-wrap w-full shadow-xl p-5 rounded-lg  ${
                 lang !== "en" && "items-start"
               }`}>
               {show && (
@@ -175,9 +175,18 @@ export const ProjectCard = ({ val, index }) => {
                     {file.projects.types}
                   </span>
                 </div>
-                {val.types.map((val, index) => {
-                  return index < 2 && <Type val={val} key={index} />;
-                })}
+                {val.types.length > 0 &&
+                  val.types.map((one, index) => {
+                    return (
+                      index < 2 && (
+                        <Type
+                          to={`/projects?type=${val.types[0]?._id}`}
+                          val={one}
+                          key={index}
+                        />
+                      )
+                    );
+                  })}
                 <Link
                   to={`/projects/${val._id}`}
                   className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer">
@@ -194,7 +203,7 @@ export const ProjectCard = ({ val, index }) => {
                     {file.projects.gits}
                   </span>
                 </div>
-                {val.gits.length > 0 ? (
+                {val.gits.length > 0 && val.gits.length > 0 ? (
                   <>
                     {val.gits.map((val, index) => {
                       return index < 1 && <ProjectGit val={val} key={index} />;
@@ -221,9 +230,18 @@ export const ProjectCard = ({ val, index }) => {
                   </span>
                 </div>
 
-                {val.stacks.map((val, index) => {
-                  return index < 4 && <Stack val={val} key={index} />;
-                })}
+                {val.stacks.length > 0 &&
+                  val.stacks.map((one, index) => {
+                    return (
+                      index < 4 && (
+                        <Stack
+                          to={`/projects?stack=${val.stacks[0]?._id}`}
+                          val={one}
+                          key={index}
+                        />
+                      )
+                    );
+                  })}
                 <Link
                   to={`/projects/${val._id}`}
                   className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer">

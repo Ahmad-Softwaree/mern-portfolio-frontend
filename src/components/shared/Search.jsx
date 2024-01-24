@@ -16,6 +16,9 @@ export default function Search({ refetch }) {
         value={input || ""}
         onChange={(e) => {
           setSearchParams((prev) => {
+            prev.delete(ENUMs.CATEGORY_PARAM);
+            prev.delete(ENUMs.FILTER_PARAM);
+
             prev.set(ENUMs.SEARCH_PARAM, e.target.value);
             return prev;
           });

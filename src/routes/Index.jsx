@@ -11,7 +11,7 @@ import {
   UserRouterProvider,
 } from "../providers";
 import { Layout, SignInLayout } from "../pages/_root/layout";
-import { Login } from "../pages/_root";
+import { Login, PrivacyPolicy } from "../pages/_root";
 import { Layout as AdminLayout } from "../pages/_user/layout";
 import {
   Users,
@@ -74,6 +74,11 @@ const routes = createBrowserRouter(
             path="certificates/:id"
             errorElement={<Error />}
             element={<Certificate />}
+          />
+          <Route
+            path="privacy_policy"
+            errorElement={<Error />}
+            element={<PrivacyPolicy />}
           />
         </Route>
       </>

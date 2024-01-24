@@ -42,7 +42,6 @@ const WorkForm = () => {
     arTitle: "",
     krTitle: "",
     url: "",
-    company: "",
     from: "",
     to: "",
     continue: false,

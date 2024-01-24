@@ -23,7 +23,7 @@ export default function Blogs() {
 
       {isLoading ? (
         <Loader size="xl" />
-      ) : data?.pages?.length > 0 ? (
+      ) : data?.pages?.some((arr) => arr.length > 0) ? (
         <>
           <Carousel
             opts={{
@@ -37,7 +37,7 @@ export default function Blogs() {
                     {row.map((blog, index) => {
                       return (
                         <CarouselItem
-                          className="basis-full md:basis-1/2 grow"
+                          className="basis-full md:basis-1/2 lg:basis-1/3 grow"
                           key={index}>
                           <BlogCard val={blog} index={index} />
                         </CarouselItem>

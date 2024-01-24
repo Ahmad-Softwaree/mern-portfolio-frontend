@@ -67,7 +67,8 @@ export default function Blog() {
               }`}>
               {data.categories?.map((category, index) => {
                 return (
-                  <span
+                  <Link
+                    to={`/blogs?category=${category._id}`}
                     key={index}
                     className={`text-white-500 opacity-70 border-black-300 border-solid border-2 p-2 rounded-[20px] hover:bg-black-300 hover:opacity-100 transition-all duration-200   px-4 cursor-pointer`}>
                     {lang === "en"
@@ -75,7 +76,7 @@ export default function Blog() {
                       : lang === "ar"
                       ? category.arName
                       : category.krName}
-                  </span>
+                  </Link>
                 );
               })}
             </div>

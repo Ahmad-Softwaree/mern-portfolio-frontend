@@ -22,6 +22,10 @@ const Pagination = ({ children, page }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   let search = searchParams.get(ENUMs.SEARCH_PARAM);
   let filter = searchParams.get(ENUMs.FILTER_PARAM);
+  let category = searchParams.get(ENUMs.CATEGORY_PARAM);
+  let type = searchParams.get(ENUMs.TYPE_PARAM);
+  let stack = searchParams.get(ENUMs.STACK_PARAM);
+
   const { ref, inView } = useInView();
   const { ref: filterRef, inView: filterInView } = useInView();
   const {
@@ -33,9 +37,9 @@ const Pagination = ({ children, page }) => {
     refetch,
   } =
     page === "blog"
-      ? useGetBlogs(filter)
+      ? useGetBlogs(category)
       : page === "project"
-      ? useGetProjects(filter)
+      ? useGetProjects(type, stack)
       : page === "certificate"
       ? useGetCertificates(filter)
       : null;
@@ -59,7 +63,7 @@ const Pagination = ({ children, page }) => {
   useEffect(() => {
     if (filter && filter !== "") refetch(filter);
   }, [filter]);
-  const isSearched = debounceValue;
+  const isSearched = debounceValue && debounceValue !== "";
 
   const resultObject = {
     pages: Array.from(
@@ -88,6 +92,7 @@ const Pagination = ({ children, page }) => {
     searchData: resultObject,
     searchRefetch,
     filter,
+    searchLoading,
   });
 };
 

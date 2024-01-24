@@ -14,7 +14,7 @@ export default function Certificates() {
       <h1 className="text-white-500 font-bold">{file.nav.certificate}</h1>
       {isLoading ? (
         <Loader size="xl" />
-      ) : data?.pages?.length > 0 ? (
+      ) : data?.pages?.some((arr) => arr.length > 0) ? (
         <>
           <>
             {data.pages.map((row, index) => {

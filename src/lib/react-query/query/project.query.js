@@ -22,12 +22,13 @@ import { CONTEXT_TYPEs } from "@/context";
 import { ENUMs } from "@/lib/enum";
 import { UtilContext } from "@/context/UtilContext";
 
-export function useGetProjects(filter) {
+export function useGetProjects(type, stack) {
   const { dispatch } = useContext(AlertContext);
 
   return useInfiniteQuery({
     queryKey: [QUERY_KEYs.PROJECTS],
-    queryFn: ({ pageParam = 1 }) => getProjects(dispatch, pageParam, filter),
+    queryFn: ({ pageParam = 1 }) =>
+      getProjects(dispatch, pageParam, type, stack),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length > 0 ? allPages.length + 1 : undefined;
     },
@@ -45,7 +46,7 @@ export function useGetProject(id) {
 }
 export function useSearchProject(search) {
   const { dispatch } = useContext(AlertContext);
-
+  console.log("object");
   return useQuery({
     queryKey: [QUERY_KEYs.SEARCH_PROJECTS],
     queryFn: () => searchProject(dispatch, search),

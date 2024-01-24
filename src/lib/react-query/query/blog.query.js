@@ -44,7 +44,6 @@ export function useGetRelatedBlogs(category, id) {
 
 export function useGetBlogs(filter) {
   const { dispatch } = useContext(AlertContext);
-
   return useInfiniteQuery({
     queryKey: [QUERY_KEYs.BLOGS],
     queryFn: ({ pageParam = 1 }) => getBlogs(dispatch, pageParam, filter),

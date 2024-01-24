@@ -15,7 +15,7 @@ export default function Project() {
   const { data, isLoading } = useGetProject(id);
 
   return (
-    <section className="element min-h-screen">
+    <section className="element min-h-screen  !justify-start">
       {isLoading ? (
         <Loader size="xl" screen={true} />
       ) : (

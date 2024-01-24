@@ -2,10 +2,17 @@ import { authApi } from "@/lib/config/api.config";
 import { generateAlert } from "@/lib/functions";
 import { URLs } from "../url";
 
-export const getProjects = async (dispatch, pageParam, filter = "default") => {
+export const getProjects = async (
+  dispatch,
+  pageParam,
+  type = "default",
+  stack = "default"
+) => {
   try {
     const { data } = await authApi.get(
-      `${URLs.GET_PROJECTS}/${filter ? filter : "default"}?pages=${pageParam}`
+      `${URLs.GET_PROJECTS}/${type ? type : "default"}/${
+        stack ? stack : "default"
+      }?pages=${pageParam}`
     );
     return data;
   } catch (error) {

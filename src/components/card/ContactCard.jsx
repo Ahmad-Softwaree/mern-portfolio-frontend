@@ -15,6 +15,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import { Loader } from "../shared";
 import { LanguageContext } from "@/context/LanguageContext";
 import { useContext } from "react";
+
 export default function ContactCard() {
   const { state, updateState } = useDynamicState({
     email: "",

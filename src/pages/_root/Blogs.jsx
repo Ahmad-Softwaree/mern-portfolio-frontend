@@ -1,5 +1,5 @@
 import Pagination from "@/components/providers/_user/Pagination";
-import { Loader, NoData, Return } from "@/components/shared";
+import { Loader, NoData } from "@/components/shared";
 import BlogGrid from "@/components/shared/BlogGrid";
 import Search from "@/components/shared/Search";
 import { LanguageContext } from "@/context/LanguageContext";
@@ -10,7 +10,7 @@ export default function Blogs() {
     state: { file },
   } = useContext(LanguageContext);
   return (
-    <section className="element min-h-screen">
+    <section className="element min-h-screen !justify-start">
       <div className="flex flex-row justify-between items-center w-full flex-wrap gap-5">
         <h1 className="text-white-500 font-bold">{file.nav.blogs}</h1>
         <Search />
@@ -23,15 +23,23 @@ export default function Blogs() {
           hasNextPage,
           isLoading,
           ref,
-
           isSearched,
           searchData,
+          searchLoading,
         }) => {
+          console.log(isSearched);
+          if (
+            isSearched &&
+            !searchLoading &&
+            searchData?.pages?.every((arr) => arr.length === 0)
+          ) {
+            return <NoData />;
+          }
           return (
             <>
-              {isLoading ? (
+              {isLoading || searchLoading ? (
                 <Loader size="xl" screen={true} />
-              ) : data?.pages?.length > 0 ? (
+              ) : data?.pages?.some((arr) => arr.length > 0) ? (
                 <div className="w-full flex flex-row justify-center items-start gap-10 md:gap-20 flex-wrap">
                   {!isSearched ? (
                     <>

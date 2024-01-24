@@ -12,7 +12,7 @@ export default function Certificate() {
     state: { file, lang },
   } = useContext(LanguageContext);
   return (
-    <section className="element min-h-screen">
+    <section className="element min-h-screen !justify-start">
       {isLoading ? (
         <Loader size="xl" screen={true} />
       ) : (

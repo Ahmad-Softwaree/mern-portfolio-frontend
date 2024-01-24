@@ -10,7 +10,7 @@ export default function Projects() {
     state: { file },
   } = useContext(LanguageContext);
   return (
-    <section className="element min-h-screen">
+    <section className="element min-h-screen !justify-start">
       <div className="flex flex-row justify-between items-center w-full flex-wrap gap-5">
         <h1 className="text-white-500 font-bold">{file.nav.projects}</h1>
         <Search />
@@ -26,12 +26,20 @@ export default function Projects() {
 
           isSearched,
           searchData,
+          searchLoading,
         }) => {
+          if (
+            isSearched &&
+            !searchLoading &&
+            searchData?.pages?.every((arr) => arr.length === 0)
+          ) {
+            return <NoData />;
+          }
           return (
             <>
-              {isLoading ? (
+              {isLoading || searchLoading ? (
                 <Loader size="xl" screen={true} />
-              ) : data?.pages?.length > 0 ? (
+              ) : data?.pages?.some((arr) => arr.length > 0) ? (
                 <div className="w-full flex flex-row justify-center items-start gap-10 md:gap-20 flex-wrap">
                   {!isSearched ? (
                     <>

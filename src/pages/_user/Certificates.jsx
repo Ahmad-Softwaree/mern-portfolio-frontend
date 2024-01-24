@@ -24,13 +24,18 @@ export const Certificates = () => {
         hasNextPage,
         isLoading,
         ref,
-        filterRef,
-        refetch,
+
         isSearched,
         searchData,
-        searchRefetch,
-        filter,
+        searchLoading,
       }) => {
+        if (
+          isSearched &&
+          !searchLoading &&
+          searchData?.pages?.every((arr) => arr.length === 0)
+        ) {
+          return <NoData />;
+        }
         return (
           <>
             <h1 className="text-heading3-bold md:text-heading2-bold">
@@ -57,9 +62,9 @@ export const Certificates = () => {
               )}
             </div>
 
-            {isLoading ? (
+            {isLoading || searchLoading ? (
               <Loader size="xl" screen={true} />
-            ) : data?.pages?.length > 0 ? (
+            ) : data?.pages?.some((arr) => arr.length > 0) ? (
               <div className="w-full min-w-[200px] overflow-y-hidden  grid grid-cols-1 lg:grid-cols-12 gap-10">
                 {!isSearched ? (
                   <>

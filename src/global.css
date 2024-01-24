@@ -84,7 +84,8 @@ a.active.headerLink::after {
   .element {
     @apply w-full flex flex-col justify-center items-center gap-10 px-5 md:px-10 lg:px-20 py-20  !text-white-500  min-h-[500px] relative overflow-visible;
   }
-  header {
+  header,
+  footer {
     @apply !px-5 md:!px-10 lg:!px-20 !p-3 z-[1000];
   }
   .chakra {
