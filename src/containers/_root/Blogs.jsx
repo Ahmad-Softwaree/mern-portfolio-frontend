@@ -55,11 +55,13 @@ export default function Blogs() {
             )}
           </Carousel>
 
-          <Link
-            className="blogsLink p-2 px-6 rounded-lg cursor-pointer text-white-500 bg-transparent border-2 border-primary-500 border-solid transition-all duration-300 hover:bg-primary-500 hover:text-white-500"
-            to={`/blogs`}>
-            {file.blog.seeMore}
-          </Link>
+          {data.pages[0]?.length > 10 && (
+            <Link
+              className="blogsLink p-2 px-6 rounded-lg cursor-pointer text-white-500 bg-transparent border-2 border-primary-500 border-solid transition-all duration-300 hover:bg-primary-500 hover:text-white-500"
+              to={`/blogs`}>
+              {file.blog.seeMore}
+            </Link>
+          )}
         </>
       ) : (
         <NoData />

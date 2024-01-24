@@ -40,7 +40,7 @@ const Aside = () => {
         className="!right-0 !fixed !m-5 !z-[1000] !bg-primary-500"
         ref={btnRef}
         colorScheme="teal"
-        onClick={onOpen}>
+        onClick={isOpen ? onClose : onOpen}>
         <HamburgerIcon />
       </Button>
       <Drawer
@@ -50,8 +50,10 @@ const Aside = () => {
         finalFocusRef={btnRef}>
         <DrawerOverlay />
         <DrawerContent className="!flex !bg-black-500 !text-white-500 !w-full !flex-col !justify-left !items-center !gap-10">
-          <DrawerCloseButton className="!z-[1000] !cursor-pointer" />
-          <DrawerHeader className="!w-full">Dashboard Navigation</DrawerHeader>
+          <DrawerCloseButton
+            onClick={onClose}
+            className="!z-[1000] !cursor-pointer"
+          />
           <Logo size="lg" />
 
           <DrawerBody className="!w-full !flex !flex-col !justify-left !items-center !gap-10">

@@ -65,7 +65,7 @@ export const Certificates = () => {
             {isLoading || searchLoading ? (
               <Loader size="xl" screen={true} />
             ) : data?.pages?.some((arr) => arr.length > 0) ? (
-              <div className="w-full min-w-[200px] overflow-y-hidden  grid grid-cols-1 lg:grid-cols-12 gap-10">
+              <div className="w-full flex flex-row justify-center items-start gap-10 md:gap-20 flex-wrap">
                 {!isSearched ? (
                   <>
                     {data.pages.map((row, index) => {

@@ -15,7 +15,8 @@ import { useLocation } from "react-router-dom";
 
 import { homeLinks } from "@/constants";
 import { LanguageContext } from "@/context/LanguageContext";
-
+import { Admin } from "@/components/providers/_user";
+import { NavLink } from "react-router-dom";
 const MobNav = () => {
   const { pathname } = useLocation();
   const path = pathname.split("/");
@@ -63,6 +64,17 @@ const MobNav = () => {
                 </Link>
               );
             })}
+            <Admin>
+              {({}) => {
+                return (
+                  <NavLink
+                    to={`/dashboard`}
+                    className={`w-full  p-2 px-1 text-center cursor-pointer hover:text-primary-500 transition-all duration-200`}>
+                    <p className="text-text1-semibold">Dashboard</p>
+                  </NavLink>
+                );
+              }}
+            </Admin>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

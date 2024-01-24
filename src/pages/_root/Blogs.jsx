@@ -27,7 +27,6 @@ export default function Blogs() {
           searchData,
           searchLoading,
         }) => {
-          console.log(isSearched);
           if (
             isSearched &&
             !searchLoading &&

@@ -29,7 +29,7 @@ export const Skills = () => {
       {isLoading ? (
         <Loader color="black" screen={true} size="xl" />
       ) : data?.length > 0 ? (
-        <div className="w-full grid grid-cols-2 md:grid-cols-8 lg:grid-cols-12 gap-10 justify-items-center ">
+        <div className="w-full flex flex-row justify-center items-stretch py-[30px] flex-wrap gap-2">
           {data?.map((val, index) => {
             return <SkillCard key={index} val={val} />;
           })}
