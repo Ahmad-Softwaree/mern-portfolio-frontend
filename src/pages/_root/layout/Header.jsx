@@ -77,7 +77,7 @@ const Header = () => {
         {path.length === 0 ? (
           <MobNav />
         ) : (
-          <Link to={`/`}>
+          <Link to={-1}>
             <PiKeyReturnFill className="text-[25px]" />
           </Link>
         )}
