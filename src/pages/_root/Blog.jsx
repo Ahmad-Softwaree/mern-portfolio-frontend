@@ -26,7 +26,7 @@ export default function Blog() {
       ) : (
         <div className="!py-20 md:mx-20 lg:mx-50 px-10 bg-black-600 col-span-full h-full">
           <div className="flex flex-col justify-start items-start gap-10 z-50">
-            <h1 className="w-full text-heading3-bold md:text-heading2-bold lg:text-heading2-bold text-white-500 text-left !font-[700]">
+            <h1 className="text-heading3-bold md:text-heading2-bold lg:text-heading2-bold text-white-500 text-left !font-[700]">
               {lang === "en"
                 ? data.enTitle
                 : lang === "ar"

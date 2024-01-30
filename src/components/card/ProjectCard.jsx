@@ -130,7 +130,7 @@ export const ProjectCard = ({ val, index }) => {
               )}
 
               <div className="flex flex-col justify-left items-start gap-5 w-full">
-                <div className="w-full flex flex-row justify-between items-center gap-10">
+                <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-10">
                   <div className="flex flex-row justify-left items-center gap-5">
                     <img
                       className="w-[40px] md:w-[50px] h-[40px] md:h-[50px] rounded-full object-cover"

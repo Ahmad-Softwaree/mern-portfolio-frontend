@@ -15,7 +15,7 @@ export function useGetSubscribers() {
   });
 }
 
-export function useAddSubscriber() {
+export function useAddSubscriber(replaceState) {
   const { dispatch } = useContext(AlertContext);
   const queryClient = useQueryClient();
   return useMutation({
@@ -23,6 +23,9 @@ export function useAddSubscriber() {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEYs.SUBSCRIBERS]);
       generateAlert(data.message, "success", dispatch);
+      replaceState({
+        email: "",
+      });
     },
     onError: (error) => {
       generateAlert(error, "error", dispatch);

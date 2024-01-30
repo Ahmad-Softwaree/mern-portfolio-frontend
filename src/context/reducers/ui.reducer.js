@@ -14,7 +14,6 @@ export const uiState = {
   work_form: false,
   config: "",
   qKey: "",
-  about: false,
 };
 
 export const uiReducer = (state = uiState, action) => {
@@ -36,7 +35,6 @@ export const uiReducer = (state = uiState, action) => {
         config_form: false,
         config: "",
         qKey: "",
-        about: false,
       };
     case CONTEXT_TYPEs.USER_FORM:
       return {
@@ -70,11 +68,7 @@ export const uiReducer = (state = uiState, action) => {
         data: payload?.data,
         certificate_form: !state.certificate_form,
       };
-    case CONTEXT_TYPEs.ABOUT:
-      return {
-        ...state,
-        about: !state.about,
-      };
+
     case CONTEXT_TYPEs.PROJECT_FORM:
       return {
         ...state,

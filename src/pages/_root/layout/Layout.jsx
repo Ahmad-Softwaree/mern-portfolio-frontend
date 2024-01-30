@@ -2,7 +2,7 @@ import Alert from "@/components/shared/Alert";
 import useRefreshPage from "@/hooks/useRefreshPage";
 import useScrollTop from "@/hooks/useScrollTop";
 import { Outlet } from "react-router-dom";
-import { Modals } from ".";
+
 import Header from "./Header";
 import Footer from "./Footer";
 import useReactScroll from "@/hooks/useReactScroll";
@@ -18,7 +18,7 @@ const Layout = () => {
   return (
     <>
       <Alert />
-      <Modals />
+
       <main className="w-full overflow-hidden min-h-screen bg-black-500">
         <Header />
 

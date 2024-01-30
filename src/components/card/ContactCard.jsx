@@ -17,14 +17,14 @@ import { LanguageContext } from "@/context/LanguageContext";
 import { useContext } from "react";
 
 export default function ContactCard() {
-  const { state, updateState } = useDynamicState({
+  const { state, updateState, replaceState } = useDynamicState({
     email: "",
   });
   const { email } = state;
   const {
     state: { file },
   } = useContext(LanguageContext);
-  const { mutateAsync, isPending } = useAddSubscriber();
+  const { mutateAsync, isPending } = useAddSubscriber(replaceState);
   const handleInputChange = (e) => updateState(e.target.name, e.target.value);
 
   return (

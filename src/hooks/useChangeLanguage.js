@@ -16,6 +16,9 @@ const useChangeLanguage = () => {
       document.body.classList.remove("font-poppins");
       document.body.classList.add("font-rabar");
     }
+    document.querySelectorAll(".carousel")?.forEach((val) => {
+      val.style.direction = "ltr";
+    });
   }, [lang]);
 };
 

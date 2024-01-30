@@ -141,7 +141,10 @@ const BlogCard = ({ val, index }) => {
                   </span>
                 </div>
 
-                <h2 className="text-body2-bold md:text-body1-bold !font-[700] text-left mb-3">
+                <h2
+                  className={`text-body2-bold md:text-body1-bold !font-[700] text-left mb-3 ${
+                    lang === "en" ? "text-left'" : "text-right"
+                  }`}>
                   {lang === "en"
                     ? val.enTitle
                     : lang === "ar"

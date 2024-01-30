@@ -13,7 +13,7 @@ import { BlogCard } from "@/components/card";
 import { Link } from "react-router-dom";
 export default function Blogs() {
   const {
-    state: { file },
+    state: { file, lang },
   } = useContext(LanguageContext);
   const { data, isLoading } = useGetBlogs();
 
@@ -27,9 +27,9 @@ export default function Blogs() {
         <>
           <Carousel
             opts={{
-              align: "start",
+              align: lang === "en" ? "start" : "end",
             }}
-            className="w-full">
+            className="w-full carousel">
             <CarouselContent className="w-full">
               {data.pages.map((row, index) => {
                 return (
