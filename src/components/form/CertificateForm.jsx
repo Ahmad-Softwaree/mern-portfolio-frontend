@@ -233,7 +233,9 @@ const CertificateForm = () => {
             <Calendar
               mode="single"
               selected={date}
-              onSelect={onChange}
+              onSelect={(e) => {
+                updateState("date", e);
+              }}
               initialFocus
             />
           </PopoverContent>
