@@ -4,11 +4,12 @@ import { useGetCertificates } from "@/lib/react-query/query/certificate.query";
 import { Fragment, useContext } from "react";
 
 import { CertificateCard } from "@/components/card";
+import { Link } from "react-router-dom";
 export default function Certificates() {
   const {
     state: { file },
   } = useContext(LanguageContext);
-  const { data, isLoading } = useGetCertificates();
+  const { data, isLoading, hasNextPage } = useGetCertificates();
   return (
     <>
       <h1 className="text-white-500 font-bold">{file.nav.certificate}</h1>
@@ -35,6 +36,12 @@ export default function Certificates() {
               );
             })}
           </>
+
+          <Link
+            className="blogsLink p-2 px-6 rounded-lg cursor-pointer text-white-500 bg-transparent border-2 border-primary-500 border-solid transition-all duration-300 hover:bg-primary-500 hover:text-white-500"
+            to={`/certificates`}>
+            {file.blog.seeMore}
+          </Link>
         </>
       ) : (
         <NoData />

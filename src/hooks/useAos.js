@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 const useAos = () => {
   useEffect(() => {
-    console.log(AOS);
     AOS.init();
   }, []);
 };

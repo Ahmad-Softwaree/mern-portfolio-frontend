@@ -15,8 +15,7 @@ export default function Projects() {
   const {
     state: { file, lang },
   } = useContext(LanguageContext);
-  const { data, isLoading } = useGetProjects();
-
+  const { data, isLoading, hasNextPage } = useGetProjects();
   return (
     <>
       <h1 className="text-white-500 font-bold">{file.nav.projects}</h1>
@@ -50,13 +49,11 @@ export default function Projects() {
             <CarouselNext />
           </Carousel>
 
-          {data.pages[0]?.length > 10 && (
-            <Link
-              className="blogsLink p-2 px-6 rounded-lg cursor-pointer text-white-500 bg-transparent border-2 border-primary-500 border-solid transition-all duration-300 hover:bg-primary-500 hover:text-white-500"
-              to={`/projects`}>
-              {file.blog.seeMore}
-            </Link>
-          )}
+          <Link
+            className="blogsLink p-2 px-6 rounded-lg cursor-pointer text-white-500 bg-transparent border-2 border-primary-500 border-solid transition-all duration-300 hover:bg-primary-500 hover:text-white-500"
+            to={`/projects`}>
+            {file.blog.seeMore}
+          </Link>
         </>
       ) : (
         <NoData />

@@ -11,7 +11,6 @@ import { IoMdAddCircle } from "react-icons/io";
 export default function Config({ type, qKey }) {
   const { dispatch } = useContext(UiContext);
   const { data, isLoading, refetch } = useGetConfig(qKey, type);
-
   return (
     <div
       data-aos="fade-up-right"

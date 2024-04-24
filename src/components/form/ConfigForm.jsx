@@ -35,17 +35,16 @@ export default function ConfigForm() {
     form_type === "add" ? useAddConfig(qKey) : useUpdateConfig(qKey, id);
 
   useEffect(() => {
-    console.log(config);
     if (data && form_type === "update") {
       replaceState({
         enName: data?.enName,
         arName: data?.arName,
         krName: data?.krName,
+        type: config,
         color: data?.color,
       });
     }
   }, [data]);
-
   return (
     <form
       onSubmit={(e) => {
@@ -65,7 +64,7 @@ export default function ConfigForm() {
           placeholder="English Name"
         />
       </FormControl>
-      {config !== "stack" ? (
+      {config !== ENUMs.STACK ? (
         <>
           <FormControl isRequired>
             <FormLabel>Arabic Name</FormLabel>
@@ -102,18 +101,7 @@ export default function ConfigForm() {
           </FormControl>
         </>
       )}
-      {type === ENUMs.STACK && (
-        <FormControl isRequired>
-          <FormLabel>Color</FormLabel>
 
-          <Input
-            value={color}
-            onChange={onChange}
-            name={`color`}
-            placeholder="Color"
-          />
-        </FormControl>
-      )}
       <div className="w-full flex flex-row justify-center items-center gap-10">
         <Button mt={4} colorScheme="teal" isLoading={isPending} type="submit">
           {isPending ? <Loader /> : "Submit"}
