@@ -67,7 +67,6 @@ const WorkForm = () => {
         arTitle: data?.arTitle,
         krTitle: data?.krTitle,
         url: data?.url,
-        company: data?.company,
         from: data?.from,
         to: data?.to,
         continue: data?.continue,

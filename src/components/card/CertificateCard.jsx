@@ -37,7 +37,7 @@ export default function CertificateCard({ val, index }) {
               data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}
               className={`relative w-full grid grid-cols-2 gap-10`}>
               <div
-                className={`relative col-span-full lg:col-span-1 bg-black-700 flex flex-col justify-center items-end gap-5 md:gap-10 flex-wrap shadow-xl p-5 rounded-lg
+                className={` relative col-span-full lg:col-span-1 bg-black-700 flex flex-col justify-center items-end gap-5 md:gap-10 flex-wrap shadow-xl p-5 rounded-lg
                  ${index % 2 === 0 ? "order-1" : "order-2"}
                 ${lang !== "en" && "items-start"}`}>
                 <div className="flex flex-col justify-left items-start gap-5 w-full">
@@ -97,7 +97,7 @@ export default function CertificateCard({ val, index }) {
               <img
                 src={val.imageURL}
                 alt="certificateImage"
-                className={`image cols-span-1 hidden lg:flex  object-contain origin-center  ${
+                className={`image cols-span-1 hidden lg:flex  object-contain origin-center   w-full  ${
                   index % 2 === 0 ? "order-2" : "order-1"
                 }`}
               />

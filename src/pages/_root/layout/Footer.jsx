@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="p-5 w-full grid grid-cols-1 md:grid-cols-2 gap-5 bg-black-600 shadow-xl text-white-500">
-      <div className="flex flex-row justify-center md:justify-start items-center gap-5 col-span-full md:col-span-1">
-        <p className="text-white-500 text-body1-light text-center">Ahmad.dev</p>
+      <div className="flex order-2 md:order-1 flex-row justify-center md:justify-start items-center gap-5 col-span-full md:col-span-1">
+        <p className="text-white-500 text-text1-light md:text-body1-light text-center">
+          Ahmad.dev
+        </p>
         <div className="w-[2px] h-[20px] bg-white-500 rounded-xl"></div>
-        <p className="text-white-500 text-body2-light text-center">
+        <p className="text-white-500 text-text2-light md:text-body2-light text-center">
           all rights received &copy; {new Date().getFullYear()}
         </p>
       </div>
-      <div className="flex flex-row justify-center md:justify-end items-center gap-5 col-span-full md:col-span-1">
+      <div className="flex order-1 md:order-2 flex-row justify-center md:justify-end items-center gap-5 col-span-full md:col-span-1">
         <Link
           to={`/privacy_policy`}
-          className="text-white-500 text-body2-light text-center">
+          className="text-white-500 text-text2-light md:text-body2-light text-center">
           Privacy Policy
         </Link>
         <div className="w-[2px] h-[20px] bg-white-500 rounded-xl"></div>

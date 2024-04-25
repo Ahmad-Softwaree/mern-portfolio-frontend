@@ -28,6 +28,7 @@ import {
   Home,
   Blogs as RootBlogs,
   Projects as RootProjects,
+  Certificates as RootCertificates,
 } from "@/pages/_root";
 import Blog from "@/pages/_root/Blog";
 import Project from "@/pages/_root/Project";
@@ -64,6 +65,11 @@ const routes = createBrowserRouter(
             path="projects"
             errorElement={<Error />}
             element={<RootProjects />}
+          />
+          <Route
+            path="certificates"
+            errorElement={<Error />}
+            element={<RootCertificates />}
           />
           <Route
             path="projects/:id"
