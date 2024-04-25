@@ -18,7 +18,7 @@ export default function Contact() {
               <i className="fa-solid fa-phone"></i>
             </span>
             <span className="text-white-500 !text-[18px]">
-              +964&nbsp;750-116-71-53
+              +964&nbsp;770-199-30-85
             </span>
           </div>
 
