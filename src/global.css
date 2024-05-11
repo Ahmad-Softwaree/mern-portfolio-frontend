@@ -82,7 +82,7 @@ a.active.headerLink::after {
     @apply z-50;
   }
   .element {
-    @apply w-full flex flex-col justify-center items-center gap-10 px-5 md:px-10 lg:px-20 py-20  !text-white-500  min-h-[500px] relative overflow-visible;
+    @apply w-full flex flex-col justify-center items-center gap-5 md:gap-10 px-5 md:px-10 lg:px-20 py-20  !text-white-500  min-h-[500px] relative overflow-visible;
   }
   header,
   footer {

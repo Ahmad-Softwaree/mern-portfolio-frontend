@@ -60,10 +60,10 @@ export default function CertificateCard({ val, index }) {
                     </h2>
                     <h2 className="text-niceGray !text-[16px] md:!text-[18px] font-[500] w-full ">
                       {lang === "en"
-                        ? val.enDesc
+                        ? val.enDesc.substring(0, 120).concat("...")
                         : lang === "ar"
-                        ? val.arDesc
-                        : val.krDesc}
+                        ? val.arDesc.substring(0, 120).concat("...")
+                        : val.krDesc.substring(0, 120).concat("...")}
                     </h2>
                   </div>
                 </div>

@@ -22,7 +22,7 @@ export default function Certificates() {
               return (
                 <div
                   key={index}
-                  className="w-full flex flex-col justify-left items-start gap-10">
+                  className="w-full flex flex-col justify-left items-start gap-5 md:gap-10">
                   {row.map((certificate, index) => {
                     return (
                       <CertificateCard

@@ -50,7 +50,9 @@ export const URLs = {
 
   //BLOG
 
+  GET_INFINITE_BLOGS: `${API}/blog/infinite`,
   GET_BLOGS: `${API}/blog`,
+
   GET_BLOG: `${API}/blog/one`,
   GET_RELATED_BLOGS: `${API}/blog/related`,
 

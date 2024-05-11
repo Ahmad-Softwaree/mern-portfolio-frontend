@@ -12,6 +12,7 @@ import {
   deleteBlog,
   getBlog,
   getBlogs,
+  getInfiniteBlogs,
   getRelatedBlogs,
   searchBlog,
   updateBlog,
@@ -42,14 +43,23 @@ export function useGetRelatedBlogs(category, id) {
   });
 }
 
-export function useGetBlogs(filter) {
+export function useGetInfiniteBlogs(filter) {
   const { dispatch } = useContext(AlertContext);
   return useInfiniteQuery({
     queryKey: [QUERY_KEYs.BLOGS],
-    queryFn: ({ pageParam = 1 }) => getBlogs(dispatch, pageParam, filter),
+    queryFn: ({ pageParam = 1 }) =>
+      getInfiniteBlogs(dispatch, pageParam, filter),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length > 0 ? allPages.length + 1 : undefined;
     },
+    retry: 0,
+  });
+}
+export function useGetBlogs() {
+  const { dispatch } = useContext(AlertContext);
+  return useQuery({
+    queryKey: [QUERY_KEYs.BLOGS],
+    queryFn: ({ pageParam = 1 }) => getBlogs(dispatch),
     retry: 0,
   });
 }

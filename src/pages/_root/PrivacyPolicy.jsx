@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
       <h1 className="text-white-500 font-bold w-full text-left">
         Privacy Policy
       </h1>
-      <div className="w-full flex flex-col justify-left items-start gap-5">
+      <div className="w-full flex flex-col justify-left items-start gap-20">
         {privacyPolicy.map((val, index) => {
           return (
             <div

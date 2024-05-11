@@ -67,19 +67,20 @@ export default function Certificate() {
                 {file.projects.types}
               </span>
             </div>
-            {data.types.map((val, index) => {
-              return (
-                <span
-                  key={index}
-                  className="p-1 px-2 border-[3px] hover:bg-black-600 border-solid border-black-600 transition-all duration-300 w-fit  text-white-500 !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer">
-                  {lang === "en"
-                    ? val.enName
-                    : lang === "ar"
-                    ? val.arName
-                    : val.krName}
-                </span>
-              );
-            })}
+            {data?.types?.length > 0 &&
+              data.types.map((val, index) => {
+                return (
+                  <span
+                    key={index}
+                    className="p-1 px-2 border-[3px] hover:bg-black-600 border-solid border-black-600 transition-all duration-300 w-fit  text-white-500 !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer">
+                    {lang === "en"
+                      ? val.enName
+                      : lang === "ar"
+                      ? val.arName
+                      : val.krName}
+                  </span>
+                );
+              })}
           </div>
 
           <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
@@ -92,16 +93,17 @@ export default function Certificate() {
               </span>
             </div>
 
-            {data.stacks.map((val, index) => {
-              return (
-                <span
-                  key={index}
-                  style={{ borderColor: val.color }}
-                  className={`p-1 px-2 border-[3px] hover:bg-black-600 border-solid  transition-all duration-300 w-fit text-white-500 !text-[14px] rounded-md bg-transparent  cursor-pointer font-Poppins`}>
-                  {val.enName}
-                </span>
-              );
-            })}
+            {data?.stacks?.length > 0 &&
+              data.stacks.map((val, index) => {
+                return (
+                  <span
+                    key={index}
+                    style={{ borderColor: val.color }}
+                    className={`p-1 px-2 border-[3px] hover:bg-black-600 border-solid  transition-all duration-300 w-fit text-white-500 !text-[14px] rounded-md bg-transparent  cursor-pointer font-Poppins`}>
+                    {val.enName}
+                  </span>
+                );
+              })}
           </div>
         </>
       )}

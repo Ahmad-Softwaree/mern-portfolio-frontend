@@ -7,7 +7,11 @@ import useDebounce from "@/hooks/useDebounce";
 
 import { QUERY_KEYs } from "@/lib/react-query/types";
 
-import { useGetBlogs, useSearchBlog } from "@/lib/react-query/query/blog.query";
+import {
+  useGetBlogs,
+  useGetInfiniteBlogs,
+  useSearchBlog,
+} from "@/lib/react-query/query/blog.query";
 import {
   useGetProjects,
   useSearchProject,
@@ -37,7 +41,7 @@ const Pagination = ({ children, page }) => {
     refetch,
   } =
     page === "blog"
-      ? useGetBlogs(category)
+      ? useGetInfiniteBlogs(category)
       : page === "project"
       ? useGetProjects(type, stack)
       : page === "certificate"

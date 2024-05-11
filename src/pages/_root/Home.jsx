@@ -37,7 +37,7 @@ const Home = () => {
         data-aos="fade-up"
         id="blogs"
         name="blogs"
-        className="element px-[55px]   bg-black-600">
+        className="element   bg-black-600">
         <div className="home_sections_h1_blur"></div>
         <Blogs />
       </Element>

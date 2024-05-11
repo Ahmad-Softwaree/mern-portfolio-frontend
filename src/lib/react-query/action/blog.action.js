@@ -2,11 +2,25 @@ import { authApi } from "@/lib/config/api.config";
 import { generateAlert } from "@/lib/functions";
 import { URLs } from "../url";
 
-export const getBlogs = async (dispatch, pageParam, filter = "default") => {
+export const getInfiniteBlogs = async (
+  dispatch,
+  pageParam,
+  filter = "default"
+) => {
   try {
     const { data } = await authApi.get(
-      `${URLs.GET_BLOGS}/${filter ? filter : "default"}?pages=${pageParam}`
+      `${URLs.GET_INFINITE_BLOGS}/${
+        filter ? filter : "default"
+      }?pages=${pageParam}`
     );
+    return data;
+  } catch (error) {
+    return generateAlert(error, "error", dispatch);
+  }
+};
+export const getBlogs = async (dispatch) => {
+  try {
+    const { data } = await authApi.get(`${URLs.GET_BLOGS}`);
     return data;
   } catch (error) {
     return generateAlert(error, "error", dispatch);
