@@ -26,6 +26,11 @@ export default function Blog() {
       ) : (
         <div className="!py-20 md:mx-20 lg:mx-50 px-10 bg-black-600 col-span-full h-full">
           <div className="flex flex-col justify-start items-start gap-10 z-50">
+            <img
+              className="w-full h-[400px] object-cover"
+              src={`${data.imageURL}`}
+              alt="Blog Image"
+            />
             <h1 className="text-heading3-bold md:text-heading2-bold lg:text-heading2-bold text-white-500 text-left !font-[700]">
               {lang === "en"
                 ? data.enTitle
@@ -64,13 +69,15 @@ export default function Blog() {
             <div
               className={`w-full flex flex-row items-center gap-5 mt-20 ${
                 lang === "en" ? "justify-left" : "justify-right"
-              }`}>
+              }`}
+            >
               {data.categories?.map((category, index) => {
                 return (
                   <Link
                     to={`/blogs?category=${category._id}`}
                     key={index}
-                    className={`text-white-500 opacity-70 border-black-300 border-solid border-2 p-2 rounded-[20px] hover:bg-black-300 hover:opacity-100 transition-all duration-200   px-4 cursor-pointer`}>
+                    className={`text-white-500 opacity-70 border-black-300 border-solid border-2 p-2 rounded-[20px] hover:bg-black-300 hover:opacity-100 transition-all duration-200   px-4 cursor-pointer`}
+                  >
                     {lang === "en"
                       ? category.enName
                       : lang === "ar"

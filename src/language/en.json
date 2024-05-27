@@ -49,8 +49,8 @@
     "exp": {
       "header": "Experience",
       "one": {
-        "title": "CEO & Founder",
-        "body": "CEO & Founder Of Bester Group"
+        "title": "Project Manager",
+        "body": "Project Manager & Developer at Bester Group"
       },
       "two": {
         "title": "Full-stack Developer",
@@ -68,8 +68,8 @@
     "edu": {
       "header": "Education & Certification",
       "one": {
-        "title": "Bachelor Degree",
-        "body": "Bachelor Degree In Computer Science, Sulaymaniah University"
+        "title": "1 Year Study",
+        "body": "1 Year Studying In Computer Science, Sulaymaniah University"
       },
       "two": {
         "title": "Bachelor Degree",
@@ -131,7 +131,7 @@
   },
   "singleBlog": {
     "name": "Ahmad Software",
-    "ceo": "CEO & Founder of Bester Group",
+    "ceo": "Member of Bester Group",
     "categories": "Categories",
     "related": "Related blogs"
   },

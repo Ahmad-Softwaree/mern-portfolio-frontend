@@ -87,7 +87,8 @@ export const ProjectCard = ({ val, index }) => {
                       });
                     }}
                     variant="solid"
-                    colorScheme="teal">
+                    colorScheme="teal"
+                  >
                     Update
                   </Button>
                   <Button
@@ -102,7 +103,8 @@ export const ProjectCard = ({ val, index }) => {
                       })
                     }
                     variant="ghost"
-                    colorScheme="red">
+                    colorScheme="red"
+                  >
                     Delete
                   </Button>
                 </ButtonGroup>
@@ -120,11 +122,13 @@ export const ProjectCard = ({ val, index }) => {
               onMouseLeave={() => setShow(false)}
               className={`project-${index} projectCard h-full relative bg-black-500 col-span-full md:col-span-6 ld:col-span-4 flex flex-col justify-center items-end gap-5  flex-wrap w-full shadow-xl p-5 rounded-lg  ${
                 lang !== "en" && "items-start"
-              }`}>
+              }`}
+            >
               {show && (
                 <div
                   className="w-fit absolute z-[100] flex flex-row justify-center items-center gap-2"
-                  style={blurStyle}>
+                  style={blurStyle}
+                >
                   <div className="w-[40px] md:w-[60px] h-[40px] md:h-[60px] blur-[55px] bg-primary-500  opacity-70 transition-all duration-200 rounded-full"></div>
                 </div>
               )}
@@ -160,7 +164,8 @@ export const ProjectCard = ({ val, index }) => {
                     &nbsp;
                     <Link
                       to={`/projects/${val._id}`}
-                      className="!text-[14px] text-purple">
+                      className="!text-[14px] text-purple"
+                    >
                       {file.blog.seeMore}
                     </Link>
                   </h2>
@@ -189,7 +194,8 @@ export const ProjectCard = ({ val, index }) => {
                   })}
                 <Link
                   to={`/projects/${val._id}`}
-                  className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer">
+                  className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
+                >
                   {file.blog.seeMore}..
                 </Link>
               </div>
@@ -210,7 +216,8 @@ export const ProjectCard = ({ val, index }) => {
                     })}
                     <Link
                       to={`/projects/${val._id}`}
-                      className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer">
+                      className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
+                    >
                       {file.blog.seeMore}..
                     </Link>
                   </>
@@ -244,7 +251,8 @@ export const ProjectCard = ({ val, index }) => {
                   })}
                 <Link
                   to={`/projects/${val._id}`}
-                  className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer">
+                  className="p-1 px-2 border-[3px] hover:bg-purple border-solid border-purple transition-all duration-300 w-fit  text-white-500 text-caption1-light  md:text-text1-light rounded-md bg-transparent  cursor-pointer"
+                >
                   {file.blog.seeMore}..
                 </Link>
               </div>
@@ -253,8 +261,9 @@ export const ProjectCard = ({ val, index }) => {
                   <a
                     href={`${val.url}`}
                     target="_blank"
-                    className="preview flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1">
-                    <span className="!text-[14px] text-white">
+                    className="preview flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
+                  >
+                    <span className="text-caption1-light  md:text-text1-light text-white-500">
                       {file.projects.preview}
                     </span>
                     <ReadMoreIcon className="text-white" fontSize="14px" />
@@ -264,8 +273,9 @@ export const ProjectCard = ({ val, index }) => {
                     onClick={() => {
                       uiDispatch({ type: CONTEXT_TYPEs.PRIVATE });
                     }}
-                    className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1">
-                    <span className="!text-[14px] text-white">
+                    className="flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
+                  >
+                    <span className="text-caption1-light  md:text-text1-light text-red-500">
                       {file.projects.private}
                     </span>
                     <OpenInNewIcon className="text-white" fontSize="14px" />
@@ -273,8 +283,9 @@ export const ProjectCard = ({ val, index }) => {
                 )}
                 <Link
                   to={`/projects/${val._id}`}
-                  className="more flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1">
-                  <span className="!text-[14px] text-white">
+                  className="more flex flex-row gap-1 justify-center items-center text-white  px-2 border-2 border-solid border-purple transition-all duration-300 hover:bg-purple hover:text-white rounded-md cursor-pointer p-1"
+                >
+                  <span className="text-caption1-light  md:text-text1-light text-white">
                     {file.projects.more}
                   </span>
                   <ReadMoreIcon className="text-white" fontSize="14px" />
