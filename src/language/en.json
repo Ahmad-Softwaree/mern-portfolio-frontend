@@ -34,7 +34,7 @@
   },
   "about": {
     "header": "About Me",
-    "about": "My name is Ahmad, I'm 20 Years Old from Kurdistan Iraq",
+    "about": "My name is Ahmad, I'm 22 Years Old from Kurdistan Iraq",
     "main": {
       "header": "Main Skills",
       "one": {
@@ -68,11 +68,11 @@
     "edu": {
       "header": "Education & Certification",
       "one": {
-        "title": "1 Year Study",
-        "body": "1 Year Studying In Computer Science, Sulaymaniah University"
+        "title": "1 Year Bachelor Study",
+        "body": "1 Year Studying Bachelor In Computer Science, Sulaymaniah University"
       },
       "two": {
-        "title": "Bachelor Degree",
+        "title": "Bachelor Studying",
         "body": "Student In Software Engineer, Salahadin University"
       }
     }
