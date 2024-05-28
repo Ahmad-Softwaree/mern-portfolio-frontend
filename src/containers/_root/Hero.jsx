@@ -1,91 +1,49 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
+import { Spotlight } from "@/components/ui/Spotlight";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import MagicButton from "@/components/ui/MagicButton";
+import { FlipWords } from "@/components/ui/flip-words";
 
-export default function Hero({ style }) {
+export default function Hero() {
   const {
     state: { file },
   } = useContext(LanguageContext);
-  //make the background goes with the mouse
-
-  const jobs = useRef();
-  const jobsArray = file.home.job;
-
-  useEffect(() => {
-    const animateJobs = async () => {
-      for (let i = 1; i <= jobsArray.length; i++) {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        const currentTop = parseInt(jobs.current?.style.top || "0", 10);
-
-        if (i === jobsArray.length) {
-          i = 0;
-          jobs.current.style.top = 0 + "px";
-        } else {
-          jobs.current.style.top = currentTop - 60 + "px";
-        }
-      }
-    };
-
-    animateJobs();
-  }, [jobs]);
-
+  const words = ["React.js", "Laravel", "Next.js", "Vue.js"];
   return (
     <>
-      <img
-        data-aos="fade-right"
-        src="/images/hero.jpg"
-        alt="Ahmad Image"
-        className="absolute z-[1000] min-h-screen w-full object-cover xl:object-contain aspect-square   filter brightness-105 contrast-100 saturate-150 opacity-20   blur-[2px]"
+      <Spotlight
+        className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"
+        fill="white"
       />
-      <div className="absolute z-[1100] min-h-screen w-full  opacity-70  aspect-square bg-black-500 inset-0"></div>
-      <div
-        data-aos="fade-left"
-        className="relative flex flex-col justify-center items-center  gap-5  w-[95%] min-w-[300px] z-[1200]">
-        <h1 className="font-[500] !text-[30px] md:!text-[35px] text-center w-full lg:!text-[50px]">
-          {file.home.welcome}
-        </h1>
-        <div className="flex flex-row gap-2">
-          <h1 className="font-[500] !text-[25px] md:!text-[30px] lg:!text-[40px]">
-            {file.home.who}
-          </h1>
-          <div className="relative text-white-500">
-            <img
-              alt="Rect Image"
-              src="/images/rect.svg"
-              className="absolute inset-0 z-1"
-            />
-            <h1 className="z-20 relative font-[500]    !text-[25px] md:!text-[30px] lg:!text-[40px]">
-              {file.home.name}
-            </h1>
-          </div>
-        </div>
-        <div className={`relative w-full text-center overflow-hidden h-[60px]`}>
-          <div
-            ref={jobs}
-            className={`absolute top-0 w-full text-center transition-all duration-700 flex flex-col justify-center items-center left-0 `}>
-            {jobsArray.map((val, index) => {
-              return (
-                <h1
-                  className="font-bold    !text-[25px] md:!text-[30px] lg:!text-[40px] h-[60px] text-primary-500"
-                  key={index}>
-                  {val}
-                </h1>
-              );
-            })}
-          </div>
-        </div>
-        <a
-          href="/pdf/Resume.pdf"
-          download
-          className="downloadCV p-2 px-8 bg-transparent border-2 border-solid border-primary-500 transition-all duration-200 hover:bg-primary-500 text-white-500 rounded-md  !text-[15px] md:!text-[20px]">
-          {file.home.cv}
-        </a>
+      <Spotlight className="top-10 left-full h-[80vh] w-[50vw]" fill="purple" />
+      <Spotlight className="top-28 left-80 h-[80vh] w-[50vw]" fill="blue" />
+
+      <div className="h-[50rem] w-full  bg-white  bg-grid-white-100/[0.03]  flex items-center justify-center absolute top-0 left-0">
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center  bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       </div>
 
       <div
-        className="w-fit absolute z-[100] flex flex-row justify-center items-center gap-2"
-        style={style}>
-        <div className="w-[227.11px] h-[222.5px] blur-[115px] bg-green opacity-70 transition-all duration-200 rounded-full"></div>
-        <div className="w-[227.11px] h-[222.5px] blur-[115px] bg-primary-500 rotate-180 opacity-70 transition-all duration-200 rounded-full"></div>
+        data-aos="fade-left"
+        className="relative flex flex-col justify-center items-center  gap-5  w-[95%] min-w-[300px] z-[1200]"
+      >
+        <h2 className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
+          Dynamic Web Magic with React.js
+        </h2>
+        <TextGenerateEffect
+          className="text-center text-[40px] md:text-5xl lg:text-6xl"
+          words={`Transforming Concepts into Seamless User Experiences`}
+        />
+        <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2x1">
+          {" "}
+          Hi, I&apos;m Ahmad, a
+          <FlipWords words={words} /> <br />
+          Developer based in Kurdistan.
+        </p>
+
+        <a href="/pdf/Resume.pdf" download>
+          <MagicButton title={file.home.cv} />
+        </a>
       </div>
     </>
   );

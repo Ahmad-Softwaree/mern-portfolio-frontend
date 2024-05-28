@@ -34,4 +34,5 @@ export const ENUMs = {
   SKILL_BUCKET: "skill",
   WORK_BUCKET: "work",
   CERTIFICATE_BUCKET: "certificate",
+  STACK_BUCKET: "stack",
 };

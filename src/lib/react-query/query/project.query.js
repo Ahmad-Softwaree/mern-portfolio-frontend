@@ -10,6 +10,7 @@ import { QUERY_KEYs } from "../types";
 import {
   addProject,
   deleteProject,
+  getInfiniteProjects,
   getProject,
   getProjects,
   searchProject,
@@ -22,16 +23,25 @@ import { CONTEXT_TYPEs } from "@/context";
 import { ENUMs } from "@/lib/enum";
 import { UtilContext } from "@/context/UtilContext";
 
-export function useGetProjects(type, stack) {
+export function useGetInfiniteProjects(type, stack) {
   const { dispatch } = useContext(AlertContext);
 
   return useInfiniteQuery({
-    queryKey: [QUERY_KEYs.PROJECTS],
+    queryKey: [QUERY_KEYs.INFINITE_PROJECTS],
     queryFn: ({ pageParam = 1 }) =>
-      getProjects(dispatch, pageParam, type, stack),
+      getInfiniteProjects(dispatch, pageParam, type, stack),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length > 0 ? allPages.length + 1 : undefined;
     },
+    retry: 0,
+  });
+}
+export function useGetProjects(type, stack) {
+  const { dispatch } = useContext(AlertContext);
+
+  return useQuery({
+    queryKey: [QUERY_KEYs.PROJECTS],
+    queryFn: () => getProjects(dispatch),
     retry: 0,
   });
 }

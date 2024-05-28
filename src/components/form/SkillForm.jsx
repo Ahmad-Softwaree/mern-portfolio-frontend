@@ -1,16 +1,8 @@
 import { ImageContext } from "@/context/ImageContext";
 import { UiContext } from "@/context/UiContext";
 import useDynamicState from "@/hooks/useDynamicState";
-import { Textarea } from "@chakra-ui/react";
 import { useCallback, useContext, useEffect, useState } from "react";
-import {
-  FormControl,
-  FormLabel,
-  Button,
-  Input,
-  Select,
-} from "@chakra-ui/react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { FormControl, FormLabel, Button, Input } from "@chakra-ui/react";
 
 import { Loader } from "../shared";
 import { ShadInput } from "@/components/ui/input";
@@ -24,13 +16,11 @@ import { useGetConfig } from "@/lib/react-query/query/config.query";
 import { QUERY_KEYs } from "@/lib/react-query/types";
 import { ENUMs } from "@/lib/enum";
 import { LanguageContext } from "@/context/LanguageContext";
-import { Diversity1Sharp } from "@mui/icons-material";
 const SkillForm = () => {
   const {
     state: { lang },
   } = useContext(LanguageContext);
   const { data: types } = useGetConfig(QUERY_KEYs.TYPES, ENUMs.TYPE);
-  const { data: stacks } = useGetConfig(QUERY_KEYs.STACKS, ENUMs.STACK);
   const {
     dispatch,
     state: { type: form_type, id, data },
@@ -76,7 +66,8 @@ const SkillForm = () => {
           image: skillImage,
         });
       }}
-      className="max-h-[600px] overflow-y-auto fixed inset-0 w-[90%] max-w-[1000px] p-5 rounded-md bg-black-600 text-white-500 z-[1500] m-auto h-fit flex flex-col justify-left items-center gap-5">
+      className="max-h-[600px] overflow-y-auto fixed inset-0 w-[90%] max-w-[1000px] p-5 rounded-md bg-black-600 text-white-500 z-[1500] m-auto h-fit flex flex-col justify-left items-center gap-5"
+    >
       <h1 className="text-body2-semibold md:text-body1-semibold">
         {form_type === "add" ? "Add" : "Update"} Skill
       </h1>
@@ -106,7 +97,8 @@ const SkillForm = () => {
                   state.types?.includes(val._id) && "bg-primary-500"
                 }`}
                 key={index}
-                value={val._id}>
+                value={val._id}
+              >
                 {lang === "en"
                   ? val.enName
                   : lang === "ar"
@@ -163,7 +155,8 @@ const SkillForm = () => {
           }
           mt={4}
           colorScheme="red"
-          type="button">
+          type="button"
+        >
           Cancel
         </Button>
       </div>

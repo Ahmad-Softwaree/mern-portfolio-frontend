@@ -12,6 +12,7 @@ import {
   deleteCertificate,
   getCertificate,
   getCertificates,
+  getInfiniteCertificates,
   searchCertificate,
   updateCertificate,
 } from "../action/certificate.action";
@@ -22,16 +23,27 @@ import { CONTEXT_TYPEs } from "@/context";
 import { ENUMs } from "@/lib/enum";
 import { UtilContext } from "@/context/UtilContext";
 
-export function useGetCertificates(filter) {
+export function useGetInfiniteCertificates(filter) {
   const { dispatch } = useContext(AlertContext);
 
   return useInfiniteQuery({
-    queryKey: [QUERY_KEYs.CERTIFICATES],
+    queryKey: [QUERY_KEYs.INFINITE_CERTIFICATES],
     queryFn: ({ pageParam = 1 }) =>
-      getCertificates(dispatch, pageParam, filter),
+      getInfiniteCertificates(dispatch, pageParam, filter),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length > 0 ? allPages.length + 1 : undefined;
     },
+    retry: 0,
+  });
+}
+
+export function useGetCertificates() {
+  const { dispatch } = useContext(AlertContext);
+
+  return useQuery({
+    queryKey: [QUERY_KEYs.CERTIFICATES],
+    queryFn: () => getCertificates(dispatch),
+
     retry: 0,
   });
 }

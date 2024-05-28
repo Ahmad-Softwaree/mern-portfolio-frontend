@@ -20,7 +20,8 @@ export default function SkillCard({ val, index }) {
           return (
             <div
               id={`skillCardId-${index}`}
-              className="w-fit md:w-[200px]  max-w-[200px] rounded-md cursor-pointer  p-2 md:px-1 transition-all flex flex-row md:flex-col flex-wrap md:flex-nowrap justify-left px-3 items-center gap-3 border-black-600  duration-300 bg-black-600 shadow-xl hover:border-primary-500 flex-auto border-2 border-solid hover:scale-[1.1] hover:text-red">
+              className="w-fit md:w-[200px]  max-w-[200px] rounded-md cursor-pointer  p-2 md:px-1 transition-all flex flex-row md:flex-col flex-wrap md:flex-nowrap justify-left px-3 items-center gap-3 border-black-600  duration-300 bg-black-600 shadow-xl hover:border-primary-500 flex-auto border-2 border-solid hover:scale-[1.1] hover:text-red"
+            >
               <img
                 className="w-[25px] md:w-full h-[30px] md:h-[100px] object-contain md:px-5"
                 src={val.imageURL}
@@ -34,7 +35,8 @@ export default function SkillCard({ val, index }) {
                   return (
                     <div
                       key={index}
-                      className="flex flex-row justify-center items-center gap-2">
+                      className="flex flex-row justify-center items-center gap-2"
+                    >
                       <span className="w-fit text-left text-white-500 opacity-60 font-[500] !text-[12px]">
                         {lang === "en"
                           ? one?.enName
@@ -60,7 +62,8 @@ export default function SkillCard({ val, index }) {
           return (
             <div
               id={`skillCardId-${index}`}
-              className="max-w-[200px] col-span-full md:col-span-4 lg:col-span-3 w-full rounded-md cursor-pointer  p-5 px-1 transition-all flex flex-col justify-left items-center gap-3 border-niceBlack  duration-300 bg-black-500 shadow-xl hover:border-primary-500 flex-auto border-2 border-solid hover:scale-[1.1] hover:text-red">
+              className="max-w-[200px] col-span-full md:col-span-4 lg:col-span-3 w-full rounded-md cursor-pointer  p-5 px-1 transition-all flex flex-col justify-left items-center gap-3 border-niceBlack  duration-300 bg-black-80 shadow-xl hover:border-primary-500 flex-auto border-2 border-solid hover:scale-[1.1] hover:text-red"
+            >
               <img
                 className="w-full h-[50px] md:h-[100px] object-contain px-5"
                 src={val.imageURL}
@@ -74,7 +77,8 @@ export default function SkillCard({ val, index }) {
                   return (
                     <div
                       key={index}
-                      className="flex flex-row justify-center items-center gap-2">
+                      className="flex flex-row justify-center items-center gap-2"
+                    >
                       <span className="w-fit text-left text-white-500 opacity-60 font-[500] !text-[12px]">
                         {lang === "en"
                           ? one?.enName
@@ -104,7 +108,8 @@ export default function SkillCard({ val, index }) {
                     });
                   }}
                   variant="solid"
-                  colorScheme="teal">
+                  colorScheme="teal"
+                >
                   Update
                 </Button>
                 <Button
@@ -119,7 +124,8 @@ export default function SkillCard({ val, index }) {
                     })
                   }
                   variant="ghost"
-                  colorScheme="red">
+                  colorScheme="red"
+                >
                   Delete
                 </Button>
               </div>

@@ -20,8 +20,7 @@ const Layout = () => {
       <Alert />
 
       <main className="w-full overflow-hidden min-h-screen bg-black-500">
-        <Header />
-
+        {/* <Header /> */}
         <Outlet />
 
         <Footer />

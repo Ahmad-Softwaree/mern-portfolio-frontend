@@ -2,7 +2,7 @@ import { authApi } from "@/lib/config/api.config";
 import { generateAlert } from "@/lib/functions";
 import { URLs } from "../url";
 
-export const getProjects = async (
+export const getInfiniteProjects = async (
   dispatch,
   pageParam,
   type = "default",
@@ -14,6 +14,14 @@ export const getProjects = async (
         stack ? stack : "default"
       }?pages=${pageParam}`
     );
+    return data;
+  } catch (error) {
+    return generateAlert(error, "error", dispatch);
+  }
+};
+export const getProjects = async (dispatch) => {
+  try {
+    const { data } = await authApi.get(URLs.GET_PROJECTS);
     return data;
   } catch (error) {
     return generateAlert(error, "error", dispatch);

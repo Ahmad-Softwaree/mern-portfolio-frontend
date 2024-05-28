@@ -41,40 +41,26 @@ export const adminLinks = [
 ];
 export const homeLinks = [
   {
-    to: "home",
-    text: "home",
+    link: "home",
+    name: "home",
+    icon: "",
+  },
+
+  {
+    link: "skills",
+    name: "skills",
+    icon: "",
   },
   {
-    to: "blogs",
-    text: "blogs",
+    link: "projects",
+    name: "projects",
+    icon: "",
   },
+
   {
-    to: "about",
-    text: "about",
-  },
-  {
-    to: "services",
-    text: "services",
-  },
-  {
-    to: "skills",
-    text: "skills",
-  },
-  {
-    to: "projects",
-    text: "projects",
-  },
-  {
-    to: "certificates",
-    text: "certificate",
-  },
-  {
-    to: "works",
-    text: "works",
-  },
-  {
-    to: "contact",
-    text: "contact",
+    link: "contact",
+    name: "contact",
+    icon: "",
   },
 ];
 export const configParts = [

@@ -2,17 +2,25 @@ import { authApi } from "@/lib/config/api.config";
 import { generateAlert } from "@/lib/functions";
 import { URLs } from "../url";
 
-export const getCertificates = async (
+export const getInfiniteCertificates = async (
   dispatch,
   pageParam,
   filter = "default"
 ) => {
   try {
     const { data } = await authApi.get(
-      `${URLs.GET_CERTIFICATES}/${
+      `${URLs.GET_INFINITE_CERTIFICATES}/${
         filter ? filter : "default"
       }/default?pages=${pageParam}`
     );
+    return data;
+  } catch (error) {
+    return generateAlert(error, "error", dispatch);
+  }
+};
+export const getCertificates = async (dispatch) => {
+  try {
+    const { data } = await authApi.get(URLs.GET_CERTIFICATES);
     return data;
   } catch (error) {
     return generateAlert(error, "error", dispatch);

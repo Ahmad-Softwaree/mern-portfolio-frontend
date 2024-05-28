@@ -7,6 +7,7 @@ export const imageState = {
   skillImage: "",
   certificateImage: "",
   workImage: "",
+  stackImage: "",
 };
 
 export const imageReducer = (state = imageState, action) => {
@@ -42,6 +43,11 @@ export const imageReducer = (state = imageState, action) => {
       return {
         ...state,
         skillImage: payload,
+      };
+    case CONTEXT_TYPEs.STACK_IMAGE:
+      return {
+        ...state,
+        stackImage: payload,
       };
     default:
       return state;

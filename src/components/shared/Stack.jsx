@@ -1,12 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Stack({ val, to }) {
+export default function Stack({ val, to, index }) {
   return (
-    <span
-      style={{ borderColor: val.color }}
-      className={`p-1 px-2 border-[3px] hover:bg-black-600 border-solid  transition-all duration-300 w-fit text-white-500 text-caption1-light  md:text-text1-light  rounded-md bg-transparent  cursor-pointer font-Poppins`}
+    <Link
+      to={to}
+      style={{
+        transform: `translateX(-${5 * index * 2}px)`,
+        zIndex: `${5 * index + 1}`,
+      }}
+      className={`p-1 lg:w-10 lg:h-10 w-8 h-8  flex justify-center items-center border-[3px] border-black-400 rounded-full  border-solid  transition-all duration-300 text-center bg-black-500  cursor-pointer`}
     >
-      {val.enName}
-    </span>
+      <img
+        src={val.imageURL}
+        alt={val.imageName}
+        className="w-full h-full rounded-full object-contain"
+      />
+    </Link>
   );
 }

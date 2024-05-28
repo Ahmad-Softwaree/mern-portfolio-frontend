@@ -3,7 +3,7 @@ import { ProjectCard } from "../card";
 
 const ProjectGrid = ({ row, page }) => {
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-10">
+    <div className="w-full flex flex-row justify-center items-center gap-10 flex-wrap">
       {row.map((val, index) => {
         return (
           <ProjectCard

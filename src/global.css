@@ -70,10 +70,10 @@ a.active.headerLink::after {
   }
 
   section.admin {
-    @apply bg-black-500 min-h-screen w-full flex flex-col justify-start  items-center gap-5 h-fit py-[40px] px-10 text-white-500;
+    @apply bg-niceBlack min-h-screen w-full flex flex-col justify-start  items-center gap-5 h-fit py-[40px] px-10 text-white-500;
   }
   section {
-    @apply bg-black-500 min-h-screen w-full flex flex-col justify-start  items-center  h-fit py-[20px] pt-[50px] md:pt-[60px] lg:pt-[60px];
+    @apply bg-niceBlack min-h-screen w-full flex flex-col justify-start  items-center  h-fit pb-[20px];
   }
   .home_sections_h1_blur {
     @apply absolute top-[50px] w-[90px] md:w-[140px] h-[70px] md:h-[100px] blur-[70px] bg-primary-500 rotate-180 opacity-70 transition-all duration-200 z-20 rounded-full;
@@ -118,7 +118,7 @@ a.active.headerLink::after {
   opacity: 0.7;
   background: linear-gradient(
     to bottom,
-    rgba(249, 0, 77, 1),
+    rgb(194, 173, 230),
     rgba(34, 34, 34, 1)
   );
 }
@@ -134,7 +134,7 @@ a.active.headerLink::after {
 .wrapper:hover {
   background: linear-gradient(
     to bottom,
-    rgba(249, 0, 77, 1),
+    rgb(194, 173, 230),
     rgba(34, 34, 34, 1)
   );
 }
@@ -147,7 +147,7 @@ a.active.headerLink::after {
 }
 
 .blogHeader {
-  background: linear-gradient(145deg, #f81f01, #ee076e);
+  background: linear-gradient(145deg, #c4afe8, #ee076e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
@@ -155,7 +155,7 @@ a.active.headerLink::after {
 }
 
 .blog_owner {
-  background: linear-gradient(145deg, #f81f01, #ee076e);
+  background: linear-gradient(145deg, #c4afe8, #ee076e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -177,13 +177,13 @@ a.active.headerLink::after {
 
 .about.active::after {
   width: 80%;
-  background-color: #f9004d;
+  background-color: #c4afe8;
 }
 
 .purple-shadow {
-  box-shadow: -2px -3px 51px 10px rgba(249, 0, 77, 1);
-  -webkit-box-shadow: -2px -1px 65px -30px rgba(249, 0, 77, 1);
-  -moz-box-shadow: -2px -3px 51px 10px rgba(249, 0, 77, 1);
+  box-shadow: -2px -3px 51px 10px rgb(194, 173, 230);
+  -webkit-box-shadow: -2px -1px 65px -30px rgb(194, 173, 230);
+  -moz-box-shadow: -2px -3px 51px 10px rgb(194, 173, 230);
 }
 
 .projects::-webkit-scrollbar {

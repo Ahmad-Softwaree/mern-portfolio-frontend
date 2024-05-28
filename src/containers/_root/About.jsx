@@ -1,140 +1,73 @@
-import React, { useContext, useState } from "react";
-import { Element } from "react-scroll";
-import { LanguageContext } from "../../context/LanguageContext";
+import React, { useContext } from "react";
+import { Tabs } from "@/components/ui/tabs";
+import { Image } from "@chakra-ui/react";
+import { LanguageContext } from "@/context/LanguageContext";
 
 export default function About() {
-  const [part, setPart] = useState("main");
   const {
-    state: { lang, file },
+    state: { file },
   } = useContext(LanguageContext);
+  let items = [
+    "My name is Ahmad, I'm 22 Years Old from Kurdistan Iraq",
+    "Developing Good UI/UX Front-end With React.js",
+    "Developing Good Back-end With Node.js & Express.js",
+    "Project Manager & Developer at Bester Group",
+    "Full-stack Developer in Bester Group",
+    "Full-stack Developer in Kurdferga Group",
+    "Front-end Developer in Informatics",
+    "1 Year Studying Bachelor In Computer Science, Sulaymaniah University",
+    "Student In Software Engineer, Salahadin University",
+  ];
+  const tabs = [
+    {
+      title: "My Self",
+      value: "myself",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>About My Self</p>
+          <p>1.My name is Ahmad, I'm 22 Years Old from Kurdistan Iraq</p>
+        </div>
+      ),
+    },
+    {
+      title: "Education",
+      value: "education",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>Education</p>
+          <p>
+            1. 1 Year Studying Bachelor In Computer Science, Sulaymaniah
+            University
+          </p>
+          <p>2. Student In Software Engineer, Salahadin University</p>
+        </div>
+      ),
+    },
+    {
+      title: "Experience",
+      value: "experience",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>Experience</p>
+          <p>1. Developing Good UI/UX Front-end With React.js</p>
+          <p>2. Developing Good Back-end With Node.js & Express.js</p>
+          <p>3. Project Manager & Developer at Bester Group</p>
+          <p>4. Full-stack Developer in Bester Group</p>
+          <p>5. Full-stack Developer in Kurdferga Group</p>
+          <p>6. Front-end Developer in Informatics</p>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <>
-      <h1 className="aboutHeader font-bold text-white-500">
+      <h1 className="serviceHeader font-bold text-white-500">
         {file.about.header}
       </h1>
-
-      <p className="text-niceGray w-full">{file.about.about}</p>
-      <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
-        <p
-          onClick={() => setPart("main")}
-          className={`text-white-500 ${
-            lang === "en"
-              ? "after:left-0 text-left"
-              : "after:right-0 text-right"
-          }  cursor-pointer about transition-all  duration-300 text-text2-light md:text-body2-semibold w-[250] ${
-            part === "main" && "active"
-          }`}>
-          {file.about.main.header}
-        </p>
-        <p
-          onClick={() => setPart("exp")}
-          className={`text-white-500 ${
-            lang === "en"
-              ? "after:left-0 text-left"
-              : "after:right-0 text-right"
-          } cursor-pointer about transition-all  duration-300 text-text2-light md:text-body2-semibold w-[250] ${
-            part === "exp" && "active"
-          }`}>
-          {file.about.exp.header}
-        </p>
-        <p
-          onClick={() => setPart("edu")}
-          className={`text-white-500 ${
-            lang === "en"
-              ? "after:left-0 text-left"
-              : "after:right-0 text-right"
-          } cursor-pointer about transition-all  duration-300 text-text2-light md:text-body2-semibold w-[250] ${
-            part === "edu" && "active"
-          }`}>
-          {file.about.edu.header}
-        </p>
+      <div className="h-[25rem] [perspective:1000px] relative  flex flex-col max-w-5xl mx-auto w-full  items-start justify-start my-10">
+        <Tabs tabs={tabs} />
       </div>
-
-      {part === "main" && (
-        <div
-          data-aos="fade-right"
-          className="w-full flex flex-col justify-left items-center gap-5 p-5 bg-black-600 shadow-xl rounded-md mt-5 md:mt-5">
-          <div className="flex flex-col justify-left items-start gap-1 w-full">
-            <p className="font-bold  text-text2-light md:text-body2-semibold text-primary-500">
-              {file.about.main.one.title}
-            </p>
-            <p className="font-[400]  text-text2-light md:text-text1-bold opacity-80 ">
-              {file.about.main.one.body}
-            </p>
-          </div>
-          <div className="flex flex-col justify-left items-start gap-1 w-full">
-            <p className="font-bold  text-text2-light md:text-body2-semibold text-primary-500">
-              {file.about.main.two.title}
-            </p>
-            <p className="font-[400]  text-text2-light md:text-text1-bold opacity-80 ">
-              {file.about.main.two.body}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {part === "exp" && (
-        <div
-          data-aos="fade-right"
-          className="w-full flex flex-col justify-left items-center gap-5 p-5 bg-black-600 shadow-xl rounded-md mt-5 md:mt-5">
-          <div className="flex flex-col justify-left items-start gap-1 w-full">
-            <p className="font-bold  text-text2-light md:text-body2-semibold text-primary-500">
-              {file.about.exp.one.title}
-            </p>
-            <p className="font-[400]  text-text2-light md:text-text1-bold opacity-80 ">
-              {file.about.exp.one.body}
-            </p>
-          </div>
-          <div className="flex flex-col justify-left items-start gap-1 w-full">
-            <p className="font-bold  text-text2-light md:text-body2-semibold text-primary-500">
-              {file.about.exp.two.title}
-            </p>
-            <p className="font-[400]  text-text2-light md:text-text1-bold opacity-80 ">
-              {file.about.exp.two.body}
-            </p>
-          </div>
-          <div className="flex flex-col justify-left items-start gap-1 w-full">
-            <p className="font-bold  text-text2-light md:text-body2-semibold text-primary-500">
-              {file.about.exp.three.title}
-            </p>
-            <p className="font-[400]  text-text2-light md:text-text1-bold opacity-80 ">
-              {file.about.exp.three.body}
-            </p>
-          </div>
-          <div className="flex flex-col justify-left items-start gap-1 w-full">
-            <p className="font-bold  text-text2-light md:text-body2-semibold text-primary-500">
-              {file.about.exp.four.title}
-            </p>
-            <p className="font-[400]  text-text2-light md:text-text1-bold opacity-80 ">
-              {file.about.exp.four.body}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {part === "edu" && (
-        <div
-          data-aos="fade-right"
-          className="w-full flex flex-col justify-left items-center gap-5 p-5 bg-black-600 shadow-xl rounded-md mt-5 md:mt-5">
-          <div className="flex flex-col justify-left items-start gap-1 w-full">
-            <p className="font-bold  text-text2-light md:text-body2-semibold text-primary-500">
-              {file.about.edu.one.title}
-            </p>
-            <p className="font-[400]  text-text2-light md:text-text1-bold opacity-80 ">
-              {file.about.edu.one.body}
-            </p>
-          </div>
-          <div className="flex flex-col justify-left items-start gap-1 w-full">
-            <p className="font-bold  text-text2-light md:text-body2-semibold text-primary-500">
-              {file.about.edu.two.title}
-            </p>
-            <p className="font-[400]  text-text2-light md:text-text1-bold opacity-80 ">
-              {file.about.edu.two.body}
-            </p>
-          </div>
-        </div>
-      )}
     </>
   );
 }

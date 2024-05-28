@@ -28,7 +28,9 @@ export const URLs = {
 
   //PROJECT
 
+  GET_INFINITE_PROJECTS: `${API}/project/infinite`,
   GET_PROJECTS: `${API}/project`,
+
   GET_PROJECT: `${API}/project/one`,
 
   SEARCH_PROJECTS: `${API}/project/search`,
@@ -39,7 +41,9 @@ export const URLs = {
 
   //CERTIFICATE
 
+  GET_INFINITE_CERTIFICATES: `${API}/certificate/infinite`,
   GET_CERTIFICATES: `${API}/certificate`,
+
   GET_CERTIFICATE: `${API}/certificate/one`,
 
   SEARCH_CERTIFICATES: `${API}/certificate/search`,

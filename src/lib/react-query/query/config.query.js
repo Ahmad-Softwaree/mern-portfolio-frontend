@@ -11,6 +11,8 @@ import { generateAlert } from "@/lib/functions";
 import { UiContext } from "@/context/UiContext";
 import { CONTEXT_TYPEs } from "@/context";
 import { UtilContext } from "@/context/UtilContext";
+import { deleteImage, insertImage } from "@/lib/firebase/firebase.action";
+import { ENUMs } from "@/lib/enum";
 
 export function useGetConfig(key, type) {
   const { dispatch } = useContext(AlertContext);
@@ -26,7 +28,19 @@ export function useAddConfig(key) {
   const { dispatch } = useContext(AlertContext);
   const { dispatch: ui } = useContext(UiContext);
   return useMutation({
-    mutationFn: (form) => addConfig(form),
+    mutationFn: async ({ state, image }) => {
+      let form = state;
+      if (image) {
+        let { imageURL, imageName } = await insertImage(
+          image,
+          ENUMs.STACK_BUCKET,
+          dispatch
+        );
+        form.imageName = imageName;
+        form.imageURL = imageURL;
+      }
+      return await addConfig(form);
+    },
     onSuccess: (data) => {
       queryClient.invalidateQueries([key]);
       generateAlert(data.message, "success", dispatch);
@@ -44,9 +58,27 @@ export function useUpdateConfig(key, id) {
   const queryClient = useQueryClient();
   const { dispatch } = useContext(AlertContext);
   const { dispatch: ui } = useContext(UiContext);
-
   return useMutation({
-    mutationFn: (form) => updateConfig(form, id),
+    mutationFn: async ({ state, oldImg, oldURL, image }) => {
+      let form = state;
+      if (image) {
+        //new image uploaded
+        //insert image
+        let { imageURL, imageName } = await insertImage(
+          image,
+          ENUMs.STACK_BUCKET,
+          dispatch
+        );
+        form.imageName = imageName;
+        form.imageURL = imageURL;
+        //delete old image
+        if (oldImg) await deleteImage(oldImg, ENUMs.STACK_BUCKET, dispatch);
+      } else {
+        form.imageName = oldImg;
+        form.imageURL = oldURL;
+      }
+      return await updateConfig(form, id);
+    },
     onSuccess: (data) => {
       queryClient.invalidateQueries([key]);
       generateAlert(data.message, "success", dispatch);

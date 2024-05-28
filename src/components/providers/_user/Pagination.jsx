@@ -67,6 +67,15 @@ const Pagination = ({ children, page }) => {
   useEffect(() => {
     if (filter && filter !== "") refetch(filter);
   }, [filter]);
+  useEffect(() => {
+    if (category && category !== "") refetch(category);
+  }, [category]);
+  useEffect(() => {
+    if (type && type !== "") refetch(type);
+  }, [type]);
+  useEffect(() => {
+    if (stack && stack !== "") refetch(stack);
+  }, [stack]);
   const isSearched = debounceValue && debounceValue !== "";
 
   const resultObject = {

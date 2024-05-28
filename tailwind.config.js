@@ -1,4 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+const svgToDataUri = require("mini-svg-data-uri");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -19,15 +26,15 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          100: "#feccdb",
-          200: "#fd99b8",
-          300: "#fb6694",
-          400: "#fa3371",
-          500: "#f9004d",
-          600: "#c7003e",
-          700: "#95002e",
-          800: "#64001f",
-          900: "#32000f",
+          100: "#f1eefb",
+          200: "#e4ddf7",
+          300: "#d6cdf2",
+          400: "#c9bcee",
+          500: "#bbabea",
+          600: "#9689bb",
+          700: "#70678c",
+          800: "#4b445e",
+          900: "#25222f",
         },
         white: {
           100: "#ffffff",
@@ -41,18 +48,18 @@ module.exports = {
           900: "#333333",
         },
         black: {
-          100: "#d1d1d1",
-          200: "#a3a3a3",
-          300: "#747474",
-          400: "#464646",
-          500: "#181818",
-          600: "#131313",
-          700: "#0e0e0e",
-          800: "#0a0a0a",
-          900: "#050505",
+          100: "#ccccd0",
+          200: "#9999a1",
+          300: "#666773",
+          400: "#333444",
+          500: "#000115",
+          600: "#000111",
+          700: "#00010d",
+          800: "#000008",
+          900: "#000004",
         },
         lightBlack: "#262626",
-        niceBlack: "#191919",
+        niceBlack: "#000000",
         yellow: "#ffc700",
         green: "#29ffe5",
         blue: "#00eded",
@@ -381,6 +388,24 @@ module.exports = {
         ],
       },
       keyframes: {
+        shimmer: {
+          from: {
+            backgroundPosition: "0 0",
+          },
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
+        spotlight: {
+          "0%": {
+            opacity: 0,
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -389,12 +414,57 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        spotlight: "spotlight 2s ease .75s 1 forwards",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    addVariablesForColors,
+    function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "bg-grid": (value) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="112" height="112" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+            )}")`,
+          }),
+          "bg-grid-small": (value) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+            )}")`,
+          }),
+          "bg-dot": (value) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`
+            )}")`,
+          }),
+        },
+        { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
+      );
+    },
+  ],
 };
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}

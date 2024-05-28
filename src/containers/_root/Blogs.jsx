@@ -16,7 +16,7 @@ export default function Blogs() {
       ) : data?.length > 0 ? (
         <div className="w-full flex flex-row justify-center items-center gap-10 flex-wrap">
           {data.map((val, index) => {
-            return <BlogCard val={val} index={index} />;
+            return <BlogCard key={index} val={val} index={index} />;
           })}
         </div>
       ) : (

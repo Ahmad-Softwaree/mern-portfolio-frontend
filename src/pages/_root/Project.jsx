@@ -5,15 +5,14 @@ import { useGetProject } from "@/lib/react-query/query/project.query";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import ProjectGit from "@/components/shared/ProjectGit";
+import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 export default function Project() {
   const {
     state: { file, lang },
   } = useContext(LanguageContext);
   const { id } = useParams();
   const { data, isLoading } = useGetProject(id);
-
   return (
     <section className="element min-h-screen  !justify-start">
       {isLoading ? (
@@ -34,7 +33,8 @@ export default function Project() {
                 <a
                   target="_blank"
                   href={`${data.url}`}
-                  className="flex flex-row gap-1 justify-center items-center text-white-500  px-2 border-2 border-solid border-primary-500 transition-all duration-300 hover:bg-primary-500 hover:text-white-500 rounded-md cursor-pointer p-1">
+                  className="flex flex-row gap-1 justify-center items-center text-white-500  px-2 border-2 border-solid border-primary-500 transition-all duration-300 hover:bg-primary-500 hover:text-white-500 rounded-md cursor-pointer p-1"
+                >
                   <span className="!text-[14px] text-white-500">
                     {file.projects.preview}
                   </span>
@@ -95,19 +95,8 @@ export default function Project() {
               </span>
             )}
           </div>
-          <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
-            <div className="w-full flex flex-row justify-left items-center gap-5">
-              <span className="!text-[16px] md:!text-[18px] text-white-500">
-                <i className="fa-solid fa-cubes"></i>
-              </span>
-              <span className="!text-[16px] md:!text-[18px] text-white-500">
-                {file.projects.stacks}
-              </span>
-            </div>
-
-            {data.stacks.map((val, index) => {
-              return <Stack val={val} key={index} />;
-            })}
+          <div className="flex flex-row items-center justify-start mb-10 w-full">
+            <AnimatedTooltip items={data.stacks} />
           </div>
         </>
       )}

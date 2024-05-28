@@ -2,6 +2,7 @@ import Pagination from "@/components/providers/_user/Pagination";
 import { Loader, NoData, Return } from "@/components/shared";
 import ProjectGrid from "@/components/shared/ProjectGrid";
 import Search from "@/components/shared/Search";
+import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { LanguageContext } from "@/context/LanguageContext";
 import { useContext } from "react";
 
@@ -44,17 +45,13 @@ export default function Projects() {
                   {!isSearched ? (
                     <>
                       {data.pages.map((row, index) => {
-                        return (
-                          <ProjectGrid key={index} page={index} row={row} />
-                        );
+                        return <HoverEffect items={row} key={index} />;
                       })}
                     </>
                   ) : (
                     <>
                       {searchData.pages.map((row, index) => {
-                        return (
-                          <ProjectGrid key={index} page={index} row={row} />
-                        );
+                        return <HoverEffect items={row} key={index} />;
                       })}
                     </>
                   )}

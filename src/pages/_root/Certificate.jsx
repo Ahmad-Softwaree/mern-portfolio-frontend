@@ -5,6 +5,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useGetCertificate } from "@/lib/react-query/query/certificate.query";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 export default function Certificate() {
   const { id } = useParams();
   const { data, isLoading } = useGetCertificate(id);
@@ -31,7 +32,8 @@ export default function Certificate() {
                 <a
                   target="_blank"
                   href={`${data.url}`}
-                  className="flex flex-row gap-1 justify-center items-center text-white-500  px-2 border-2 border-solid border-primary-500 transition-all duration-300 hover:bg-primary-500 hover:text-white-500 rounded-md cursor-pointer p-1">
+                  className="flex flex-row gap-1 justify-center items-center text-white-500  px-2 border-2 border-solid border-primary-500 transition-all duration-300 hover:bg-primary-500 hover:text-white-500 rounded-md cursor-pointer p-1"
+                >
                   <span className="!text-[14px] text-white-500">
                     {" "}
                     {file.certificates.link}
@@ -72,7 +74,8 @@ export default function Certificate() {
                 return (
                   <span
                     key={index}
-                    className="p-1 px-2 border-[3px] hover:bg-black-600 border-solid border-black-600 transition-all duration-300 w-fit  text-white-500 !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer">
+                    className="p-1 px-2 border-[3px] hover:bg-black-600 border-solid border-black-600 transition-all duration-300 w-fit  text-white-500 !text-[12px] md:!text-[14px] rounded-md bg-transparent  cursor-pointer"
+                  >
                     {lang === "en"
                       ? val.enName
                       : lang === "ar"
@@ -83,27 +86,8 @@ export default function Certificate() {
               })}
           </div>
 
-          <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
-            <div className="w-full flex flex-row justify-left items-center gap-5">
-              <span className="!text-[16px] md:!text-[18px] text-white-500">
-                <i className="fa-solid fa-cubes"></i>
-              </span>
-              <span className="!text-[16px] md:!text-[18px] text-white-500">
-                {file.projects.stack}
-              </span>
-            </div>
-
-            {data?.stacks?.length > 0 &&
-              data.stacks.map((val, index) => {
-                return (
-                  <span
-                    key={index}
-                    style={{ borderColor: val.color }}
-                    className={`p-1 px-2 border-[3px] hover:bg-black-600 border-solid  transition-all duration-300 w-fit text-white-500 !text-[14px] rounded-md bg-transparent  cursor-pointer font-Poppins`}>
-                    {val.enName}
-                  </span>
-                );
-              })}
+          <div className="flex flex-row items-center justify-start mb-10 w-full">
+            <AnimatedTooltip items={data.stacks} />
           </div>
         </>
       )}
