@@ -5,13 +5,14 @@ import { URLs } from "../url";
 export const getInfiniteCertificates = async (
   dispatch,
   pageParam,
-  filter = "default"
+  type = "default",
+  stack = "default"
 ) => {
   try {
     const { data } = await authApi.get(
-      `${URLs.GET_INFINITE_CERTIFICATES}/${
-        filter ? filter : "default"
-      }/default?pages=${pageParam}`
+      `${URLs.GET_INFINITE_CERTIFICATES}/${type ? type : "default"}/${
+        stack ? stack : "default"
+      }?pages=${pageParam}`
     );
     return data;
   } catch (error) {

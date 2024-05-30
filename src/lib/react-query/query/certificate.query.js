@@ -23,13 +23,13 @@ import { CONTEXT_TYPEs } from "@/context";
 import { ENUMs } from "@/lib/enum";
 import { UtilContext } from "@/context/UtilContext";
 
-export function useGetInfiniteCertificates(filter) {
+export function useGetInfiniteCertificates(type, stack) {
   const { dispatch } = useContext(AlertContext);
 
   return useInfiniteQuery({
     queryKey: [QUERY_KEYs.INFINITE_CERTIFICATES],
     queryFn: ({ pageParam = 1 }) =>
-      getInfiniteCertificates(dispatch, pageParam, filter),
+      getInfiniteCertificates(dispatch, pageParam, type, stack),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length > 0 ? allPages.length + 1 : undefined;
     },

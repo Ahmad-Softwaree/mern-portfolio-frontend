@@ -47,7 +47,7 @@ const Pagination = ({ children, page }) => {
       : page === "project"
       ? useGetInfiniteProjects(type, stack)
       : page === "certificate"
-      ? useGetInfiniteCertificates()
+      ? useGetInfiniteCertificates(type, stack)
       : null;
   const debounceValue = useDebounce(search, 1000);
 
