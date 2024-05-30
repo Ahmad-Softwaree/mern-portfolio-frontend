@@ -13,11 +13,13 @@ import {
   useSearchBlog,
 } from "@/lib/react-query/query/blog.query";
 import {
+  useGetInfiniteProjects,
   useGetProjects,
   useSearchProject,
 } from "@/lib/react-query/query/project.query";
 import {
   useGetCertificates,
+  useGetInfiniteCertificates,
   useSearchCertificate,
 } from "@/lib/react-query/query/certificate.query";
 
@@ -43,9 +45,9 @@ const Pagination = ({ children, page }) => {
     page === "blog"
       ? useGetInfiniteBlogs(category)
       : page === "project"
-      ? useGetProjects(type, stack)
+      ? useGetInfiniteProjects(type, stack)
       : page === "certificate"
-      ? useGetCertificates(filter)
+      ? useGetInfiniteCertificates()
       : null;
   const debounceValue = useDebounce(search, 1000);
 

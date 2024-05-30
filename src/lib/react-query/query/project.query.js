@@ -36,7 +36,7 @@ export function useGetInfiniteProjects(type, stack) {
     retry: 0,
   });
 }
-export function useGetProjects(type, stack) {
+export function useGetProjects() {
   const { dispatch } = useContext(AlertContext);
 
   return useQuery({
