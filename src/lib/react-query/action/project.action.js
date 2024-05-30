@@ -10,7 +10,7 @@ export const getInfiniteProjects = async (
 ) => {
   try {
     const { data } = await authApi.get(
-      `${URLs.GET_PROJECTS}/${type ? type : "default"}/${
+      `${URLs.GET_INFINITE_PROJECTS}/${type ? type : "default"}/${
         stack ? stack : "default"
       }?pages=${pageParam}`
     );
