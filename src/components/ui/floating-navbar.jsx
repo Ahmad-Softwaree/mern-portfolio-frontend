@@ -6,8 +6,8 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { Link } from "react-scroll";
+import { cn } from "@/utils/cn";
 
 export const FloatingNav = ({ navItems, className }) => {
   const { scrollYProgress } = useScroll();

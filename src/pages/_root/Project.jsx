@@ -1,18 +1,10 @@
-import { Loader, Stack, Type } from "@/components/shared";
-import { LanguageContext } from "@/context/LanguageContext";
-import { convertTimeStampToMomentMonth } from "@/lib/functions";
-import { useGetProject } from "@/lib/react-query/query/project.query";
-import { useContext } from "react";
+import { Type } from "@/components/shared";
 import { useParams } from "react-router-dom";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ProjectGit from "@/components/shared/ProjectGit";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 export default function Project() {
-  const {
-    state: { file, lang },
-  } = useContext(LanguageContext);
   const { id } = useParams();
-  const { data, isLoading } = useGetProject(id);
   return (
     <section className="element min-h-screen  !justify-start">
       {isLoading ? (
@@ -22,7 +14,7 @@ export default function Project() {
           <div className="flex flex-col justify-left items-start gap-[30px] w-full">
             <img
               className="w-full h-[340px] md:h-[450px] rounded-md object-contain border-2 border-solid border-niceBlack"
-              src={`${data.imageURL}`}
+              src={`${data.image}`}
               alt="Project Image"
             />
             <div className="w-full flex flex-row justify-between items-center gap-5">

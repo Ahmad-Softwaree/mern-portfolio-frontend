@@ -1,16 +1,13 @@
-import { LanguageContext } from "@/context/LanguageContext";
-import { cn } from "@/util/cn";
+import { cn } from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { AnimatedTooltip } from "./animated-tooltip";
 
 export const HoverEffect = ({ items, className }) => {
   let [hoveredIndex, setHoveredIndex] = useState(null);
-  const {
-    state: { lang, file },
-  } = useContext(LanguageContext);
+
   return (
     <div
       className={cn(
@@ -21,7 +18,7 @@ export const HoverEffect = ({ items, className }) => {
       {items.map((item, idx) => {
         return (
           <div
-            key={item?._id}
+            key={item?.url}
             className="relative group col-span-full md:col-span-2 lg:col-span-2 block p-2 h-full w-full"
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
@@ -45,27 +42,14 @@ export const HoverEffect = ({ items, className }) => {
             </AnimatePresence>
             <Card>
               <CardTitle item={item}>
-                {lang === "en"
-                  ? item.enTitle
-                  : lang === "ar"
-                  ? item.arTitle
-                  : item.krTitle}
+                {item.title}
                 {"        "}
                 <OpenInNewIcon className="text-white" fontSize="14px" />
               </CardTitle>
               <CardDescription stacks={item.stacks}>
-                {lang === "en"
-                  ? item.enDesc.substring(0, 60).concat("...")
-                  : lang === "ar"
-                  ? item.arDesc.substring(0, 60).concat("...")
-                  : item.krDesc.substring(0, 60).concat("...")}
+                {item.desc.substring(0, 60).concat("...")}
                 &nbsp;
-                <Link
-                  to={`/projects/${item._id}`}
-                  className="!text-[14px] text-primary-500"
-                >
-                  {file.blog.seeMore}
-                </Link>
+                <div className="!text-[14px] text-primary-500">More</div>
               </CardDescription>
             </Card>
           </div>
@@ -92,16 +76,13 @@ export const Card = ({ className, children }) => {
 export const CardTitle = ({ className, children, item }) => {
   return (
     <>
-      <Link
-        className="min-w-full h-[250px] rounded-xl"
-        to={`/projects/${item._id}`}
-      >
+      <div className="min-w-full h-[250px] rounded-xl">
         <img
           className="min-w-full h-[250px] rounded-xl object-cover"
-          src={`${item.imageURL}`}
+          src={`${item.image}`}
           alt="Project Image"
         />
-      </Link>
+      </div>
       <a href={item.url} target="_blank">
         <h2
           className={cn(

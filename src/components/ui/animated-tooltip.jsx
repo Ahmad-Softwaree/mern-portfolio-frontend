@@ -37,11 +37,11 @@ export const AnimatedTooltip = ({ items }) => {
             <div
               className="-mr-1  relative group bg-black-500"
               key={item.name}
-              onMouseEnter={() => setHoveredIndex(item._id)}
+              onMouseEnter={() => setHoveredIndex(item.name)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <AnimatePresence>
-                {hoveredIndex === item._id && (
+                {hoveredIndex === item.name && (
                   <motion.div
                     initial={{ opacity: 0, y: 20, scale: 0.6 }}
                     animate={{
@@ -65,7 +65,7 @@ export const AnimatedTooltip = ({ items }) => {
                     <div className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent h-px " />
                     <div className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px " />
                     <div className="font-bold text-white relative z-30 text-base">
-                      {item.enName}
+                      {item.name}
                     </div>
                   </motion.div>
                 )}
@@ -74,8 +74,8 @@ export const AnimatedTooltip = ({ items }) => {
                 onMouseMove={handleMouseMove}
                 height={10}
                 width={10}
-                src={item.imageURL}
-                alt={item.imageName}
+                src={item.image}
+                alt={item.name}
                 className="object-cover !m-0 !p-0 object-top rounded-full  border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
               />
             </div>

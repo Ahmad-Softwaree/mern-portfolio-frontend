@@ -1,19 +1,15 @@
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { homeLinks } from "@/constants";
-import { Hero } from "@/containers/_root";
-import About from "@/containers/_root/About";
-import Blogs from "@/containers/_root/Blogs";
-import Certificates from "@/containers/_root/Certificates";
-import Contact from "@/containers/_root/Contact";
-import Projects from "@/containers/_root/Projects";
-import Services from "@/containers/_root/Services";
-import Skills from "@/containers/_root/Skills";
-import Work from "@/containers/_root/Works";
+
 import { FaHome } from "react-icons/fa";
 import { Element } from "react-scroll";
 import { FaList } from "react-icons/fa6";
 import { PiProjectorScreenChart } from "react-icons/pi";
 import { PiContactlessPaymentFill } from "react-icons/pi";
+import { About, Hero, Services, Skills } from "@/containers";
+import Projects from "@/containers/Projects";
+import Certificates from "@/containers/Certificates";
+import Works from "@/containers/Works";
+import Contact from "@/containers/Contact";
 
 const Home = () => {
   return (
@@ -44,32 +40,22 @@ const Home = () => {
           },
         ]}
       />
-
       <Element
         data-aos="fade-up"
         id="home"
         name="home"
-        className="element min-h-screen !overflow-hidden"
+        className="element min-h-[800px] !overflow-hidden"
       >
         <Hero />
       </Element>
-      {/* <Element
-        data-aos="fade-up"
-        id="blogs"
-        name="blogs"
-        className="element   bg-black-600"
-      >
-        <div className="home_sections_h1_blur"></div>
-        <Blogs />
-      </Element> */}
       <Element
         data-aos="fade-up"
         id="about"
         name="about"
-        className="element  bg-niceBlack"
+        className="element  bg-niceBlack overflow-hidden"
       >
         <About />
-      </Element>
+      </Element>{" "}
       <Element
         data-aos="fade-up"
         id="services"
@@ -93,7 +79,7 @@ const Home = () => {
         className="element px-[20px] md:px-[55px] bg-niceBlack"
       >
         <Projects />
-      </Element>
+      </Element>{" "}
       <Element
         data-aos="fade-up"
         id="certificates"
@@ -101,14 +87,14 @@ const Home = () => {
         className="element bg-niceBlack"
       >
         <Certificates />
-      </Element>
+      </Element>{" "}
       <Element
         data-aos="fade-up"
         id="works"
         name="works"
         className="element  !min-h-fit  bg-black-600"
       >
-        <Work />
+        <Works />
       </Element>
       <Element
         data-aos="fade-up"

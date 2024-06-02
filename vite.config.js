@@ -14,16 +14,5 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    proxy: {
-      "/api": {
-        target: import.meta.env?.VITE_BACKED_API,
-        changeOrigin: true,
-        secure: false,
-        ws: true,
-        pathRewrite: {
-          "^/api": "",
-        },
-      },
-    },
   },
 });

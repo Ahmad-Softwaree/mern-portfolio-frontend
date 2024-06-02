@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 import { WorkCard } from "../card";
+import { cn } from "@/utils/cn";
 
 export const InfiniteMovingCards = ({
   items,

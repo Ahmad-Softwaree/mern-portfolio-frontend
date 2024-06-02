@@ -1,17 +1,10 @@
-import { Loader } from "@/components/shared";
-import { LanguageContext } from "@/context/LanguageContext";
-import { convertTimeStampToMomentMonth } from "@/lib/functions";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { useGetCertificate } from "@/lib/react-query/query/certificate.query";
-import { useContext } from "react";
+
 import { useParams } from "react-router-dom";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 export default function Certificate() {
   const { id } = useParams();
-  const { data, isLoading } = useGetCertificate(id);
-  const {
-    state: { file, lang },
-  } = useContext(LanguageContext);
+
   return (
     <section className="element min-h-screen !justify-start">
       {isLoading ? (
@@ -21,7 +14,7 @@ export default function Certificate() {
           <div className="flex flex-col justify-left items-start gap-[30px] w-full">
             <img
               className="w-full h-[340px] md:h-[450px] rounded-md object-contain border-2 border-solid border-niceBlack"
-              src={`${data.imageURL}`}
+              src={`${data.image}`}
               alt="Certificate Image"
             />
             <div className="w-full flex flex-row justify-between items-center gap-5">

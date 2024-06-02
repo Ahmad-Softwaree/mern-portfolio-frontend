@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/util/cn";
+import { cn } from "@/utils/cn";
 
 export const Tabs = ({
   tabs: propTabs,

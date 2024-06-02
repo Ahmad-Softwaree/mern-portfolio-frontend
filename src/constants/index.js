@@ -1,44 +1,3 @@
-import { ENUMs } from "@/lib/enum";
-import { QUERY_KEYs } from "@/lib/react-query/types";
-
-export const adminLinks = [
-  {
-    link: "home",
-    text: "home",
-  },
-  {
-    link: "blogs",
-    text: "blogs",
-  },
-  {
-    link: "projects",
-    text: "projects",
-  },
-  {
-    link: "skills",
-    text: "skills",
-  },
-  {
-    link: "certificates",
-    text: "certificates",
-  },
-  {
-    link: "works",
-    text: "works",
-  },
-  {
-    link: "users",
-    text: "users",
-  },
-  {
-    link: "subscribers",
-    text: "subscribers",
-  },
-  {
-    link: "configs",
-    text: "configs",
-  },
-];
 export const homeLinks = [
   {
     link: "home",
@@ -63,41 +22,6 @@ export const homeLinks = [
     icon: "",
   },
 ];
-export const configParts = [
-  {
-    text: "Categories",
-    type: ENUMs.CATEGORY,
-    qKey: QUERY_KEYs.CATEGORIES,
-  },
-  {
-    text: "Stacks",
-    type: ENUMs.STACK,
-    qKey: QUERY_KEYs.STACKS,
-  },
-  {
-    text: "Types",
-    type: ENUMs.TYPE,
-    qKey: QUERY_KEYs.TYPES,
-  },
-];
-export const services = [
-  {
-    text: "Mobile application development",
-    color: "bg-primary-500",
-  },
-  {
-    text: "UI/UX Design",
-    color: "bg-green-500",
-  },
-  {
-    text: "Web application development",
-    color: "bg-orange-500",
-  },
-  {
-    text: "API development",
-    color: "bg-pink-500",
-  },
-];
 
 export const privacyPolicy = [
   {
@@ -117,3 +41,30 @@ export const privacyPolicy = [
     body: "We have implemented reasonable security measures to protect any information that may be collected inadvertently. Our commitment to privacy and data security is paramount.",
   },
 ];
+
+export const services = {
+  one: {
+    title: "Web development",
+    body: "Developing website with newest technologies, clean code and configuration",
+  },
+  two: {
+    title: "System development",
+    body: "Developing Systems with newest technologies, clean code and configuration",
+  },
+  three: {
+    title: "Online teaching",
+    body: "Teaching Fields online with good plan, I can bring attention of everyone",
+  },
+  four: {
+    title: "Server management",
+    body: "Managing Servers and Maintain Them, Switching and Protecting Server and Hosts",
+  },
+  five: {
+    title: "API integration",
+    body: "Building Secure and most high performance API as much as It could be",
+  },
+  six: {
+    title: "Database",
+    body: "Build and Join Tables and Data, With SQL and NoSql databases",
+  },
+};
