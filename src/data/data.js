@@ -3,70 +3,70 @@ export const skills = [
   {
     name: "React",
     image: "/images/skills/react.png",
-    types: ["frontend"],
+    types: ["development"],
   },
   {
     name: "HTML",
     image: "/images/skills/html.png",
-    types: ["frontend"],
+    types: ["development"],
   },
   {
     name: "Postgresql",
     image: "/images/skills/postgresql.png",
-    types: ["database"],
+    types: ["development"],
   },
   {
     name: "CSS",
     image: "/images/skills/css.png",
-    types: ["frontend", "style"],
+    types: ["development"],
   },
   {
     name: "Sass",
     image: "/images/skills/scss.png",
-    types: ["frontend", "style"],
+    types: ["development"],
   },
   {
     name: "Node.js",
     image: "/images/skills/node.png",
-    types: ["backend"],
+    types: ["development"],
   },
   {
     name: "Github",
     image: "/images/skills/github.png",
-    types: ["general"],
+    types: ["language"],
   },
   {
     name: "Javascript",
     image: "/images/skills/js.png",
-    types: ["frontend", "backend"],
+    types: ["development", "development"],
   },
   {
     name: "Typescript",
     image: "/images/skills/ts.png",
-    types: ["frontend", "backend"],
+    types: ["development", "development"],
   },
   {
     name: "Java",
     image: "/images/skills/java.png",
-    types: ["general"],
+    types: ["language"],
   },
   {
     name: "C#",
     image: "/images/skills/csharp.png",
 
-    types: ["general"],
+    types: ["language"],
   },
   {
     name: "Firebase",
     image: "/images/skills/firebase.png",
 
-    types: ["database", "server", "storage"],
+    types: ["development"],
   },
   {
     name: "Socket.io",
     image: "/images/skills/socket.png",
 
-    types: ["realtime"],
+    types: ["development"],
   },
   {
     name: "Netlify",
@@ -90,132 +90,132 @@ export const skills = [
     name: "Chakra UI",
     image: "/images/skills/chakra.png",
 
-    types: ["frontend", "style"],
+    types: ["development"],
   },
   {
     name: "Bootstrap",
     image: "/images/skills/bootstrap.png",
 
-    types: ["frontend", "style"],
+    types: ["development"],
   },
   {
     name: "JWT",
     image: "/images/skills/jwt.png",
 
-    types: ["backend", "auth"],
+    types: ["development"],
   },
   {
     name: "npm",
     image: "/images/skills/npm.png",
 
-    types: ["backend", "general"],
+    types: ["development"],
   },
   {
     name: "Redux",
     image: "/images/skills/redux.png",
 
-    types: ["frontend"],
+    types: ["development"],
   },
   {
     name: "React Router",
     image: "/images/skills/react-router.png",
 
-    types: ["frontend"],
+    types: ["development"],
   },
   {
     name: "MongoDB",
     image: "/images/skills/mongo.png",
 
-    types: ["database", "backend"],
+    types: ["development"],
   },
   {
     name: "MySQL",
     image: "/images/skills/mysql.png",
 
-    types: ["backend", "database"],
+    types: ["development"],
   },
   {
     name: "Tailwind",
     image: "/images/skills/tailwind.png",
 
-    types: ["frontend", "style"],
+    types: ["development"],
   },
   {
     name: "Vue.js",
     image: "/images/skills/vue.png",
 
-    types: ["frontend"],
+    types: ["development"],
   },
   {
     name: "Express.js",
     image: "/images/skills/express.png",
 
-    types: ["backend"],
+    types: ["development"],
   },
   {
     name: "appwrite",
     image: "/images/skills/appwrite.webp",
 
-    types: ["server", "storage", "database"],
+    types: ["development"],
   },
   {
     name: "Shadcn",
     image: "/images/skills/shadcn.png",
 
-    types: ["frontend", "style"],
+    types: ["development"],
   },
   {
     name: "Auth0",
     image: "/images/skills/auth0.png",
 
-    types: ["auth"],
+    types: ["development"],
   },
   {
     name: "Sanity",
     image: "/images/skills/sanity.png",
 
-    types: ["database", "auth"],
+    types: ["development"],
   },
   {
     name: "Uploadthing",
     image: "/images/skills/uploadthing.png",
 
-    types: ["storage"],
+    types: ["development"],
   },
   {
     name: "React Query",
     image: "/images/skills/react-query.avif",
 
-    types: ["frontend"],
+    types: ["development"],
   },
   {
     name: "Zod",
     image: "/images/skills/zod.png",
-    types: ["front-end"],
+    types: ["development"],
   },
   {
     name: "Supabase",
     image: "/images/skills/supabase.webp",
 
-    types: ["database", "storage"],
+    types: ["development"],
   },
   {
     name: "React Native",
     image: "/images/skills/react.png",
 
-    types: ["frontend"],
+    types: ["development"],
   },
   {
     name: "Knex.js",
     image: "/images/skills/knex.png",
 
-    types: ["database"],
+    types: ["development"],
   },
   {
     name: "PostgreSql",
     image: "/images/skills/postgresql.png",
 
-    types: ["database"],
+    types: ["development"],
   },
   {
     name: "Vite",
@@ -227,37 +227,37 @@ export const skills = [
     name: "Next.js",
     image: "/images/skills/next.png",
 
-    types: ["frontend", "backend"],
+    types: ["development", "development"],
   },
   {
     name: "Unity",
     image: "/images/skills/unity.png",
 
-    types: ["game"],
+    types: ["development"],
   },
   {
     name: "Material UI",
     image: "/images/skills/material.jpg",
 
-    types: ["frontend", "style"],
+    types: ["development"],
   },
   {
     name: "Postman",
     image: "/images/skills/postman.svg",
 
-    types: ["backend"],
+    types: ["development"],
   },
   {
     name: "Aceternity UI",
     image: "/images/skills/aceternity.webp",
 
-    types: ["frontend", "style"],
+    types: ["development"],
   },
   {
     name: "Socket",
     image: "/images/skills/socket.png",
 
-    types: ["backend"],
+    types: ["development"],
   },
 ];
 export const projects = [
@@ -267,8 +267,8 @@ export const projects = [
     url: "https://kurdface.ahmad-software.com",
     gits: [
       {
-        git: "https://github.com/Ahmad-Softwaree/facebook-frontend",
-        name: "Kurdface Front-end",
+        git: "https://github.com/Ahmad-Softwaree/facebook-development",
+        name: "Kurdface development",
       },
       {
         git: "https://github.com/Ahmad-Softwaree/facebook-api",
@@ -476,7 +476,7 @@ export const projects = [
   },
   {
     title: "Meera Post",
-    desc: 'Meera Post" is a full-stack web application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It serves as a platform for users to create, share, and interact with posts. Users can register and log in to the platform, allowing them to create new posts, view posts from other users, like, comment, and share posts. The application features a responsive and intuitive user interface built with React.js on the frontend, providing a seamless user experience across devices. The backend, powered by Node.js and Express.js, handles user authentication, post management, and interactions with the MongoDB database. "Meera Post" aims to provide a user-friendly and engaging environment for users to connect, share their thoughts, and engage with others in a community-driven setting.',
+    desc: 'Meera Post" is a full-stack web application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It serves as a platform for users to create, share, and interact with posts. Users can register and log in to the platform, allowing them to create new posts, view posts from other users, like, comment, and share posts. The application features a responsive and intuitive user interface built with React.js on the development, providing a seamless user experience across devices. The development, powered by Node.js and Express.js, handles user authentication, post management, and interactions with the MongoDB development. "Meera Post" aims to provide a user-friendly and engaging environment for users to connect, share their thoughts, and engage with others in a community-driven setting.',
     url: "",
     image: "/images/projects/meera.png",
     gits: [],
@@ -497,20 +497,16 @@ export const projects = [
   },
   {
     title: "GCommerce",
-    desc: "GCommerce is a robust web application meticulously crafted with React and Laravel, offering a seamless fusion of cutting-edge frontend and powerful backend technologies. This comprehensive platform embodies the complete suite of functionalities essential for a thriving e-commerce venture. From intuitive user interfaces to secure payment gateways, GCommerce delivers an unparalleled shopping experience for both customers and administrators. Elevate your online business with GCommerce and unlock endless possibilities in the digital marketplace.",
+    desc: "GCommerce is a robust web application meticulously crafted with React and Laravel, offering a seamless fusion of cutting-edge development and powerful development technologies. This comprehensive platform embodies the complete suite of functionalities essential for a thriving e-commerce venture. From intuitive user interfaces to secure payment gateways, GCommerce delivers an unparalleled shopping experience for both customers and administrators. Elevate your online business with GCommerce and unlock endless possibilities in the digital marketplace.",
     url: "",
     image: "/images/projects/gcommerce.png",
     gits: [],
     stacks: skills.filter((val) =>
       [
         "React",
-        "Node.js",
-        "MongoDB",
-        "Socket",
         "Firebase",
         "Javascript",
         "React Query",
-        "Redux",
         "Chakra UI",
         "Vite",
       ].includes(val.name)
@@ -520,18 +516,17 @@ export const projects = [
     title: "Refinery Management System",
     desc: "Our Refinery Management System is a comprehensive solution designed to streamline refinery operations efficiently. Developed using React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, it encompasses functionalities such as bank transactions, inventory management of oils, machinery tracking, employee records, managerial tasks, delivery logistics, storage management, and order processing. The system provides real-time monitoring, resource optimization, integrated communication features, and robust security protocols. Customizable and scalable, it caters to refineries of all sizes, offering a user-friendly interface for enhanced productivity and decision-making.",
     url: "",
-    image: "/images/projects/kalla.png",
+    image: "/images/projects/refinery.png",
     gits: [],
     stacks: skills.filter((val) =>
       [
         "React",
         "Node.js",
-        "MongoDB",
-        "Socket",
         "Firebase",
         "Javascript",
         "React Query",
-        "Redux",
+        "Postgresql",
+        "Knex.js",
         "Chakra UI",
         "Vite",
       ].includes(val.name)
@@ -541,18 +536,16 @@ export const projects = [
     title: "Pet Management System",
     desc: "Our Pet Management System, developed with React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, is a comprehensive solution for efficient pet care and business management. From tracking pet records to managing appointments, inventory, and customer interactions, our system simplifies every aspect of running a pet-related business. With dedicated sections for employees, managers, doctors, pets, products, clinic operations, customers, and high-level managers, it's the ultimate tool for streamlining operations and enhancing customer satisfaction.",
     url: "",
-    image: "/images/projects/kalla.png",
+    image: "/images/projects/pet.png",
     gits: [],
     stacks: skills.filter((val) =>
       [
         "React",
         "Node.js",
-        "MongoDB",
-        "Socket",
-        "Firebase",
         "Javascript",
         "React Query",
-        "Redux",
+        "Postgresql",
+        "Knex.js",
         "Chakra UI",
         "Vite",
       ].includes(val.name)
@@ -562,18 +555,16 @@ export const projects = [
     title: "Absence Management System",
     desc: "Our Absence Management System, built with React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, simplifies the process of tracking employee absences. With dedicated interfaces for managers and employees, the system allows seamless communication and transparency regarding absences. The intuitive absence submission page enables employees to file requests easily, while managers can efficiently review, approve, or reject them. Robust filtering and search functionalities make it effortless to find and manage absence records. With this system, businesses can effectively monitor and manage employee attendance, ensuring smooth operations and optimal workforce management.",
     url: "",
-    image: "/images/projects/kalla.png",
+    image: "/images/projects/absence.png",
     gits: [],
     stacks: skills.filter((val) =>
       [
         "React",
         "Node.js",
-        "MongoDB",
-        "Socket",
-        "Firebase",
+        "Postgresql",
+        "Knex.js",
         "Javascript",
         "React Query",
-        "Redux",
         "Chakra UI",
         "Vite",
       ].includes(val.name)
