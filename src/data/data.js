@@ -33,17 +33,17 @@ export const skills = [
   {
     name: "Github",
     image: "/images/skills/github.png",
-    types: ["language"],
+    types: ["tool"],
   },
   {
     name: "Javascript",
     image: "/images/skills/js.png",
-    types: ["development", "development"],
+    types: ["development", "language"],
   },
   {
     name: "Typescript",
     image: "/images/skills/ts.png",
-    types: ["development", "development"],
+    types: ["development", "language"],
   },
   {
     name: "Java",
@@ -231,7 +231,7 @@ export const skills = [
   },
   {
     name: "Unity",
-    image: "/images/skills/unity.png",
+    image: "/images/skills/unity.jpg",
 
     types: ["development"],
   },
@@ -245,7 +245,25 @@ export const skills = [
     name: "Postman",
     image: "/images/skills/postman.svg",
 
-    types: ["development"],
+    types: ["development", "tool"],
+  },
+  {
+    name: "VS Code",
+    image: "/images/skills/postman.svg",
+
+    types: ["tool"],
+  },
+  {
+    name: "Intellej",
+    image: "/images/skills/postman.svg",
+
+    types: ["tool"],
+  },
+  {
+    name: "Git",
+    image: "/images/skills/postman.svg",
+
+    types: ["tool"],
   },
   {
     name: "Aceternity UI",
