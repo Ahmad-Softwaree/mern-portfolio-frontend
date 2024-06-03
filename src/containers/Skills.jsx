@@ -47,7 +47,9 @@ export default function Skills() {
           {skills
             .filter(
               (val) =>
-                val.types.includes("backend") || val.types.includes("storage")
+                val.types.includes("backend") ||
+                val.types.includes("storage") ||
+                val.types.includes("database")
             )
             .map((val, index) => {
               return <SkillCard index={index} key={index} val={val} />;

@@ -11,6 +11,11 @@ export const skills = [
     types: ["frontend"],
   },
   {
+    name: "Postgresql",
+    image: "/images/skills/postgresql.png",
+    types: ["database"],
+  },
+  {
     name: "CSS",
     image: "/images/skills/css.png",
     types: ["frontend", "style"],
@@ -297,18 +302,9 @@ export const projects = [
     gits: [],
     image: "/images/projects/bester.png",
     stacks: skills.filter((val) =>
-      [
-        "React",
-        "Node.js",
-        "MongoDB",
-        "Socket",
-        "Firebase",
-        "Javascript",
-        "React Query",
-        "Redux",
-        "Chakra UI",
-        "Vite",
-      ].includes(val.name)
+      ["React", "Javascript", "Shadcn", "Redux", "Chakra UI", "Vite"].includes(
+        val.name
+      )
     ),
   },
   {
@@ -319,15 +315,11 @@ export const projects = [
     image: "/images/projects/janan.png",
     stacks: skills.filter((val) =>
       [
-        "React",
+        "Vue.js",
         "Node.js",
         "MongoDB",
-        "Socket",
         "Firebase",
         "Javascript",
-        "React Query",
-        "Redux",
-        "Chakra UI",
         "Vite",
       ].includes(val.name)
     ),
@@ -343,7 +335,6 @@ export const projects = [
         "React",
         "Node.js",
         "MongoDB",
-        "Socket",
         "Firebase",
         "Javascript",
         "React Query",
@@ -362,14 +353,10 @@ export const projects = [
     stacks: skills.filter((val) =>
       [
         "React",
-        "Node.js",
-        "MongoDB",
-        "Socket",
         "Firebase",
         "Javascript",
         "React Query",
         "Redux",
-        "Chakra UI",
         "Vite",
       ].includes(val.name)
     ),
@@ -384,12 +371,11 @@ export const projects = [
       [
         "React",
         "Node.js",
-        "MongoDB",
-        "Socket",
+        "Postgresql",
+        "knex.js",
         "Firebase",
         "Javascript",
         "React Query",
-        "Redux",
         "Chakra UI",
         "Vite",
       ].includes(val.name)
@@ -400,7 +386,7 @@ export const projects = [
     desc: "Brand website that show the user brands of snacks in Iraq, products and it's feature, also events that the company make, what certificate they have, and other information.\nThe best part is this website is full stack, it have admin panel where they can play with the data however they want.",
     url: "https://www.baiweshtcompany.com/",
     gits: [],
-    image: "/images/projects/kurdferga.png",
+    image: "/images/projects/baiwesht.png",
     stacks: skills.filter((val) =>
       [
         "React",
@@ -451,7 +437,7 @@ export const projects = [
         name: "Todo api",
       },
     ],
-    image: "/images/projects/kurdferga.png",
+    image: "/images/projects/todo.png",
     stacks: skills.filter((val) =>
       [
         "React",
@@ -492,7 +478,7 @@ export const projects = [
     title: "Meera Post",
     desc: 'Meera Post" is a full-stack web application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It serves as a platform for users to create, share, and interact with posts. Users can register and log in to the platform, allowing them to create new posts, view posts from other users, like, comment, and share posts. The application features a responsive and intuitive user interface built with React.js on the frontend, providing a seamless user experience across devices. The backend, powered by Node.js and Express.js, handles user authentication, post management, and interactions with the MongoDB database. "Meera Post" aims to provide a user-friendly and engaging environment for users to connect, share their thoughts, and engage with others in a community-driven setting.',
     url: "",
-    image: "/images/projects/kalla.png",
+    image: "/images/projects/meera.png",
     gits: [],
     stacks: skills.filter((val) =>
       [
@@ -513,7 +499,7 @@ export const projects = [
     title: "GCommerce",
     desc: "GCommerce is a robust web application meticulously crafted with React and Laravel, offering a seamless fusion of cutting-edge frontend and powerful backend technologies. This comprehensive platform embodies the complete suite of functionalities essential for a thriving e-commerce venture. From intuitive user interfaces to secure payment gateways, GCommerce delivers an unparalleled shopping experience for both customers and administrators. Elevate your online business with GCommerce and unlock endless possibilities in the digital marketplace.",
     url: "",
-    image: "/images/projects/kalla.png",
+    image: "/images/projects/gcommerce.png",
     gits: [],
     stacks: skills.filter((val) =>
       [
@@ -630,19 +616,19 @@ export const certificates = [
     title: "React & Typescript",
     desc: "Completed an advanced React and TypeScript course on Udemy, delving deep into the intricacies of both technologies. Through hands-on projects, mastered the seamless integration of TypeScript's static typing with React's powerful component-based architecture. Developed five real-world projects, honing skills in state management, routing, and complex component interactions, elevating proficiency in modern web development.",
     url: "https://www.udemy.com/course/react-typescript-the-practical-guide/",
-    image: "/images/certificates/js.jpg",
+    image: "/images/certificates/Typescript.jpg",
   },
   {
     title: "Certificate Of Appreciation",
     desc: "This Certificate of Appreciation acknowledges Ahmad Salah for their outstanding contribution to Kallapost at Salahaddin University. Through innovative thinking, dedication, and hard work, Ahmad Salah has played a pivotal role in the successful execution of the project, demonstrating exceptional leadership and teamwork skills. Their commitment to excellence and creativity has greatly enriched the academic environment and inspired fellow students and faculty members alike. This certificate is a testament to their remarkable achievements and the positive impact they have made within the university community.",
     url: " ",
-    image: "/images/certificates/js.jpg",
+    image: "/images/certificates/software.png",
   },
   {
     title: "Kurdferga Certificate Of Appreciation",
     desc: "This Certificate of Appreciation celebrates Ahmad Salah's dedicated service to Kurdferga, a pioneering Kurdish organization dedicated to empowering youth through education. Over the past year, Ahmad Salah has demonstrated unwavering commitment and passion in advancing the organization's mission, contributing significantly to its growth and impact. Through their innovative ideas, tireless efforts, and exceptional leadership, Ahmad Salah has inspired positive change and helped shape the futures of countless young individuals. This certificate serves as a heartfelt acknowledgment of Ahmad Salah's invaluable contributions to Kurdferga and its vital work in nurturing the next generation of leaders in Kurdistan.",
     url: "https://kurdferga.net",
-    image: "/images/certificates/js.jpg",
+    image: "/images/certificates/kurdferga.png",
   },
 ];
 
