@@ -9,13 +9,10 @@ const Layout = () => {
   useReactScroll();
 
   return (
-    <>
-      <main className="w-full overflow-hidden min-h-screen bg-black-500">
-        <Outlet />
-
-        <Footer />
-      </main>
-    </>
+    <main className="w-full overflow-hidden min-h-screen bg-niceBlack">
+      <Outlet />
+      <Footer />
+    </main>
   );
 };
 

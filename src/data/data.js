@@ -312,6 +312,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Website"],
   },
   {
     title: "Bester Group",
@@ -324,6 +325,7 @@ export const projects = [
         val.name
       )
     ),
+    types: ["Website"],
   },
   {
     title: "Janan group",
@@ -341,6 +343,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Website"],
   },
   {
     title: "Kurdferga",
@@ -361,6 +364,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Website"],
   },
   {
     title: "Kurdidioms",
@@ -378,6 +382,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Website"],
   },
   {
     title: "Kallpost",
@@ -398,6 +403,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["System", "Application"],
   },
   {
     title: "Baiwesht Company",
@@ -419,6 +425,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Website"],
   },
   {
     title: "Tile Vania",
@@ -440,6 +447,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Game"],
   },
   {
     title: "Kurd Todo",
@@ -470,6 +478,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Website"],
   },
   {
     title: "Farmuda",
@@ -491,6 +500,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Website"],
   },
   {
     title: "Meera Post",
@@ -512,6 +522,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["System"],
   },
   {
     title: "GCommerce",
@@ -529,6 +540,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["Website"],
   },
   {
     title: "Refinery Management System",
@@ -549,6 +561,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["System"],
   },
   {
     title: "Pet Management System",
@@ -568,6 +581,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["System"],
   },
   {
     title: "Absence Management System",
@@ -587,6 +601,7 @@ export const projects = [
         "Vite",
       ].includes(val.name)
     ),
+    types: ["System"],
   },
 ];
 
@@ -661,5 +676,15 @@ export const works = [
     url: "https://gigant.tech/",
     company: "Gigant",
     image: "/images/works/gigant.png",
+  },
+  {
+    url: "https://peshawa.tech/",
+    company: "Peshawa Group",
+    image: "/images/works/peshawa.avif",
+  },
+  {
+    url: "https://ap-soft.tech/",
+    company: "AP Soft",
+    image: "/images/works/apsoft.jpg",
   },
 ];

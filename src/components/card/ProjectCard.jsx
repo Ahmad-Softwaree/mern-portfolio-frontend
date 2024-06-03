@@ -12,7 +12,7 @@ export const ProjectCard = ({ item, idx }) => {
   return (
     <div
       key={item?.url}
-      className="relative group col-span-full md:col-span-2 lg:col-span-2 block p-2 h-full w-full"
+      className="relative  col-span-full md:col-span-2 lg:col-span-2  p-2  w-full"
       onMouseEnter={() => setHoveredIndex(idx)}
       onMouseLeave={() => setHoveredIndex(null)}
     >
@@ -51,7 +51,7 @@ export const ProjectCard = ({ item, idx }) => {
             </a>
           )}
         </CardTitle>
-        <CardDescription stacks={item.stacks}>
+        <CardDescription types={item.types} stacks={item.stacks}>
           {item.desc}
           &nbsp;
         </CardDescription>
@@ -96,7 +96,7 @@ export const CardTitle = ({ className, children, item }) => {
     </>
   );
 };
-export const CardDescription = ({ className, children, stacks }) => {
+export const CardDescription = ({ className, children, stacks, types }) => {
   return (
     <>
       <p
@@ -107,8 +107,22 @@ export const CardDescription = ({ className, children, stacks }) => {
       >
         {children}
       </p>
-      <div className="flex flex-row items-center justify-start  w-full ">
-        <AnimatedTooltip items={stacks} />
+      <div className="w-full flex flex-row justify-between items-center gap-10">
+        <div className="flex flex-row items-center justify-start  w-full ">
+          <AnimatedTooltip items={stacks} />
+        </div>
+        <div className="flex flex-row items-center justify-end  w-full ">
+          {types.map((val, index) => {
+            return (
+              <div
+                className="p-1 px-3 rounded-md text-sm font-bold border-2 border-white-500/[0.2]"
+                key={index}
+              >
+                {val}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );

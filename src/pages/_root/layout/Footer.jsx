@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="p-5 w-full grid grid-cols-1 md:grid-cols-2 gap-5 bg-black-600 shadow-xl text-white-500">
+    <footer className="p-5 w-full grid grid-cols-1 md:grid-cols-2 gap-5 bg-niceBlack border border-solid border-white-500/[0.2] shadow-xl text-white-500">
       <div className="flex order-2 md:order-1 flex-row justify-center md:justify-start items-center gap-5 col-span-full md:col-span-1">
         <p className="text-white-500 text-text1-light md:text-body1-light text-center">
           Ahmad
