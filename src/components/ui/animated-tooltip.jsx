@@ -72,11 +72,9 @@ export const AnimatedTooltip = ({ items, git = false }) => {
               {!git && (
                 <Image
                   onMouseMove={handleMouseMove}
-                  height={8}
-                  width={8}
                   src={item.image}
                   alt={item.name}
-                  className="object-cover !m-0 !p-0 object-top rounded-full  border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
+                  className="h-6 w-6  md:h-8 md:w-8 object-cover !m-0 !p-0 object-top rounded-full  border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
                 />
               )}
               {git && (

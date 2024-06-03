@@ -107,7 +107,7 @@ export const CardDescription = ({ className, children, stacks, types }) => {
       >
         {children}
       </p>
-      <div className="w-full flex flex-row justify-between items-center gap-10">
+      <div className="w-full flex flex-row justify-between items-center">
         <div className="flex flex-row items-center justify-start  w-full ">
           <AnimatedTooltip items={stacks} />
         </div>
@@ -115,7 +115,7 @@ export const CardDescription = ({ className, children, stacks, types }) => {
           {types.map((val, index) => {
             return (
               <div
-                className="p-1 px-3 rounded-md text-sm font-bold border-2 border-white-500/[0.2]"
+                className="p-1 px-2 md:px-3 rounded-md text-sm font-bold border-2 border-white-500/[0.2]"
                 key={index}
               >
                 {val}

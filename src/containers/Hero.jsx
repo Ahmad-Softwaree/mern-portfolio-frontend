@@ -32,12 +32,12 @@ export default function Hero() {
           className="text-center text-[40px] md:text-5xl lg:text-6xl"
           words={`Transforming Concepts into Seamless User Experiences`}
         />
-        <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2x1">
+        <div className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2x1">
           {" "}
           Hi, I&apos;m Ahmad, a
           <FlipWords words={words} /> <br />
           Developer based in Kurdistan.
-        </p>
+        </div>
 
         <Link
           spy={true}
