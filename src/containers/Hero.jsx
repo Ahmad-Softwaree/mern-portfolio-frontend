@@ -46,7 +46,7 @@ export default function Hero() {
           duration={500}
           to={`skills`}
         >
-          <MagicButton title={`See My Skills`} />
+          <MagicButton title={`Show My Skills`} />
         </Link>
         <Link
           spy={true}
@@ -56,7 +56,7 @@ export default function Hero() {
           duration={500}
           to={`projects`}
         >
-          <MagicButton title={`See My Projects`} />
+          <MagicButton title={`Show My Works`} />
         </Link>
       </div>
     </>
