@@ -41,30 +41,3 @@ export const privacyPolicy = [
     body: "We have implemented reasonable security measures to protect any information that may be collected inadvertently. Our commitment to privacy and data security is paramount.",
   },
 ];
-
-export const services = {
-  one: {
-    title: "Web development",
-    body: "Developing website with newest technologies, clean code and configuration",
-  },
-  two: {
-    title: "System development",
-    body: "Developing Systems with newest technologies, clean code and configuration",
-  },
-  three: {
-    title: "Online teaching",
-    body: "Teaching Fields online with good plan, I can bring attention of everyone",
-  },
-  four: {
-    title: "Server management",
-    body: "Managing Servers and Maintain Them, Switching and Protecting Server and Hosts",
-  },
-  five: {
-    title: "API integration",
-    body: "Building Secure and most high performance API as much as It could be",
-  },
-  six: {
-    title: "Database",
-    body: "Build and Join Tables and Data, With SQL and NoSql databases",
-  },
-};

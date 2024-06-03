@@ -4,7 +4,7 @@ import { skills } from "@/data/data";
 export default function Skills() {
   return (
     <>
-      <h1 className="skillsHeader font-bold text-white-500">Skills</h1>
+      <h1 className="skillsHeader font-bold text-white-500">My Expertise</h1>
 
       <div className="w-full flex flex-col justify-start items-start gap-2">
         <h2 className="font-bold text-white-500 text-text2-semibold md:text-body2-semibold w-full text-left">

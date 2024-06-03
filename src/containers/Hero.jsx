@@ -4,6 +4,7 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import MagicButton from "@/components/ui/MagicButton";
 import { FlipWords } from "@/components/ui/flip-words";
 import { Link } from "react-scroll";
+import { FaLocationArrow } from "react-icons/fa";
 
 export default function Hero() {
   const words = ["React.js", "Laravel", "Next.js", "Vue.js"];
@@ -25,7 +26,7 @@ export default function Hero() {
         className="relative flex flex-col justify-center items-center  gap-5  w-[95%] min-w-[300px] z-[1200]"
       >
         <h2 className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
-          Dynamic Web Magic with React.js
+          Dynamic Web Magic with Next.js
         </h2>
         <TextGenerateEffect
           className="text-center text-[40px] md:text-5xl lg:text-6xl"
@@ -44,19 +45,13 @@ export default function Hero() {
           hashSpy={true}
           offset={50}
           duration={500}
-          to={`skills`}
-        >
-          <MagicButton title={`Show My Skills`} />
-        </Link>
-        <Link
-          spy={true}
-          smooth={true}
-          hashSpy={true}
-          offset={50}
-          duration={500}
           to={`projects`}
         >
-          <MagicButton title={`Show My Works`} />
+          <MagicButton
+            icon={<FaLocationArrow />}
+            position="right"
+            title={`Show My Works`}
+          />
         </Link>
       </div>
     </>

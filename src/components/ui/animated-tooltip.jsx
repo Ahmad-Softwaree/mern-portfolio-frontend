@@ -8,9 +8,8 @@ import {
   useSpring,
 } from "framer-motion";
 import { Image } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-
-export const AnimatedTooltip = ({ items }) => {
+import { FaGithub } from "react-icons/fa";
+export const AnimatedTooltip = ({ items, git = false }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const springConfig = { stiffness: 100, damping: 5 };
   const x = useMotionValue(0); // going to set this value on mouse move
@@ -35,7 +34,7 @@ export const AnimatedTooltip = ({ items }) => {
         (item, idx) =>
           idx < 8 && (
             <div
-              className="-mr-1  relative group bg-black-500"
+              className="-mr-1  relative group bg-niceBlack"
               key={item.name}
               onMouseEnter={() => setHoveredIndex(item.name)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -70,14 +69,21 @@ export const AnimatedTooltip = ({ items }) => {
                   </motion.div>
                 )}
               </AnimatePresence>
-              <Image
-                onMouseMove={handleMouseMove}
-                height={10}
-                width={10}
-                src={item.image}
-                alt={item.name}
-                className="object-cover !m-0 !p-0 object-top rounded-full  border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
-              />
+              {!git && (
+                <Image
+                  onMouseMove={handleMouseMove}
+                  height={8}
+                  width={8}
+                  src={item.image}
+                  alt={item.name}
+                  className="object-cover !m-0 !p-0 object-top rounded-full  border-2 group-hover:scale-105 group-hover:z-30 border-white  relative transition duration-500"
+                />
+              )}
+              {git && (
+                <a target="_blank" href={item.git}>
+                  <FaGithub className="text-sm md:text-xl" />
+                </a>
+              )}
             </div>
           )
       )}

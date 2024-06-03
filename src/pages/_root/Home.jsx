@@ -17,8 +17,8 @@ const Home = () => {
       <FloatingNav
         navItems={[
           {
-            link: "home",
-            name: "home",
+            link: "about",
+            name: "about",
             icon: <FaHome />,
           },
 
@@ -76,7 +76,7 @@ const Home = () => {
         data-aos="fade-up"
         id="projects"
         name="projects"
-        className="element px-[20px] md:px-[55px] bg-niceBlack"
+        className="element  bg-niceBlack"
       >
         <Projects />
       </Element>{" "}
@@ -92,15 +92,15 @@ const Home = () => {
         data-aos="fade-up"
         id="works"
         name="works"
-        className="element  !min-h-fit  bg-black-600"
+        className="element  !min-h-fit  bg-niceBlack border-y-2 border-white-500/[0.2]"
       >
         <Works />
       </Element>
       <Element
         data-aos="fade-up"
         id="contact"
-        name="contact bg-niceBlack"
-        className="element "
+        name="contact"
+        className="element  bg-niceBlack mb-30"
       >
         <Contact />
       </Element>

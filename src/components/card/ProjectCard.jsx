@@ -1,66 +1,116 @@
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaGithub } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
-import { Link } from "react-router-dom";
-import { Stack } from "../shared";
+import { useState } from "react";
+import { AnimatedTooltip } from "../ui/animated-tooltip";
+import { cn } from "@/utils/cn";
 
-export const ProjectCard = ({ val, index }) => {
+export const ProjectCard = ({ item, idx }) => {
+  let [hoveredIndex, setHoveredIndex] = useState(null);
+
   return (
     <div
-      className={`relative bg-black-800 h-[540px] w-full md:w-[500px] flex flex-col justify-center items-center gap-5  flex-wrap  shadow-xl p-5 rounded-lg `}
+      key={item?.url}
+      className="relative group col-span-full md:col-span-2 lg:col-span-2 block p-2 h-full w-full"
+      onMouseEnter={() => setHoveredIndex(idx)}
+      onMouseLeave={() => setHoveredIndex(null)}
     >
-      <div className="flex flex-col justify-left items-start gap-5 w-full rounded-xl">
-        <Link
-          className="min-w-full h-[250px] rounded-xl"
-          to={`/projects/${val._id}`}
-        >
-          {" "}
-          <img
-            className="min-w-full h-[250px] rounded-xl object-cover"
-            src={`${val.image}`}
-            alt="Project Image"
+      <AnimatePresence>
+        {hoveredIndex === idx && (
+          <motion.span
+            className="absolute inset-0 h-full w-full bg-neutral-600  block  rounded-xl"
+            layoutId="hoverBackground"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.15 },
+            }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.15, delay: 0.2 },
+            }}
           />
-        </Link>
-
-        <div className="flex flex-col justify-left items-center gap-1 w-full">
-          <Link
-            to={`/projects/${val._id}`}
-            className="text-white text-body1-semibold md:text-sub-heading3-semibold hover:text-primary-500 transition-all duration-200  font-bold w-full"
-          >
-            {lang === "en"
-              ? val.enTitle
-              : lang === "ar"
-              ? val.arTitle
-              : val.krTitle}
-            {"        "}
-            <OpenInNewIcon className="text-white" fontSize="14px" />
-          </Link>
-          <h2 className=" text-text2-light md:text-text1-light  w-full">
-            {val.desc.substring(0, 60).concat("...")}
-            &nbsp;
-            <Link
-              to={`/projects/${val._id}`}
-              className="!text-[14px] text-primary-500"
-            >
-              More
-            </Link>
-          </h2>
-        </div>
-      </div>
-
-      <div className="w-full flex items-center bg-transparent">
-        {val.stacks.length > 0 &&
-          val.stacks.map((one, index) => {
-            return (
-              <Stack
-                to={`/projects?stack=${one?._id}`}
-                val={one}
-                index={index}
-                key={one._id}
-              />
-            );
-          })}
+        )}
+      </AnimatePresence>
+      <Card>
+        <CardTitle
+          className={`flex flex-row justify-start items-center gap-2`}
+          item={item}
+        >
+          {item.title}
+          {"        "}
+          {item.gits.length > 0 && (
+            <div className="ml-4 flex flex-row gap-4">
+              <AnimatedTooltip git={true} items={item.gits} />
+            </div>
+          )}
+          {item.url !== "" && (
+            <a target="_blank" href={item.url}>
+              <FaExternalLinkAlt className="text-sm md:text-xl ml-2" />{" "}
+            </a>
+          )}
+        </CardTitle>
+        <CardDescription stacks={item.stacks}>
+          {item.desc}
+          &nbsp;
+        </CardDescription>
+      </Card>
+    </div>
+  );
+};
+export const Card = ({ className, children }) => {
+  return (
+    <div
+      className={cn(
+        "rounded-xl h-full w-full  overflow-hidden bg-niceBlack border border-white-500/[0.2]  relative z-20",
+        className
+      )}
+    >
+      <div className="relative z-50">
+        <div className="p-4">{children}</div>
       </div>
     </div>
+  );
+};
+export const CardTitle = ({ className, children, item }) => {
+  return (
+    <>
+      <div className="min-w-full h-[250px] rounded-xl">
+        <img
+          className="min-w-full h-[250px] rounded-xl object-cover"
+          src={`${item.image}`}
+          alt="Project Image"
+        />
+      </div>
+      <a href={item.url} target="_blank">
+        <h2
+          className={cn(
+            "text-zinc-100 font-bold tracking-wide mt-4",
+            className
+          )}
+        >
+          {children}
+        </h2>
+      </a>
+    </>
+  );
+};
+export const CardDescription = ({ className, children, stacks }) => {
+  return (
+    <>
+      <p
+        className={cn(
+          "mb-8 text-zinc-400 tracking-wide leading-relaxed text-sm",
+          className
+        )}
+      >
+        {children}
+      </p>
+      <div className="flex flex-row items-center justify-start  w-full ">
+        <AnimatedTooltip items={stacks} />
+      </div>
+    </>
   );
 };
 

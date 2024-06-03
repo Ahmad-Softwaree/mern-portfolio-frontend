@@ -1,14 +1,21 @@
-export default function ServiceCard({ icon, header, body }) {
-  return (
-    <div className="col-span-full md:col-span-3 lg:col-span-4 rounded-lg cursor-pointer shadow-xl bg-black-600 transition-all duration-300 md:hover:scale-[1.1] p-5  md:hover:border-primary-500 border-2 border-solid border-black-600">
-      <div className="w-full flex flex-row justify-left items-center gap-2 ">
-        <span className="font-bold !text-[16px] rounded-full p-2">
-          <i className={`fa-solid fa-${icon}`}></i>
-        </span>
-        <span className="font-[500] !text-[16px] text-niceGray">{header}</span>
-      </div>
+import { Meteors } from "../ui/meteors";
 
-      <h2 className={`!text-[16px] font-[400]`}>{body}</h2>
+export default function ServiceCard({ val }) {
+  return (
+    <div className="w-full min-w-[250px] relative max-w-xs ">
+      <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] bg-red-500 rounded-full blur-3xl" />
+      <div className="relative shadow-xl bg-gray-900 border border-gray-800  px-4 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-start items-start">
+        <h1 className="font-bold text-xl text-white-500 mb-4 relative z-50 w-full flex flex-row  gap-2 justify-start items-center">
+          {val.title} {"   "} {val.icon}
+        </h1>
+
+        <p className="font-normal text-base text-slate-500 mb-4 relative z-50">
+          {val.body}
+        </p>
+
+        {/* Meaty part - Meteor effect */}
+        <Meteors number={20} />
+      </div>
     </div>
   );
 }
