@@ -249,19 +249,19 @@ export const skills = [
   },
   {
     name: "VS Code",
-    image: "/images/skills/postman.svg",
+    image: "/images/skills/vscode.png",
 
     types: ["tool"],
   },
   {
     name: "Intellej",
-    image: "/images/skills/postman.svg",
+    image: "/images/skills/intellj.png",
 
     types: ["tool"],
   },
   {
     name: "Git",
-    image: "/images/skills/postman.svg",
+    image: "/images/skills/git.png",
 
     types: ["tool"],
   },
