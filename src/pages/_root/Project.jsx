@@ -1,97 +1,54 @@
 import { Type } from "@/components/shared";
 import { useParams } from "react-router-dom";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import ProjectGit from "@/components/shared/ProjectGit";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
+import { projects } from "@/data/data";
+import { FaExternalLinkAlt } from "react-icons/fa";
 export default function Project() {
   const { id } = useParams();
+  const data = projects.find((val) => val.id == id);
   return (
-    <section className="element min-h-screen  !justify-start">
-      {isLoading ? (
-        <Loader size="xl" screen={true} />
-      ) : (
-        <>
-          <div className="flex flex-col justify-left items-start gap-[30px] w-full">
-            <img
-              className="w-full h-[340px] md:h-[450px] rounded-md object-contain border-2 border-solid border-niceBlack"
-              src={`${data.image}`}
-              alt="Project Image"
-            />
-            <div className="w-full flex flex-row justify-between items-center gap-5">
-              <span className="text-white-500 font-bold !text-[14px] md:!text-[16px]">
-                {file.date}: {convertTimeStampToMomentMonth(data.date)}
-              </span>
-              {data.url && (
-                <a
-                  target="_blank"
-                  href={`${data.url}`}
-                  className="flex flex-row gap-1 justify-center items-center text-white-500  px-2 border-2 border-solid border-primary-500 transition-all duration-300 hover:bg-primary-500 hover:text-white-500 rounded-md cursor-pointer p-1"
-                >
-                  <span className="!text-[14px] text-white-500">
-                    {file.projects.preview}
-                  </span>
-                  <OpenInNewIcon className="text-white-500" fontSize="14px" />
-                </a>
-              )}
-            </div>
+    <section className="element min-h-screen !w-full">
+      <div className="flex flex-col justify-left items-start gap-[30px] w-full">
+        <img
+          className="w-full h-[340px] md:h-[450px] rounded-md object-contain border-2 border-solid border-niceBlack"
+          src={`${data?.image}`}
+          alt="Project Image"
+        />
 
-            <div className="flex flex-col justify-left items-center gap-1 w-full">
-              <h2 className="text-white-500 !text-[16px] md:!text-[18px] font-[500] w-full">
-                {lang === "en"
-                  ? data.enTitle
-                  : lang === "ar"
-                  ? data.arTitle
-                  : data.krTitle}
-              </h2>
-              <h2 className="text-niceGray !text-[16px] md:!text-[18px] font-[500] w-full ">
-                {lang === "en"
-                  ? data.enDesc
-                  : lang === "ar"
-                  ? data.arDesc
-                  : data.krDesc}
-              </h2>
-            </div>
-          </div>
-          <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
-            <div className="w-full flex flex-row justify-left items-center gap-5">
-              <span className="!text-[16px] md:!text-[18px] text-white-500">
-                <i className="fa-solid fa-diagram-project"></i>
-              </span>
-              <span className="!text-[16px] md:!text-[18px] text-white-500">
-                {file.projects.types}
-              </span>
-            </div>
-            {data.types.map((val, index) => {
-              return <Type val={val} key={index} />;
-            })}
-          </div>
-
-          <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
-            <div className="w-full flex flex-row justify-left items-center gap-5">
-              <span className="!text-[16px] md:!text-[18px] text-white-500">
-                <i className="fa-brands fa-github"></i>
-              </span>
-              <span className="!text-[16px] md:!text-[18px] text-white-500">
-                {file.projects.gits}
-              </span>
-            </div>
-            {data.gits.length > 0 ? (
-              <>
-                {data.gits.map((val, index) => {
-                  return <ProjectGit val={val} key={index} />;
-                })}
-              </>
-            ) : (
-              <span className="!text-[14px] md:!text-[16px] text-primary-500">
-                {file.projects.privateGit}
-              </span>
+        <div className="flex flex-col justify-left items-center gap-1 w-full">
+          <div
+            className={`w-full flex flex-row justify-start items-center gap-2`}
+          >
+            <h1 className="text-white-500 text-body2-semibold md:text-sub-heading2-semibold lg:text-sub-heading1-semibold font-bold  mb-5">
+              {data?.title} {"   "}
+            </h1>{" "}
+            {data?.url && (
+              <a target="_blank" href={data.url}>
+                <FaExternalLinkAlt className="text-sm md:text-xl ml-2" />{" "}
+              </a>
             )}
           </div>
-          <div className="flex flex-row items-center justify-start mb-10 w-full">
-            <AnimatedTooltip items={data.stacks} />
-          </div>
-        </>
+
+          <h2 className="text-niceGray !text-[16px] md:!text-[18px] font-[500] w-full ">
+            {data?.desc}
+          </h2>
+        </div>
+      </div>
+      <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
+        {data?.types.map((val, index) => {
+          return <Type val={val} key={index} />;
+        })}
+      </div>
+
+      {data?.gits.length > 0 && (
+        <div className="ml-4 flex flex-row gap-4 w-full">
+          <AnimatedTooltip git={true} items={data?.gits} />
+        </div>
       )}
+
+      <div className="flex flex-row items-center justify-start mb-10 w-full">
+        <AnimatedTooltip items={data?.stacks} />
+      </div>
     </section>
   );
 }

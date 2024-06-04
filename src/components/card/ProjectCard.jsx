@@ -5,6 +5,8 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { useState } from "react";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { cn } from "@/utils/cn";
+import { Link } from "react-router-dom";
+import { Type } from "../shared";
 
 export const ProjectCard = ({ item, idx }) => {
   let [hoveredIndex, setHoveredIndex] = useState(null);
@@ -51,9 +53,8 @@ export const ProjectCard = ({ item, idx }) => {
             </a>
           )}
         </CardTitle>
-        <CardDescription types={item.types} stacks={item.stacks}>
-          {item.desc}
-          &nbsp;
+        <CardDescription id={item.id} types={item.types} stacks={item.stacks}>
+          {item.desc.substring(0, 120)}... &nbsp;
         </CardDescription>
       </Card>
     </div>
@@ -83,20 +84,15 @@ export const CardTitle = ({ className, children, item }) => {
           alt="Project Image"
         />
       </div>
-      <a href={item.url} target="_blank">
-        <h2
-          className={cn(
-            "text-zinc-100 font-bold tracking-wide mt-4",
-            className
-          )}
-        >
-          {children}
-        </h2>
-      </a>
+      <h2
+        className={cn("text-zinc-100 font-bold tracking-wide mt-4", className)}
+      >
+        {children}
+      </h2>
     </>
   );
 };
-export const CardDescription = ({ className, children, stacks, types }) => {
+export const CardDescription = ({ className, children, stacks, types, id }) => {
   return (
     <>
       <p
@@ -107,22 +103,21 @@ export const CardDescription = ({ className, children, stacks, types }) => {
       >
         {children}
       </p>
+      <div className="flex flex-row items-center justify-start  w-full gap-2 my-5">
+        {types.map((val, index) => {
+          return <Type val={val} key={index} />;
+        })}
+      </div>
       <div className="w-full flex flex-row justify-between items-center">
         <div className="flex flex-row items-center justify-start  w-full ">
           <AnimatedTooltip items={stacks} />
         </div>
-        <div className="flex flex-row items-center justify-end  w-full gap-2">
-          {types.map((val, index) => {
-            return (
-              <div
-                className="p-1 px-2 md:px-3 rounded-md text-sm font-bold border-2 border-white-500/[0.2]"
-                key={index}
-              >
-                {val}
-              </div>
-            );
-          })}
-        </div>
+        <Link
+          to={`/projects/${id}`}
+          className="p-1 px-2 md:px-3 rounded-md text-sm font-bold border-2 border-white-500/[0.2]"
+        >
+          More{" "}
+        </Link>
       </div>
     </>
   );

@@ -280,6 +280,7 @@ export const skills = [
 ];
 export const projects = [
   {
+    id: 1,
     title: "Kurdface",
     desc: "Kurdish Social Medial web application , it's facebook clone, include most of the functionalities hosted.",
     url: "https://kurdface.ahmad-software.com",
@@ -315,6 +316,8 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 2,
+
     title: "Bester Group",
     desc: "A business website for my group (Bester Group), include all the services and works, with nice UI/UX.",
     url: "https://bester-group.com",
@@ -328,6 +331,8 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 3,
+
     title: "Janan group",
     desc: "A website for a kurdish notebook brand, contain the features and products, you can see every products description and order them via social medias.",
     url: "https://janan-group.com",
@@ -346,6 +351,8 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 4,
+
     title: "Kurdferga",
     desc: "An academic website for student in Iraqi kurdistan, which include all subjects and teachers with courses.\nIt include extra features like todo list and timer, also a user can make a pro account so he/she can access more features.",
     url: "https://kurdferga.net",
@@ -367,6 +374,8 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 5,
+
     title: "Kurdidioms",
     desc: "A Kuridsh website like dictionary , including all the english idioms translated wisely to kurdish and give the exact meaning of it, user can create account and upload idioms, then admins can see it and approve it, there are much more featrues there , check it out.",
     url: "https://kurdidioms.bester-group.com",
@@ -385,6 +394,8 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 6,
+
     title: "Kallpost",
     desc: "Full-stack web system for maintain and post delivery action, include more than 30 different part, different roles for manager and seller, each one have it's own feature and UI, managing posts and shop, access history and see increase money, how the user can access? , via 2 applications, 1 for user that can access shop and request post from all Iraq, 2 for driver that connect with kallapost company, and much more features.",
     url: "",
@@ -406,6 +417,8 @@ export const projects = [
     types: ["System", "Application"],
   },
   {
+    id: 7,
+
     title: "Baiwesht Company",
     desc: "Brand website that show the user brands of snacks in Iraq, products and it's feature, also events that the company make, what certificate they have, and other information.\nThe best part is this website is full stack, it have admin panel where they can play with the data however they want.",
     url: "https://www.baiweshtcompany.com/",
@@ -428,6 +441,7 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 8,
     title: "Tile Vania",
     desc: "A very simple game made with unity and C#, like mario.\nIt has 3 levels and A boss level, you can collect coins and you have to kill monsters in your way to the end, also there are a lot's of trap you have to aviod, have fun!!",
     url: "https://ahmadsoftware.itch.io/myfirstgame",
@@ -450,6 +464,8 @@ export const projects = [
     types: ["Game"],
   },
   {
+    id: 9,
+
     title: "Kurd Todo",
     desc: "A full stack web application where you can modify and organize your day, you can add todo and have collection of them , you have profile and can see your success of week and day.",
     url: "https://kurd-todo.netlify.app/auth/login",
@@ -481,6 +497,8 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 10,
+
     title: "Farmuda",
     desc: "A website to serve the hadiths of the Prophet (peace be upon him), as well as a special platform for legitimate questions and answers",
     url: "https://farmudaa.com",
@@ -503,6 +521,8 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 11,
+
     title: "Meera Post",
     desc: 'Meera Post" is a full-stack web application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It serves as a platform for users to create, share, and interact with posts. Users can register and log in to the platform, allowing them to create new posts, view posts from other users, like, comment, and share posts. The application features a responsive and intuitive user interface built with React.js on the development, providing a seamless user experience across devices. The development, powered by Node.js and Express.js, handles user authentication, post management, and interactions with the MongoDB development. "Meera Post" aims to provide a user-friendly and engaging environment for users to connect, share their thoughts, and engage with others in a community-driven setting.',
     url: "",
@@ -525,6 +545,8 @@ export const projects = [
     types: ["System"],
   },
   {
+    id: 12,
+
     title: "GCommerce",
     desc: "GCommerce is a robust web application meticulously crafted with React and Laravel, offering a seamless fusion of cutting-edge development and powerful development technologies. This comprehensive platform embodies the complete suite of functionalities essential for a thriving e-commerce venture. From intuitive user interfaces to secure payment gateways, GCommerce delivers an unparalleled shopping experience for both customers and administrators. Elevate your online business with GCommerce and unlock endless possibilities in the digital marketplace.",
     url: "",
@@ -543,6 +565,8 @@ export const projects = [
     types: ["Website"],
   },
   {
+    id: 13,
+
     title: "Refinery Management System",
     desc: "Our Refinery Management System is a comprehensive solution designed to streamline refinery operations efficiently. Developed using React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, it encompasses functionalities such as bank transactions, inventory management of oils, machinery tracking, employee records, managerial tasks, delivery logistics, storage management, and order processing. The system provides real-time monitoring, resource optimization, integrated communication features, and robust security protocols. Customizable and scalable, it caters to refineries of all sizes, offering a user-friendly interface for enhanced productivity and decision-making.",
     url: "",
@@ -564,6 +588,8 @@ export const projects = [
     types: ["System"],
   },
   {
+    id: 14,
+
     title: "Pet Management System",
     desc: "Our Pet Management System, developed with React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, is a comprehensive solution for efficient pet care and business management. From tracking pet records to managing appointments, inventory, and customer interactions, our system simplifies every aspect of running a pet-related business. With dedicated sections for employees, managers, doctors, pets, products, clinic operations, customers, and high-level managers, it's the ultimate tool for streamlining operations and enhancing customer satisfaction.",
     url: "",
@@ -584,6 +610,8 @@ export const projects = [
     types: ["System"],
   },
   {
+    id: 15,
+
     title: "Absence Management System",
     desc: "Our Absence Management System, built with React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, simplifies the process of tracking employee absences. With dedicated interfaces for managers and employees, the system allows seamless communication and transparency regarding absences. The intuitive absence submission page enables employees to file requests easily, while managers can efficiently review, approve, or reject them. Robust filtering and search functionalities make it effortless to find and manage absence records. With this system, businesses can effectively monitor and manage employee attendance, ensuring smooth operations and optimal workforce management.",
     url: "",
