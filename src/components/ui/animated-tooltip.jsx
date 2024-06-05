@@ -8,8 +8,8 @@ import {
   useSpring,
 } from "framer-motion";
 import { Image } from "@chakra-ui/react";
-import { FaGithub } from "react-icons/fa";
-export const AnimatedTooltip = ({ items, git = false }) => {
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+export const AnimatedTooltip = ({ link = false, items, git = false }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const springConfig = { stiffness: 100, damping: 5 };
   const x = useMotionValue(0); // going to set this value on mouse move
@@ -69,7 +69,7 @@ export const AnimatedTooltip = ({ items, git = false }) => {
                   </motion.div>
                 )}
               </AnimatePresence>
-              {!git && (
+              {!git && !link && (
                 <Image
                   onMouseMove={handleMouseMove}
                   src={item.image}
@@ -80,6 +80,11 @@ export const AnimatedTooltip = ({ items, git = false }) => {
               {git && (
                 <a target="_blank" href={item.git}>
                   <FaGithub className="text-sm md:text-xl" />
+                </a>
+              )}
+              {link && (
+                <a target="_blank" href={item.url}>
+                  <FaExternalLinkAlt className="text-sm md:text-xl ml-2" />{" "}
                 </a>
               )}
             </div>

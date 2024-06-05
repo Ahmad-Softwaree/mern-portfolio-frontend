@@ -13,13 +13,13 @@ export const ProjectCard = ({ item, idx }) => {
 
   return (
     <div
-      key={item?.url}
+      key={item?.id}
       className="relative  col-span-full md:col-span-2 lg:col-span-2  p-2  w-full"
-      onMouseEnter={() => setHoveredIndex(idx)}
+      onMouseEnter={() => setHoveredIndex(item?.id)}
       onMouseLeave={() => setHoveredIndex(null)}
     >
       <AnimatePresence>
-        {hoveredIndex === idx && (
+        {hoveredIndex === item?.id && (
           <motion.span
             className="absolute inset-0 h-full w-full bg-neutral-600  block  rounded-xl"
             layoutId="hoverBackground"
@@ -47,10 +47,10 @@ export const ProjectCard = ({ item, idx }) => {
               <AnimatedTooltip git={true} items={item.gits} />
             </div>
           )}
-          {item.url !== "" && (
-            <a target="_blank" href={item.url}>
-              <FaExternalLinkAlt className="text-sm md:text-xl ml-2" />{" "}
-            </a>
+          {item.links.length > 0 && (
+            <div className="ml-4 flex flex-row gap-4">
+              <AnimatedTooltip link={true} items={item.links} />
+            </div>
           )}
         </CardTitle>
         <CardDescription id={item.id} types={item.types} stacks={item.stacks}>
