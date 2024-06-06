@@ -814,16 +814,16 @@ export const works = [
     company: "Gigant",
     image: "/images/works/gigant.png",
   },
-  {
-    url: "https://peshawa.tech/",
-    company: "Peshawa Group",
-    image: "/images/works/peshawa.avif",
-  },
-  {
-    url: "https://ap-soft.tech/",
-    company: "AP Soft",
-    image: "/images/works/apsoft.jpg",
-  },
+  // {
+  //   url: "https://peshawa.tech/",
+  //   company: "Peshawa Group",
+  //   image: "/images/works/peshawa.avif",
+  // },
+  // {
+  //   url: "https://ap-soft.tech/",
+  //   company: "AP Soft",
+  //   image: "/images/works/apsoft.jpg",
+  // },
   {
     url: "https://farmudaa.com/",
     company: "Sayay Farmuda",
