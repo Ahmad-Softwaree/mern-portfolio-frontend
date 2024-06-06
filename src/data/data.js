@@ -303,6 +303,7 @@ export const projects = [
         name: "Kurdface socket",
       },
     ],
+    contributor: "",
     image: "/images/projects/facebook.png",
     stacks: skills.filter((val) =>
       [
@@ -332,6 +333,7 @@ export const projects = [
       },
     ],
     gits: [],
+    contributor: "",
     image: "/images/projects/bester.png",
     stacks: skills.filter((val) =>
       ["React", "Javascript", "Shadcn", "Redux", "Chakra UI", "Vite"].includes(
@@ -352,6 +354,8 @@ export const projects = [
       },
     ],
     gits: [],
+    contributor: "Bester Group",
+
     image: "/images/projects/janan.png",
     stacks: skills.filter((val) =>
       [
@@ -377,6 +381,8 @@ export const projects = [
       },
     ],
     gits: [],
+    contributor: "",
+
     image: "/images/projects/kurdferga.png",
     stacks: skills.filter((val) =>
       [
@@ -405,6 +411,8 @@ export const projects = [
       },
     ],
     gits: [],
+    contributor: "Bester Group",
+
     image: "/images/projects/idiom.png",
     stacks: skills.filter((val) =>
       [
@@ -434,6 +442,8 @@ export const projects = [
       },
     ],
     gits: [],
+    contributor: "Bester Group",
+
     image: "/images/projects/kalla.png",
     stacks: skills.filter((val) =>
       [
@@ -462,6 +472,8 @@ export const projects = [
       },
     ],
     gits: [],
+    contributor: "Bester Group",
+
     image: "/images/projects/baiwesht.png",
     stacks: skills.filter((val) =>
       [
@@ -490,6 +502,8 @@ export const projects = [
       },
     ],
     gits: [],
+    contributor: "",
+
     image: "/images/projects/unity.jpg",
     stacks: skills.filter((val) =>
       [
@@ -528,6 +542,8 @@ export const projects = [
         name: "Todo api",
       },
     ],
+    contributor: "",
+
     image: "/images/projects/todo.png",
     stacks: skills.filter((val) =>
       [
@@ -557,6 +573,8 @@ export const projects = [
       },
     ],
     gits: [],
+    contributor: "Sayay Farmuda",
+
     image: "/images/projects/saya.png",
     stacks: skills.filter((val) =>
       [
@@ -582,6 +600,8 @@ export const projects = [
     links: [],
     image: "/images/projects/meera.png",
     gits: [],
+    contributor: "Bester Group",
+
     stacks: skills.filter((val) =>
       [
         "React",
@@ -604,6 +624,8 @@ export const projects = [
     title: "GCommerce",
     desc: "GCommerce is a robust web application meticulously crafted with React and Laravel, offering a seamless fusion of cutting-edge development and powerful development technologies. This comprehensive platform embodies the complete suite of functionalities essential for a thriving e-commerce venture. From intuitive user interfaces to secure payment gateways, GCommerce delivers an unparalleled shopping experience for both customers and administrators. Elevate your online business with GCommerce and unlock endless possibilities in the digital marketplace.",
     links: [],
+    contributor: "Gigant TEchnology",
+
     image: "/images/projects/gcommerce.png",
     gits: [],
     stacks: skills.filter((val) =>
@@ -624,6 +646,8 @@ export const projects = [
     title: "Refinery Management System",
     desc: "Our Refinery Management System is a comprehensive solution designed to streamline refinery operations efficiently. Developed using React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, it encompasses functionalities such as bank transactions, inventory management of oils, machinery tracking, employee records, managerial tasks, delivery logistics, storage management, and order processing. The system provides real-time monitoring, resource optimization, integrated communication features, and robust security protocols. Customizable and scalable, it caters to refineries of all sizes, offering a user-friendly interface for enhanced productivity and decision-making.",
     links: [],
+    contributor: "",
+
     image: "/images/projects/refinery.png",
     gits: [
       {
@@ -656,6 +680,8 @@ export const projects = [
     title: "Pet Management System",
     desc: "Our Pet Management System, developed with React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, is a comprehensive solution for efficient pet care and business management. From tracking pet records to managing appointments, inventory, and customer interactions, our system simplifies every aspect of running a pet-related business. With dedicated sections for employees, managers, doctors, pets, products, clinic operations, customers, and high-level managers, it's the ultimate tool for streamlining operations and enhancing customer satisfaction.",
     links: [],
+    contributor: "",
+
     image: "/images/projects/pet.png",
     gits: [
       {
@@ -687,6 +713,8 @@ export const projects = [
     title: "Absence Management System",
     desc: "Our Absence Management System, built with React, Tailwind CSS, Node.js, PostgreSQL, and Knex.js, simplifies the process of tracking employee absences. With dedicated interfaces for managers and employees, the system allows seamless communication and transparency regarding absences. The intuitive absence submission page enables employees to file requests easily, while managers can efficiently review, approve, or reject them. Robust filtering and search functionalities make it effortless to find and manage absence records. With this system, businesses can effectively monitor and manage employee attendance, ensuring smooth operations and optimal workforce management.",
     links: [],
+    contributor: "",
+
     image: "/images/projects/absence.png",
     gits: [
       {
@@ -795,5 +823,10 @@ export const works = [
     url: "https://ap-soft.tech/",
     company: "AP Soft",
     image: "/images/works/apsoft.jpg",
+  },
+  {
+    url: "https://farmudaa.com/",
+    company: "Sayay Farmuda",
+    image: "/images/works/farmuda.png",
   },
 ];

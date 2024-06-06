@@ -32,6 +32,13 @@ export default function Project() {
           <h2 className="text-niceGray !text-[16px] md:!text-[18px] font-[500] w-full ">
             {data?.desc}
           </h2>
+          <p
+            className={
+              "my-8 w-full text-zinc-400 tracking-wide leading-relaxed text-sm"
+            }
+          >
+            Contributor: {data?.contributor || "My Self"}
+          </p>
         </div>
       </div>
       <div className="w-full flex flex-row justify-left items-center gap-5 flex-wrap">
@@ -45,7 +52,11 @@ export default function Project() {
           <AnimatedTooltip git={true} items={data?.gits} />
         </div>
       )}
-
+      {data.links.length > 0 && (
+        <div className="ml-4 flex flex-row gap-4 w-full">
+          <AnimatedTooltip link={true} items={data.links} />
+        </div>
+      )}
       <div className="flex flex-row items-center justify-start mb-10 w-full">
         <AnimatedTooltip items={data?.stacks} />
       </div>

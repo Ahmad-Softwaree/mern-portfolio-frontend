@@ -53,7 +53,12 @@ export const ProjectCard = ({ item, idx }) => {
             </div>
           )}
         </CardTitle>
-        <CardDescription id={item.id} types={item.types} stacks={item.stacks}>
+        <CardDescription
+          contributor={item.contributor}
+          id={item.id}
+          types={item.types}
+          stacks={item.stacks}
+        >
           {item.desc.substring(0, 120)}... &nbsp;
         </CardDescription>
       </Card>
@@ -92,7 +97,14 @@ export const CardTitle = ({ className, children, item }) => {
     </>
   );
 };
-export const CardDescription = ({ className, children, stacks, types, id }) => {
+export const CardDescription = ({
+  contributor,
+  className,
+  children,
+  stacks,
+  types,
+  id,
+}) => {
   return (
     <>
       <p
@@ -103,6 +115,14 @@ export const CardDescription = ({ className, children, stacks, types, id }) => {
       >
         {children}
       </p>
+      <p
+        className={cn(
+          "mb-8 text-zinc-400 tracking-wide leading-relaxed text-sm"
+        )}
+      >
+        Contributor: {contributor || "My Self"}
+      </p>
+
       <div className="flex flex-row items-center justify-start  w-full gap-2 my-5">
         {types.map((val, index) => {
           return <Type val={val} key={index} />;
