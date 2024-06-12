@@ -6,6 +6,21 @@ export const skills = [
     types: ["development"],
   },
   {
+    name: "Nest",
+    image: "/images/skills/nest.png",
+    types: ["development"],
+  },
+  {
+    name: "Prisma",
+    image: "/images/skills/prisma.svg",
+    types: ["development"],
+  },
+  {
+    name: "Neon",
+    image: "/images/skills/neon.jpg",
+    types: ["development"],
+  },
+  {
     name: "HTML",
     image: "/images/skills/html.png",
     types: ["development"],
