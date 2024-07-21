@@ -23,8 +23,7 @@ export default function Hero() {
 
       <div
         data-aos="fade-left"
-        className="relative flex flex-col justify-center items-center  gap-5  w-[95%] min-w-[300px] z-[1200]"
-      >
+        className="relative flex flex-col justify-center items-center  gap-5  w-[95%] min-w-[300px] z-[1200]">
         <h2 className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
           Dynamic Web Magic with React.js
         </h2>
@@ -45,8 +44,7 @@ export default function Hero() {
           hashSpy={true}
           offset={50}
           duration={500}
-          to={`projects`}
-        >
+          to={`projects`}>
           <MagicButton
             icon={<FaLocationArrow />}
             position="right"

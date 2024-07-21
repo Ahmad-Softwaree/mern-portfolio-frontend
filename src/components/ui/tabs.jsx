@@ -28,10 +28,10 @@ export const Tabs = ({
         className={cn(
           "flex flex-row gap-5 items-center justify-start relative overflow-auto sm:overflow-visible no-visible-scrollbar max-w-full w-full",
           containerClassName
-        )}
-      >
+        )}>
         {propTabs.map((tab, idx) => (
           <button
+            name={tab.title}
             key={tab.title}
             onClick={() => {
               moveSelectedTabToTop(idx);
@@ -44,8 +44,7 @@ export const Tabs = ({
             )}
             style={{
               transformStyle: "preserve-3d",
-            }}
-          >
+            }}>
             {active.value === tab.value && (
               <motion.div
                 layoutId="clickedbutton"
@@ -91,8 +90,7 @@ export const FadeInDiv = ({ className, tabs, hovering }) => {
           animate={{
             y: isActive(tab) ? [0, 40, 0] : 0,
           }}
-          className={cn("w-full h-full absolute top-0 left-0", className)}
-        >
+          className={cn("w-full h-full absolute top-0 left-0", className)}>
           {tab.content}
         </motion.div>
       ))}

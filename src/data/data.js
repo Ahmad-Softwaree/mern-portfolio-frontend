@@ -1,4 +1,3 @@
-export const blogs = [];
 export const skills = [
   {
     name: "React",
@@ -759,48 +758,56 @@ export const projects = [
 
 export const certificates = [
   {
+    id: 1,
     title: "Modern Javascript Course",
     desc: "A modern Javascript Course That include All the new Features of Javascirpt , async await and es6 modules and much more.",
     url: "https://www.udemy.com/course/modern-javascript-from-the-beginning/",
     image: "/images/certificates/js.jpg",
   },
   {
+    id: 2,
     title: "Full-stack Web Development",
     desc: "Udemy Certification About Full-stack Web Development, Covered a lot concepts and programming languages with help of Frameworks and Libraries",
     url: "https://www.udemy.com/course/the-complete-web-development-bootcamp/",
     image: "/images/certificates/web.jpg",
   },
   {
+    id: 3,
     title: "MERN Stack Web Development",
     desc: "Udmey MERN Stack course, One of the best, include any library and packages you need to know for developing fast and better UI/UX websites with new technologies",
     url: "https://www.udemy.com/course/mern-stack-front-to-back/",
     image: "/images/certificates/mern.jpg",
   },
   {
+    id: 4,
     title: "Mongodb",
     desc: "A certificate about mongodb in detail, include all the extra features and queries of mongodb, used in different apis and different Frameworks, also included modern queries.",
     url: "https://netninja.dev/courses/enrolled/1714198",
     image: "/images/certificates/mongo.png",
   },
   {
+    id: 5,
     title: "React Router",
     desc: "A very simple course about react router wich include everything you have to know about it, it's simple but covers a lot, how to make routes secure and authorized for users, and much more.",
     url: "https://netninja.dev/courses/enrolled/1966403",
     image: "/images/certificates/react-router.png",
   },
   {
+    id: 6,
     title: "React & Typescript",
     desc: "Completed an advanced React and TypeScript course on Udemy, delving deep into the intricacies of both technologies. Through hands-on projects, mastered the seamless integration of TypeScript's static typing with React's powerful component-based architecture. Developed five real-world projects, honing skills in state management, routing, and complex component interactions, elevating proficiency in modern web development.",
     url: "https://www.udemy.com/course/react-typescript-the-practical-guide/",
     image: "/images/certificates/Typescript.jpg",
   },
   {
+    id: 7,
     title: "Certificate Of Appreciation",
     desc: "This Certificate of Appreciation acknowledges Ahmad Salah for their outstanding contribution to Kallapost at Salahaddin University. Through innovative thinking, dedication, and hard work, Ahmad Salah has played a pivotal role in the successful execution of the project, demonstrating exceptional leadership and teamwork skills. Their commitment to excellence and creativity has greatly enriched the academic environment and inspired fellow students and faculty members alike. This certificate is a testament to their remarkable achievements and the positive impact they have made within the university community.",
     url: " ",
     image: "/images/certificates/software.png",
   },
   {
+    id: 8,
     title: "Kurdferga Certificate Of Appreciation",
     desc: "This Certificate of Appreciation celebrates Ahmad Salah's dedicated service to Kurdferga, a pioneering Kurdish organization dedicated to empowering youth through education. Over the past year, Ahmad Salah has demonstrated unwavering commitment and passion in advancing the organization's mission, contributing significantly to its growth and impact. Through their innovative ideas, tireless efforts, and exceptional leadership, Ahmad Salah has inspired positive change and helped shape the futures of countless young individuals. This certificate serves as a heartfelt acknowledgment of Ahmad Salah's invaluable contributions to Kurdferga and its vital work in nurturing the next generation of leaders in Kurdistan.",
     url: "https://kurdferga.net",

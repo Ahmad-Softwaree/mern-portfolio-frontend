@@ -26,6 +26,7 @@ export default function Git({ val, setGits, gits }) {
 
           <div className="w-full flex flex-row justify-start items-center gap-5">
             <button
+              name="git Button"
               type="button"
               onClick={() => {
                 setGits((prev) => prev.filter((one) => one.git !== val.git));
@@ -34,6 +35,7 @@ export default function Git({ val, setGits, gits }) {
               Remove Git Link
             </button>
             <button
+              name="git button"
               type="button"
               onClick={() => setUpdate(true)}
               className="my-5 !text-[14px] text-green border-2 border-solid border-green rounded-md transition-all duration-300 hover:bg-green hover:text-black-500 p-2 px-4">

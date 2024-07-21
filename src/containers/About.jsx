@@ -30,8 +30,7 @@ const SkeletonTwo = () => {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 w-full h-full min-h-[6rem] bg-dot-white-500/[0.2]  flex-col space-y-2"
-    >
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-dot-white-500/[0.2]  flex-col space-y-2">
       {arr.map((_, i) => (
         <motion.div
           key={"skelenton-two" + i}
@@ -39,8 +38,7 @@ const SkeletonTwo = () => {
           style={{
             maxWidth: Math.random() * (100 - 40) + 40 + "%",
           }}
-          className="flex flex-row rounded-full border border-white-500/[0.2] p-2  items-center space-x-2 bg-black-900 w-full h-4"
-        ></motion.div>
+          className="flex flex-row rounded-full border border-white-500/[0.2] p-2  items-center space-x-2 bg-black-900 w-full h-4"></motion.div>
       ))}
     </motion.div>
   );
@@ -76,12 +74,10 @@ const SkeletonFive = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full min-h-[6rem] bg-dot-white-500/[0.2]  flex-col space-y-2"
-    >
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-dot-white-500/[0.2]  flex-col space-y-2">
       <motion.div
         variants={variants}
-        className="flex flex-row rounded-2xl border border-white-500/[0.2] p-2  items-start space-x-2 bg-black-500"
-      >
+        className="flex flex-row rounded-2xl border border-white-500/[0.2] p-2  items-start space-x-2 bg-black-500">
         <Image
           src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
           alt="avatar"
@@ -94,8 +90,7 @@ const SkeletonFive = () => {
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="flex flex-row rounded-full border border-white-500/[0.2] p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-black-500"
-      >
+        className="flex flex-row rounded-full border border-white-500/[0.2] p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-black-500">
         <p className="text-xs text-white-500">Use Next.</p>
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
       </motion.div>
@@ -111,6 +106,7 @@ export default function About() {
       className: "md:col-span-2",
       header: (
         <img
+          alt="education"
           className="max-h-[150px] object-cover brightness-50 transition-all duration-200 hover:brightness-100 rounded-md"
           src="/images/education.avif"
         />
@@ -130,6 +126,7 @@ export default function About() {
       className: "md:col-span-1",
       header: (
         <img
+          alt="manager"
           className="max-h-[150px] object-cover brightness-50 transition-all duration-200 hover:brightness-100 rounded-md"
           src="/images/manager.avif"
         />
